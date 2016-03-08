@@ -20,9 +20,9 @@
 #       http://www.gnu.org/licenses/gpl.html
 
 # Meta
-__version__ = '0.0.1'
+__version__ = '1.0.0'
 __license__ = "GNU General Public License (GPL) Version 3"
-__version_info__ = (0, 0, 1)
+__version_info__ = (1, 0, 0)
 __author__ = 'Greg Beam'
 __email__ = '<ki7mt@yahoo.com>'
 __status__ = 'Development'
