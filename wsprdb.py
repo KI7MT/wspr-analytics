@@ -478,7 +478,7 @@ def extract_file(value):
             return fsize, csv_cols, records
 
         except ValueError:
-            print("* File is empty ..: {}".format(dest_name))
+            print("* File is empty ........: {}".format(dest_name), key=os.path.basename)
 
     # Now clean upd csvd directory
     clean_csvd()
@@ -612,7 +612,7 @@ def update_status_table():
         update_stats(value,utime,columns,lines)
         
     ttime2 = ((time.time()-ttime1)/60)
-    print(" Processing Time ..: %.1f minutes" % ttime2)
+    print(" Processing Time .....: %.1f minutes" % ttime2)
     print("\n")
 
     # now clean csvd directory
