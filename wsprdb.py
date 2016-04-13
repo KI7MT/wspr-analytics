@@ -47,29 +47,42 @@ __email__ = '<ki7mt@yahoo.com> <i2gpg@wedidit.it>'
 __status__ = 'Development'
 __license__ = "GNU General Public License (GPL) Version 3"
 """
- **WsprDB:**  Provides a set of commonly used tools to download and parse
+ **WsprDB:**  Provides a set of commonly used functions to download and parse
  database archive files from Wsprnet.org.
-
- Performs the following functions:
- * Creates and SQLite3 database for housing data
- * Download all archive files from Wsprnet.org
- * Size checks the archives and downloads if they do not match
- * Updates the current month archive, useful for daily updates
 
  The download lists are generated directly from WSPRnet.org archive URL. As
  new files are added, they should be automatically picked up by **WsprDB**
- and added to the process list.
+ and added to the process list. This includes the the current month which
+ is updated in the early hours UTC each day.
+ 
+ The script should work with either Python2 or Python3. It will also auto
+ select the extension based on running Windows (.zip) or Linux (.gz)
 
- Create directories and variables
+ The following Functions Are Currently Employed:
+ * Creates and SQLite3 database for housing data ( default db is provided )
+ * Download all archive files from Wsprnet.org
+ * Size check local and remote archives, download if they do not match
+ * Creates a monthly .csv fle for a given callsign
+ * Creates a .csv file from all WSPRNet archives for a given callsign
 
- Sets database directory based on standard File System Hierarchy
- - Linux ....: $HOME/.local/share/ + <dir-name>
- - Windows ..: C:\Users\%username%\AppData\local\ + <dir-name>
-
- srcd .......: User defined source directory for WSPRnet.org archive files
- csvd .......: Directory for holding extracted csv files
- dbname .....: Name of the SQLite3 database
- sqlf .......: SQL template for loading the SQLit3 database
+ Directory Structure and Variables:
+ * srcd .....: User defined source directory for WSPRnet.org archive files
+ * csvd .....: Directory for holding extracted csv files
+ * reports ..: Directory for output files
+ * dbname ...: Name of the SQLite3 database
+ * sqlf .....: SQL template for loading the SQLit3 database if needed
+ 
+ If you have previously downloaded the archive files, copy thenm to the
+ folder named srcd.
+ 
+ A default database, updated as of the latest git posting, is provided in
+ the repository. The data contained in the [ status ] table contains the
+ following fields:
+ 
+ name ......: archive file name from WSPRNet
+ date ......: the date the status was last updated
+ column ....: the number of columns for the archive file
+ records ...: the number of records in the archive .csv file
 """
 appdir = os.getcwd()
 srcd = (appdir + (os.sep) + 'srcd')
@@ -564,14 +577,14 @@ def update_status_table():
 #---------------------------------------------- create csv file from all tar.gz
 def search_all_months_for_callsign():
     """
-    Creates wsprlog-<call>-all.csv file based on all WSPRnet archive files
+    Credit Original Script ...: Gian Piero I2GPG
+    Modified by ..............: Greg Beam, KI7MT 
+    
+    1. Creates wsprlog-<call>-all.csv file based on all WSPRnet archive files
     """
-
-    # Credit: Gian Piero I2GPG. Modified by Greg Beam, KI7MT 
-    # process the .gz file
     call = raw_input("Enter callsign to log: ")
     call = call.upper()
-    mylogfile = reports + (os.sep) + "wsprlog-" + call + "-all" + ".csv"
+    mylogfile = reports + (os.sep) + call + "-all" + ".csv"
     
     w = open(mylogfile, "w")
     months = sorted(glob.glob(srcd + (os.sep) + '*.gz'), key=os.path.basename)
@@ -581,7 +594,8 @@ def search_all_months_for_callsign():
     print(45 * '-')
 
     for count in range (nmonths):
-        print("Processing file: %s " % months[count])
+        file_name = months[count].split("wsprspots-",1)[1]
+        print("* Processing ..: wsprspots-%s " % file_name)
         r=gzip.open(months[count], "r")
         for line in r:
             if call in line:
@@ -602,12 +616,14 @@ def search_all_months_for_callsign():
 #------------------------------------ update csv file from current month tar.gz
 def search_current_monnth_for_callsign():
     """
+    Credit Original Script ...: Gian Piero I2GPG
+    Modified by ..............: Greg Beam, KI7MT 
+
     This function performs two actions:
-    1. Update the current month WSPRnet tar.gz file
-    2. Updates / Creates wsprlog-<call>-<month>-<year>.csv file
+     1. Update the current month WSPRnet ( *.zip / .gz )  file
+     2. Creates a .csv file: <call>-<month>-<year>.csv
     """
-    # Credit: Gian Piero I2GPG. Modified by Greg Beam, KI7MT 
-    # process the .gz file
+  
     # update the current month tar.gz
     update_current_month()
  
@@ -667,7 +683,7 @@ def print_menu():
     print(" 1. Syncronize All WSPRnet Archive Files")
     print(" 2. Update Database Tables")
     print(" 3. Update [ %s ] Archive File" % cmon)
-    print(" 4. Callsign Search All Archive Files")
+    print(" 4. Callsign Search Of All Archive Files")
     print(" 5. Callsign Search For [ %s ] " % cmon)
     print(" 6. Clean Up CSV Directory")
     print(" 7. Exit/Quit")
