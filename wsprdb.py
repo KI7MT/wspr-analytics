@@ -18,57 +18,63 @@ from clint.textui import progress
 from bs4 import BeautifulSoup
 from time import gmtime
 
+#    wsprdb.py
 #
-#       wsprdb.py
+#    Copyright 2016 Greg Beam <ki7mt@yahoo.com>
+#    Copyright 2016 Gian Piero I2GPG <i2gpg@wedidit.it> 
 #
-#       Copyright 2016 Greg Beam <ki7mt@yahoo.com>
-#       Copyright 2016 Gian Piero I2GPG <i2gpg@wedidit.it> 
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; Version 3 of the License
 #
-#       This program is free software; you can redistribute it and/or modify
-#       it under the terms of the GNU General Public License as published by
-#       the Free Software Foundation; Version 3 of the License
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
 #
-#       This program is distributed in the hope that it will be useful,
-#       but WITHOUT ANY WARRANTY; without even the implied warranty of
-#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#       GNU General Public License for more details.
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, the license can be downloaded here:
 #
-#       You should have received a copy of the GNU General Public License
-#       along with this program; if not, the license can be downloaded here:
-#
-#       http://www.gnu.org/licenses/gpl.html
+#    http://www.gnu.org/licenses/gpl.html
 
 # Meta
-__author__ = 'Greg Beam, Gian Piero' 
+__author__ = 'Greg Beam' 
 __copyright__ = 'GPLv3'
 __version__ = '1.0.0'
 __version_info__ = (1, 0, 0)
-__email__ = '<ki7mt@yahoo.com>, <i2gpg@wedidit.it>'
+__email__ = '<ki7mt@yahoo.com>'
 __status__ = 'Development'
 __license__ = "GNU General Public License (GPL) Version 3"
 """
  REQUIREMENTS
- * Python2 or Python3 interrupter in your $PATH / %PATH%
+ 
+  * Python2 or Python3 interrupter in your $PATH / %PATH%
  
 
  PYTHON MODULES
- The following assumes a base install with no additional modules added. For
- Linux, you may also satisfy the requirements with your package manager
- if they are available.
  
- * pip install beautifulsoup4
- * pip install clint
- * pip install requests
+  The following assumes a base install with no additional modules added. For
+  Linux, you may also satisfy the requirements with your package manager
+  if they are available.
+ 
+  * pip install beautifulsoup4
+  * pip install clint
+  * pip install requests
  
 
- INSTALLATION and USAGE
+ INSTALLATION
  
- Using the Git Repository:
- 1. git clone git://git.code.sf.net/u/ki7mt/wsprdb
- 2. Copy previously downloaded WSPRNet archive files to ./wsprdb/srcd
+  Using the Git Repository:
+  1. git clone git://git.code.sf.net/u/ki7mt/wsprdb
+  2. Copy previously downloaded WSPRNet archive files to ./wsprdb/srcd
  
- To run, type: ./wsprdb.py
- 
+
+ USAGE
+  
+  1. To display the main menu, type: ./wsprdb.py
+  2. For the first run, select Option-1 to sync archive files
+  3. After initial database sync, you can search all or monthly for <call>
+  
 
  OVERVIEW
  
@@ -122,7 +128,7 @@ dwn_list=[]
 today = datetime.date.today()
 
 
-#----------------------------------------------------------- set file extension
+#----------------------------------------------------------- Set file extension
 """Set archive file extension ( zip or gz ) based on operating system type"""
 if sys.platform == "win32":
     ext = "zip"
@@ -130,7 +136,7 @@ else:
     ext = "gz"
 
 
-#----------------------------------------------------------- set file extension
+#----------------------------------------------------------- Create directories
 """Create directories if they do not exist"""
 for z in dirs:
     d=(appdir + (os.sep) + z)
@@ -138,7 +144,7 @@ for z in dirs:
         os.mkdir(d)
 
 
-#----------------------------------------------------------------- reset timers
+#----------------------------------------------------------------- Reset timers
 def reset_timers():
     """Reset values before running queries"""
     qt1 = 0
@@ -212,7 +218,7 @@ def init_db():
     conn.close()
 
 
-#------------------------------------------------------------- database version
+#------------------------------------------------------------ Get database info
 def check_db():
     """
     Check if we can connect to the database, if not, init_db
@@ -256,7 +262,7 @@ def check_db():
         init_db()
 
 
-#------------------------------------------------------------- database version
+#------------------------------------------------------------- Database version
 def version_db():
     """Get the wsperdb version"""
     with sqlite3.connect(dbf) as conn:
@@ -269,7 +275,7 @@ def version_db():
     return dbv
 
 
-#----------------------------------------------------------- md5sum the gz file
+#----------------------------------------------------------- MD5SUM csv.gz file
 def md5(fname):
     """
     Simple MD5SUM function for checking files.
@@ -283,7 +289,7 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 
-#----------------------------------------------------------- add csv file to db
+#----------------------------------------------------------- Add csv data to db
 def add_csv_file(value):
     """
     Add an archive file from WSPRnet.org/achieves
@@ -350,8 +356,11 @@ def add_csv_file(value):
     clean_csvd()
 
 
-#--------------------------------------------- remove all .csv files from csvd
+#--------------------------------------------- Remove all .csv files from csvd
 def clean_csvd():
+    """
+    Remove all extracted .csv files from csvd directory
+    """
     os.chdir(csvd)
     file_list = glob.glob("*.csv")
     for f in file_list:
@@ -360,7 +369,7 @@ def clean_csvd():
     os.chdir(appdir)
 
 
-#-------------------------------------------------------------- parse html page
+#-------------------------------------------------------------- Parse html page
 def csvf(Url):
     """
     Parse wsprnet.org/archive html page and extract file names
@@ -474,7 +483,7 @@ def extract_file(value):
     # Now clean upd csvd directory
     clean_csvd()
 
-#--------------------------------------------------------- check the db archive
+#--------------------------------------------------------- Check the db archive
 def check_archive():
     """
     Check each archive file for changes
@@ -535,10 +544,10 @@ def check_archive():
             download_files(value)
 
 
-#---------------------------------------------------- update current month only
+#---------------------------------------------------- Update current month only
 def update_current_month():
     """
-    Update current month archive file.
+    Download the latest changes for the current months archive file
     """
     y=(time.strftime("%Y"))
     m=(time.strftime("%m"))
@@ -577,8 +586,11 @@ def update_current_month():
         print("* Local File Status ..: Up to Date\n")
 
 
-#--------------------------------------------------------------- unpack archive
+#--------------------------------------------------------------- Unpack archive
 def update_status_table():
+    """
+    Update the SQLite3 Database Status table for each archive file
+    """
     ulist = []
     print(45 * '-')
     print(" Updating Tables - ( please be patient )")
@@ -599,18 +611,19 @@ def update_status_table():
         columns = (csv_cols)
         update_stats(value,utime,columns,lines)
         
-    ttime2 = (time.time()-ttime1)
-    print(" Total Processing Time In sec ..: %.3f" % ttime2)
+    ttime2 = ((time.time()-ttime1)/60)
+    print(" Processing Time ..: %.1f minutes" % ttime2)
+    print("\n")
 
     # now clean csvd directory
     clean_csvd()
 
 
-#---------------------------------------------- create csv file from all tar.gz
+#---------------------------------------------- Create csv file from all tar.gz
 def search_all_months_for_callsign():
     """
-    Credit Original Script ...: Gian Piero I2GPG
-    Modified by ..............: Greg Beam, KI7MT 
+    Credit For Original Script ...: Gian Piero I2GPG
+    Modified by ..................: Greg Beam, KI7MT 
     
     1. Creates wsprlog-<call>-all.csv file based on all WSPRnet archive files
     """
@@ -665,11 +678,11 @@ def search_all_months_for_callsign():
     print ("\n")
 
 
-#------------------------------------ update csv file from current month tar.gz
+#------------------------------------ Update csv file from current month tar.gz
 def search_current_monnth_for_callsign():
     """
-    Credit Original Script ...: Gian Piero I2GPG
-    Modified by ..............: Greg Beam, KI7MT 
+    Credit For Original Script ...: Gian Piero I2GPG
+    Modified by ..................: Greg Beam, KI7MT 
 
     This function performs two actions:
      1. Updates the current month WSPRnet ( *.zip / .gz )  file
@@ -728,24 +741,12 @@ def search_current_monnth_for_callsign():
     print ("\n")
 
 
-#-------------------------------------------------------------------- main menu
-def print_menu():
-    cmon =  today.strftime("%B")
-    print(45 * "-")
-    print(" WSPR Database Main Menu")
-    print(45 * "-")
-    print(" 1. Syncronize All WSPRnet Archive Files")
-    print(" 2. Update Database Tables")
-    print(" 3. Update [ %s ] Archive File" % cmon)
-    print(" 4. Callsign Search Of All Archive Files")
-    print(" 5. Callsign Search For [ %s ] " % cmon)
-    print(" 6. Clean Up CSV Directory")
-    print(" 7. Exit/Quit")
-    print("")
 
-
-#---------------------------------------------------------------- main function
+#---------------------------------------------------------- Main Menu Functions
 def main():
+    """
+    Main menu functions. Must match the items in print_menu().
+    """
     clear_screen()
     while True:
         print_menu()
@@ -773,7 +774,28 @@ def main():
 
         else:
             return
-        
+
+
+#-------------------------------------------------------------------- Main Menu
+def print_menu():
+    """
+    Print the main menu
+    """
+
+    cmon =  today.strftime("%B")
+    print(45 * "-")
+    print(" WSPR Database Main Menu")
+    print(45 * "-")
+    print(" 1. Synchronize WSPRnet Archive Files")
+    print(" 2. Update Database Status Table")
+    print(" 3. Update [ %s ] Archive File" % cmon)
+    print(" 4. Callsign Search Of All Archive Files")
+    print(" 5. Callsign Search For [ %s ] " % cmon)
+    print(" 6. Clean Up CSV Directory")
+    print(" 7. Exit/Quit")
+    print("")
+
+       
 if __name__ == "__main__":
     main()
 
