@@ -43,11 +43,36 @@ __author__ = 'Greg Beam, Gian Piero'
 __copyright__ = 'GPLv3'
 __version__ = '1.0.0'
 __version_info__ = (1, 0, 0)
-__email__ = '<ki7mt@yahoo.com> <i2gpg@wedidit.it>'
+__email__ = '<ki7mt@yahoo.com>, <i2gpg@wedidit.it>'
 __status__ = 'Development'
 __license__ = "GNU General Public License (GPL) Version 3"
 """
- **WsprDB:**  Provides a set of commonly used functions to download and parse
+ REQUIREMENTS
+ * Python2 or Python3 interrupter in your $PATH / %PATH%
+ 
+
+ PYTHON MODULES
+ The following assumes a base install with no additional modules added. For
+ Linux, you may also satisfy the requirements with your package manager
+ if they are available.
+ 
+ * pip install beautifulsoup4
+ * pip install clint
+ * pip install requests
+ 
+
+ INSTALLATION and USAGE
+ 
+ Using the Git Repository:
+ 1. git clone git://git.code.sf.net/u/ki7mt/wsprdb
+ 2. Copy previously downloaded WSPRNet archive files to ./wsprdb/srcd
+ 
+ To run, type: ./wsprdb.py
+ 
+
+ OVERVIEW
+ 
+ WsprDB provides a set of commonly used functions to download and parse
  database archive files from Wsprnet.org.
 
  The download lists are generated directly from WSPRnet.org archive URL. As
@@ -96,18 +121,24 @@ Url = "http://wsprnet.org/archive/"
 dwn_list=[]
 today = datetime.date.today()
 
+
+#----------------------------------------------------------- set file extension
 """Set archive file extension ( zip or gz ) based on operating system type"""
 if sys.platform == "win32":
     ext = "zip"
 else:
     ext = "gz"
 
+
+#----------------------------------------------------------- set file extension
 """Create directories if they do not exist"""
 for z in dirs:
     d=(appdir + (os.sep) + z)
     if not os.path.exists(d):
         os.mkdir(d)
 
+
+#----------------------------------------------------------------- reset timers
 def reset_timers():
     """Reset values before running queries"""
     qt1 = 0
@@ -181,7 +212,7 @@ def init_db():
     conn.close()
 
 
-#------------------------------------------------------- database version
+#------------------------------------------------------------- database version
 def check_db():
     """
     Check if we can connect to the database, if not, init_db
@@ -225,7 +256,7 @@ def check_db():
         init_db()
 
 
-#------------------------------------------------------- database version
+#------------------------------------------------------------- database version
 def version_db():
     """Get the wsperdb version"""
     with sqlite3.connect(dbf) as conn:
@@ -238,7 +269,7 @@ def version_db():
     return dbv
 
 
-#------------------------------------------------------- md5sum the gz file
+#----------------------------------------------------------- md5sum the gz file
 def md5(fname):
     """
     Simple MD5SUM function for checking files.
@@ -252,7 +283,7 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 
-#------------------------------------------------------- add csv file to db
+#----------------------------------------------------------- add csv file to db
 def add_csv_file(value):
     """
     Add an archive file from WSPRnet.org/achieves
@@ -329,7 +360,7 @@ def clean_csvd():
     os.chdir(appdir)
 
 
-#------------------------------------------------------- parse html page
+#-------------------------------------------------------------- parse html page
 def csvf(Url):
     """
     Parse wsprnet.org/archive html page and extract file names
@@ -339,7 +370,7 @@ def csvf(Url):
         yield a['href']
 
 
-#------------------------------------------------------- Download Files
+#--------------------------------------------------------------- Download Files
 def download_files(value):
     """
     Download wsprspot archive files
@@ -377,6 +408,7 @@ def update_stats(value,utime,columns,lines):
     conn.commit()
     conn.close()
 
+#--------------------------------------------------------- Extract archive file
 def extract_file(value):
     """
     Extract downloaded archive files
@@ -442,7 +474,7 @@ def extract_file(value):
     # Now clean upd csvd directory
     clean_csvd()
 
-#------------------------------------------------------- check the db archive
+#--------------------------------------------------------- check the db archive
 def check_archive():
     """
     Check each archive file for changes
@@ -545,7 +577,7 @@ def update_current_month():
         print("* Local File Status ..: Up to Date\n")
 
 
-#------------------------------------------------------- unpack archive
+#--------------------------------------------------------------- unpack archive
 def update_status_table():
     ulist = []
     print(45 * '-')
@@ -582,10 +614,11 @@ def search_all_months_for_callsign():
     
     1. Creates wsprlog-<call>-all.csv file based on all WSPRnet archive files
     """
+    reset_timers()
     call = raw_input("Enter callsign to log: ")
     call = call.upper()
     mylogfile = reports + (os.sep) + call + "-all" + ".csv"
-    
+
     w = open(mylogfile, "w")
     months = sorted(glob.glob(srcd + (os.sep) + '*.gz'), key=os.path.basename)
     nmonths = len(months)
@@ -593,6 +626,7 @@ def search_all_months_for_callsign():
     print(" Searching %s Archive Files for [ %s ]" % (str(nmonths),call))
     print(45 * '-')
 
+    qt1 = time.time()
     for count in range (nmonths):
         file_name = months[count].split("wsprspots-",1)[1]
         print("* Processing ..: wsprspots-%s " % file_name)
@@ -609,8 +643,26 @@ def search_all_months_for_callsign():
                     w.write(newl,)                      # write line to output file
     r.close()          
     w.close()
-    print("End of job ")
-    print("Log file is " + mylogfile)
+    qt2 = ((time.time()-qt1)/60)
+    print("--End of Job--")
+        
+    # get total number of entries in <call>-all.csv file
+    with open(mylogfile,"r") as f:
+        reader = csv.reader(f,delimiter = ",")
+        data = list(reader)
+        ncount = len(data)
+    
+    f.close()
+    
+    # priont job summary data
+    print("\n" + 45 * '-')
+    print(" Search Summary For [ %s ]" % call)
+    print(45 * '-')
+    print("* Files Processed ..: %s " % nmonths)
+    print("* Log Entry Count ..: %s " % ncount)
+    print("* Process Time .....: %.1f minutes" % qt2)
+    print("* File Location ....: %s " % mylogfile)
+    print ("\n")
 
 
 #------------------------------------ update csv file from current month tar.gz
@@ -620,11 +672,12 @@ def search_current_monnth_for_callsign():
     Modified by ..............: Greg Beam, KI7MT 
 
     This function performs two actions:
-     1. Update the current month WSPRnet ( *.zip / .gz )  file
+     1. Updates the current month WSPRnet ( *.zip / .gz )  file
      2. Creates a .csv file: <call>-<month>-<year>.csv
     """
   
     # update the current month tar.gz
+    reset_timers()
     update_current_month()
  
     # get data parameters
@@ -645,8 +698,7 @@ def search_current_monnth_for_callsign():
     print(" Processing [ %s ] for %s" % (call,now))
     print(45 * '-')
 
-    # Credit: Gian Piero I2GPG. Modified by Greg Beam, KI7MT 
-    # process the .gz file
+    qt1 = time.time()
     r=gzip.open(month, "r")
     for line in r:
         if call in line:
@@ -669,6 +721,8 @@ def search_current_monnth_for_callsign():
         ncount = len(data)
     
     f.close()
+    qt2 = ((time.time()-qt1)/60)
+    print("* Process Time ...: %.1f minutes" % qt2)
     print("* Log Count ......: %s " % ncount)
     print("* File Location ..: %s " % mylogfile)
     print ("\n")
@@ -690,7 +744,7 @@ def print_menu():
     print("")
 
 
-#--------------------------------------------------------------- main functions
+#---------------------------------------------------------------- main function
 def main():
     clear_screen()
     while True:
