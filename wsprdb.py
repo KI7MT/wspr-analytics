@@ -767,7 +767,19 @@ def main():
             search_current_monnth_for_callsign()
 
         if "6" == selection:
+            afiles = next(os.walk(csvd))[2]
+            nfiles = len(afiles)
+            print("\n" + 45 * '-')
+            print(" Cleanup CSV Directory")
+            print(45 * '-')
+            if nfiles == 0:
+                print(" * CSV Directory Is Empty, Nothing To Be Done")
+            else:
+                print(" * Removing [ %s ] files from CSV Directory" % nfiles)
+            
             clean_csvd()
+            print(" * Finished Cleanup")
+            print("\n")            
 
         if "7" == selection:
             return
@@ -781,7 +793,6 @@ def print_menu():
     """
     Print the main menu
     """
-
     cmon =  today.strftime("%B")
     print(45 * "-")
     print(" WSPR Database Main Menu")
