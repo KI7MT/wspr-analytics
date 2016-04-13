@@ -1,9 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+from __future__ import print_function
+import os
+import sys
+import time
+import datetime
+import csv
+import sqlite3
+import readline
+import hashlib
+import gzip
+import glob
+import mmap
+import requests
+from clint.textui import progress
+from bs4 import BeautifulSoup
+from time import gmtime
+
 #
 #       wsprdb.py
 #
 #       Copyright 2016 Greg Beam <ki7mt@yahoo.com>
+#       Copyright 2016 Gian Piero I2GPG <i2gpg@wedidit.it> 
 #
 #       This program is free software; you can redistribute it and/or modify
 #       it under the terms of the GNU General Public License as published by
@@ -20,80 +39,61 @@
 #       http://www.gnu.org/licenses/gpl.html
 
 # Meta
+__author__ = 'Greg Beam, Gian Piero' 
+__copyright__ = 'GPLv3'
 __version__ = '1.0.0'
-__license__ = "GNU General Public License (GPL) Version 3"
 __version_info__ = (1, 0, 0)
-__author__ = 'Greg Beam'
-__email__ = '<ki7mt@yahoo.com>'
+__email__ = '<ki7mt@yahoo.com> <i2gpg@wedidit.it>'
 __status__ = 'Development'
-
+__license__ = "GNU General Public License (GPL) Version 3"
 """
-**WsprDB:**  Provides a set of commonly used tools to download and parse
-database archive files from Wsprnet.org.
+ **WsprDB:**  Provides a set of commonly used tools to download and parse
+ database archive files from Wsprnet.org.
 
-Performs the following functions:
-    - abc
-    - abc
-    - abd
+ Performs the following functions:
+ * Creates and SQLite3 database for housing data
+ * Download all archive files from Wsprnet.org
+ * Size checks the archives and downloads if they do not match
+ * Updates the current month archive, useful for daily updates
+
+ The download lists are generated directly from WSPRnet.org archive URL. As
+ new files are added, they should be automatically picked up by **WsprDB**
+ and added to the process list.
+
+ Create directories and variables
+
+ Sets database directory based on standard File System Hierarchy
+ - Linux ....: $HOME/.local/share/ + <dir-name>
+ - Windows ..: C:\Users\%username%\AppData\local\ + <dir-name>
+
+ srcd .......: User defined source directory for WSPRnet.org archive files
+ csvd .......: Directory for holding extracted csv files
+ dbname .....: Name of the SQLite3 database
+ sqlf .......: SQL template for loading the SQLit3 database
 """
+appdir = os.getcwd()
+srcd = (appdir + (os.sep) + 'srcd')
+csvd = (appdir + (os.sep) + "csvd")
+reports = (appdir + (os.sep) + "reports")
+dbname = 'wsprana.db'
+dbf = (appdir + (os.sep) + dbname)
+dirs=['srcd', 'csvd', 'reports']
+sqlf = ("wsprdb.sql")
+Url = "http://wsprnet.org/archive/"
+dwn_list=[]
+today = datetime.date.today()
 
-from __future__ import print_function
-import os
-import sys
-import time
-import datetime
-import csv
-import sqlite3
-import readline
-import hashlib
-import gzip
-import glob
-import mmap
-import requests
-import appdirs
-from clint.textui import progress
-from bs4 import BeautifulSoup
+"""Set archive file extension ( zip or gz ) based on operating system type"""
+if sys.platform == "win32":
+    ext = "zip"
+else:
+    ext = "gz"
 
-usage = """python wsprdb.py <module-name>"""
-
-def setup_common_dirs():
-    """Create directories and variables
-
-    Sets database directory based on standard File System Hierarchy
-    - Linux ....: $HOME/.local/share/ + <dir-name>
-    - Windows ..: C:\Users\%username%\AppData\local\ + <dir-name>
-
-    srcd .......: Source Directory for WSPRnet.org archive files
-    cvsd .......: Directory for holding extracted csv files
-    dbname .....: Name of the SQLite3 database
-
-    """
-    shared = appdirs.AppDirs("WSPR-LOG", appauthor='', version='', multipath='')
-    shared = shared.user_data_dir
-    srcd = ('/media/ki7mt/data/wsprdb')
-    csvd = (shared + (os.sep) + "csvd")
-    Url="http://wsprnet.org/archive/"
-    dbname = 'wsprana.db'
-    dbf = (shared + (os.sep) + dbname)
-    dirs=(shared, srcd, csvd)
-
-    for i in dirs():
-        if not os.path.exists(i):
-            os.mkdir(i)
-        
-    return shared, srcd, csvd, Url, dbname, dbf
-
-
-def archive_ext()
-    """Set archive file extension ( zip or gz ) based on operating
-    system type
-    """
-    if sys.platform == "win32":
-        ext = "zip"
-    else:
-        ext = "gz"
-    
-    return ext
+"""Create directories if they do not exist"""
+for z in dirs:
+    d=(appdir + (os.sep) + z)
+    if not os.path.exists(d):
+        os.mkdir(d)
 
 def reset_timers():
     """Reset values before running queries"""
@@ -104,6 +104,8 @@ def reset_timers():
     qt5 = 0
     qt6 = 0
 
+
+#----------------------------------------------------------------- Clean Screen
 def clear_screen():
     """Clear based on the platform"""
     if sys.platform == 'win32':
@@ -111,6 +113,8 @@ def clear_screen():
     else:
         os.system('clear')
 
+
+#---------------------------------------------------------- Initialize Database
 def init_db():
     """Create database structure and add default table data"""
     qt1 = time.time()
@@ -121,48 +125,24 @@ def init_db():
     # connect to SQLite3 database
     with sqlite3.connect(dbf) as conn:
         cur = conn.cursor()
-
-        # get the Sqlite3 version
-        cur.execute("""SELECT SQLITE_VERSION()""")
-        sv = cur.fetchone()
-
-        # drop tables if they exist
-        cur.execute('''DROP TABLE IF EXISTS appdata''')
-        cur.execute('''DROP TABLE IF EXISTS records''')
-        cur.execute('''DROP TABLE IF EXISTS status''')
-        conn.commit()
-
-        # create appdata table
-        cur.execute("""CREATE TABLE appdata(
-            author      TEXT,
-            copyright   TEXT,
-            license     TEXT,
-            version     TEXT,
-            email       TEXT,
-            status      TEXT
-        );""")
+        fd = open(sqlf, 'r')
+        script = fd.read()
+        cur.executescript(script)
+        fd.close()
         
+        cur.execute('SELECT SQLITE_VERSION()')
+        sv = cur.fetchone()
+ 
         # default values
         author = (__author__)
         copyright = (__copyright__)
         license = (__license__)
         version = (__version__)
-        email = (__email_)
-        status = (status__)
-        cur.execute("""NSERT INTO appdata(author,copyright,license,version,
-                    email,status) VALUES (?,?,?,?,?,?);""", (author,copyright,
-                    license,version,email,status))
-        
-        # create archive status table
-        cur.execute("""CREATE TABLE IF NOT EXISTS status(
-                    name           TEXT    PRIMARY KEY UNIQUE  NOT NULL,
-                    date_added     TEXT,
-                    columns        TEXT,
-                    records        TEXT
-        );""")
- 
+        email = (__email__)
+        status = (__status__)
+        cur.execute('''INSERT INTO appdata(author,copyright,license,version,email,status) VALUES (?,?,?,?,?,?)''', (author,copyright,license,version,email,status))
         conn.commit()
-
+ 
         cur.execute('SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1')
         for row in cur.fetchall():
             aut=row[0]
@@ -171,7 +151,7 @@ def init_db():
             ver=row[3]
             cnt=row[4]
             sta=row[5]
-    
+
     conn.close()
 
     qt2 = (time.time()-qt1)
@@ -186,6 +166,7 @@ def init_db():
     print(" Execution time ....: %.3f seconds" % qt2)
     print("\n")
     conn.close()
+
 
 #------------------------------------------------------- database version
 def check_db():
@@ -230,6 +211,7 @@ def check_db():
     else:
         init_db()
 
+
 #------------------------------------------------------- database version
 def version_db():
     """Get the wsperdb version"""
@@ -241,6 +223,7 @@ def version_db():
     
     conn.close()
     return dbv
+
 
 #------------------------------------------------------- md5sum the gz file
 def md5(fname):
@@ -255,6 +238,7 @@ def md5(fname):
     f.close()
     return hash_md5.hexdigest()
 
+
 #------------------------------------------------------- add csv file to db
 def add_csv_file(value):
     """
@@ -266,7 +250,7 @@ def add_csv_file(value):
     Update the status table
     """
     print("* Database .......: {}".format(dbname))
-    csvfile = (shared + (os.sep) + value)
+    csvfile = (appdir + (os.sep) + value)
     fname = (csvfile)
     MD5 = (md5(fname))
     print("* CSV File Name ..: {}".format(os.path.basename(csvfile)))
@@ -318,6 +302,20 @@ def add_csv_file(value):
         conn.commit()
     conn.close()
 
+    # now cleanup the csv direcroty
+    clean_csvd()
+
+
+#--------------------------------------------- remove all .csv files from csvd
+def clean_csvd():
+    os.chdir(csvd)
+    file_list = glob.glob("*.csv")
+    for f in file_list:
+        os.remove(f)
+    
+    os.chdir(appdir)
+
+
 #------------------------------------------------------- parse html page
 def csvf(Url):
     """
@@ -327,10 +325,12 @@ def csvf(Url):
     for a in list.find_all('a'):
         yield a['href']
 
-#------------------------------------------------------- DownloaFiles
+
+#------------------------------------------------------- Download Files
 def download_files(value):
     """
     Download wsprspot archive files
+    Note: this can take a long time >= 25-30 minutes the first run
     """
     os.chdir(srcd)
     r = requests.get(Url + value, stream=True)
@@ -344,7 +344,6 @@ def download_files(value):
     f.close()
 
     # now that the file has been downloaded to SRCD, update the status table
-    # Note: this can take a long time >=25-30 minutes the first run
     extract_file(value)
     fname = (value)
     utime = time.strftime("%Y-%b-%d",time.gmtime())
@@ -353,6 +352,7 @@ def download_files(value):
     update_stats(value,utime,columns,lines)
 
 
+#------------------------------------------------- Update database status table
 def update_stats(value,utime,columns,lines):
     """
     Update the database stats table for each archive files
@@ -374,11 +374,12 @@ def extract_file(value):
     fsize=0
     csv_cols=0
     records=0
-    os.chdir(shared)
+    os.chdir(appdir)
     src = (srcd + (os.sep) + value)
     dest_dir = (csvd)
     dest_name = os.path.join(dest_dir, value[:-3])
     qt1 = time.time()
+
     # extract the .zip / .gz file
     print("* Extracting Archive ..: {}".format(value))
     with gzip.open(src, 'rb') as infile:
@@ -393,32 +394,40 @@ def extract_file(value):
     # use mmap for speed increa, could also use multi-core processing
     qt3 = time.time()
     with open(dest_name, 'rt', os.O_RDONLY) as f:
-        mInput = mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
-        L=0
-        for s in iter(mInput.readline, ""):
-            L+=1            
-        records=(int(L))
-    qt4 = (time.time()-qt3)   
-    mInput.close()
-    f.close()
+        try:
+            mInput = mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
+            L=0
+            for s in iter(mInput.readline, ""):
+                L+=1            
+            records=(int(L))
 
-    qt5 = time.time()
-    with open(dest_name, 'rt') as f:
-        reader = csv.reader(f, delimiter=',', skipinitialspace=True)
-        csv_cols = len(reader.next())
-    qt6 = (time.time()-qt5)   
-    f.close()
+            qt4 = (time.time()-qt3)   
+            mInput.close()
+            f.close()
 
-    # get the file size before deleting
-    fsize = os.stat(dest_name).st_size
-    print("* CSV File Name .......: {}".format(value[:-3]))
-    print("* CSV Size ............: {:,} bytes".format(fsize))
-    print("* CSV Columns .........: {}".format(csv_cols))
-    print("* CSV Record Count ....: {:,}".format(records))
-    print("* Extraction Time .....: %.4f seconds" % qt2)
-    print("* Record Query Time ...: %.4f seconds" % qt4)
-    print("* Col Query Time ......: %.4f seconds\n" % qt6)
-    return fsize, csv_cols, records
+            qt5 = time.time()
+            with open(dest_name, 'rt') as f:
+                reader = csv.reader(f, delimiter=',', skipinitialspace=True)
+                csv_cols = len(reader.next())
+            qt6 = (time.time()-qt5)   
+            f.close()
+
+            # get the file size before deleting
+            fsize = os.stat(dest_name).st_size
+            print("* CSV File Name .......: {}".format(value[:-3]))
+            print("* CSV Size ............: {:,} bytes".format(fsize))
+            print("* CSV Columns .........: {}".format(csv_cols))
+            print("* CSV Record Count ....: {:,}".format(records))
+            print("* Extraction Time .....: %.4f seconds" % qt2)
+            print("* Record Query Time ...: %.4f seconds" % qt4)
+            print("* Col Query Time ......: %.4f seconds\n" % qt6)
+            return fsize, csv_cols, records
+
+        except ValueError:
+            print("* File is empty ..: {}".format(dest_name))
+
+    # Now clean upd csvd directory
+    clean_csvd()
 
 #------------------------------------------------------- check the db archive
 def check_archive():
@@ -454,7 +463,7 @@ def check_archive():
             if not (int(remote_size)) == (int(local_size)):
                 dwn_list.append(l)
             else:
-                print("* {} with {:,} bytes is Up To Date".format(l,local_size))
+                print("* {} size {:,} bytes is Up To Date".format(l,local_size))
                 
     # check if archive data is missing from status table
     for l in csvf(Url):
@@ -470,6 +479,7 @@ def check_archive():
 
     # print needed updates and run          
     ix = len(dwn_list)
+    print("\n")
     print(45 * '-')
     print(" Archive Summary")
     print(45 * '-')
@@ -479,6 +489,8 @@ def check_archive():
         for value in sorted(dwn_list):
             download_files(value)
 
+
+#---------------------------------------------------- update current month only
 def update_current_month():
     """
     Update current month archive file.
@@ -494,8 +506,7 @@ def update_current_month():
     req.content
     remote_size=(req.headers['content-length'])
     
-    clear_screen()
-    print(45 * '-')
+    print("\n" + 45 * '-')
     print(" Updating %s" % value)
     print(45 * '-')
 
@@ -510,10 +521,6 @@ def update_current_month():
         local_size = 0
 
     if not (int(remote_size)) == (int(local_size)):
-        clear_screen()
-        print(45 * '-')
-        print(" Updating Archive for %s %s" % (month,y))
-        print(45 * '-')
         download_files(value)
     else:
         clear_screen
@@ -521,8 +528,9 @@ def update_current_month():
         l = int(local_size)
         print("* File Name ..........: %s" % value)
         print("* Remote File Size ...: {:,} bytes".format(r))
-        print("* Local File Sise ....: {:,} bytes".format(l))
+        print("* Local File Size ....: {:,} bytes".format(l))
         print("* Local File Status ..: Up to Date\n")
+
 
 #------------------------------------------------------- unpack archive
 def update_status_table():
@@ -545,11 +553,158 @@ def update_status_table():
         lines = (records)
         columns = (csv_cols)
         update_stats(value,utime,columns,lines)
-            
+        
     ttime2 = (time.time()-ttime1)
     print(" Total Processing Time In sec ..: %.3f" % ttime2)
 
-if __name__ == '__main__':
-    globals()[sys.argv[1]]()
+    # now clean csvd directory
+    clean_csvd()
+
+
+#---------------------------------------------- create csv file from all tar.gz
+def search_all_months_for_callsign():
+    """
+    Creates wsprlog-<call>-all.csv file based on all WSPRnet archive files
+    """
+
+    # Credit: Gian Piero I2GPG. Modified by Greg Beam, KI7MT 
+    # process the .gz file
+    call = raw_input("Enter callsign to log: ")
+    call = call.upper()
+    mylogfile = reports + (os.sep) + "wsprlog-" + call + "-all" + ".csv"
+    
+    w = open(mylogfile, "w")
+    months = sorted(glob.glob(srcd + (os.sep) + '*.gz'), key=os.path.basename)
+    nmonths = len(months)
+    print("\n" + 45 * '-')
+    print(" Searching %s Archive Files for [ %s ]" % (str(nmonths),call))
+    print(45 * '-')
+
+    for count in range (nmonths):
+        print("Processing file: %s " % months[count])
+        r=gzip.open(months[count], "r")
+        for line in r:
+            if call in line:
+                x=line.split(',')                       # split data fields
+                if (x[2] == call) or (x[6] == call):    # callsign or reporter fields only
+                    t = gmtime(float(x[1]))             # decode and replace time stamp
+                    timestamp = str(t[0])+'-'+str(t[1])+'-'+str(t[2])+','+str(t[3])+':'+str(t[4])
+                    newl = x[0]+','+timestamp
+                    for count in range (len(x)-2):      #copy rest of the line
+                        newl = newl+','+x[count+2]
+                    w.write(newl,)                      # write line to output file
+    r.close()          
+    w.close()
+    print("End of job ")
+    print("Log file is " + mylogfile)
+
+
+#------------------------------------ update csv file from current month tar.gz
+def search_current_monnth_for_callsign():
+    """
+    This function performs two actions:
+    1. Update the current month WSPRnet tar.gz file
+    2. Updates / Creates wsprlog-<call>-<month>-<year>.csv file
+    """
+    # Credit: Gian Piero I2GPG. Modified by Greg Beam, KI7MT 
+    # process the .gz file
+    # update the current month tar.gz
+    update_current_month()
+ 
+    # get data parameters
+    now =  today.strftime("%B-%Y")
+    y = (time.strftime("%Y"))
+    m = (time.strftime("%m"))
+    count = 0
+
+    value = ("wsprspots-" + y + "-" + m + ".csv." + ext)
+    call = raw_input("Enter callsign to check: ")
+    call=call.upper()
+    mylogfile = reports + (os.sep) + call + '-' + time.strftime("%B") + '-' + y + ".csv"
+    w = open(mylogfile, "w")
+
+    month = (srcd + (os.sep) + (os.sep) + value)
+    name = (value)
+    print("\n" + 45 * '-')
+    print(" Processing [ %s ] for %s" % (call,now))
+    print(45 * '-')
+
+    # Credit: Gian Piero I2GPG. Modified by Greg Beam, KI7MT 
+    # process the .gz file
+    r=gzip.open(month, "r")
+    for line in r:
+        if call in line:
+            x=line.split(',')                   # split data fields
+            if (x[2]==call) or (x[6]==call):    # callsign or reporter fields only
+                t=gmtime(float(x[1]))           # decode and replace time stamp
+                timestamp=str(t[0])+'-'+str(t[1])+'-'+str(t[2])+','+str(t[3])+':'+str(t[4])
+                newl=x[0]+','+timestamp
+                for count in range (len(x)-2):  #copy rest of the line
+                    newl = newl+','+x[count+2]
+                w.write(newl,)                  # write line to output file
+
+    r.close()          
+    w.close()
+
+    # get total number of entries in the new .csv file
+    with open(mylogfile,"r") as f:
+        reader = csv.reader(f,delimiter = ",")
+        data = list(reader)
+        ncount = len(data)
+    
+    f.close()
+    print("* Log Count ......: %s " % ncount)
+    print("* File Location ..: %s " % mylogfile)
+    print ("\n")
+
+
+#-------------------------------------------------------------------- main menu
+def print_menu():
+    cmon =  today.strftime("%B")
+    print(45 * "-")
+    print(" WSPR Database Main Menu")
+    print(45 * "-")
+    print(" 1. Syncronize All WSPRnet Archive Files")
+    print(" 2. Update Database Tables")
+    print(" 3. Update [ %s ] Archive File" % cmon)
+    print(" 4. Callsign Search All Archive Files")
+    print(" 5. Callsign Search For [ %s ] " % cmon)
+    print(" 6. Clean Up CSV Directory")
+    print(" 7. Exit/Quit")
+    print("")
+
+
+#--------------------------------------------------------------- main functions
+def main():
+    clear_screen()
+    while True:
+        print_menu()
+        selection = raw_input("Your selection: ")
+        if "1" == selection:
+            check_archive()
+
+        if "2" == selection:
+            update_status_table()
+
+        if "3" == selection:
+            update_current_month()
+
+        if "4" == selection:
+            search_all_months_for_callsign()
+
+        if "5" == selection:
+            search_current_monnth_for_callsign()
+
+        if "6" == selection:
+            clean_csvd()
+
+        if "7" == selection:
+            return
+
+        else:
+            return
+        
+if __name__ == "__main__":
+    main()
 
 # END WsprDB
