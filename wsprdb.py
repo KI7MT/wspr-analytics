@@ -478,7 +478,8 @@ def extract_file(value):
             return fsize, csv_cols, records
 
         except ValueError:
-            print("* File is empty ........: {}".format(dest_name), key=os.path.basename)
+            print("* CSV File Is  Empty ..: {}".format(value[:-3]))
+            print("\n")
 
     # Now clean upd csvd directory
     clean_csvd()
@@ -488,7 +489,7 @@ def check_archive():
     """
     Check each archive file for changes
     """
-    print(65 * '-')
+    print("\n" + 65 * '-')
     print(" Checking Archives - ( please be patient )")
     print(65 * '-')
     lcount=0
@@ -591,8 +592,10 @@ def update_status_table():
     """
     Update the SQLite3 Database Status table for each archive file
     """
+    trecords = 0
+    tfsize = 0
     ulist = []
-    print(45 * '-')
+    print("\n" + 45 * '-')
     print(" Updating Tables - ( please be patient )")
     print(45 * '-')
     ttime1 = time.time()
@@ -610,9 +613,17 @@ def update_status_table():
         lines = (records)
         columns = (csv_cols)
         update_stats(value,utime,columns,lines)
-        
+        trecords += records
+        tfsize += fsize
+
     ttime2 = ((time.time()-ttime1)/60)
-    print(" Processing Time .....: %.1f minutes" % ttime2)
+
+    print("\n" + 45 * '-')
+    print(" Update Table Summary")
+    print(45 * '-')
+    print(" * Total Records .....: {:,}".format(trecords))
+    print(" * Total Bytes .......: {:,}".format(tfsize))
+    print(" * Processing Time ...: %.1f minutes" % ttime2)
     print("\n")
 
     # now clean csvd directory
