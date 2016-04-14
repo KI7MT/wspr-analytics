@@ -692,7 +692,7 @@ def search_all_months_for_callsign():
     
     f.close()
     
-    # priont job summary data
+    # print job summary data
     print("\n" + 45 * '-')
     print(" Search Summary For [ %s ]" % call)
     print(45 * '-')
@@ -700,7 +700,6 @@ def search_all_months_for_callsign():
     print("* Log Entry Count ..: %s " % ncount)
     print("* Process Time .....: %.1f minutes" % qt2)
     print("* File Location ....: %s " % mylogfile)
-    print ("\n")
 
     # cleanup csvd directory
     clean_csvd()
@@ -816,7 +815,6 @@ def main():
                 print(" * Removing [ %s ] files from CSV Directory" % nfiles)
                 clean_csvd()
                 print(" * Finished Cleanup")
-                print("\n")            
             
             pause()
             main()
