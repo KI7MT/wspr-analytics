@@ -163,6 +163,10 @@ def clear_screen():
     else:
         os.system('clear')
 
+#--------------------------------------------------------------- Pause function
+def pause():
+    raw_input("\nPress <ENTER> for main menu...")
+
 
 #---------------------------------------------------------- Initialize Database
 def init_db():
@@ -368,7 +372,6 @@ def clean_csvd():
     
     os.chdir(appdir)
 
-
 #-------------------------------------------------------------- Parse html page
 def csvf(Url):
     """
@@ -404,6 +407,9 @@ def download_files(value):
     columns = (csv_cols)
     update_stats(value,utime,columns,lines)
 
+    # cleanup csvd directory
+    clean_csvd()
+
 
 #------------------------------------------------- Update database status table
 def update_stats(value,utime,columns,lines):
@@ -416,6 +422,7 @@ def update_stats(value,utime,columns,lines):
                 values (?,?,?,?);''', (value,utime,columns,lines))
     conn.commit()
     conn.close()
+
 
 #--------------------------------------------------------- Extract archive file
 def extract_file(value):
@@ -478,11 +485,11 @@ def extract_file(value):
             return fsize, csv_cols, records
 
         except ValueError:
-            print("* CSV File Is  Empty ..: {}".format(value[:-3]))
-            print("\n")
+            print("* CSV File Is Empty ...: {} \n".format(value[:-3]))
 
-    # Now clean upd csvd directory
+    # clean csvd directory
     clean_csvd()
+
 
 #--------------------------------------------------------- Check the db archive
 def check_archive():
@@ -544,6 +551,9 @@ def check_archive():
         for value in sorted(dwn_list):
             download_files(value)
 
+    # cleanup csvd directory
+    clean_csvd()
+
 
 #---------------------------------------------------- Update current month only
 def update_current_month():
@@ -586,6 +596,8 @@ def update_current_month():
         print("* Local File Size ....: {:,} bytes".format(l))
         print("* Local File Status ..: Up to Date\n")
 
+    # cleanup csvd directory
+    clean_csvd()
 
 #--------------------------------------------------------------- Unpack archive
 def update_status_table():
@@ -594,6 +606,7 @@ def update_status_table():
     """
     trecords = 0
     tfsize = 0
+    tfcount = 0
     ulist = []
     print("\n" + 45 * '-')
     print(" Updating Tables - ( please be patient )")
@@ -615,16 +628,17 @@ def update_status_table():
         update_stats(value,utime,columns,lines)
         trecords += records
         tfsize += fsize
+        tfcount += 1
 
     ttime2 = ((time.time()-ttime1)/60)
 
     print("\n" + 45 * '-')
     print(" Update Table Summary")
     print(45 * '-')
+    print(" * Total Files .......: {:,}".format(tfcount))
     print(" * Total Records .....: {:,}".format(trecords))
     print(" * Total Bytes .......: {:,}".format(tfsize))
-    print(" * Processing Time ...: %.1f minutes" % ttime2)
-    print("\n")
+    print(" * Processing Time ...: %.1f minutes \n" % ttime2)
 
     # now clean csvd directory
     clean_csvd()
@@ -688,6 +702,9 @@ def search_all_months_for_callsign():
     print("* File Location ....: %s " % mylogfile)
     print ("\n")
 
+    # cleanup csvd directory
+    clean_csvd()
+
 
 #------------------------------------ Update csv file from current month tar.gz
 def search_current_monnth_for_callsign():
@@ -749,8 +766,9 @@ def search_current_monnth_for_callsign():
     print("* Process Time ...: %.1f minutes" % qt2)
     print("* Log Count ......: %s " % ncount)
     print("* File Location ..: %s " % mylogfile)
-    print ("\n")
 
+    # cleanup csvd directory
+    clean_csvd()
 
 
 #---------------------------------------------------------- Main Menu Functions
@@ -764,34 +782,45 @@ def main():
         selection = raw_input("Your selection: ")
         if "1" == selection:
             check_archive()
+            pause()
+            main()
 
         if "2" == selection:
             update_status_table()
+            pause()
+            main()
 
         if "3" == selection:
             update_current_month()
+            pause()
+            main()
 
         if "4" == selection:
             search_all_months_for_callsign()
+            pause()
+            main()
 
         if "5" == selection:
             search_current_monnth_for_callsign()
+            pause()
+            main()
 
         if "6" == selection:
-            afiles = next(os.walk(csvd))[2]
-            nfiles = len(afiles)
+            afiles = len(glob.glob1(csvd,"*.csv"))
             print("\n" + 45 * '-')
             print(" Cleanup CSV Directory")
             print(45 * '-')
-            if nfiles == 0:
-                print(" * CSV Directory Is Empty, Nothing To Be Done")
+            if afiles == 0:
+                print(" * CSV Directory Is Clean, Nothing To Be Done \n")
             else:
                 print(" * Removing [ %s ] files from CSV Directory" % nfiles)
+                clean_csvd()
+                print(" * Finished Cleanup")
+                print("\n")            
             
-            clean_csvd()
-            print(" * Finished Cleanup")
-            print("\n")            
-
+            pause()
+            main()
+            
         if "7" == selection:
             return
 
@@ -814,7 +843,7 @@ def print_menu():
     print(" 4. Callsign Search Of All Archive Files")
     print(" 5. Callsign Search For [ %s ] " % cmon)
     print(" 6. Clean Up CSV Directory")
-    print(" 7. Exit/Quit")
+    print(" 7. Exit")
     print("")
 
        
