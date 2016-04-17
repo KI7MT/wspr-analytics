@@ -810,14 +810,16 @@ def search_all_months_for_callsign():
         r=gzip.open(months[count], "r")
         for line in r:
             if call in line:
-                x=line.split(',')                       # split data fields
-                if (x[2] == call) or (x[6] == call):    # callsign or reporter fields only
-                    t = gmtime(float(x[1]))             # decode and replace time stamp
-                    timestamp = str(t[0])+'-'+str(t[1])+'-'+str(t[2])+','+str(t[3])+':'+str(t[4])
-                    newl = x[0]+','+timestamp
-                    for count in range (len(x)-2):      #copy rest of the line
-                        newl = newl+','+x[count+2]
-                    w.write(newl,)                      # write line to output file
+                x=line.split(',')                                   # split data fields
+                if (x[2] == call) or (x[6] == call):                # callsign or reporter fields only
+                    s = float(x[1])                                 # decode and replace time stamp
+                    d = time.strftime('%Y-%m-%d', time.gmtime(s))
+                    t = time.strftime('%H%M', time.gmtime(s))
+                    timestamp = str(d) + ',' + str(t)
+                    newl = x[0] + ',' + timestamp
+                    for count in range (len(x)-2):                  # copy rest of the line
+                        newl = newl + ',' + x[count + 2]
+                    w.write(newl,)                                  # write line to output file
     r.close()          
     w.close()
     qt2 = ((time.time()-qt1)/60)
@@ -892,17 +894,21 @@ def search_current_monnth_for_callsign():
     # start the main loop
     for line in r:
         if call in line:
-            x=line.split(',')                   # split data fields
-            if (x[2]==call) or (x[6]==call):    # callsign or reporter fields only
-                t=gmtime(float(x[1]))           # decode and replace time stamp
-                timestamp=str(t[0])+'-'+str(t[1])+'-'+str(t[2])+','+str(t[3])+':'+str(t[4])
-                newl=x[0]+','+timestamp
-                for count in range (len(x)-2):  #copy rest of the line
-                    newl = newl+','+x[count+2]
-                w.write(newl,)                  # write line to output file
+            x = line.split(",")                         # split data fields
+            if (x[2] == call) or (x[6] == call):        # callsign or reporter fields only
+                s = float(x[1])                                # decode and replace time stamp
+                d = time.strftime('%Y-%m-%d', time.gmtime(s))
+                t = time.strftime('%H%M', time.gmtime(s))
+                timestamp = str(d) + ',' + str(t)
+                newl = x[0] + ',' + timestamp
+                for count in range (len(x)-2):      #copy rest of the line
+                    newl = newl + ',' + x[count + 2]
+                w.write(newl,)                      # write line to output file
 
     r.close()          
     w.close()
+    return
+
 
     # get total number of entries in the new .csv file
     with open(mylogfile,"r") as f:
