@@ -7,6 +7,7 @@ from __future__ import print_function
 #
 #    Copyright 2016 Greg Beam <ki7mt@yahoo.com>
 #    Copyright 2016 Gian Piero I2GPG <i2gpg@wedidit.it> 
+#    Copyright 2016 Pavel Demin <pavel.demin@uclouvain.be>
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -775,7 +776,7 @@ def update_status_table():
 
 
 #---------------------------------------------- Create csv file from all tar.gz
-def search_all_months_for_callsign():
+def search_all_months_for_callsign(call):
     """Search All Archive Files For A Given Callsign
     
     Original Script by ...: Gian Piero I2GPG
@@ -788,9 +789,7 @@ def search_all_months_for_callsign():
     """
     # reset timers and prompt user for callsign
     reset_timers()
-    call = raw_input("Enter callsign to log: ")
-    call = call.upper()
-    
+  
     # create the output file name and open the filw for writing
     mylogfile = reports + (os.sep) + call + "-all" + ".csv"
     w = open(mylogfile, "w")
@@ -847,7 +846,7 @@ def search_all_months_for_callsign():
 
 
 #-------------------------------------------- Search current month for callsign
-def search_current_monnth_for_callsign():
+def search_current_monnth_for_callsign(call):
     """Search Current Month For A Given Callsign
         
     Original Script by ...: Gian Piero I2GPG
@@ -863,20 +862,14 @@ def search_current_monnth_for_callsign():
     reset_timers()
 
     # get data parameters
-    now =  today.strftime("%B-%Y")
-    y = (time.strftime("%Y"))
-    m = (time.strftime("%m"))
+    now =  today.strftime("%Y-%m")
     count = 0
 
     # create the file name to search
-    value = ("wsprspots-" + y + "-" + m + ".csv." + ext)
+    value = ("wsprspots-" + now + ".csv." + ext)
     
-    # prompt the user for callsign input
-    call = raw_input("Enter callsign to check: ")
-    call=call.upper()
-
     # setup the output file name
-    mylogfile = reports + (os.sep) + call + '-' + time.strftime("%B") + '-' + y + '.csv'
+    mylogfile = reports + (os.sep) + call + '-' + now + '.csv'
 
     # open the log file and set the file name to check
     w = open(mylogfile, "w")
@@ -925,6 +918,37 @@ def search_current_monnth_for_callsign():
     # cleanup csvd directory
     clean_csvd()
 
+
+#----------------------------------------------------------- Raw Input Callsign
+def enter_callsign():
+    global call
+    call = ""
+    call = raw_input("Enter callsign: ")
+    call = call.upper()
+    
+    return call
+
+
+###############################################################################
+# USER SUPPLIED REPORTS / GENERATORS
+###############################################################################
+
+#---------------------------------------------------------- Pavel Demin Reprots
+def pavel_rscripts():
+    """Pavel Demen WSPR Analysis Scripts
+       Source: git clone https://github.com/pavel-demin/wsprspots-analyzer.git
+    
+    Requirments:
+        * R Language
+        * ggplot
+
+    Function Notes:
+        * Generates Graph of WSPR Spots Per Hour Per Band using ggplot
+        * Generates Average SNR Different Per Day using ggplot
+        * Generates SNR over PWR normalized using ggplot
+
+    """
+    return
 
 #---------------------------------------------------------- Main Menu Functions
 def main():
@@ -1006,12 +1030,14 @@ def report_selection():
         report_menu()
         selection = raw_input("Selection: ")
         if "1" == selection:
-            search_all_months_for_callsign()
+            enter_callsign()
+            search_all_months_for_callsign(call)
             pause()
             report_menu()
 
         if "2" == selection:
-            search_current_monnth_for_callsign()
+            enter_callsign()
+            search_current_monnth_for_callsign(call)
             pause()
             report_menu()
 
@@ -1071,7 +1097,7 @@ def report_menu():
     print(45 * "-")
     print(" WSPR Analysis Report Menu")
     print(45 * "-")
-    print(" 1. Callsign Search Of ALl Archive Files")
+    print(" 1. Callsign Search Of All Archive Files")
     print(" 2. Callsign Search For [ %s ] " % cmon)
     print(" 3. Back To Main Menu")
     print(" 4. Exit")
