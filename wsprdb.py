@@ -907,7 +907,6 @@ def search_current_monnth_for_callsign():
 
     r.close()          
     w.close()
-    return
 
 
     # get total number of entries in the new .csv file
