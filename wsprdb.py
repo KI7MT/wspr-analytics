@@ -223,7 +223,7 @@ def pause():
         1. Prompt the user for input to create a pause
     
     """    
-    raw_input("\nPress <ENTER> for main menu...")
+    raw_input("\nPress <ENTER> to continue...")
 
 
 #---------------------------------------------------------- Initialize Database
@@ -861,8 +861,7 @@ def search_current_monnth_for_callsign():
   
     # reset timers and update current monthly archive file
     reset_timers()
-    update_current_month()
- 
+
     # get data parameters
     now =  today.strftime("%B-%Y")
     y = (time.strftime("%Y"))
@@ -877,7 +876,7 @@ def search_current_monnth_for_callsign():
     call=call.upper()
 
     # setup the output file name
-    mylogfile = reports + (os.sep) + call + '-' + time.strftime("%B") + '-' + y + ".csv"
+    mylogfile = reports + (os.sep) + call + '-' + time.strftime("%B") + '-' + y + '.csv'
 
     # open the log file and set the file name to check
     w = open(mylogfile, "w")
@@ -932,10 +931,17 @@ def main():
     """Main Menu Functions
     
     Function Notes:
-        1. Creates required directories
-        2. Sets the archive file extension based on the platform
-        3. After each action the csvd directory is cleaned
-        4. The pause statement sets up return to main menu
+        * Creates required directories
+        * Sets the archive file extension based on the platform
+        * After each action the csvd directory is cleaned
+        * The pause statement sets up return to main menu
+        
+    Option Notes:
+        1. Synchronize all WSPRnet archive files
+        2. Update the status table for each archive file
+        3. Update the current months archive file and update the status table
+        4. Displays the report menu
+        5. Cleans up the CSV directory
         
         NOTE: Entries must match the items in print_menu() function.
     
@@ -944,8 +950,8 @@ def main():
     set_ext()
     clear_screen()
     while True:
-        print_menu()
-        selection = raw_input("Your selection: ")
+        main_menu()
+        selection = raw_input("Selection: ")
         if "1" == selection:
             check_archive()
             pause()
@@ -962,16 +968,9 @@ def main():
             main()
 
         if "4" == selection:
-            search_all_months_for_callsign()
-            pause()
-            main()
+            report_selection()
 
         if "5" == selection:
-            search_current_monnth_for_callsign()
-            pause()
-            main()
-
-        if "6" == selection:
             afiles = len(glob.glob1(csvd,"*.csv"))
             print("\n" + 45 * '-')
             print(" Cleanup CSV Directory")
@@ -986,23 +985,55 @@ def main():
             pause()
             main()
             
-        if "7" == selection:
-            return
+        if "6" == selection:
+            sys.exit("\n")
 
         else:
             return
 
 
+#---------------------------------------------------------- Main Menu Functions
+def report_selection():
+    """Report Functions
+    
+    Supported Reports:
+        1. Generates a CSV for a given call searching all archive files
+        2. Generates CSV file for the current month
+
+    """
+    clear_screen()
+    while True:
+        report_menu()
+        selection = raw_input("Selection: ")
+        if "1" == selection:
+            search_all_months_for_callsign()
+            pause()
+            report_menu()
+
+        if "2" == selection:
+            search_current_monnth_for_callsign()
+            pause()
+            report_menu()
+
+        if "3" == selection:
+            main()
+
+        if "4" == selection:
+            sys.exit("\n")
+
+        else:
+            report_menu()
+
+
 #-------------------------------------------------------------------- Main Menu
-def print_menu():
+def main_menu():
     """Prints The Main Menu
 
     Actions Performed:
         1. Synchronize WSPRnet Archive Files
         2. Update Database Status Table
         3. Update [ %s ] Archive File
-        4. Callsign Search Of All Archive Files
-        5. Callsign Search For <Current Month>
+        4. Display Reports Menu
         6. Clean Up CSV Directory
     
         Note: Synchronizing and Updating the the Status Table can take
@@ -1018,13 +1049,34 @@ def print_menu():
     print(" 1. Synchronize WSPRnet Archive Files")
     print(" 2. Update Database Status Table")
     print(" 3. Update [ %s ] Archive File" % cmon)
-    print(" 4. Callsign Search Of All Archive Files")
-    print(" 5. Callsign Search For [ %s ] " % cmon)
-    print(" 6. Clean Up CSV Directory")
-    print(" 7. Exit")
+    print(" 4. Generate Reports")
+    print(" 5. Clean Up CSV Directory")
+    print(" 6. Exit")
     print("")
 
-       
+
+#------------------------------------------------------------------ Report Menu
+def report_menu():
+    """Prints The Report menu
+
+    Current Reports
+        1. Callsign Search Of All Archive Files
+        2. Callsign Search For <Current Month>
+        3. Back To Main Menu
+        4. Exit
+    
+    """
+    clear_screen()
+    cmon =  today.strftime("%B")
+    print(45 * "-")
+    print(" WSPR Analysis Report Menu")
+    print(45 * "-")
+    print(" 1. Callsign Search Of ALl Archive Files")
+    print(" 2. Callsign Search For [ %s ] " % cmon)
+    print(" 3. Back To Main Menu")
+    print(" 4. Exit")
+    print("")
+
 if __name__ == "__main__":
     main()
 
