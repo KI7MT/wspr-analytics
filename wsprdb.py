@@ -864,7 +864,7 @@ def search_all_months_for_callsign(call):
 
 
 #-------------------------------------------- Search current month for callsign
-def search_current_monnth_for_callsign(call):
+def search_current_month_for_callsign(call):
     """Search Current Month For A Given Callsign
         
     Original Script by ...: Gian Piero I2GPG
@@ -879,9 +879,10 @@ def search_current_monnth_for_callsign(call):
     now = today.strftime("%Y-%m")
     sdate = today.strftime("%Y-%m-01")
     edate = today.strftime("%Y-%m-%d")
+    value=(call)
 
     # create the file name to search
-    source = (reports + (os.sep) + "wsprspots-" + now + '.csv')
+    source = (srcd + (os.sep) + 'wsprspots-' + now + '.csv.' + ext)
   
     # setup the output file name
     mylogfile = reports + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
@@ -914,7 +915,6 @@ def search_current_monnth_for_callsign(call):
 
     r.close()          
     w.close()
-
 
     # get total number of entries in the new .csv file
     with open(mylogfile,"r") as f:
@@ -1187,7 +1187,7 @@ def report_selection():
 
         if "2" == selection:
             enter_callsign()
-            search_current_monnth_for_callsign(call)
+            search_current_month_for_callsign(call)
             pause()
             report_menu()
 
