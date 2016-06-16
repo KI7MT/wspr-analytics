@@ -12,12 +12,12 @@ The script should work with either Python2 or Python3. It will also auto
 select the extension based on running Windows ``.zip`` or Linux ``.gz``
 
 
-REQUIREMENTS
+Requirements
 ------------
 ``Python2.5+`` or ``Python3.0+`` interrupter in your ``$PATH / %PATH%``
 
 
-PYTHON MODULES
+Python Modules
 --------------
 
 The following assumes a base install with no additional modules added. For
@@ -43,7 +43,7 @@ packages with:
    sudo apt-get install python3-bs4 python3-clint python3-requests
 
 
-INSTALLATION and USAGE
+Installation and Usage
 ----------------------
 If you have already downloaded all the archive files from `Download Section`_ on
 `WSPRnet`_, copy them to the srcd directory after cloning.
@@ -56,8 +56,8 @@ If you have already downloaded all the archive files from `Download Section`_ on
    month for a given callsign.
 
 
-STRUCTURE, VARIABLES and SCRIPTS
---------------------------------
+Variables and Scripts
+---------------------
 
 For the users convenience, a preloaded database has already been provided.
 This help prevent anomalies with downloads an initial status table updates.
@@ -72,7 +72,7 @@ This help prevent anomalies with downloads an initial status table updates.
 - ``wsprana.py``, Main script
 
 
-DEFAULT DATABASE
+Default Database
 ----------------
 
 A default database, updated as of the latest git posting, is provided in
