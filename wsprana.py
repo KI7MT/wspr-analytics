@@ -41,34 +41,34 @@ import subprocess
 import sys
 import time
 
-from clint.textui import progress
 from bs4 import BeautifulSoup
+from clint.textui import progress
 from time import gmtime
+
 
 #-------------------------------------------------------------------- meta data
 __author__ = 'Greg Beam' 
 __copyright__ = 'GPLv3'
+__email__ = '<ki7mt@yahoo.com>'
+__license__ = "GNU General Public License (GPL) Version 3"
+__status__ = 'Development'
 __version__ = '1.0.0'
 __version_info__ = (1, 0, 0)
-__email__ = '<ki7mt@yahoo.com>'
-__status__ = 'Development'
-__license__ = "GNU General Public License (GPL) Version 3"
 
 
 #--------------------------------------------------- global variables and paths
 appdir = os.getcwd()
-srcd = (appdir + (os.sep) + 'srcd')
 csvd = (appdir + (os.sep) + "csvd")
-rscriptd = (appdir + (os.sep) + "rscripts")
-reports = (appdir + (os.sep) + "reports")
-dbname = 'wsprana.db'
 dbf = (appdir + (os.sep) + dbname)
+dbname = 'wsprana.db'
 dirs=['srcd', 'csvd', 'reports']
-sqlf = ("wsprana.sql")
-Url = "http://wsprnet.org/archive/"
 dwn_list=[]
+reports = (appdir + (os.sep) + "reports")
+rscriptd = (appdir + (os.sep) + "rscripts")
+sqlf = ("wsprana.sql")
+srcd = (appdir + (os.sep) + 'srcd')
 today = datetime.date.today()
-
+Url = "http://wsprnet.org/archive/"
 
 
 #------------------------------------------------------ Help and Docstring Data
@@ -173,6 +173,7 @@ def set_ext():
 
     return ext
 
+
 #----------------------------------------------------------- Create directories
 def create_dirs():
     """Create Script Directories
@@ -206,6 +207,7 @@ def reset_timers():
     qt9 = 0
     qt10 = 0
 
+
 #----------------------------------------------------------------- Clean Screen
 def clear_screen():
     """Clear Screen Based On Platform Type
@@ -219,6 +221,7 @@ def clear_screen():
         os.system('cls')
     else:
         os.system('clear')
+
 
 #--------------------------------------------------------------- Pause function
 def pause():
@@ -469,6 +472,7 @@ def clean_csvd():
         os.remove(f)
     
     os.chdir(appdir)
+
 
 #-------------------------------------------------------------- Parse html page
 def csvf(Url):
@@ -741,6 +745,7 @@ def update_current_month():
     # cleanup csvd directory
     clean_csvd()
 
+
 #--------------------------------------------------------------- Unpack archive
 def update_status_table():
     """Update Database Status Table For Each Archive File
@@ -748,7 +753,6 @@ def update_status_table():
     Actions Performed:
         1. Creates a list of downloaded archive files
         2. Loop through all archive files and update database status table
-    
     """
     trecords = 0
     tfsize = 0
@@ -1005,6 +1009,7 @@ def enter_callsign():
 # USER SUPPLIED REPORT GENERATORS
 ###############################################################################
 
+
 #---------------------------------------------------------- Pavel Demin Reports
 def pavel_rscripts():
     """Pavel Demin Provides the WSPR Analysis Script written in R
@@ -1099,6 +1104,7 @@ def pavel_rscripts():
     #print('The maximum of the numbers is:', x)
     pause()
     return
+
 
 #---------------------------------------------------------- Main Menu Functions
 def main():
@@ -1261,4 +1267,4 @@ def report_menu():
 if __name__ == "__main__":
     main()
 
-# END Wspr-Ana
+# END WSPR-Ana
