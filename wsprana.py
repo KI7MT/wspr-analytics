@@ -3,7 +3,7 @@
 from __future__ import print_function
 
 ###############################################################################
-#    wsprdb.py
+#    wsprana.py
 #
 #    Copyright 2016 Greg Beam <ki7mt@yahoo.com>
 #    Copyright 2016 Gian Piero I2GPG <i2gpg@wedidit.it> 
@@ -64,7 +64,7 @@ reports = (appdir + (os.sep) + "reports")
 dbname = 'wsprana.db'
 dbf = (appdir + (os.sep) + dbname)
 dirs=['srcd', 'csvd', 'reports']
-sqlf = ("wsprdb.sql")
+sqlf = ("wsprana.sql")
 Url = "http://wsprnet.org/archive/"
 dwn_list=[]
 today = datetime.date.today()
@@ -73,7 +73,7 @@ today = datetime.date.today()
 
 #------------------------------------------------------ Help and Docstring Data
 def a_help():
-    """WSPRDB Help and General Information
+    """WSPRANA Help and General Information
     
     REQUIREMENTS:
      
@@ -105,9 +105,9 @@ def a_help():
     If you have already downloaded all the archive files from WSPRnet.org, 
     copy them to the srcd directory after clonning.
 
-        1. git clone git://git.code.sf.net/u/ki7mt/wsprdb
-        2. Copy previously downloaded WSPRNet archive files to ./wsprdb/srcd
-        3. To run, type: ./wsprdb.py
+        1. git clone git://git.code.sf.net/u/ki7mt/wspr-ana
+        2. Copy previously downloaded WSPRNet archive files to ./wspr-ana/srcd
+        3. To run, type: ./wsprana.py
         4. For the first run, select Option-1 to sync archive files
         5. After initial database sync, you can search all or the current
            month for a given callsign.
@@ -115,7 +115,7 @@ def a_help():
 
      OVERVIEW:
      
-     WsprDB provides a set of commonly used functions to download and parse
+     Wspr-Ana provides a set of commonly used functions to download and parse
      database archive files from http://wsprnet.org.
 
      The download lists are generated directly from WSPRnet.org archive URL. As
@@ -134,12 +134,12 @@ def a_help():
     
     The folder and file structures are as follows:
                
-        srcd .......: Directory for WSPRNet archive files
-        csvd .......: Directory for extracted csv files
-        reports ....: Directory for output files
-        wsprana ....: SQLite3 Database
-        sqlf .......: SQL template for pre-loading the database
-        wsprdb.py ..: Main script
+        srcd ........: Directory for WSPRNet archive files
+        csvd ........: Directory for extracted csv files
+        reports .....: Directory for output files
+        wsprana .....: SQLite3 Database
+        sqlf ........: SQL template for pre-loading the database
+        wsprana.py ..: Main script
 
 
      DEFAULT DATABASE:
@@ -343,7 +343,7 @@ def check_db():
 
 #------------------------------------------------------------- Database version
 def version_db():
-    """Get WSPRDB Version
+    """Get WSPR-Ana Version
     
     Actions Performed
         1. Opens the database
@@ -1261,4 +1261,4 @@ def report_menu():
 if __name__ == "__main__":
     main()
 
-# END WsprDB
+# END Wspr-Ana
