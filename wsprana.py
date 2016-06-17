@@ -989,14 +989,12 @@ def search_current_month_no_split(call):
 #----------------------------------------------------------- Raw Input Callsign
 def enter_callsign():
     """Enter callsign to seach for"""
-    entry = input("Enter callsign: ")
-    if not entry:
-        call = entry.upper()
-        return call
-    else:
-        print("Callsing entry cannot be a NULL value ")
-        pause()
-        report_menu()
+    global call
+    call = raw_input("Enter callsign: ")
+    call = call.upper()
+
+    return call
+
 
 ###############################################################################
 # USER SUPPLIED REPORT GENERATORS
