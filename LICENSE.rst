@@ -1,3 +1,6 @@
+License
+=======
+
 Copyright (C) 2016 Greg Beam, KI7MT
 
 This program is free software: you can redistribute it and/or modify
