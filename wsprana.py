@@ -35,16 +35,16 @@ import gzip
 import hashlib
 import mmap
 import os
-import requests
 import sqlite3
 import subprocess
 import sys
 import time
-
-from bs4 import BeautifulSoup
-from clint.textui import progress
 from time import gmtime
 from builtins import input
+
+import requests
+from bs4 import BeautifulSoup
+from clint.textui import progress
 
 #-------------------------------------------------------------------- meta data
 __author__ = 'Greg Beam'
@@ -177,7 +177,7 @@ def set_ext():
     else:
         OS_EXT = "gz"
 
-    print("Using [ %s ] file extension" % OS_EXT) 
+    print("Using [ %s ] file extension" % OS_EXT)
 
     return OS_EXT
 
@@ -448,11 +448,11 @@ def add_csv_file(value):
     conn.close()
 
     # now cleanup the csv directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #--------------------------------------------- Remove all .csv files from CSV_PATH
-def clean_CSV_PATH():
+def clean_csv_path():
     """Removes All CSV Files from CSV Directory
 
     Actions Performed:
@@ -475,7 +475,7 @@ def csvf(BASE_URL):
     Actions Performed:
         1. Use HTML parser for scrape archive page
         1. Returns a list of available files"""
-    list = BeautifulSoup(requests.get(Url).text, "html.parser")
+    list = BeautifulSoup(requests.get(BASE_URL).text, "html.parser")
     for a in list.find_all('a'):
         yield a['href']
 
@@ -507,7 +507,7 @@ def download_files(value):
     update_stats(value, utime, columns, lines)
 
     # cleanup CSV_PATH directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #------------------------------------------------- Update database status table
@@ -606,7 +606,7 @@ def extract_file(value):
             print("* CSV File Is Empty ...: {} \n".format(value[:-3]))
 
     # clean CSV_PATH directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #--------------------------------------------------------- Check the db archive
@@ -643,7 +643,7 @@ def check_archive():
             else:
                 local_size = 0
 
-            if not (int(remote_size)) == (int(local_size)):
+            if (int(remote_size)) != (int(local_size)):
                 DWN_LIST.append(l)
             else:
                 print("* {} size {:,} bytes is Up To Date".format(l, local_size))
@@ -673,7 +673,7 @@ def check_archive():
             download_files(value)
 
     # cleanup CSV_PATH directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #---------------------------------------------------- Update current month only
@@ -715,7 +715,7 @@ def update_current_month():
     else:
         local_size = 0
 
-    if not (int(remote_size)) == (int(local_size)):
+    if (int(remote_size)) != (int(local_size)):
         download_files(value)
     else:
         clear_screen
@@ -727,7 +727,7 @@ def update_current_month():
         print("* Local File Status ..: Up to Date\n")
 
     # cleanup CSV_PATH directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #--------------------------------------------------------------- Unpack archive
@@ -778,7 +778,7 @@ def update_status_table():
     print(" * Processing Time ...: %.1f minutes \n" % ttime2)
 
     # now clean CSV_PATH directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #---------------------------------------------- Create csv file from all tar.gz
@@ -853,7 +853,7 @@ def search_all_months_for_callsign(call):
     print("* File Location ....: %s " % mylogfile)
 
     # cleanup CSV_PATH directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #-------------------------------------------- Search current month for callsign
@@ -926,7 +926,7 @@ def search_current_month_for_callsign(call):
     print("* File Location ..: %s " % mylogfile)
 
     # cleanup CSV_PATH directory
-    clean_CSV_PATH()
+    clean_csv_path()
 
 
 #-------------------------------------------- Search current month for callsign
@@ -988,13 +988,15 @@ def search_current_month_no_split(call):
 
 #----------------------------------------------------------- Raw Input Callsign
 def enter_callsign():
-    global call
-    call = ""
-    call = input("Enter callsign: ")
-    call = call.upper()
-
-    return call
-
+    """Enter callsign to seach for"""
+    entry = input("Enter callsign: ")
+    if not entry:
+        call = entry.upper()
+        return call
+    else:
+        print("Callsing entry cannot be a NULL value ")
+        pause()
+        report_menu()
 
 ###############################################################################
 # USER SUPPLIED REPORT GENERATORS
@@ -1035,9 +1037,7 @@ def pavel_rscripts():
         * Output        file-per-hour-call.png      # output image file
         * Call(s)       KI7MT,K1ABC,K1DEF           # callsign(s) to search in archive
         * Start Date    2016-04-01                  # first day of the current month
-        * End Date      2016-01-18                  # current day in the month
-
-   """
+        * End Date      2016-01-18                  # current day in the month"""
     # setup variables
     now = DATE_TIME.strftime("%Y-%m")
     sdate = DATE_TIME.strftime("%Y-%m-01")
@@ -1156,7 +1156,7 @@ def main():
                 print(" * CSV Directory Is Clean, Nothing To Be Done \n")
             else:
                 print(" * Removing [ %s ] files from CSV Directory" % nfiles)
-                clean_CSV_PATH()
+                clean_csv_path()
                 print(" * Finished Cleanup")
 
             pause()
