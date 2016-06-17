@@ -1,5 +1,6 @@
 Overview
 --------
+
 Wspr-Ana provides a set of common functions to download and parse
 database archive files from `WSPRnet`_.
 
@@ -11,50 +12,8 @@ in early hours UTC each day.
 The script should work with either Python2 or Python3. It will also auto
 select the extension based on running Windows ``.zip`` or Linux ``.gz``
 
-
-Requirements
-------------
-``Python2.5+`` or ``Python3.0+`` interrupter in your ``$PATH / %PATH%``
-
-
-Python Modules
---------------
-
-The following assumes a base install with no additional modules added. For
-Linux, you may also satisfy the requirements with your package manager
-if they are available.
-
-.. code-block:: python
-
-   pip install beautifulsoup4
-   pip install clint
-   pip install requests
-
-
-For Debian / Ubuntu based distributions, you can install the required
-packages with:
-
-.. code-block:: bash
-
-   Python2
-   sudo apt-get install python-bs4 python-clint python-requests
-
-   Python3
-   sudo apt-get install python3-bs4 python3-clint python3-requests
-
-
-Installation and Usage
-----------------------
-If you have already downloaded all the archive files from `Download Section`_ on
-`WSPRnet`_, copy them to the srcd directory after cloning.
-
-1. git clone git://git.code.sf.net/u/ki7mt/wspr-ana
-2. Copy previously downloaded WSPRNet archive files to ./wspr-ana/srcd
-3. To run, type: ./wsprana.py
-4. For the first run, select Option-1 to sync archive files
-5. After initial database sync, you can search all or the current
-   month for a given callsign.
-
+At the time of this writing, there are only ``(2)`` plot reports that can
+be generated,
 
 Variables and Scripts
 ---------------------
@@ -84,6 +43,6 @@ following fields:
 - ``column``,  the number of columns for the archive file
 - ``records``, the number of records in the archive .csv file
 
-
 .. _WSPRnet: http://wsprnet.org/drupal/
 .. _Download Section: http://wsprnet.org/drupal/downloads
+

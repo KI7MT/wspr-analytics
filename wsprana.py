@@ -57,19 +57,26 @@ __version_info__ = (1, 0, 0)
 
 
 #--------------------------------------------------- global variables and paths
+
+# get current path
 appdir = os.getcwd()
+
+# set db and sql names
+dbname = 'wsprana.db'
+sqlf = ("wsprana.sql")
+
+# set path vvariables
 csvd = (appdir + (os.sep) + "csvd")
 dbf = (appdir + (os.sep) + dbname)
-dbname = 'wsprana.db'
-dirs=['srcd', 'csvd', 'reports']
-dwn_list=[]
 reports = (appdir + (os.sep) + "reports")
 rscriptd = (appdir + (os.sep) + "rscripts")
-sqlf = ("wsprana.sql")
 srcd = (appdir + (os.sep) + 'srcd')
-today = datetime.date.today()
-Url = "http://wsprnet.org/archive/"
 
+# general variables
+dirs=['srcd', 'csvd', 'reports']
+today = datetime.date.today()
+dwn_list=[]
+Url = "http://wsprnet.org/archive/"
 
 #------------------------------------------------------ Help and Docstring Data
 def a_help():
