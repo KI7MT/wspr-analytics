@@ -163,7 +163,6 @@ def a_help():
      column ....: the number of columns for the archive file
      records ...: the number of records in the archive .csv file"""
 
-
 #----------------------------------------------------------- Set file extension
 def set_ext():
     """Set Archive File Extension
@@ -177,10 +176,7 @@ def set_ext():
     else:
         OS_EXT = "gz"
 
-    print("Using [ %s ] file extension" % OS_EXT)
-
     return OS_EXT
-
 
 #----------------------------------------------------------- Create directories
 def create_dirs():
@@ -447,10 +443,6 @@ def add_csv_file(value):
         conn.commit()
     conn.close()
 
-    # now cleanup the csv directory
-    clean_csv_path()
-
-
 #--------------------------------------------- Remove all .csv files from CSV_PATH
 def clean_csv_path():
     """Removes All CSV Files from CSV Directory
@@ -505,9 +497,6 @@ def download_files(value):
     lines = (records)
     columns = (csv_cols)
     update_stats(value, utime, columns, lines)
-
-    # cleanup CSV_PATH directory
-    clean_csv_path()
 
 
 #------------------------------------------------- Update database status table
@@ -605,9 +594,6 @@ def extract_file(value):
         except ValueError:
             print("* CSV File Is Empty ...: {} \n".format(value[:-3]))
 
-    # clean CSV_PATH directory
-    clean_csv_path()
-
 
 #--------------------------------------------------------- Check the db archive
 def check_archive():
@@ -672,9 +658,6 @@ def check_archive():
         for value in sorted(DWN_LIST):
             download_files(value)
 
-    # cleanup CSV_PATH directory
-    clean_csv_path()
-
 
 #---------------------------------------------------- Update current month only
 def update_current_month():
@@ -726,9 +709,6 @@ def update_current_month():
         print("* Local File Size ....: {:,} bytes".format(l))
         print("* Local File Status ..: Up to Date\n")
 
-    # cleanup CSV_PATH directory
-    clean_csv_path()
-
 
 #--------------------------------------------------------------- Unpack archive
 def update_status_table():
@@ -776,9 +756,6 @@ def update_status_table():
     print(" * Total Records .....: {:,}".format(trecords))
     print(" * Total Bytes .......: {:,}".format(tfsize))
     print(" * Processing Time ...: %.1f minutes \n" % ttime2)
-
-    # now clean CSV_PATH directory
-    clean_csv_path()
 
 
 #---------------------------------------------- Create csv file from all tar.gz
@@ -851,9 +828,6 @@ def search_all_months_for_callsign(call):
     print("* Process Time .....: %.1f minutes" % qt2)
     print("* File Location ....: %s " % mylogfile)
 
-    # cleanup CSV_PATH directory
-    clean_csv_path()
-
 
 #-------------------------------------------- Search current month for callsign
 def search_current_month_for_callsign(call):
@@ -919,9 +893,6 @@ def search_current_month_for_callsign(call):
     print("* Process Time ...: %.2f seconds" % qt2)
     print("* Log Count ......: %s " % ncount)
     print("* File Location ..: %s " % callfile)
-
-    # cleanup CSV_PATH directory
-    clean_csv_path()
 
 
 #-------------------------------------------- Search current month for callsign
