@@ -817,8 +817,7 @@ def search_all_months_for_callsign(call):
             if call in line:
                 # split data fields
                 x = line.split(',')
-                if (x[2] == call) or (
-                        x[6] == call):                # callsign or reporter fields only
+                if (x[2] == call) or (x[6] == call):                # callsign or reporter fields only
                     # decode and replace time stamp
                     s = float(x[1])
                     d = time.strftime('%Y-%m-%d', time.gmtime(s))
@@ -866,53 +865,49 @@ def search_current_month_for_callsign(call):
     Actions Performed:
         1. Updates the current months archive file
         2. Creates a .csv file: <call>-<month>-<year>.csv
-
     """
     # get date parameters
     now = DATE_TIME.strftime("%Y-%m")
     sdate = DATE_TIME.strftime("%Y-%m-01")
     edate = DATE_TIME.strftime("%Y-%m-%d")
-    value = (call)
 
-    # create the file name to search
+    # Extrace Zip/GZ file name to search
+    gzName = 'wsprspots-' + now + '.csv.' + OS_EXT
     source = (SRC_PATH + (os.sep) + 'wsprspots-' + now + '.csv.' + OS_EXT)
+    csvfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv'
+    callfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
 
-    # setup the output file name
-    mylogfile = REPORTS_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
-
-    # open the log file and set the file name to check
-    w = open(mylogfile, "w")
-    month = (SRC_PATH + (os.sep) + value)
-    name = (value)
+    # start processing the source file
     print("\n" + 45 * '-')
     print(" Processing [ %s ] for %s" % (call, now))
     print(45 * '-')
 
-    # start the timer and open the archive file
+    # Decompress the archive file
+    # TO-DO: Make this a generic method for "ALL" and single Archive files
     qt1 = time.time()
-    r = gzip.open(source, "r")
+    print(" Decompressing ...: %s " % gzName)
+    gzFile = gzip.open(source,"rb")
+    ucFile = open(csvfile,"wb")
+    decoded = gzFile.read()
+    ucFile.write(decoded)
+    gzFile.close()
+    ucFile.close()
 
-    # start the main loop
-    for line in r:
-        if call in line:
-            x = line.split(",")                         # split data fields
-            if (x[2] == call) or (
-                    x[6] == call):        # callsign or reporter fields only
-                # decode and replace time stamp
-                s = float(x[1])
-                d = time.strftime('%Y-%m-%d', time.gmtime(s))
-                t = time.strftime('%H%M', time.gmtime(s))
-                timestamp = str(d) + ',' + str(t)
-                newl = x[0] + ',' + timestamp
-                for count in range(len(x) - 2):  # copy rest of the line
-                    newl = newl + ',' + x[count + 2]
-                w.write(newl,)                      # write line to output file
-
-    r.close()
-    w.close()
+    # Process the CSV file
+    print(" Processing ......: %s " % gzName[:-3])
+    search_for = call
+    with open(csvfile) as inf, open(callfile,'w') as outf:
+        reader = csv.reader(inf)
+        writer = csv.writer(outf)
+        for row in reader:
+            sys.stdout.flush()
+            if (row[2] == call) or (row[6] == call):
+                writer.writerow(row)
+    inf.close()
+    outf.close()
 
     # get total number of entries in the new .csv file
-    with open(mylogfile, "r") as f:
+    with open(callfile, "r") as f:
         reader = csv.reader(f, delimiter=",")
         data = list(reader)
         ncount = len(data)
@@ -920,10 +915,10 @@ def search_current_month_for_callsign(call):
     f.close()
 
     # print the summary
-    qt2 = ((time.time() - qt1) / 60)
-    print("* Process Time ...: %.1f minutes" % qt2)
+    qt2 = ((time.time() - qt1))
+    print("* Process Time ...: %.2f seconds" % qt2)
     print("* Log Count ......: %s " % ncount)
-    print("* File Location ..: %s " % mylogfile)
+    print("* File Location ..: %s " % callfile)
 
     # cleanup CSV_PATH directory
     clean_csv_path()
@@ -939,7 +934,6 @@ def search_current_month_no_split(call):
     Actions Performed:
         1. Opens the current months archive file
         2. Parse each line for the call sign enterd by the user
-
     """
     # get date parameters
     now = DATE_TIME.strftime("%Y-%m")
@@ -990,9 +984,8 @@ def search_current_month_no_split(call):
 def enter_callsign():
     """Enter callsign to seach for"""
     global call
-    call = raw_input("Enter callsign: ")
+    call = input("Enter callsign: ")
     call = call.upper()
-
     return call
 
 
