@@ -550,10 +550,10 @@ def extract_file(value):
 
     # extract the .zip / .gz file
     print("* Extracting Archive ..: {}".format(value))
-    with gzip.open(src, 'rb') as infile:
-        with open(dest_name, 'wb') as outfile:
-            for line in infile:
-                outfile.write(line)
+    with gzip.open(src, 'rb') as infile, open(dest_name, 'wb') as outfile:
+        for line in infile:
+            outfile.write(line)
+
     infile.close()
     outfile.close()
     qt2 = (time.time() - qt1)
@@ -561,42 +561,35 @@ def extract_file(value):
     # get the number of columns and records
     # use mmap for speed increa, could also use multi-core processing
     qt3 = time.time()
-    with open(dest_name, 'rt', os.O_RDONLY) as f:
-        try:
-            mInput = mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
-            L = 0
-            for s in iter(mInput.readline, ""):
-                L += 1
-            records = (int(L))
 
-            qt4 = (time.time() - qt3)
-            mInput.close()
-            f.close()
+    # get record count
+    with open(dest_name, "r") as f:
+        reader = csv.reader(f, delimiter=' ', skipinitialspace=True)
+        first_row = next(reader)
+        data = list(reader)
+        records = len(data)
+    f.close()
 
-            qt5 = time.time()
-            with open(dest_name, 'rt') as f:
-                reader = csv.reader(f, delimiter=',', skipinitialspace=True)
-                csv_cols = len(reader.next())
-            qt6 = (time.time() - qt5)
-            f.close()
+    # get column cound
+    with open(dest_name) as f:
+        reader = csv.reader(f, delimiter=',', skipinitialspace=True)
+        first_row = next(reader)
+        num_cols = len(first_row)
+    f.close()
+    qt4 = (time.time() - qt3)
 
-            # get the file size before deleting
-            fsize = os.stat(dest_name).st_size
-            print("* CSV File Name .......: {}".format(value[:-3]))
-            print("* CSV Size ............: {:,} bytes".format(fsize))
-            print("* CSV Columns .........: {}".format(csv_cols))
-            print("* CSV Record Count ....: {:,}".format(records))
-            print("* Extraction Time .....: %.4f seconds" % qt2)
-            print("* Record Query Time ...: %.4f seconds" % qt4)
-            print("* Col Query Time ......: %.4f seconds\n" % qt6)
-            return fsize, csv_cols, records
-
-        except ValueError:
-            print("* CSV File Is Empty ...: {} \n".format(value[:-3]))
-
+    # get the file size before deleting
+    fsize = os.stat(dest_name).st_size
+    print("* CSV File Name .......: {}".format(value[:-3]))
+    print("* CSV Size ............: {:,} bytes".format(fsize))
+    print("* CSV Columns .........: {}".format(num_cols))
+    print("* CSV Record Count ....: {:,}".format(records))
+    print("* Extraction Time .....: %.2f seconds" % qt2)
+    print("* Record Query Time ...: %.2f seconds" % qt4)
+    return fsize, csv_cols, records
 
 #--------------------------------------------------------- Check the db archive
-def check_archive():
+def donwload_all():
     """Check Archive File For Changes
 
     Actions Performed:
@@ -723,7 +716,7 @@ def update_status_table():
     tfcount = 0
     ulist = []
     print("\n" + 45 * '-')
-    print(" Updating Tables - ( please be patient )")
+    print(" Updating Table Data - ( please be patient )")
     print(45 * '-')
     ttime1 = time.time()
     total_records = 0
@@ -890,66 +883,9 @@ def search_current_month_for_callsign(call):
 
     # print the summary
     qt2 = ((time.time() - qt1))
-    print("* Process Time ...: %.2f seconds" % qt2)
-    print("* Log Count ......: %s " % ncount)
-    print("* File Location ..: %s " % callfile)
-
-
-#-------------------------------------------- Search current month for callsign
-def search_current_month_no_split(call):
-    """Search Current Month For A Given Callsign, Do not Split Date Time
-
-    This function is used for parsing callsigns without splitting the
-    epoc date time field.
-
-    Actions Performed:
-        1. Opens the current months archive file
-        2. Parse each line for the call sign enterd by the user
-    """
-    # get date parameters
-    now = DATE_TIME.strftime("%Y-%m")
-    sdate = DATE_TIME.strftime("%Y-%m-01")
-    edate = DATE_TIME.strftime("%Y-%m-%d")
-    global mylogfile
-
-   # create the file name to search
-    source = (SRC_PATH + (os.sep) + "wsprspots-" + now + '.csv.' + OS_EXT)
-
-    # setup the output file name
-    mylogfile = REPORTS_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
-    logname = ('wsprspots-' + now + '-' + call + '.csv')
-
-    # open the log file and set the file name to check
-    w = open(mylogfile, "w")
-    print("\n" + 45 * '-')
-    print(" Processing %s Archive for [ %s ]" % (now, call))
-    print(45 * '-')
-
-    # start the timer and open the archive file
-    r = gzip.open(source, "r")
-
-    # start the main loop
-    print(" * Creating [ %s ] CSV file" % call)
-    for line in r:
-        if call in line:
-            w.write(line,)  # write line to output file
-
-    r.close()
-    w.close()
-
-    # get total number of entries in the new .csv file
-    with open(mylogfile, "r") as f:
-        reader = csv.reader(f, delimiter=",")
-        data = list(reader)
-        ncount = len(data)
-        # print the summary
-        print(" * Spot Count ..: %s " % ncount)
-        print(" * File Name ...: %s " % logname)
-
-    f.close()
-
-    return mylogfile
-
+    print(" Process Time ...: %.2f seconds" % qt2)
+    print(" Log COunt ......: {:,}".format(ncount))
+    print(" File Location ..: %s " % gzName[:-3])
 
 #----------------------------------------------------------- Raw Input Callsign
 def enter_callsign():
@@ -969,31 +905,24 @@ def enter_callsign():
 def pavel_rscripts():
     """Pavel Demin Provides the WSPR Analysis Script written in R
        Source: git clone https://github.com/pavel-demin/wsprspots-analyzer.git
-
     The following has been constructed to feed each of the three script via
     Python.
-
     Requirements:
         * R Language base
         * R Packages: ggplot, data-table + Deps
-
     R Language Installation: (may very depending on distribution)
-
         # In performed in the Gnome terminal:
         sudo apt-get install r-base r-base-dev  libcurl4-gnutls-dev
-
         # Actions performed in the R console:
         sudo R
         update.packages()
         install.packages("ggplot2", dependencies=TRUE, repos='http://cran.rstudio.com/'
         install.packages("data.table", dependencies=TRUE, repos='http://cran.rstudio.com/')
         quit("no")
-
     Function Notes:
         * Generates Graph of WSPR Spots Per Hour Per Band using ggplot
         * Generates Average SNR Different Per Day using ggplot
         * Generates SNR over PWR normalized using ggplot
-
     Each R script requires 5 variables in the following format
         * Input         file-call.csv               # current monthly archive file
         * Output        file-per-hour-call.png      # output image file
@@ -1009,7 +938,7 @@ def pavel_rscripts():
     # this gets passed to the gz extract script
     value = ("wsprspots-" + now + ".csv." + OS_EXT)
     srccsv = (CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv')
-
+    
     print("\n" + 45 * '-')
     print(" Pavel Demin's Report Generator")
     print(45 * '-')
@@ -1023,35 +952,25 @@ def pavel_rscripts():
             int(call)
         except ValueError:
             callcount += 1
-    # print(" * Processing [ %s ] call(s)" % callcount)
-
+    #print(" * Processing [ %s ] call(s)" % callcount)
     # loop through the calls and call the R script
     for call in callargs:
         call = call.upper()
-        search_current_month_no_split(call)
+        # search_current_month_no_split(call)
+        mylogfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
         arg1 = (mylogfile)
         arg3 = call
         arg4 = sdate
         arg5 = edate
         os.chdir(R_SCRIPT_PATH)
+
         # script 1
-        print(" * Report ......: Spots Per Hour")
+        print(" * Generate Spots Per Hour Plot for [ %s ]" % call)
         scr1 = (REPORTS_PATH + (os.sep) + 'wsprspots-per-hour-' + call + '.png')
         args = (arg1 + ' ' + scr1 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
         with open(os.devnull) as devnull:
             subprocess.call(
                 "Rscript wsprspots-per-hour.r " + args,
-                shell=True,
-                stdout=subprocess.PIPE,
-                stderr=devnull)
-
-        # script 2
-        print(" * Report ......: SNR Normal")
-        scr3 = (REPORTS_PATH + (os.sep) + 'wsprspots-snr-norm-' + call + '.png')
-        args = (arg1 + ' ' + scr3 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
-        with open(os.devnull) as devnull:
-            subprocess.call(
-                "Rscript wsprspots-snr-norm.r " + args,
                 shell=True,
                 stdout=subprocess.PIPE,
                 stderr=devnull)
@@ -1062,7 +981,16 @@ def pavel_rscripts():
         # args = (arg1 + ' ' + scr2 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
         # subprocess.call("Rscript wsprspots-snr-diff.r " + args, shell=True)
 
-    #print('The maximum of the numbers is:', x)
+        # script 3 ( Not Implemented Yet )
+        #print(" * Report ......: SNR Normal")
+        #scr3 = (REPORTS_PATH + (os.sep) + 'wsprspots-snr-norm-' + call + '.png')
+        #args = (arg1 + ' ' + scr3 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
+        #with open(os.devnull) as devnull:
+        #    subprocess.call(
+        #        "Rscript wsprspots-snr-norm.r " + args,
+        #        shell=True,
+        #        stdout=subprocess.PIPE)
+
     pause()
     return
 
@@ -1078,11 +1006,13 @@ def main():
         * The pause statement sets up return to main menu
 
     Option Notes:
-        1. Synchronize all WSPRnet archive files
-        2. Update the status table for each archive file
-        3. Update the current months archive file and update the status table
-        4. Displays the report menu
-        5. Cleans up the CSV directory
+        1. Download All WSPRnet Archive Files
+        2. Update Current Months Archive File
+        3. Search All Archive for Callsign
+        4. Seach Current Month for Callsign
+        5. Reports Menu
+        6. Clean CSV Directory
+        7. Exit
 
         NOTE: Entries must match the items in print_menu() function."""
     create_dirs()
@@ -1091,24 +1021,32 @@ def main():
     while True:
         main_menu()
         selection = input("Selection: ")
+        # Download all archiove files from WSPRnet
         if selection == '1':
-            check_archive()
+            download_all()
             pause()
             main()
-
+        # Download or Update only the current month from WSPRnet
         if selection == '2':
-            update_status_table()
-            pause()
-            main()
-
-        if selection == '3':
             update_current_month()
             pause()
             main()
-
+        # Search all archives for a call sign
+        if selection == '3':
+            enter_callsign()
+            search_all_months_for_callsign(call)
+            pause()
+            report_menu()
+         # Search Current month for a call sign
         if selection == '4':
+            enter_callsign()
+            search_current_month_for_callsign(call)
+            pause()
+            menu()
+        # List availabel reports
+        if selection == '5':
             report_selection()
-
+        # Clean up csvd directory, removes all csv files
         if selection == '5':
             afiles = len(glob.glob1(CSV_PATH, "*.csv"))
             print("\n" + 45 * '-')
@@ -1123,7 +1061,7 @@ def main():
 
             pause()
             main()
-
+        # Exit the menu
         if selection == '6':
             sys.exit("\n")
 
@@ -1133,34 +1071,19 @@ def main():
 
 #---------------------------------------------------------- Main Menu Functions
 def report_selection():
-    """Report Functions
-
-    Supported REPORTS_PATH:
-        1. Generates a CSV for a given call searching all archive files
-        2. Generates CSV file for the current month"""
+    """Report Functions"""
     clear_screen()
     while True:
         report_menu()
         selection = input("Selection: ")
+
         if selection == '1':
-            enter_callsign()
-            search_all_months_for_callsign(call)
-            pause()
-            report_menu()
-
-        if selection == '2':
-            enter_callsign()
-            search_current_month_for_callsign(call)
-            pause()
-            report_menu()
-
-        if selection == '3':
             pavel_rscripts()
 
-        if selection == '4':
+        if selection == '2':
             main()
 
-        if selection == '5':
+        if selection == '3':
             sys.exit("\n")
 
         else:
@@ -1169,56 +1092,32 @@ def report_selection():
 
 #-------------------------------------------------------------------- Main Menu
 def main_menu():
-    """Prints The Main Menu
-
-    Actions Performed:
-        1. Synchronize WSPRnet Archive Files
-        2. Update Database Status Table
-        3. Update [ %s ] Archive File
-        4. Display REPORTS_PATH Menu
-        6. Clean Up CSV Directory
-
-        Note: Synchronizing and Updating the the Status Table can take
-              several minutes depending on Internet speeds and your
-              systems computer processor / disk speeds. It is not uncommon
-              for each process between 20-30 minutes.
-
-    """
+    """Prints The Main Menu"""
     cmon = DATE_TIME.strftime("%B")
     print(45 * "-")
     print(" WSPR Database Main Menu")
     print(45 * "-")
-    print(" 1. Synchronize WSPRnet Archive Files")
-    print(" 2. Update Database Status Table")
-    print(" 3. Update [ %s ] Archive File" % cmon)
-    print(" 4. Generate REPORTS_PATH")
-    print(" 5. Clean Up CSV Directory")
+    print(" 1. Download All WSPRnet Archive Files")
+    print(" 2. Update Current Months Archive File")
+    print(" 3. Search All Archive for Callsign")
+    print(" 4. Search [ %s ] For Callsign" % cmon)
+    print(" 5. Reports Menu")
+    print(" 5. Clean CSV Directory")
     print(" 6. Exit")
     print("")
 
 
 #------------------------------------------------------------------ Report Menu
 def report_menu():
-    """Prints The Report menu
-
-    Current REPORTS_PATH
-        1. Callsign Search Of All Archive Files
-        2. Callsign Search For <Current Month>
-        3. Run Pavels R Script REPORTS_PATH
-        3. Back To Main Menu
-        4. Exit
-
-    """
+    """Prints The Report menu"""
     clear_screen()
     cmon = DATE_TIME.strftime("%B")
     print(45 * "-")
     print(" WSPR Analysis Report Menu")
     print(45 * "-")
-    print(" 1. Callsign Search Of All Archive Files")
-    print(" 2. Callsign Search For [ %s ] " % cmon)
-    print(" 3. SNR and Spots Per Hour")
-    print(" 4. Back To Main Menu")
-    print(" 5. Exit")
+    print(" 1. Spots Per Hour Report ( last 24hrs )")
+    print(" 2. Back To Main Menu")
+    print(" 3. Exit")
     print("")
 
 if __name__ == "__main__":
