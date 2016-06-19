@@ -20,10 +20,12 @@ from bs4 import BeautifulSoup
 from clint.textui import progress
 from appdirs import AppDirs
 
+
 #--------------------------------------------------- global variables and paths
 
-# set FSH path locations
-APP_DIR = appdirs.AppDirs("WSPR-ANA", appauthor='', version='', multipath='')
+# set FSH path locations using AppDirs
+dirs = APP_DIR = AppDirs("WSPR-ANA", appauthor='', version='', multipath='')
+APP_DIR = dirs.user_data_dir
 
 # set db and sql names
 DB_NAME = 'wsprana.db'
@@ -33,8 +35,8 @@ SQL_FILE = ("wsprana.sql")
 CSV_PATH = (APP_DIR + (os.sep) + "csvd")
 DB_PATH = (APP_DIR + (os.sep) + DB_NAME)
 REPORTS_PATH = (APP_DIR + (os.sep) + "reports")
-R_SCRIPT_PATH = (APP_DIR + (os.sep) + "rscripts")
 SRC_PATH = (APP_DIR + (os.sep) + 'srcd')
+R_SCRIPT_PATH = (os.getcwd() + (os.sep) + "rscripts")
 
 # general variables
 DIR_LIST = [SRC_PATH, CSV_PATH, REPORTS_PATH]
@@ -816,7 +818,7 @@ def search_current_month_for_callsign(call):
     # Decompress the archive file
     # TO-DO: Make this a generic method for "ALL" and single Archive files
     qt1 = time.time()
-    print(" Decompressing ...: %s " % gzName)
+    print(" Decompressing ..: %s " % gzName)
     gzFile = gzip.open(source,"rb")
     ucFile = open(csvfile,"wb")
     decoded = gzFile.read()
@@ -825,7 +827,7 @@ def search_current_month_for_callsign(call):
     ucFile.close()
 
     # Process the CSV file
-    print(" Processing ......: %s " % gzName[:-3])
+    print(" Processing .....: %s " % gzName[:-3])
     search_for = call
     with open(csvfile) as inf, open(callfile,'w') as outf:
         reader = csv.reader(inf)
@@ -1006,7 +1008,7 @@ def main():
             enter_callsign()
             search_current_month_for_callsign(call)
             pause()
-            menu()
+            main()
         # List availabel reports
         if selection == '5':
             report_selection()
