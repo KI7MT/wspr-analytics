@@ -37,7 +37,6 @@ from bs4 import BeautifulSoup
 from clint.textui import progress
 from appdirs import AppDirs
 
-
 #--------------------------------------------------- global variables and paths
 
 # set FSH path locations using AppDirs

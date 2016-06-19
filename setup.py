@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='wspr-ana',
-    version=open("VERSION.txt").read().strip(),
+    version=open("wsprana/_version.py").readlines()[-1].split()[-1].strip("\"'"),
     description='WSPR Data Analysis Tools',
     author='Greg Beam',
     author_email='ki7mt@yahoo.com',
