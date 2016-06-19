@@ -1,5 +1,22 @@
 #!/usr/bin/env python
-""" Module provides varius funcitons in processing WSPRnet data files"""
+r""" Module provides various functions in processing WSPRnet data files
+
+    Application Directories
+    -----------------------
+    WSPR-Ana uses FSH or file system hierarchy. The following locations
+    apply for both Windows and Linux:
+
+    Linux: /home/<user-name>/.local/share/WSPR-ANA/{csvd,srcd,reports}
+
+    Windows: C:\Users\<user-name>\AppData\Roaming\WSPR-ANA\{csvd,srcd,reports}
+    
+    If you have previously downloaded the WSPRnet archive files, ensure you
+    move any *.gz / *.zip file to the 'srcd" directory.
+
+    Likewise, if you have extracted CSV files, ensure they are copied or moved
+    to the 'csvd' directory.
+
+"""
 
 import csv
 import datetime
@@ -79,7 +96,7 @@ def a_help():
     INSTALLATION and USAGE:
 
     If you have already downloaded all the archive files from WSPRnet.org,
-    copy them to the SRC_PATH directory after clonning.
+    copy them to the SRC_PATH directory after cloning.
 
         1. git clone git://git.code.sf.net/u/ki7mt/wspr-ana
         2. Copy previously downloaded WSPRNet archive files to ./wspr-ana/SRC_PATH
@@ -722,7 +739,7 @@ def search_all_months_for_callsign(call):
     """Search All Archive Files For A Given Callsign
 
     Original Script by ...: Gian Piero I2GPG
-    Modified by ..........: Greg Beam, KI7MT
+    Re-Written by ........: Greg Beam, KI7MT
 
     Actions Performed:
         1. Searches ALL downloaded archive files for a given callsign
