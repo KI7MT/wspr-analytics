@@ -470,7 +470,7 @@ def download_files(value):
     lines = (records)
     columns = (csv_cols)
     update_stats(value, utime, columns, lines)
-
+    clean_csv_path()
 
 #------------------------------------------------- Update database status table
 def update_stats(value, utime, columns, lines):
@@ -560,6 +560,7 @@ def extract_file(value):
     print("* Extraction Time .....: %.2f seconds" % qt2)
     print("* Record Query Time ...: %.2f seconds" % qt4)
     return fsize, csv_cols, records
+    clean_csv_path()
 
 #--------------------------------------------------------- Check the db archive
 def download_all():
@@ -738,7 +739,7 @@ def search_all_months_for_callsign(call):
     # reset timers and prompt user for callsign
     reset_timers()
 
-    # create the output file name and open the filw for writing
+    # create the output file name and open the file for writing
     mylogfile = REPORTS_PATH + (os.sep) + call + "-all" + ".csv"
     w = open(mylogfile, "w")
 
@@ -814,7 +815,7 @@ def search_current_month_for_callsign(call):
     gzName = 'wsprspots-' + now + '.csv.' + OS_EXT
     source = (SRC_PATH + (os.sep) + 'wsprspots-' + now + '.csv.' + OS_EXT)
     csvfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv'
-    callfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
+    callfile = REPORTS_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
 
     # start processing the source file
     print("\n" + 45 * '-')
@@ -858,6 +859,7 @@ def search_current_month_for_callsign(call):
     print(" Process Time ...: %.2f seconds" % qt2)
     print(" Log Count ......: {:,}".format(ncount))
     print(" File Location ..: %s " % gzName[:-3])
+
 
 #----------------------------------------------------------- Raw Input Callsign
 def enter_callsign():
