@@ -1,9 +1,9 @@
 Installation
 ------------
 
-At the time of this writting, usage has only been tested on Linux x86-64 and. There is
-no particular reason why installation and usage could be done on Windows or
-Mac OSX if the Requirements are met.
+At the time of this writing, usage has only been tested on Linux x86-64 and.
+There is no particular reason why installation and usage could not be done on
+Windows or Mac OSX if the Requirements are met.
 
 It is ``Highly Recommended`` to use `Anaconda`_ from `Continuum Analytics`_. 
 It's free, supports all major operating systems, is well supported, does not
@@ -13,7 +13,7 @@ and provides everything needed for **WSPR-Ana** and much more.
 Installing Anaconda
 ^^^^^^^^^^^^^^^^^^^
 Installing `Anaconda`_ is very easy. Simply download the shell script and
-run it in a terninal:
+run it in a terminal:
 
 .. code-block:: bash
 
@@ -31,8 +31,8 @@ installation direcotry of:
 Upgrade Anaconda
 ^^^^^^^^^^^^^^^^
 This is part of `30 Minute Conda`_ getting started page, but for completeness,
-I'm adding what was needed for my environment. All actions are perfomed in a
-termainal, open as required on your system, then:
+I'm adding what was needed for my environment. All actions are performed in a
+terminal, open as required on your system, then:
 
 First,  `Anaconda`_ should be upgraded:
 
@@ -47,7 +47,7 @@ Next, update the conda-env scripts:
 
    conda update conda-env
 
-That is all for the basic `Anaconda`_ insatallaition and update. You should
+That is all for the basic `Anaconda`_ installation and update. You should
 close, then re-open your terminal to ensure all the paths and updates are
 working proerpy.
 
@@ -65,7 +65,7 @@ be installed with `Pip`_. In the terinal:
 Installing R
 ^^^^^^^^^^^^
 The `R-Scripting`_ language in not part of the base `Anaconda`_ installation,
-however, installation is farily easy using `conda`_, the `Anaconda`_ package
+however, installation is fairly easy using `conda`_, the `Anaconda`_ package
 manager.
 
 Again, in the terminal, perform the following:
@@ -76,17 +76,18 @@ Again, in the terminal, perform the following:
   conda install -c r r-gridextra
 
 
-General Usage
--------------
-If you have already downloaded all the archive files from Download Section on
-WSPRnet, copy them to the srcd directory after cloning.
+Building Py35 Virtual ENV
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. git clone git://git.code.sf.net/u/ki7mt/wspr-ana
-2. Copy previously downloaded WSPRNet archive files to ./wspr-ana/srcd
-3. To run, type: ./wsprana.py
-4. For the first run, select Option-1 to sync archive files
-5. After initial database sync, you can search all or the current
-   month for a given callsign.
+TO-DO
+
+
+Usage Guide
+^^^^^^^^^^^
+
+TO-DO
+
+
 
 .. _Anaconda: https://www.continuum.io/downloads
 .. _Continuum Analytics: https://www.continuum.io/

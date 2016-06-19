@@ -1,8 +1,7 @@
 Overview
 --------
-
-Wspr-Ana provides a set of common functions to download and parse
-database archive files from `WSPRnet`_.
+WSPR-Ana provides a set of functions to download and parse database archive
+files from `WSPRnet`_ to enable post even analysis.
 
 The download lists are generated directly from `WSPRnet`_ archive URL. As
 new files are added, they should be automatically picked up by and added
@@ -12,37 +11,13 @@ in early hours UTC each day.
 At present, the scripts only work with Python3, however, they will auto
 select the extension based on running Windows ``.zip`` or Linux ``.gz``
 
-At the time of this writing, there are only ``(2)`` plot reports that can
-be generated,
+At the time of this writing the following features are enabled:
 
+* Automated downloads of all or current month Archive files
+* Generate call-sign specific CSV files for offline analysis
+* Generate Spots per Band per Day for current month
 
-Variables and Scripts
----------------------
-
-For the users convenience, a preloaded database has already been provided.
-This help prevent anomalies with downloads an initial status table updates.
-
-**The folder and file structures are as follows**
-
-- ``srcd``, Directory for WSPRNet archive files
-- ``csvd``, Directory for extracted csv files
-- ``reports``, Directory for output files
-- ``wsprana.db``, SQLite3 Database
-- ``wsprana.sql``, SQL template for pre-loading the database
-- ``wsprana.py``, Main script
-
-
-Default Database
-----------------
-
-A default database, updated as of the latest git posting, is provided in
-the repository. The data contained in the ``[ status ]`` table contains the
-following fields:
-
-- ``name``, archive file name from WSPRNet
-- ``date``, the date the status was last updated
-- ``column``,  the number of columns for the archive file
-- ``records``, the number of records in the archive .csv file
+Mush more is planned for as time allows.
 
 .. _WSPRnet: http://wsprnet.org/drupal/
 .. _Download Section: http://wsprnet.org/drupal/downloads
