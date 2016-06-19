@@ -236,23 +236,6 @@ def init_db():
         cur.execute('SELECT SQLITE_VERSION()')
         sv = cur.fetchone()
 
-        # default values
-        author = (__author__)
-        copyright = (__copyright__)
-        license = (__license__)
-        version = (__version__)
-        email = (__email__)
-        status = (__status__)
-        cur.execute(
-            '''INSERT INTO appdata(author,copyright,license,version,email,status) VALUES (?,?,?,?,?,?)''',
-            (author,
-             copyright,
-             license,
-             version,
-             email,
-             status))
-        conn.commit()
-
         cur.execute('SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1')
         for row in cur.fetchall():
             aut = row[0]
@@ -331,15 +314,22 @@ def version_db():
     Actions Performed
         1. Opens the database
         2. Fetch the appdata version"""
-    with sqlite3.connect(DB_PATH) as conn:
-        cur = conn.cursor()
-        cur.execute('SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1')
-        for row in cur.fetchall():
-            dbv = row[3]
-
-    conn.close()
-    return dbv
-
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            cur = conn.cursor()
+            cur.execute('SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1')
+            for row in cur.fetchall():
+                dbv = row[3]
+        conn.close()
+        return dbv
+    except sqlite3.OperationalError as sql3_error:
+        print("")
+        print(45 * '-')
+        print(sql3_error)
+        print("There was a problem the DB, performing clean initialization")
+        print(45 * '-')
+        print("")
+        init_db()
 
 #----------------------------------------------------------- MD5SUM csv.gz file
 def md5(fname):
@@ -462,6 +452,7 @@ def download_files(value):
         1. Gets archive name from WSPRNet, then downloads the file
         2. Updates the databse via update_status() function"""
     os.chdir(SRC_PATH)
+    print("")
     r = requests.get(BASE_URL + value, stream=True)
     with open(value, 'wb') as f:
         total_length = int(r.headers.get('content-length'))
@@ -571,7 +562,7 @@ def extract_file(value):
     return fsize, csv_cols, records
 
 #--------------------------------------------------------- Check the db archive
-def donwload_all():
+def download_all():
     """Check Archive File For Changes
 
     Actions Performed:
@@ -683,7 +674,6 @@ def update_current_month():
         print("* Remote File Size ...: {:,} bytes".format(r))
         print("* Local File Size ....: {:,} bytes".format(l))
         print("* Local File Status ..: Up to Date\n")
-
 
 #--------------------------------------------------------------- Unpack archive
 def update_status_table():
@@ -993,8 +983,9 @@ def main():
         3. Search All Archive for Callsign
         4. Seach Current Month for Callsign
         5. Reports Menu
-        6. Clean CSV Directory
-        7. Exit
+        6. Update DB Status
+        7. Clean CSV Directory
+        8. Exit
 
         NOTE: Entries must match the items in print_menu() function."""
     create_dirs()
@@ -1003,7 +994,7 @@ def main():
     while True:
         main_menu()
         selection = input("Selection: ")
-        # Download all archiove files from WSPRnet
+        # Download all archive files from WSPRnet
         if selection == '1':
             download_all()
             pause()
@@ -1028,8 +1019,10 @@ def main():
         # List availabel reports
         if selection == '5':
             report_selection()
+        if selection == '6':
+            check_db()
         # Clean up csvd directory, removes all csv files
-        if selection == '5':
+        if selection == '7':
             afiles = len(glob.glob1(CSV_PATH, "*.csv"))
             print("\n" + 45 * '-')
             print(" Cleanup CSV Directory")
@@ -1044,7 +1037,7 @@ def main():
             pause()
             main()
         # Exit the menu
-        if selection == '6':
+        if selection == '8':
             sys.exit("\n")
 
         else:
@@ -1084,8 +1077,9 @@ def main_menu():
     print(" 3. Search All Archive for Callsign")
     print(" 4. Search [ %s ] For Callsign" % cmon)
     print(" 5. Reports Menu")
-    print(" 5. Clean CSV Directory")
-    print(" 6. Exit")
+    print(" 6. Check Database")
+    print(" 7. Clean CSV Directory")
+    print(" 8. Exit")
     print("")
 
 
