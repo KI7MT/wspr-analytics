@@ -14,10 +14,10 @@ select the extension based on running Windows ``.zip`` or Linux ``.gz``
 At the time of this writing the following features are enabled:
 
 * Automated downloads of all or current month Archive files
-* Generate call-sign specific CSV files for offline analysis
+* Generate call-sign specific CSV files for off line analysis
 * Generate Spots per Band per Day for current month
 
-Mush more is planned for as time allows.
+Much more is planned for as time allows... stay tunned!
 
 .. _WSPRnet: http://wsprnet.org/drupal/
 .. _Download Section: http://wsprnet.org/drupal/downloads
