@@ -1,33 +1,6 @@
 #!/usr/bin/env python
 """ Module provides varius funcitons in processing WSPRnet data files"""
 
-from __future__ import print_function
-
-###############################################################################
-#    wsprana.py
-#
-#    Copyright 2016 Greg Beam <ki7mt@yahoo.com>
-#    Copyright 2016 Gian Piero I2GPG <i2gpg@wedidit.it>
-#    Copyright 2016 Pavel Demin <pavel.demin@uclouvain.be>
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; Version 3 of the License
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program; if not, the license can be downloaded here:
-#
-#    http://www.gnu.org/licenses/gpl.html
-#
-###############################################################################
-
-
-#--------------------------------------------------------------- import mudules
 import csv
 import datetime
 import glob
@@ -45,21 +18,12 @@ from builtins import input
 import requests
 from bs4 import BeautifulSoup
 from clint.textui import progress
-
-#-------------------------------------------------------------------- meta data
-__author__ = 'Greg Beam'
-__copyright__ = 'GPLv3'
-__email__ = '<ki7mt@yahoo.com>'
-__license__ = "GNU General Public License (GPL) Version 3"
-__status__ = 'Development'
-__version__ = '1.0.0'
-__version_info__ = (1, 0, 0)
-
+from appdirs import AppDirs
 
 #--------------------------------------------------- global variables and paths
 
-# get current path
-APP_DIR = os.getcwd()
+# set FSH path locations
+APP_DIR = appdirs.AppDirs("WSPR-ANA", appauthor='', version='', multipath='')
 
 # set db and sql names
 DB_NAME = 'wsprana.db'
