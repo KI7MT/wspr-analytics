@@ -884,7 +884,7 @@ def search_current_month_for_callsign(call):
     # print the summary
     qt2 = ((time.time() - qt1))
     print(" Process Time ...: %.2f seconds" % qt2)
-    print(" Log COunt ......: {:,}".format(ncount))
+    print(" Log Count ......: {:,}".format(ncount))
     print(" File Location ..: %s " % gzName[:-3])
 
 #----------------------------------------------------------- Raw Input Callsign
