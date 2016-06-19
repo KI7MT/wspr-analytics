@@ -9,11 +9,12 @@ new files are added, they should be automatically picked up by and added
 to the process list. This includes the the current month which is updated
 in early hours UTC each day.
 
-The script should work with either Python2 or Python3. It will also auto
+At present, the scripts only work with Python3, however, they will auto
 select the extension based on running Windows ``.zip`` or Linux ``.gz``
 
 At the time of this writing, there are only ``(2)`` plot reports that can
 be generated,
+
 
 Variables and Scripts
 ---------------------
