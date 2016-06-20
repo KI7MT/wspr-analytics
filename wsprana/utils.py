@@ -83,39 +83,37 @@ def enter_callsign():
     return call
 
 #----------------------------------------------------------- Convert Epoch Date
-def convert_epoch_date(ecpch_time_stamp)
+def convert_epoch_date(epoch_time_stamp):
     """Converts unix epoch time in seconds to date
-    
+
     Parameters
     ----------
     Epoch time in seconds
-    
+
     Returns
     -------
     utc_date: %Y-%m-%d
 
     """
-    timestamp = (ecpch_time_stamp)
-    initial_value = datetime.datetime.fromtimestamp(ecpch_time_stamp)
-    utc_date = (value.strftime('%Y-%m-%d'))
+    initial_value = datetime.datetime.fromtimestamp(epoch_time_stamp)
+    utc_date = (initial_value.strftime('%Y-%m-%d'))
     return utc_date
 
 #----------------------------------------------------------- Convert Epoch Time
-def convert_epoch_time(ecpch_time_stamp)
+def convert_epoch_time(epoch_time_stamp):
     r"""Convert epoch time in seconds to time
-    
+
     Parameters
     ----------
     Epoch time in seconds
-    
+
     Returns
     -------
     utc_date: %H%M
 
     """
-    timestamp = (ecpch_time_stamp)
-    initial_value = datetime.datetime.fromtimestamp(ecpch_time_stamp)
-    utc_time = (value.strftime('%H%M'))
+    initial_value = datetime.datetime.fromtimestamp(epoch_time_stamp)
+    utc_time = (initial_value.strftime('%H%M'))
     return utc_time
 
 
