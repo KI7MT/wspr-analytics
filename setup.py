@@ -20,10 +20,8 @@ setup(
         "Topic :: Utilities",
     ],
     install_requires=[
-        'pandas',
-        'numpy',
-        'matplotlib',
         'beautifulsoup4',
+        'appdirs',
         'requests'
     ]
 )
