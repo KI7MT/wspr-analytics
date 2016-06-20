@@ -24,7 +24,6 @@ setup(
         'numpy',
         'matplotlib',
         'beautifulsoup4',
-        'requests',
-        'clint2'
+        'requests'
     ]
 )
