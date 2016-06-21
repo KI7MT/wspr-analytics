@@ -917,9 +917,14 @@ def pavel_rscripts():
     # this gets passed to the gz extract script
     value = ("wsprspots-" + now + ".csv." + OS_EXT)
     srccsv = (CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv')
+
+    # create the reports directory ../reports/yyyy-mm-dd
+    rpt_dir = (REPORTS_PATH + (os.sep) + edate)
+    if not os.path.exists(rpt_dir):
+        os.makedirs(rpt_dir)
     
     print("\n" + 45 * '-')
-    print(" Pavel Demin's Report Generator")
+    print(" Pavel Demin's R-Script Report Generator")
     print(45 * '-')
     print(" * Separate Calls with a ',' example: KI7MT,K1ABC,K1DEF")
     callargs = input(" * Enter Callsigns : ").split(',')
@@ -936,7 +941,7 @@ def pavel_rscripts():
     for call in callargs:
         call = call.upper()
         # search_current_month_no_split(call)
-        mylogfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
+        mylogfile = rpt_dir + (os.sep) + now + '-' + call.lower() + '-raw.csv'
         arg1 = (mylogfile)
         arg3 = call
         arg4 = sdate
@@ -945,15 +950,17 @@ def pavel_rscripts():
 
         # script 1
         print(" * Generate Spots Per Hour Plot for [ %s ]" % call)
-        scr1 = (REPORTS_PATH + (os.sep) + 'wsprspots-per-hour-' + call + '.png')
+        scr1 = (rpt_dir + (os.sep) + 'wsprspots-per-hour-' + call.lower() + '.png')
         args = (arg1 + ' ' + scr1 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
         with open(os.devnull) as devnull:
-            subprocess.call(
-                "Rscript wsprspots-per-hour.r " + args,
-                shell=True,
-                stdout=subprocess.PIPE,
-                stderr=devnull)
-
+            if os.path.isfile(mylogfile):
+                subprocess.call(
+                    "Rscript wsprspots-per-hour.r " + args,
+                    shell=True,
+                    stdout=subprocess.PIPE,
+                    stderr=devnull)
+            else:
+                print("   [ %s] Missing CSV. Please generate from the main menu." % call.upper())
         # script 2 ( Not Implemented Yet )
         # print(" * Generate Report ..: SNR DIFF")
         # scr2 = (REPORTS_PATH + (os.sep) + 'wsprspots-snr-diff-' + call + '.png')
