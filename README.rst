@@ -13,12 +13,19 @@ select the extension based on running Windows ``.zip`` or Linux ``.gz``
 
 At the time of this writing the following features are enabled:
 
-* Automated downloads of all or current month archive files
-* Generate call-sign specific CSV files for off line analysis
+* Download / Update all `WSPRnet`_ archive files
+* Download / Update current month archive file
+* Generate call sign specific raw CSV files
+* Generate call sign specific `Epoch`_ converted ( human readable ) CSV files
 * Generate ``Spots per Band per Day`` for current month
 
 Much more is planned for as time allows... stay tunned!
 
+.. note::
+
+    During development, this package **is not** intended for pip installaiton.
+    It should be checked out and run from source.
+
 .. _WSPRnet: http://wsprnet.org/drupal/
 .. _Download Section: http://wsprnet.org/drupal/downloads
-
+.. _Epoch: https://en.wikipedia.org/wiki/Unix_time
