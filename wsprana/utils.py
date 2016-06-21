@@ -126,7 +126,7 @@ def convert_epoch_time(epoch_time_stamp):
 
 #--------------------------------------------------- Convert Epoch lines in CSV
 # TO-DO: this function is not implmented yet
-def convert_epoch_lines():
+def convert_epoch_lines(call,csv_in, csv_out):
     r"""Convert lines in CSV file from epoch to human readable
 
     Parameters
@@ -142,32 +142,28 @@ def convert_epoch_lines():
      field [1] must be the epoch time stamp.
 
     """
-    now = DATE_TIME.strftime("%Y-%m")
-    appdir = os.getcwd()
-    REPORTS_PATH = ''
-    os.chdir(REPORTS_PATH)
-    csv_file = ''
-    mylogfile = REPORTS_PATH + (os.sep) + now + '-' + call + '-converted.csv'
+    BASE_PATH = (os.getcwd())
     try:
-        w = open(mylogfile, "w")
-        r = open(csv_file, 'r')
+        # processloop through each callsign
+        r = open(csv_in, 'r')
+        w = open(csv_out, "w")
+        print(" * Converting Raw CSV file for [ %s ]" % call.upper())
         for line in r:
             x = line.split(',')
             epoch_time_stamp = float(x[1])                      # get epoch date/time
             utc_date = convert_epoch_date(epoch_time_stamp)     # get time
             utc_time = convert_epoch_time(epoch_time_stamp)     # get date
-            timestamp = str(utc_date) + ',' + str(t)            # combine date , time
+            timestamp = str(utc_date) + ',' + str(utc_time)     # combine date , time
             newl = x[0] + ',' + timestamp                       # create new line beginning
             for count in range (len(x)-2):                      # re-combine the line
                 newl = newl + ',' + x[count+2]
             w.write(newl,)                                      # write the new line to file
         r.close()                                               # close in_file
         w.close()                                               # close out_file
-        os.chdir(appdir)                                        # go back to script directory
-    except IOError as io_error:
-        file_io_error_msg(io_error)
-        os.chdir(appdir)
-        exit()
+        os.chdir(BASE_PATH)
+    except IOError:
+        print(" * Nothing to do for [ %s ]" % call)
+        os.chdir(BASE_PATH)
 
 ###############################################################################
 # GENERAL ERROR MESSAGES

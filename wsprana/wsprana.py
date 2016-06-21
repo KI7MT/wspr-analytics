@@ -36,7 +36,7 @@ import requests
 from bs4 import BeautifulSoup
 from clint.textui import progress
 from appdirs import AppDirs
-
+import utils as ut
 
 #--------------------------------------------------- global variables and paths
 
@@ -103,7 +103,7 @@ def a_help():
         2. Copy previously downloaded WSPRNet archive files to ./wspr-ana/SRC_PATH
         3. To run, type: ./wsprana.py
         4. For the first run, select Option-1 to sync archive files
-        5. After initial database sync, you can search all or the current
+        5. Aer initial database sync, you can search all or the current
            month for a given callsign.
 
 
@@ -779,7 +779,7 @@ def search_all_months_for_callsign(call):
                 if (x[2] == call) or (x[6] == call):        # callsign or reporter fields only
                     # decode and replace time stamp
                     s = float(x[1])
-                    d = time.strftime('%Y-%m-%d', time.gmtime(s))
+                    d = tme.strftime('%Y-%m-%d', time.gmtime(s))
                     t = time.strftime('%H%M', time.gmtime(s))
                     timestamp = str(d) + ',' + str(t)
                     newl = x[0] + ',' + timestamp
@@ -905,16 +905,20 @@ def enter_callsign():
     print(50 * '-')
     msg = """
  You can enter one or more calls separated by ','
- Each call will have its own CSV file.
+ Each call will have its own Raw CSV file.
  
  Example
-   Input ....: KI7MT,XX1XX,ZZ1ZZ
-   Creates ..: <date>-<call>-raw.csv
+   Input ....:  I7MT,XX1XX,ZZ1ZZ
+   Creates ..:  <year>-<month>-<call>-raw.csv
+                <year>-<month>-<call>-converted.csv
  
- Files:
-   2016-06-ki7mt-raw.vsv
-   2016-06-xx1xx-raw.vsv
-   2016-06-zz1zz-raw.vsv
+ NOTE:  The raw CSV files do not convert epoch time stampes.
+        They are extracted exacely as listed in the source
+        archive file. This is import for the R scripts
+        as they do the epoch conversion automatically.
+        
+        To convert the current month CSV file, select the
+        feature from the Main Menu.
  
  """
     print(msg)
@@ -1065,38 +1069,53 @@ def main():
     while True:
         main_menu()
         selection = input("Selection: ")
-        # Update all archive files from WSPRnet
+        # update all archive files from WSPRnet
         if selection == '1':
             download_all()
             pause()
             menu()
-        # Search all archives for call
+        # search all archives for call
         if selection == '2':
             under_development()
             #enter_callsign()
             #search_all_months_for_callsign(call)
             pause()
             main()
-        # Update current month from WSPRnet
+        # update current month from WSPRnet
         if selection == '3':
             update_current_month()
             pause()
             main()
-         # Search Current month for a call
+        # search current month for a call
         if selection == '4':
             clear_screen()
             enter_callsign()
             search_current_month_for_callsign(callargs)
             pause()
             main()
-        # List available reports
+
+        # search current month for a call
         if selection == '5':
+            clear_screen()
+            enter_callsign()
+            now = DATE_TIME.strftime("%Y-%m")
+            edate = DATE_TIME.strftime("%Y-%m-%d")
+            for call in callargs:
+                csv_in = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call + '-raw.csv'
+                csv_out = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call + '-converted.csv'
+                ut.convert_epoch_lines(call,csv_in, csv_out)
+            os.chdir(BASE_PATH)
+            pause()
+            main()
+
+        # List available reports
+        if selection == '6':
             report_selection()
         # Check database
-        if selection == '6':
+        if selection == '7':
             check_db()
         # Clean up csvd directory, removes all csv files
-        if selection == '7':
+        if selection == '8':
             afiles = len(glob.glob1(CSV_PATH, "*.csv"))
             print("\n" + 45 * '-')
             print(" Cleanup CSV Directory")
@@ -1104,14 +1123,14 @@ def main():
             if afiles == 0:
                 print(" * CSV Directory Is Clean, Nothing To Be Done \n")
             else:
-                print(" * Removing [ %s ] files from CSV Directory" % nfiles)
+                print(" * Removing [ %s ] files from CSV Directory" % afiles)
                 clean_csv_path()
                 print(" * Finished Cleanup")
 
             pause()
             main()
         # Exit the menu
-        if selection == '8':
+        if selection == '9':
             sys.exit("\n")
 
         else:
@@ -1151,13 +1170,14 @@ def main_menu():
     print("   2. Search All Archives for Call")
     print("\n CURRENT MONTH FUNCTIONS - [ %s ]" % cmon)    
     print("   3. Update Archive")
-    print("   4. Search For Call")
+    print("   4. Search Archive For Call")
+    print("   5. Convert raw csv from epoch")
     print("\n REPORT FUNCTIONS")
-    print("   5. Reports Menu")
+    print("   6. Reports Menu")
     print("\n UTILITIES")    
-    print("   6. Check Database")
-    print("   7. Clean CSV Directory")
-    print("   8. Exit")
+    print("   7. Check Database")
+    print("   8. Clean CSV Directory")
+    print("   9. Exit")
     print("")
 
 
