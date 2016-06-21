@@ -8,7 +8,7 @@ Windows or Mac OSX if the Requirements are met.
 It is ``Highly Recommended`` to use `Anaconda`_ from `Continuum Analytics`_. 
 It's free, supports all major operating systems, is well supported, does not
 interfere with system level packaging, can be installed on a per user basics
-and provides everything needed for **WSPR-Ana** and much more.
+and provides everything needed for **Comprehensive WSPR Data Analysis**.
 
 Installing Anaconda
 ^^^^^^^^^^^^^^^^^^^
@@ -59,7 +59,7 @@ be installed with `Pip`_. In the terinal:
 
 .. code-block:: bash
 
-   pip install appdirs
+   pip install appdirs clint
 
 
 Installing R

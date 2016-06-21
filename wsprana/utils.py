@@ -5,10 +5,10 @@ General utilities for WSPR Analysis
 """
 
 import os
-import sys
 import csv
 import datetime
-from time import gmtime
+
+BASE_PATH = (os.getcwd())
 
 #--------------------------------------------------------- Get CSV Column Count
 # TO-DO: this function is not implmented yet
@@ -126,7 +126,7 @@ def convert_epoch_time(epoch_time_stamp):
 
 #--------------------------------------------------- Convert Epoch lines in CSV
 # TO-DO: this function is not implmented yet
-def convert_epoch_lines(call,csv_in, csv_out):
+def convert_epoch_lines(call, csv_in, csv_out):
     r"""Convert lines in CSV file from epoch to human readable
 
     Parameters
@@ -142,24 +142,23 @@ def convert_epoch_lines(call,csv_in, csv_out):
      field [1] must be the epoch time stamp.
 
     """
-    BASE_PATH = (os.getcwd())
     try:
         # processloop through each callsign
-        r = open(csv_in, 'r')
-        w = open(csv_out, "w")
+        r_file = open(csv_in, 'r')
+        w_file = open(csv_out, "w")
         print(" * Converting Raw CSV file for [ %s ]" % call.upper())
-        for line in r:
-            x = line.split(',')
-            epoch_time_stamp = float(x[1])                      # get epoch date/time
+        for line in r_file:
+            x_line = line.split(',')
+            epoch_time_stamp = float(x_line[1])                 # get epoch date/time
             utc_date = convert_epoch_date(epoch_time_stamp)     # get time
             utc_time = convert_epoch_time(epoch_time_stamp)     # get date
             timestamp = str(utc_date) + ',' + str(utc_time)     # combine date , time
-            newl = x[0] + ',' + timestamp                       # create new line beginning
-            for count in range (len(x)-2):                      # re-combine the line
-                newl = newl + ',' + x[count+2]
-            w.write(newl,)                                      # write the new line to file
-        r.close()                                               # close in_file
-        w.close()                                               # close out_file
+            newl = x_line[0] + ',' + timestamp                       # create new line beginning
+            for count in range(len(x_line)-2):                       # re-combine the line
+                newl = newl + ',' + x_line[count+2]
+            w_file.write(newl,)                                      # write the new line to file
+        r_file.close()                                               # close in_file
+        w_file.close()                                               # close out_file
         os.chdir(BASE_PATH)
     except IOError:
         print(" * Nothing to do for [ %s ]" % call)
