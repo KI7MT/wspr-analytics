@@ -900,7 +900,7 @@ def search_current_month_for_callsign(callargs):
 def enter_callsign():
     """Enter callsign to seach for"""
     global callargs
-    print("\n" + 50 * '-')
+    print(50 * '-')
     print(" ENTER ONE OR MORE CALLS")
     print(50 * '-')
     msg = """
@@ -1084,6 +1084,7 @@ def main():
             main()
          # Search Current month for a call
         if selection == '4':
+            clear_screen()
             enter_callsign()
             search_current_month_for_callsign(callargs)
             pause()
