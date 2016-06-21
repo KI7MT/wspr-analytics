@@ -36,6 +36,7 @@ import requests
 from bs4 import BeautifulSoup
 from clint.textui import progress
 from appdirs import AppDirs
+from tqdm import *
 
 #--------------------------------------------------- global variables and paths
 
@@ -208,7 +209,15 @@ def pause():
 
     Actions Performed:
         1. Prompt the user for input to create a pause"""
-    input("\nPress <ENTER> to continue...")
+    input("\nPress [ ENTER ] to continue...")
+
+#--------------------------------------------------- Under Development Message
+def under_development():
+    print("\n" + 45 * '-')
+    print(" Under Development")
+    print(45 * '-')
+    print("\n This feature is currently under development.")
+    print("")
 
 
 #---------------------------------------------------------- Initialize Database
@@ -796,7 +805,7 @@ def search_all_months_for_callsign(call):
 
 
 #-------------------------------------------- Search current month for callsign
-def search_current_month_for_callsign(call):
+def search_current_month_for_callsign(callargs):
     """Search Current Month For A Given Callsign
 
     Original Script by ...: Gian Piero I2GPG
@@ -807,6 +816,7 @@ def search_current_month_for_callsign(call):
         2. Creates a .csv file: <call>-<month>-<year>.csv
     """
     # get date parameters
+
     now = DATE_TIME.strftime("%Y-%m")
     sdate = DATE_TIME.strftime("%Y-%m-01")
     edate = DATE_TIME.strftime("%Y-%m-%d")
@@ -820,59 +830,89 @@ def search_current_month_for_callsign(call):
     gzName = 'wsprspots-' + now + '.csv.' + OS_EXT
     source = (SRC_PATH + (os.sep) + 'wsprspots-' + now + '.csv.' + OS_EXT)
     csvfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv'
-    callfile = rpt_dir + (os.sep) + now + '-' + call.lower() + '-raw' + '.csv'
-
-    # start processing the source file
-    print("\n" + 45 * '-')
-    print(" Processing [ %s ] for %s" % (call, now))
-    print(45 * '-')
 
     # Decompress the archive file
     # TO-DO: Make this a generic method for "ALL" and single Archive files
     qt1 = time.time()
-    print(" Decompressing ..: %s " % gzName)
+    # start processing the source file
+    print("\n" + 50 * '-')
+    print(" Decompressing Source [ %s ] " % gzName)
+    print(50 * '-')
     gzFile = gzip.open(source,"rb")
     ucFile = open(csvfile,"wb")
     decoded = gzFile.read()
     ucFile.write(decoded)
     gzFile.close()
     ucFile.close()
+    callcount = 0
 
-    # Process the CSV file
-    print(" Processing .....: %s " % gzName[:-3])
-    search_for = call
-    with open(csvfile) as inf, open(callfile,'w') as outf:
-        reader = csv.reader(inf)
-        writer = csv.writer(outf)
-        for row in reader:
-            sys.stdout.flush()
-            if (row[2] == call) or (row[6] == call):
-                writer.writerow(row)
-    inf.close()
-    outf.close()
+    for call in callargs:
+        try:
+            int(call)
+        except ValueError:
+            callcount += 1
+    #print(" * Processing [ %s ] call(s)" % callcount)
+    # loop through the calls and call the R script
+    for call in callargs:
+        print(' Processing .... : %s' % call.upper())
+        callfile = rpt_dir + (os.sep) + now + '-' + call.lower() + '-raw' + '.csv'
+        call = call.upper()
 
-    # get total number of entries in the new .csv file
-    with open(callfile, "r") as f:
-        reader = csv.reader(f, delimiter=",")
-        data = list(reader)
-        ncount = len(data)
+        # Process the CSV file
+        print(" Searching ......: %s " % gzName[:-3])
+        search_for = call
+        counter = 0
+        with open(csvfile) as inf, open(callfile,'w') as outf:
+            reader = csv.reader(inf)
+            writer = csv.writer(outf)
+            for row in reader:
+                counter +=1
+                sys.stdout.flush()
+                if (row[2] == call) or (row[6] == call):
+                    writer.writerow(row)
+                    print(" Adding Spot Id ..: %s " % counter, end='\r')
+            inf.close()
+            outf.close()
 
-    f.close()
+        # get total number of entries in the new .csv file
+        with open(callfile, "r") as f:
+            reader = csv.reader(f, delimiter=",")
+            data = list(reader)
+            ncount = len(data)
 
-    # print the summary
-    qt2 = ((time.time() - qt1))
-    print(" Process Time ...: %.2f seconds" % qt2)
-    print(" Log Count ......: {:,}".format(ncount))
-    print(" File Location ..: %s " % callfile)
+        f.close()
+
+        # print the summary
+        qt2 = ((time.time() - qt1))
+        print(" Process Time ...: %.2f seconds" % qt2)
+        print(" Log Count ......: {:,}".format(ncount))
+        print(" File Location ..: %s \n" % callfile)
 
 
 #----------------------------------------------------------- Raw Input Callsign
 def enter_callsign():
     """Enter callsign to seach for"""
-    global call
-    call = input("Enter callsign: ")
-    call = call.upper()
-    return call
+    global callargs
+    print("\n" + 50 * '-')
+    print(" ENTER ONE OR MORE CALLS")
+    print(50 * '-')
+    msg = """
+ You can enter one or more calls separated by ','
+ Each call will have its own CSV file.
+ 
+ Example
+   Input ....: KI7MT,K1ABC,K1DEF
+   Creates ..: <date>-<call>-raw.csv
+ 
+ Files:
+   2016-06-ki7mt-raw.vsv
+   2016-06-kiabc-raw.vsv
+   2016-06-k1def-raw.vsv
+ 
+ """
+    print(msg)
+    callargs = input(" * Enter Callsigns : ").split(',')
+    return callargs
 
 
 ###############################################################################
@@ -1012,14 +1052,14 @@ def main():
         if selection == '1':
             download_all()
             pause()
-            main()
+            menu()
         # Search all archives for call
         if selection == '2':
-            enter_callsign()
-            search_all_months_for_callsign(call)
+            under_development()
+            #enter_callsign()
+            #search_all_months_for_callsign(call)
             pause()
-            report_menu()
-
+            main()
         # Update current month from WSPRnet
         if selection == '3':
             update_current_month()
@@ -1028,7 +1068,7 @@ def main():
          # Search Current month for a call
         if selection == '4':
             enter_callsign()
-            search_current_month_for_callsign(call)
+            search_current_month_for_callsign(callargs)
             pause()
             main()
         # List available reports
@@ -1088,14 +1128,18 @@ def main_menu():
     print(45 * "-")
     print(" WSPR Analysis Main Menu")
     print(45 * "-")
-    print(" 1. Update All Archive Files")
-    print(" 2. Search All Archives for Call")
-    print(" 3. Update [ %s ] Archive" % cmon)
-    print(" 4. Search [ %s ] Archive For Call" % cmon)
-    print(" 5. Reports Menu")
-    print(" 6. Check Database")
-    print(" 7. Clean CSV Directory")
-    print(" 8. Exit")
+    print("\n ALL ARCHIVE FUNCTIONS")    
+    print("   1. Update All Archive Files")
+    print("   2. Search All Archives for Call")
+    print("\n CURRENT MONTH FUNCTIONS - [ %s ]" % cmon)    
+    print("   3. Update Archive")
+    print("   4. Search For Call")
+    print("\n REPORT FUNCTIONS")
+    print("   5. Reports Menu")
+    print("\n UTILITIES")    
+    print("   6. Check Database")
+    print("   7. Clean CSV Directory")
+    print("   8. Exit")
     print("")
 
 
