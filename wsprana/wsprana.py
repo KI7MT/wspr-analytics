@@ -36,7 +36,7 @@ import requests
 from bs4 import BeautifulSoup
 from clint.textui import progress
 from appdirs import AppDirs
-from tqdm import *
+
 
 #--------------------------------------------------- global variables and paths
 
@@ -56,7 +56,7 @@ SRC_PATH = (APP_DIR + (os.sep) + 'srcd')
 R_SCRIPT_PATH = (os.getcwd() + (os.sep) + "rscripts")
 
 # general variables
-DIR_LIST = [SRC_PATH, CSV_PATH, REPORTS_PATH]
+DIR_LIST = [APP_DIR, SRC_PATH, CSV_PATH, REPORTS_PATH]
 DATE_TIME = datetime.date.today()
 DWN_LIST = []
 BASE_URL = "http://wsprnet.org/archive/"
@@ -1157,6 +1157,7 @@ def report_menu():
     print("")
 
 if __name__ == "__main__":
+    create_dirs()
     main()
 
 # END WSPR-Ana
