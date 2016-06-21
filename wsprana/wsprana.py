@@ -733,7 +733,7 @@ def update_status_table():
     print(" * Processing Time ...: %.1f minutes \n" % ttime2)
 
 
-#---------------------------------------------- Create csv file from all tar.gz
+#---------------------------------------- Create csv file from all tar.gz files
 def search_all_months_for_callsign(call):
     """Search All Archive Files For A Given Callsign
 
@@ -763,13 +763,13 @@ def search_all_months_for_callsign(call):
     qt1 = time.time()
     for count in range(nmonths):
         file_name = months[count].split("wsprspots-", 1)[1]
-        print("* Processing ..: wsprspots-%s " % file_name)
+        print("* Processing...: wsprspots-%s " % file_name)
         r = gzip.open(months[count], "r")
         for line in r:
             if call in line:
                 # split data fields
                 x = line.split(',')
-                if (x[2] == call) or (x[6] == call):                # callsign or reporter fields only
+                if (x[2] == call) or (x[6] == call):        # callsign or reporter fields only
                     # decode and replace time stamp
                     s = float(x[1])
                     d = time.strftime('%Y-%m-%d', time.gmtime(s))
@@ -777,7 +777,7 @@ def search_all_months_for_callsign(call):
                     timestamp = str(d) + ',' + str(t)
                     newl = x[0] + ',' + timestamp
                     for count in range(
-                            len(x) - 2):                  # copy rest of the line
+                            len(x) - 2):                    # copy rest of the line
                         newl = newl + ',' + x[count + 2]
                     # write line to output file
                     w.write(newl,)
@@ -846,13 +846,14 @@ def search_current_month_for_callsign(callargs):
     ucFile.close()
     callcount = 0
 
+    # check callsign args
     for call in callargs:
         try:
             int(call)
         except ValueError:
             callcount += 1
-    #print(" * Processing [ %s ] call(s)" % callcount)
-    # loop through the calls and call the R script
+
+    # loop through each callsign
     for call in callargs:
         print(' Processing .... : %s' % call.upper())
         callfile = rpt_dir + (os.sep) + now + '-' + call.lower() + '-raw' + '.csv'
@@ -870,7 +871,7 @@ def search_current_month_for_callsign(callargs):
                 sys.stdout.flush()
                 if (row[2] == call) or (row[6] == call):
                     writer.writerow(row)
-                    print(" Adding Spot Id ..: %s " % counter, end='\r')
+                    print(" Adding Spot Id ( %s )" % counter, end='\r')
             inf.close()
             outf.close()
 
@@ -879,7 +880,6 @@ def search_current_month_for_callsign(callargs):
             reader = csv.reader(f, delimiter=",")
             data = list(reader)
             ncount = len(data)
-
         f.close()
 
         # print the summary
@@ -901,13 +901,13 @@ def enter_callsign():
  Each call will have its own CSV file.
  
  Example
-   Input ....: KI7MT,K1ABC,K1DEF
+   Input ....: KI7MT,XX1XX,ZZ1ZZ
    Creates ..: <date>-<call>-raw.csv
  
  Files:
    2016-06-ki7mt-raw.vsv
-   2016-06-kiabc-raw.vsv
-   2016-06-k1def-raw.vsv
+   2016-06-xx1xx-raw.vsv
+   2016-06-zz1zz-raw.vsv
  
  """
     print(msg)
