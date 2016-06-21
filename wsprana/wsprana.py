@@ -811,11 +811,16 @@ def search_current_month_for_callsign(call):
     sdate = DATE_TIME.strftime("%Y-%m-01")
     edate = DATE_TIME.strftime("%Y-%m-%d")
 
+    # create the reports directory ../reports/yyyy-mm-dd
+    rpt_dir = (REPORTS_PATH + (os.sep) + edate)
+    if not os.path.exists(rpt_dir):
+        os.makedirs(rpt_dir)
+
     # Extrace Zip/GZ file name to search
     gzName = 'wsprspots-' + now + '.csv.' + OS_EXT
     source = (SRC_PATH + (os.sep) + 'wsprspots-' + now + '.csv.' + OS_EXT)
     csvfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv'
-    callfile = REPORTS_PATH + (os.sep) + 'wsprspots-' + now + '-' + call + '.csv'
+    callfile = rpt_dir + (os.sep) + now + '-' + call.lower() + '-raw' + '.csv'
 
     # start processing the source file
     print("\n" + 45 * '-')
@@ -858,7 +863,7 @@ def search_current_month_for_callsign(call):
     qt2 = ((time.time() - qt1))
     print(" Process Time ...: %.2f seconds" % qt2)
     print(" Log Count ......: {:,}".format(ncount))
-    print(" File Location ..: %s " % gzName[:-3])
+    print(" File Location ..: %s " % callfile)
 
 
 #----------------------------------------------------------- Raw Input Callsign
@@ -996,31 +1001,33 @@ def main():
     while True:
         main_menu()
         selection = input("Selection: ")
-        # Download all archive files from WSPRnet
+        # Update all archive files from WSPRnet
         if selection == '1':
             download_all()
             pause()
             main()
-        # Download or Update only the current month from WSPRnet
+        # Search all archives for call
         if selection == '2':
-            update_current_month()
-            pause()
-            main()
-        # Search all archives for a call sign
-        if selection == '3':
             enter_callsign()
             search_all_months_for_callsign(call)
             pause()
             report_menu()
-         # Search Current month for a call sign
+
+        # Update current month from WSPRnet
+        if selection == '3':
+            update_current_month()
+            pause()
+            main()
+         # Search Current month for a call
         if selection == '4':
             enter_callsign()
             search_current_month_for_callsign(call)
             pause()
             main()
-        # List availabel reports
+        # List available reports
         if selection == '5':
             report_selection()
+        # Check database
         if selection == '6':
             check_db()
         # Clean up csvd directory, removes all csv files
@@ -1072,12 +1079,12 @@ def main_menu():
     """Prints The Main Menu"""
     cmon = DATE_TIME.strftime("%B")
     print(45 * "-")
-    print(" WSPR Database Main Menu")
+    print(" WSPR Analysis Main Menu")
     print(45 * "-")
-    print(" 1. Download All WSPRnet Archive Files")
-    print(" 2. Update Current Months Archive File")
-    print(" 3. Search All Archive for Callsign")
-    print(" 4. Search [ %s ] For Callsign" % cmon)
+    print(" 1. Update All Archive Files")
+    print(" 2. Search All Archives for Call")
+    print(" 3. Update [ %s ] Archive" % cmon)
+    print(" 4. Search [ %s ] Archive For Call" % cmon)
     print(" 5. Reports Menu")
     print(" 6. Check Database")
     print(" 7. Clean CSV Directory")
