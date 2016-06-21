@@ -43,10 +43,11 @@ from appdirs import AppDirs
 # set FSH path locations using AppDirs
 dirs = APP_DIR = AppDirs("WSPR-ANA", appauthor='', version='', multipath='')
 APP_DIR = dirs.user_data_dir
+BASE_PATH = (os.getcwd())
 
 # set db and sql names
 DB_NAME = 'wsprana.db'
-SQL_FILE = ("wsprana.sql")
+SQL_FILE = (BASE_PATH + (os.sep) + 'wsprana.sql')
 
 # set path vvariables
 CSV_PATH = (APP_DIR + (os.sep) + "csvd")
@@ -268,6 +269,7 @@ def init_db():
     print(" Execution time ....: %.3f seconds" % qt2)
     print("\n")
     conn.close()
+    time.sleep(2)
 
 
 #------------------------------------------------------------ Get database info
@@ -320,8 +322,7 @@ def check_db():
 def version_db():
     """Get WSPR-Ana Version
 
-    Actions Performed
-        1. Opens the database
+    Actions Performedie database
         2. Fetch the appdata version"""
     try:
         with sqlite3.connect(DB_PATH) as conn:
@@ -478,6 +479,7 @@ def download_files(value):
     utime = time.strftime("%Y-%b-%d", time.gmtime())
     lines = (records)
     columns = (csv_cols)
+    
     update_stats(value, utime, columns, lines)
     clean_csv_path()
 
@@ -488,6 +490,11 @@ def update_stats(value, utime, columns, lines):
     Actions Performed:
         1. Connects to the SQLit3 database
         2. Commits data to status table"""
+
+    # check the DB is OK
+    version_db()
+
+    # add the update to database status table
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
     cur.execute('''REPLACE into status(name,date_added,columns,records)
@@ -1041,9 +1048,19 @@ def main():
         7. Clean CSV Directory
         8. Exit
 
-        NOTE: Entries must match the items in print_menu() function."""
+        NOTE: Entries must match the items in print_menu() function.
+    """
+    
+    # make sure directories exist
     create_dirs()
+
+    # check that wsprana database exists
+    version_db()
+    
+    # set the archive extension
     set_ext()
+
+    # start main loop
     clear_screen()
     while True:
         main_menu()
