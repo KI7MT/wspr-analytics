@@ -1114,6 +1114,8 @@ def main():
         # Check database
         if selection == '7':
             check_db()
+            pause()
+            main()
         # Clean up csvd directory, removes all csv files
         if selection == '8':
             afiles = len(glob.glob1(CSV_PATH, "*.csv"))
