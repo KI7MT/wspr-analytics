@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-r""" Module provides various functions in processing WSPRnet data files
+# -*- coding: utf-8 -*-
+
+from __future__ import absolute_import, print_function
+
+r"""Module provides various functions in processing WSPRnet data files
 
     Application Directories
     -----------------------
@@ -908,7 +912,7 @@ def enter_callsign():
  Each call will have its own Raw CSV file.
  
  Example
-   Input ....:  I7MT,XX1XX,ZZ1ZZ
+   Input ....:  KI7MT,XX1XX,ZZ1ZZ
    Creates ..:  <year>-<month>-<call>-raw.csv
                 <year>-<month>-<call>-converted.csv
  
