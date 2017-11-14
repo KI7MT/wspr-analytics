@@ -1107,7 +1107,7 @@ def main():
             for call in callargs:
                 csv_in = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call + '-raw.csv'
                 csv_out = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call + '-converted.csv'
-                ut.convert_epoch_lines(call,csv_in, csv_out)
+                ut.convert_epoch_lines(call,csv_in,csv_out)
             os.chdir(BASE_PATH)
             pause()
             main()

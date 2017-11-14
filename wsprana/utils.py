@@ -69,7 +69,6 @@ def csv_record_count(in_file):
         exit()
 
 #----------------------------------------------------------- Raw Input Callsign
-# TO-DO: this function is not implmented yet
 def enter_callsign():
     r"""
     Command line callsign entry
@@ -89,7 +88,6 @@ def enter_callsign():
     return call
 
 #----------------------------------------------------------- Convert Epoch Date
-# TO-DO: this function is not implmented yet
 def convert_epoch_date(epoch_time_stamp):
     """Converts unix epoch time in seconds to date
 
@@ -107,7 +105,6 @@ def convert_epoch_date(epoch_time_stamp):
     return utc_date
 
 #----------------------------------------------------------- Convert Epoch Time
-# TO-DO: this function is not implmented yet
 def convert_epoch_time(epoch_time_stamp):
     r"""Convert epoch time in seconds to time
 
@@ -125,7 +122,6 @@ def convert_epoch_time(epoch_time_stamp):
     return utc_time
 
 #--------------------------------------------------- Convert Epoch lines in CSV
-# TO-DO: this function is not implmented yet
 def convert_epoch_lines(call, csv_in, csv_out):
     r"""Convert lines in CSV file from epoch to human readable
 
@@ -149,20 +145,19 @@ def convert_epoch_lines(call, csv_in, csv_out):
         print(" * Converting Raw CSV file for [ %s ]" % call.upper())
         for line in r_file:
             x_line = line.split(',')
-            epoch_time_stamp = float(x_line[1])                 # get epoch date/time
-            utc_date = convert_epoch_date(epoch_time_stamp)     # get time
-            utc_time = convert_epoch_time(epoch_time_stamp)     # get date
-            timestamp = str(utc_date) + ',' + str(utc_time)     # combine date , time
-            newl = x_line[0] + ',' + timestamp                       # create new line beginning
-            for count in range(len(x_line)-2):                       # re-combine the line
+            epoch_time_stamp = float(x_line[1])
+            utc_date = convert_epoch_date(epoch_time_stamp)
+            utc_time = convert_epoch_time(epoch_time_stamp)
+            timestamp = str(utc_date) + ',' + str(utc_time)
+            newl = x_line[0] + ',' + timestamp
+            for count in range(len(x_line)-2):
                 newl = newl + ',' + x_line[count+2]
-            w_file.write(newl,)                                      # write the new line to file
-        r_file.close()                                               # close in_file
-        w_file.close()                                               # close out_file
+            w_file.write(newl,)
+        r_file.close()
+        w_file.close()
         os.chdir(BASE_PATH)
-    except IOError:
-        print(" * Nothing to do for [ %s ]" % call)
-        os.chdir(BASE_PATH)
+    except Exception as e:
+        print(e.message, e.args)
 
 ###############################################################################
 # GENERAL ERROR MESSAGES
