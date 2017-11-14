@@ -174,7 +174,7 @@ def create_dirs():
         1. Creates directories if they do no exist"""
     for d in DIR_LIST:
         if not os.path.exists(d):
-            os.mkdir(d)
+            os.makedirs(d)
 
 
 #----------------------------------------------------------------- Reset timers
