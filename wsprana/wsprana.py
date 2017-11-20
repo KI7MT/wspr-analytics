@@ -787,8 +787,7 @@ def search_all_months_for_callsign(call):
                     t = time.strftime('%H%M', time.gmtime(s))
                     timestamp = str(d) + ',' + str(t)
                     newl = x[0] + ',' + timestamp
-                    for count in range(
-                            len(x) - 2):                    # copy rest of the line
+                    for count in range(len(x) - 2):                    # copy rest of the line
                         newl = newl + ',' + x[count + 2]
                     # write line to output file
                     w.write(newl,)
@@ -920,10 +919,9 @@ def enter_callsign():
         They are extracted exacely as listed in the source
         archive file. This is import for the R scripts
         as they do the epoch conversion automatically.
-        
+
         To convert the current month CSV file, select the
         feature from the Main Menu.
- 
  """
     print(msg)
     callargs = input(" * Enter Callsigns : ").split(',')
@@ -1105,8 +1103,8 @@ def main():
             now = DATE_TIME.strftime("%Y-%m")
             edate = DATE_TIME.strftime("%Y-%m-%d")
             for call in callargs:
-                csv_in = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call + '-raw.csv'
-                csv_out = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call + '-converted.csv'
+                csv_in = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call.lower() + '-raw.csv'
+                csv_out = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call.lower() + '-converted.csv'
                 ut.convert_epoch_lines(call,csv_in,csv_out)
             os.chdir(BASE_PATH)
             pause()
