@@ -48,13 +48,13 @@ The primary data source will be the monthly [WSPRNet Archives][]. At present, th
 nightly updates. That could change if a reasonble API implementation is identified.
 
 The WSPR CSV tools will be used to convert the raw CSV files into a format better suited for parallel processing,
-namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramativaly with this storage formate.
-However, there is a drawback, one cannot simply view a binary file format as they can with raw text files. The
-original CSV will remain in place, but all processing that's done on a large scale will be pulled from [Parquet][].
-During these transformations is where [PyArrow][] will earn it's keep.
+namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramativaly with this storage format.
+However, there is a drawback, one cannot simply view a binary format as they can with raw text files. The
+original CSV will remain in place, but all buulk processing will be pulled from [Parquet][].
+During these transformations is where [PyArrow][] + [PySpark][] will earn it's keep.
 
-A [PostgreSQL] data base server will be beeded. There are many ways to perform this installation (local, remote,
-[Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively through many of the apps and scripts.
+A [PostgreSQL][] database server will be beeded. There are many ways to perform this installation (local, remote,
+[Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively by many of the apps and scripts.
 
 ## Presentation
 
@@ -89,6 +89,7 @@ Each section in the `src` folder will have a `README` that convers basic usage, 
 [Jupyter Notebooks]: https://jupyter.org/
 [IntelliJ IDEA]: https://www.jetbrains.com/idea/
 [Dockerize PostgreSQL]: https://docs.docker.com/engine/examples/postgresql_service/
+[PostgreSQL]: https://www.postgresql.org/
 [PostgreSQL with Vagrant]: https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant
 [Parquet]: https://parquet.apache.org/
 [Flask-Pandas-App]: https://github.com/the-akira/Flask-Pandas-App
