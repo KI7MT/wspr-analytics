@@ -32,7 +32,7 @@ You must have Java, Scala, and Spark available from the command line.
 
 ## Run The App
 
-Make sure all the SBT commands work, just for completness.
+Run the commands in order, and check your results.
 
 ```bash
 #
