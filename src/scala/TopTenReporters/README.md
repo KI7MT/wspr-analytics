@@ -1,8 +1,25 @@
 # Build Process
 
 This is a sample Application using Scala DataSets to
-get the TopTenReporter by Couny for the designated
-wsprspot year + month
+get the Top Ten Reporters Grouped By Count for the designated
+wsprspot year + month csv file. This example uses
+1wpsrspots-2020-02.csv.zip as the base.
+
+If you use a different archive, make sure to update the
+Scala script:
+
+```scala
+  // Change the csvfile, save and exit.
+  // No other edits requored.
+
+  // The main entry point
+  def main(args: Array[String]) {
+
+    val csvfile: String = "wsprspots-2020-02.csv"
+    val appname: String = "TenReporterDataset"
+    val timestamp: String = LocalDateTime.now().toString()
+    val description: String = "Returns the Top Ten Reporters Grouped by Count"
+```
 
 ## Framework Requirments
 
@@ -19,8 +36,8 @@ Make sure all the SBT commands work, just for completness.
 
 ```bash
 #
-# Download : http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
-# Extract to data/wsprspots-2020-02.csv
+# Download   : http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
+# Extract to : data/wsprspots-2020-02.csv
 # 
 
 # clean

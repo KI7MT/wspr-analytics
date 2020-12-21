@@ -24,7 +24,7 @@ object TopTenReporterDataset {
       result
   }
 
-  // Our main function where the action happens 
+  // The main entry point
   def main(args: Array[String]) {
 
     val csvfile: String = "wsprspots-2020-02.csv"
