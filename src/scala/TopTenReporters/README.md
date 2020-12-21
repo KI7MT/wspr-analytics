@@ -5,6 +5,10 @@ get the Top Ten Reporters Grouped By Count for the designated
 wsprspot year + month csv file. This example uses
 [wpsrspots-2020-02.csv.zip][] as the source.
 
+The specs on this file are:
+- Rows 47,310,649 spots
+- File decompressed 3.964 GB
+
 If you use a different archive, make sure to update the
 Scala script:
 
