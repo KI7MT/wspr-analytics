@@ -15,16 +15,16 @@ help with this challange.
 
 ## Abstract Implementation
 
-This peoject will focus on `Scaling Up`, not so much `Scaling Out`, using comodity based
+This project will focus on `Scaling Up`, not so much `Scaling Out`, using comodity based
 hardware. [Big Data][] tooling from vendors such as [Amazon AWS EBR][], [Microsoft Cloud Analytics][],
 [Google Smart Analytics][] provide a litany of options for processing [Big Data][]. However, for most of us, the
 return on invenst just isn't there.
 
-The same [Open Source Tools][] used in the pay-to-play areana can be employed on a much smaller scale
-(home server, work station, laptop, VMWare / VirtualBox Nodes, or SBC's like the Raspbery Pi) and used to process
+The same [Open Source Tools][] used in the pay-to-play arena can be employed on a much smaller scale
+(home server, workstation, laptop, VMWare / VirtualBox Nodes, or SBC's like the Raspbery Pi) and used to process
 datasets in a much more effecient manner than mere parsing of CSV files. The trade off is a bit more 
 processing time compared to the thousands of dollars one could spend spining up compute clusters with 
-cloud based providers.
+cloud based providers. Either way, we're talking orders of magnitude faster than simple CSV parsing.
 
 Commodity based hardware, for the most part, will be the focus of this project. That is not to say, [AWS],
 [Azure], [GCP] examples won't be provided in time, they just won't be the main focus initially.
@@ -33,33 +33,36 @@ Commodity based hardware, for the most part, will be the focus of this project. 
 
 While there may be some `installable` packages, where warrented, the majority of activity will take place
 in [Jupyter Notebooks][], [IntelliJ IDEA][], running scripts or compiled applications from the command line.
-There will be no overarching application that performs all tasks, rather, a colletion of scripts and smaller
+There will be no overarching application that performs all tasks, rather, a collection of scripts and smaller
 apps one can choose to use if desired.
 
 ## Cross Platform Compatability
 
-The majority of the tools that will be used can run on Windows, Linux, or MacOS. Windows, as always,
+The majority (if not all) of tools used can run on Windows, Linux, or MacOS. Windows, as always,
 presents a unique set of challanges, but will not left out of the mix.
 
 
 ## Data Sources and Processing
 
 The primary data source will be the monthly [WSPRNet Archives][]. At present, there is no plan to pull
-nightly updates. That could change if a reasonble API implementation is identified.
+nightly updates. That could change if a reasonble API is identified.
 
 The WSPR CSV tools will be used to convert the raw CSV files into a format better suited for parallel processing,
 namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramativaly with this storage format.
-However, there is a drawback, one cannot simply view a binary format as they can with raw text files. The
-original CSV will remain in place, but all buulk processing will be pulled from [Parquet][].
+However, there is a drawback, one cannot simply view a binary file as they can with raw text files. The
+original CSV will remain in place, but all bulk processing will be pulled from [Parquet][].
 During these transformations is where [PyArrow][] + [PySpark][] will earn it's keep.
 
 A [PostgreSQL][] database server will be beeded. There are many ways to perform this installation (local, remote,
-[Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively by many of the apps and scripts.
+[Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively
+by many of the apps and scripts.
 
 ## Presentation
 
-The presentation layer very much depends on the users needs. One may be writing a paper and only need specific
-data blocks presented in [Jupyter Notebooks][] while others are generating data for use with a [Full Stack Flask][] app. No matter the case, examples will be provided to show how this can eaily be achived with the language framework we've chosen to use. See this example ([Flask-Pandas-App][]) to illistrate the point resepctive to Data Science.
+The presentation layer very much depends on the users needs. One may be writing a paper and only needs specific
+data blocks presented in [Jupyter Notebooks][] while others are generating data for use with a [Full Stack Flask][] app.
+No matter the case, examples will be provided to show how this can eaily be achived with the language framework
+we've chosen to use. See this example ([Flask-Pandas-App][]) to illistrate the point resepctive to Data Science.
 
 ## Documentation
 
