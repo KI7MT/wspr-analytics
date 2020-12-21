@@ -79,6 +79,9 @@ object TopTenReporterDataset {
     println("- Executing Query\n")
     time {sortedResults.show(10)}
 
+    // shutdown spark engine
+    spark.stop()
+
   } // END - main method
 
 } // END - TopTenReporterDataset
