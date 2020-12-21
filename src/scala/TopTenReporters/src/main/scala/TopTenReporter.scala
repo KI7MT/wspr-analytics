@@ -20,7 +20,7 @@ object TopTenReporterDataset {
       val result = block  // call the block
       val t1 = System.currentTimeMillis()
       val elapsedTime: Long = (t1 - t0)
-      println("Query Elapsed time: " + elapsedTime + " msec\n")
+      println(f"Query Elapsed Time : $elapsedTime msec\n")
       result
   }
 
