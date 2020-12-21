@@ -10,9 +10,8 @@ By any reasonable definition, it is safe to say, [WSPR] has entered the realm of
 With this entry comes a unique set of challanges to draw meaningful results in a timely manner.
 The `WSPR Analytics` project will contain a seris of documents, small modules, example
 applications, code snippets and various utilities centerd around [Apache Spark][], [Apache Hadoop][],
-[PySpark][], [Anaconda Python][], [Jupyter Notebooks][], [Scala][] and other [Big Data][] tooling to
+[PySpark][], [PyArrow][], [Anaconda Python][], [Jupyter Notebooks][], [Scala][] and other [Big Data][] tooling to
 help with this challange.
-[Py Arrow][]
 
 ## Abstract Implementation
 
