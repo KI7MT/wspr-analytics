@@ -6,6 +6,7 @@ wsprspot year + month csv file. This example uses
 [wpsrspots-2020-02.csv.zip][] as the source.
 
 The specs on this file are:
+- File name wsprspots-2020-02.csv
 - Rows 47,310,649 spots
 - File decompressed 3.964 GB
 
