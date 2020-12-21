@@ -10,7 +10,7 @@ Scala script:
 
 ```scala
   // Change the csvfile, save and exit.
-  // No other edits requored.
+  // No other edits required.
 
   // The main entry point
   def main(args: Array[String]) {
