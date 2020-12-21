@@ -45,7 +45,7 @@ presents a unique set of challanges, but will not left out of the mix.
 ## Data Sources and Processing
 
 The primary data source will be the monthly [WSPRNet Archives][]. At present, there is no plan to pull
-nightly updates but that could change of a reasonble implementation can be identified.
+nightly updates. That could change if a reasonble API implementation is identified.
 
 The WSPR CSV tools will be used to convert the raw CSV files into a format better suited for parallel processing,
 namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramativaly with this storage formate.
@@ -93,4 +93,5 @@ Each section in the `src` folder will have a `README` that convers basic usage, 
 [Parquet]: https://parquet.apache.org/
 [Flask-Pandas-App]: https://github.com/the-akira/Flask-Pandas-App
 [Full Stack Flask]: https://www.fullstackpython.com
+[WSPRNet Archives]: http://www.wsprnet.org/drupal/downloads
 [PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
