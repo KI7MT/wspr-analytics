@@ -1,11 +1,12 @@
 package com.ki7mt.spark
 
-import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
+import java.time.LocalDateTime
+
 import org.apache.log4j._
+
+import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
-
-import java.time.LocalDateTime
 
 // Get The Top Ten Reporters by Count
 object TopTenReporterDataset {
