@@ -92,6 +92,6 @@ Each section in the `src` folder will have a `README` that convers basic usage, 
 [Dockerize PostgreSQL]: https://docs.docker.com/engine/examples/postgresql_service/
 [PostgreSQL with Vagrant] :https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant
 [Parquet]: https://parquet.apache.org/
-[PyArrow]: https://parquet.apache.org/
+[PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
 [Flask-Pandas-App]: https://github.com/the-akira/Flask-Pandas-App
 [Full Stack Flask]: https://www.fullstackpython.com/flask.html
