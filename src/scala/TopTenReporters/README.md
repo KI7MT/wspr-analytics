@@ -3,7 +3,7 @@
 This is a sample Application using Scala DataSets to
 get the Top Ten Reporters Grouped By Count for the designated
 wsprspot year + month csv file. This example uses
-1wpsrspots-2020-02.csv.zip as the base.
+[wpsrspots-2020-02.csv.zip][] as the source.
 
 If you use a different archive, make sure to update the
 Scala script:
@@ -88,3 +88,5 @@ only showing top 10 rows
 
 Query Elapsed time: 6971 msec
 ```
+
+[wpsrspots-2020-02.csv.zip]: http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
