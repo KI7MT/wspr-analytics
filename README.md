@@ -10,8 +10,9 @@ By any reasonable definition, it is safe to say, [WSPR] has entered the realm of
 With this entry comes a unique set of challanges to draw meaningful results in a timely manner.
 The `WSPR Analytics` project will contain a seris of documents, small modules, example
 applications, code snippets and various utilities centerd around [Apache Spark][], [Apache Hadoop][],
-[PySpark][], [Anaconda Python][], [PyArrow][], [Jupyter Notebooks][], [Scala][] and other [Big Data][] tooling to
+[PySpark][], [Anaconda Python][], [Jupyter Notebooks][], [Scala][] and other [Big Data][] tooling to
 help with this challange.
+[Py Arrow][]
 
 ## Abstract Implementation
 
@@ -59,7 +60,7 @@ A [PostgreSQL] data base server will be beeded. There are many ways to perform t
 ## Presentation
 
 The presentation layer very much depends on the users needs. One may be writing a paper and only need specific
-data blocks presented in [[Jupyter Notebooks][] while others are generating data for use with a [Full Stack Flask][] app. No matter the case, examples will be provided to show how this can eaily be achived with the language framework we've chosen to use. See this example ([Flask-Pandas-App][]) to illistrate the point resepctive to Data Science.
+data blocks presented in [Jupyter Notebooks][] while others are generating data for use with a [Full Stack Flask][] app. No matter the case, examples will be provided to show how this can eaily be achived with the language framework we've chosen to use. See this example ([Flask-Pandas-App][]) to illistrate the point resepctive to Data Science.
 
 ## Documentation
 
@@ -70,7 +71,6 @@ most of what they can do.
 At this time, the documentation sight is under development. When the basic framweork is complete, including tool setup, it will be published to Github Pages as a static website.
 
 Each section in the `src` folder will have a `README` that convers basic usage, and if needed, compling instructions. User are encouraged to read these files before attemmpting to run the app/script. In most cases, some level of configuration will be needed, if for no other reason that to identify the data-source location.
-
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPR]: https://www.physics.princeton.edu/pulsar/k1jt/wspr.html
@@ -90,8 +90,8 @@ Each section in the `src` folder will have a `README` that convers basic usage, 
 [Jupyter Notebooks]: https://jupyter.org/
 [IntelliJ IDEA]: https://www.jetbrains.com/idea/
 [Dockerize PostgreSQL]: https://docs.docker.com/engine/examples/postgresql_service/
-[PostgreSQL with Vagrant] :https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant
+[PostgreSQL with Vagrant]: https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant
 [Parquet]: https://parquet.apache.org/
-[PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
 [Flask-Pandas-App]: https://github.com/the-akira/Flask-Pandas-App
-[Full Stack Flask]: https://www.fullstackpython.com/flask.html
+[Full Stack Flask]: https://www.fullstackpython.com
+[PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
