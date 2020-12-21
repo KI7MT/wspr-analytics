@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
 // Get The Top Ten Reporters by Count
-object TopTenReporterDataset {
+object TopTenReporter {
 
   case class Reporter(SpotID: Integer, Timestamp: Integer, Reporter: String)
 
@@ -20,8 +20,10 @@ object TopTenReporterDataset {
       val t0 = System.currentTimeMillis()
       val result = block  // call the block
       val t1 = System.currentTimeMillis()
-      val elapsedTime: Long = (t1 - t0)
-      println(f"Query Time : $elapsedTime msec\n")
+      val elapsedTimeMsec: Float = (t1 - t0)
+      val elapsedTime: Float = (elapsedTimeMsec / 1000)
+
+      println(f"Query Time : $elapsedTime sec\n")
       result
   }
 

@@ -5,10 +5,28 @@ get the Top Ten Reporters Grouped By Count for the designated
 wsprspot year + month csv file. This example uses
 [wpsrspots-2020-02.csv.zip][] as the source.
 
-The specs on this file are:
-- File name wsprspots-2020-02.csv
-- Rows 47,310,649 spots
-- File decompressed 3.964 GB
+## Framework Requirments
+
+You must have Java, Scala, Spark and SBT available from the command line.
+
+- Java openjdk version 1.8.0_275 or later
+- Scala Version 2.12.12
+- Spark 3.0.1
+- SBT Tools 1.4.5
+
+An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
+through an management tool called [sdkman][]. This tool allows
+one to install virtually any combination of tools you need without
+affecting your root file system. All the above requirements
+can be installed and managed via [sdkman][].
+
+## Test File Specs
+
+The specs on the test file are:
+
+- Test File : wsprspots-2020-02.csv
+- Rows : 47,310,649 spots
+- File Size Decompressed : 3.964 GB
 
 If you use a different archive, make sure to update the
 Scala script:
@@ -26,18 +44,9 @@ Scala script:
     val description: String = "Returns the Top Ten Reporters Grouped by Count"
 ```
 
-## Framework Requirments
+## Build and Run The App
 
-You must have Java, Scala, and Spark available from the command line.
-
-- Java openjdk version 1.8.0_275 or later
-- ScalaVersion 2.12.12
-- Spark 3.0.1
-- SBT Plugin 0.15.0
-
-## Run The App
-
-Run the commands in order, and check your results.
+Run the following commands in order, and check your results.
 
 ```bash
 #
@@ -53,7 +62,7 @@ sbt assembly
 
 # cd data directory and run
 cd data/
-spark-submit ../target/scala-2.12/TopTenReporter-1.0.jar 
+spark-submit ../target/scala-2.12/TopTenReporter-assembly-1.0.jar
 ```
 
 ### Results
@@ -94,4 +103,25 @@ only showing top 10 rows
 Query Elapsed time: 6971 msec
 ```
 
+## ToDo
+
+This script could be much more generic, and will be in the future
+
+- Change the name to be more generic
+- Add command-line option for FileName and Path
+- Add command-line option for which column to count
+- Add command-line option to set the number of rows to return
+
+### Example
+```scala
+
+// <filename> the full path and file name to process
+// <column-name> the column from the csv file to process
+// <number> the number of rows to return
+
+spark-submit CountByColumn-assembly-1.0.jar <file-name> <column-name> <number>
+
+```
+
 [wpsrspots-2020-02.csv.zip]: http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
+[sdkman]: https://sdkman.io/
