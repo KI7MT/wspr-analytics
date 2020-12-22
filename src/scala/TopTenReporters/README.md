@@ -1,9 +1,12 @@
 # Build Process
 
 This is a sample Application using [Scala][] via [Spark SQL][]
-get the Top Ten Reporters Grouped By Count for the designated
+to get the Top Ten Reporters Grouped By Count for the designated
 wsprspot year + month csv file. This example uses
-[wpsrspots-2020-02.csv.zip][] as the source.
+[wpsrspots-2020-02.csv.zip][] as the source. This script could
+easily be extended to perform much more that it does presently.
+
+See [ToDo](#todo) for planned additions.
 
 ## Framework Requirments
 
