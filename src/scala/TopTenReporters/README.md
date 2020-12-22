@@ -41,7 +41,7 @@ Scala script:
   def main(args: Array[String]) {
 
     val csvfile: String = "wsprspots-2020-02.csv"
-    val appname: String = "TenReporterDataset"
+    val appname: String = "TopTenReporter"
     val timestamp: String = LocalDateTime.now().toString()
     val description: String = "Returns the Top Ten Reporters Grouped by Count"
 ```
@@ -75,7 +75,7 @@ You should get results similar to the following:
 >NOTE The time it takes will depend on your system resources (CPU, RAM, etc)
 
 ```bash
-Application  : TenReporterDataset
+Application  : TopTenReporter
 Process File : data/wsprspots-2020-02.csv
 Tiimestame   : 2020-12-22T03:17:29.973
 Description  : Returns the Top Ten Reporters Grouped by Count

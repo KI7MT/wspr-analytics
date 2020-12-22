@@ -31,14 +31,14 @@ object TopTenReporter {
   def main(args: Array[String]) {
 
     if (args.length <= 0) {
-      println("\nInput FIle Error")
+      println("\nInput File Error")
       println("Usage: TopTenReporters <file path to wsprspots-xxxx-xx.csv")
       println("Example: wsprspots-2020-02.csv")
       System.exit(1)
     }
 
     val csvfile: String = args(0)
-    val appname: String = "TenReporterDataset"
+    val appname: String = "TopTenReporter"
     val timestamp: String = LocalDateTime.now().toString()
     val description: String = "Returns the Top Ten Reporters Grouped by Count"
 
