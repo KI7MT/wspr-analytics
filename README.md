@@ -2,22 +2,17 @@
 
 In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
 that number has increased to over 46 Million at last count, and shows no sign of abatment.
-By any reasonable definition, it is safe to say, [WSPR] has entered the realm of [Big Data][].
+By any reasonable definition, it is safe to say, [WSPR][] has entered the realm of [Big Data][].
 
-With this entry comes a unique set of challanges to draw meaningful results in a timely manner.
-The `WSPR Analytics` project will contain a seris of documents, small modules, example
-applications, code snippets and various utilities centerd around [Apache Spark][], [Apache Hadoop][],
-[PySpark][], [PyArrow][], [Anaconda Python][], [Jupyter Notebooks][], [Scala][] and other [Big Data][] tooling to
-help with this challange.
+WSPR Analytics CSV Utilities is one of several packages surrouning the WSPR Analytics Suite of tools.
+This repository contains tools used to download, clean, transform and otherwise manage the
+original CSV files from [WSPRnet][]. Other tools sets will be used to generate additional datasets for
+analytics purposes.
 
 ## Basic Tool Requirments
 
-The original festures of this project performed basic file transformations with a few select
-`R` script to render vvisualizations, this tool will be moved to it's on set of scripts and
-packages.
-
->NOTE: During development, this package **is not** intended for pip installaiton.
-> It should be checked out and run from source.
+>NOTE: During development, this package **is not** intended for pip installaiton yet, but will be.
+>It should be checked out and run from source at present.
 
 You must have Python, Java, PySpark/Spark available from the command line.
 
@@ -53,6 +48,7 @@ by many of the apps and scripts.
 
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
+[WSPRnet]: http://www.wsprnet.org
 [WSPR]: https://www.physics.princeton.edu/pulsar/k1jt/wspr.html
 [Big Data]: https://www.oracle.com/big-data/what-is-big-data.html
 [Amazon AWS EBR]: https://aws.amazon.com/emr/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc
