@@ -119,4 +119,5 @@ Each section in the `src` folder will have a `README` that convers basic usage, 
 [Full Stack Flask]: https://www.fullstackpython.com
 [WSPRNet Archives]: http://www.wsprnet.org/drupal/downloads
 [Anaconda Python]: https://www.anaconda.com/
+[sdkman]: https://sdkman.io/
 [PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
