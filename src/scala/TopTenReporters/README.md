@@ -7,7 +7,7 @@ to perform much more than it does currently.
 
 See [ToDo](#todo) for planned additions.
 
-## Framework Requirments
+## Framework Requirements
 
 You must have Java, Scala, Spark and SBT available from the command line.
 
