@@ -49,9 +49,7 @@ sbt clean
 # build the fat Jar
 sbt assembly
 
-# cd data directory and run
-# Adjust the wsprspots file as appropriate
-cd data/
+# Runs the following command
 spark-submit target/scala-2.12/toptenreporter_2.12-3.0.1-1.0.jar data/wsprspots-2020-02.csv
 ```
 
@@ -99,7 +97,6 @@ Query Time : 5.52 sec
 This script could be much more generic, and will be in the future
 
 - Change the name to be more generic
-- Add command-line option for FileName and Path
 - Add command-line option for which column to count
 - Add command-line option to set the number of rows to return
 
