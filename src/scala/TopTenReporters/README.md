@@ -2,13 +2,8 @@
 
 This is a sample Application using [Scala][] via [Spark SQL][]
 to get the Top Ten Reporters Grouped By Count for the designated
-wsprspot year + month csv file. This example uses
-<<<<<<< HEAD
-[wpsrspots-2020-02.csv.zip][] as the source. This script could
-=======
-[wpsrspots-2020-02.csv.zip][] as the source. This scrip could
->>>>>>> e68a12a813d7e8ca47e415b185782c169ff0a2d8
-easily be extended to perform much more that it does presently.
+wsprspot year + month csv file. This example uses easily be extended
+to perform much more that it does presently.
 
 See [ToDo](#todo) for planned additions.
 
