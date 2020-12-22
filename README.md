@@ -6,7 +6,7 @@ By any reasonable definition, it is safe to say, [WSPR][] has entered the realm 
 
 WSPR Analytics CSV Utilities is one of several packages surrouning the WSPR Analytics Suite of tools.
 This repository contains tools used to download, clean, transform and otherwise manage the
-original CSV files from [WSPRnet][]. Other tools sets will be used to generate additional datasets for
+original CSV files from [WSPRnet][]. Other tools will be used to generate additional datasets for
 analytics purposes.
 
 ## Basic Tool Requirments
