@@ -1,6 +1,6 @@
 # Build Process
 
-This is a sample Application using Scala DataSets to
+This is a sample Application using [Scala][] via [Spark SQL][]
 get the Top Ten Reporters Grouped By Count for the designated
 wsprspot year + month csv file. This example uses
 [wpsrspots-2020-02.csv.zip][] as the source.
@@ -125,3 +125,5 @@ spark-submit CountByColumn-assembly-1.0.jar <file-name> <column-name> <number>
 
 [wpsrspots-2020-02.csv.zip]: http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
 [sdkman]: https://sdkman.io/
+[Spark SQL]: https://spark.apache.org/docs/latest/sql-programming-guide.html
+[Scala]: https://scala-lang.org/
