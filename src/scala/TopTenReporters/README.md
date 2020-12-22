@@ -63,8 +63,9 @@ sbt clean
 sbt assembly
 
 # cd data directory and run
+# Adjust the wsprspots file as appropriate
 cd data/
-spark-submit ../target/scala-2.12/TopTenReporter-assembly-1.0.jar
+spark-submit target/scala-2.12/toptenreporter_2.12-3.0.1-1.0.jar data/wsprspots-2020-02.csv
 ```
 
 ### Results
@@ -75,16 +76,17 @@ You should get results similar to the following:
 
 ```bash
 Application  : TenReporterDataset
-Process File : wsprspots-2020-02.csv
-Tiimestame   : 2020-12-20 T 20:49:59.324
+Process File : data/wsprspots-2020-02.csv
+Tiimestame   : 2020-12-22T03:17:29.973
 Description  : Returns the Top Ten Reporters Grouped by Count
 
+Process Steps for this application
 - Creating the Schema
 - Reading CSV into DataSet
 - Selecting Reporters
 - GroupBy and Count Reporters
 - Sort Reporters Descending
-- Executing Query
+- Query Execution
 
 +--------+------+
 |Reporter| count|
@@ -102,7 +104,7 @@ Description  : Returns the Top Ten Reporters Grouped by Count
 +--------+------+
 only showing top 10 rows
 
-Query Elapsed time: 6971 msec
+Query Time : 5.52 sec
 ```
 
 ## ToDo

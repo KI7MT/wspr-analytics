@@ -30,7 +30,14 @@ object TopTenReporter {
   // The main entry point
   def main(args: Array[String]) {
 
-    val csvfile: String = "wsprspots-2020-02.csv"
+    if (args.length <= 0) {
+      println("\nInput FIle Error")
+      println("Usage: TopTenReporters <file path to wsprspots-xxxx-xx.csv")
+      println("Example: wsprspots-2020-02.csv")
+      System.exit(1)
+    }
+
+    val csvfile: String = args(0)
     val appname: String = "TenReporterDataset"
     val timestamp: String = LocalDateTime.now().toString()
     val description: String = "Returns the Top Ten Reporters Grouped by Count"
@@ -39,6 +46,7 @@ object TopTenReporter {
     println(s"Process File : $csvfile" )
     println(s"Tiimestame   : $timestamp")
     println(s"Description  : $description\n" )
+    println("Process Steps for this application")
 
     // Set the Java Log Leve
     Logger.getLogger("org").setLevel(Level.ERROR)
@@ -78,7 +86,7 @@ object TopTenReporter {
     val sortedResults = rank.sort(desc("Count"))
 
     // Print results from the dataset
-    println("- Executing Query\n")
+    println("- Query Execution\n")
     time {sortedResults.show(10)}
 
     // shutdown spark engine
