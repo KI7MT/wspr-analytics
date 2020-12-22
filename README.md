@@ -1,10 +1,7 @@
 # WSPR Analytics
 
-`Big Data Analytics on a small budget is the focus of this project.` 
-
-
 In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
-that number has increased to nearly 46 Million, and shows no sign of abatment.
+that number has increased to over 46 Million at last count, and shows no sign of abatment.
 By any reasonable definition, it is safe to say, [WSPR] has entered the realm of [Big Data][].
 
 With this entry comes a unique set of challanges to draw meaningful results in a timely manner.
@@ -13,9 +10,32 @@ applications, code snippets and various utilities centerd around [Apache Spark][
 [PySpark][], [PyArrow][], [Anaconda Python][], [Jupyter Notebooks][], [Scala][] and other [Big Data][] tooling to
 help with this challange.
 
+## Basic Tool and Build Instructions
+
+In each folder under `src`, you'll find instructions for compiling and running each
+project or script as appropriate.
+
+You must have Python, Java, Scala, Spark and SBT available from the command line.
+
+- Java openjdk version 1.8.0_275 or later
+- Scala Version 2.12.12
+- Spark 3.0.1
+- SBT Tools 1.4.5
+- Python 3.7+
+
+An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
+through an management tool called [sdkman][]. This tool allows
+one to install virtually any combination of tools you need without
+affecting your root file system. With the exception of Python,
+All the above requirements can be installed and managed via [sdkman][].
+
+For Python, the recomendation is to use [Anaconda Python][], the full version,
+as it provides all the analytics tooling you'll need for this project and more.
+
+
 ## Abstract Implementation
 
-This project will focus on `Scaling Up`, not so much `Scaling Out`, using comodity based
+This project will focus on `Scaling Up Some`, not so much `Scaling Out`, using comodity based
 hardware. [Big Data][] tooling from vendors such as [Amazon AWS EBR][], [Microsoft Cloud Analytics][],
 [Google Smart Analytics][] provide a litany of options for processing [Big Data][]. However, for most of us, the
 return on invenst just isn't there.
@@ -98,4 +118,5 @@ Each section in the `src` folder will have a `README` that convers basic usage, 
 [Flask-Pandas-App]: https://github.com/the-akira/Flask-Pandas-App
 [Full Stack Flask]: https://www.fullstackpython.com
 [WSPRNet Archives]: http://www.wsprnet.org/drupal/downloads
+[Anaconda Python]: https://www.anaconda.com/
 [PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
