@@ -30,21 +30,8 @@ The specs on the test file are:
 - Rows : 47,310,649 spots
 - File Size Decompressed : 3.964 GB
 
-If you use a different archive, make sure to update the
-Scala script:
-
-```scala
-  // Change the csvfile, save and exit.
-  // No other edits required.
-
-  // The main entry point
-  def main(args: Array[String]) {
-
-    val csvfile: String = "wsprspots-2020-02.csv"
-    val appname: String = "TopTenReporter"
-    val timestamp: String = LocalDateTime.now().toString()
-    val description: String = "Returns the Top Ten Reporters Grouped by Count"
-```
+If you use a different archive, make sure to you pass
+the relative location to the script when running.
 
 ## Build and Run The App
 
