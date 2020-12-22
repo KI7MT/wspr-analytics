@@ -25,6 +25,7 @@ You must have Python, Java, PySpark/Spark available from the command line.
 - Spark 3.0.1
 - Python 3.7+
 - PySpark from PyPi (optional)
+- PostgreSQL Database (local, remote, Docker, etc)
 
 An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
@@ -46,9 +47,10 @@ However, there is a drawback, one cannot simply view a binary file as they can w
 original CSV will remain in place, but all bulk processing will be pulled from [Parquet][].
 During these transformations is where [PyArrow][] + [PySpark][] will earn it's keep.
 
-A [PostgreSQL][] database server will be beeded. There are many ways to perform this installation (local, remote,
+A [PostgreSQL][] database server will be needed. There are many ways to perform this installation (local, remote,
 [Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively
 by many of the apps and scripts.
+
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPR]: https://www.physics.princeton.edu/pulsar/k1jt/wspr.html
