@@ -2,8 +2,8 @@
 
 This is a sample Application using [Scala][] via [Spark SQL][]
 to get the Top Ten Reporters Grouped By Count for the designated
-wsprspot year + month csv file. This example uses easily be extended
-to perform much more that it does presently.
+wsprspot year + month csv file. This example could easily be extended
+to perform much more than it does currently.
 
 See [ToDo](#todo) for planned additions.
 
