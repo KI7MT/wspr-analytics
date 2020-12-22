@@ -1,7 +1,7 @@
 # WSPR Analytics CSV Utilities
 
 In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
-that number has increased to over 46 Million at last count, and shows no sign of abatment.
+that number has increased to over 46 Million per month at last count, and shows no sign of abatement.
 By any reasonable definition, it is safe to say, [WSPR][] has entered the realm of [Big Data][].
 
 WSPR Analytics CSV Utilities is one of several packages surrouning the WSPR Analytics Suite of tools.
