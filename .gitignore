@@ -4,3 +4,4 @@ csvd/
 reports/
 temp/
 docs/build/
+venv/*
