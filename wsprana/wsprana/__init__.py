@@ -1,6 +1,4 @@
-from _version import __version__
-
-
+__version__ = "0.1.0"
 __title__ = 'WSPR Analytics'
 __author__ = 'Greg Beam, KI7MT'
 __license__ = 'Apache License, Version 2.0'
