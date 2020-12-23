@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 General utilities for WSPR Analysis
-
 """
 
 import os
@@ -10,7 +9,8 @@ import datetime
 
 BASE_PATH = (os.getcwd())
 
-#--------------------------------------------------------- Get CSV Column Count
+
+# --------------------------------------------------------- Get CSV Column Count
 # TO-DO: this function is not implmented yet
 def csv_column_count(in_file):
     """
@@ -38,9 +38,10 @@ def csv_column_count(in_file):
         file_io_error_msg(io_error)
         exit()
 
-#--------------------------------------------------------- Get CSV Record Count
+
+# --------------------------------------------------------- Get CSV Record Count
 def csv_record_count(in_file):
-# TO-DO: this function is not implmented yet
+    # TO-DO: this function is not implmented yet
     """
     Get the number of records in a CSV files
 
@@ -68,7 +69,8 @@ def csv_record_count(in_file):
         file_io_error_msg(io_error)
         exit()
 
-#----------------------------------------------------------- Raw Input Callsign
+
+# ----------------------------------------------------------- Raw Input Callsign
 def enter_callsign():
     r"""
     Command line callsign entry
@@ -87,7 +89,8 @@ def enter_callsign():
     call = call.upper()
     return call
 
-#----------------------------------------------------------- Convert Epoch Date
+
+# ----------------------------------------------------------- Convert Epoch Date
 def convert_epoch_date(epoch_time_stamp):
     """Converts unix epoch time in seconds to date
 
@@ -104,7 +107,8 @@ def convert_epoch_date(epoch_time_stamp):
     utc_date = (initial_value.strftime('%Y-%m-%d'))
     return utc_date
 
-#----------------------------------------------------------- Convert Epoch Time
+
+# ----------------------------------------------------------- Convert Epoch Time
 def convert_epoch_time(epoch_time_stamp):
     r"""Convert epoch time in seconds to time
 
@@ -121,7 +125,8 @@ def convert_epoch_time(epoch_time_stamp):
     utc_time = (initial_value.strftime('%H%M'))
     return utc_time
 
-#--------------------------------------------------- Convert Epoch lines in CSV
+
+# --------------------------------------------------- Convert Epoch lines in CSV
 def convert_epoch_lines(call, csv_in, csv_out):
     r"""Convert lines in CSV file from epoch to human readable
 
@@ -139,7 +144,7 @@ def convert_epoch_lines(call, csv_in, csv_out):
 
     """
     try:
-        # processloop through each callsign
+        # process loop through each callsign
         r_file = open(csv_in, 'r')
         w_file = open(csv_out, "w")
         print(" * Converting Raw CSV file for [ %s ]" % call.upper())
@@ -148,26 +153,26 @@ def convert_epoch_lines(call, csv_in, csv_out):
             epoch_time_stamp = float(x_line[1])
             utc_date = convert_epoch_date(epoch_time_stamp)
             utc_time = convert_epoch_time(epoch_time_stamp)
-            timestamp = str(utc_date) + ',' + str(utc_time)
+            timestamp: str = str(utc_date) + ',' + str(utc_time)
             newl = x_line[0] + ',' + timestamp
-            for count in range(len(x_line)-2):
-                newl = newl + ',' + x_line[count+2]
-            w_file.write(newl,)
+            for count in range(len(x_line) - 2):
+                newl = newl + ',' + x_line[count + 2]
+            w_file.write(newl, )
         r_file.close()
         w_file.close()
         os.chdir(BASE_PATH)
     except Exception as e:
-        print(e.message, e.args)
+        print(e, e.args)
+
 
 ###############################################################################
 # GENERAL ERROR MESSAGES
 ###############################################################################
 
-#--------------------------------------------------------- File IOError Message
+# --------------------------------------------------------- File IOError Message
 def file_io_error_msg(io_error):
     """File missing or bad path IOError Message"""
     print("")
     print(io_error)
     print("Check file exists, path is correct, and file is not currupt.")
     print("")
-
