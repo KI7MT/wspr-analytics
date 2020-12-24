@@ -35,3 +35,5 @@ format, but for now it's manual.
 
 After settin the year and month you want, just right click and run
 it from your IDE.
+
+[WSPRNet]: http://www.wsprnet.org/drupal/downloads
