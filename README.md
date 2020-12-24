@@ -18,6 +18,7 @@ Folder | Frameworks | Description
 |:--- |:--- |:---
 |docs|Python, MkDocs| General repository documentation
 |examples|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
+|java|Java, Scala, SBT| Basic Java apps for RDD and Avro examples
 |notebooks|Jupyter Notebooks| Notebooks to demonstrate features an capabilities
 |scala|Scala| Scapa programs to query files
 |wsprana|Python|Python package to manage downloading CSV files
