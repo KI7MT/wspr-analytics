@@ -20,7 +20,7 @@ Folder | Frameworks | Description
 |examples|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
 |notebooks|Jupyter Notebooks| Notbooks to demonstrates features an capabilities
 |scala|Scala| Scapa programs to query files
-|wsprana|Python|Python package to manage downloding CSV files
+|wsprana|Python|Python package to manage downloading CSV files
 
 Each folder has a top level README, as do each sub-folder project. One should pay close
 attention to these files as they lay out how to setup the tools needed to run their
