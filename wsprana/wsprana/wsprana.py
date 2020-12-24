@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-from __future__ import absolute_import, print_function
-
 r"""Module provides various functions in processing WSPRnet data files
 
     Application Directories

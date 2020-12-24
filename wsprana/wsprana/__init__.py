@@ -51,3 +51,6 @@ r"""
         MacOS: /Users/$USER/.local/share/wsprana/parquet
         Win32: C:\Users\%USERNAME%\AppData\local\wsprana\parquet
 """
+
+__database__ = os.path.join(__wsprana_share__,__title__,'wsprana.db')
+"""Path and name to wsprana database"""
