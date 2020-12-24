@@ -21,7 +21,6 @@ r"""Module provides various functions in processing WSPRnet data files
     to the 'csvd' directory.
 
 """
-
 import csv
 import datetime
 import glob
@@ -45,7 +44,7 @@ from wsprana import utils as ut
 #--------------------------------------------------- global variables and paths
 
 # set FSH path locations using AppDirs
-dirs = APP_DIR = AppDirs("WSPR-ANA", appauthor='', version='', multipath='')
+dirs = APP_DIR = AppDirs("wsprana", appauthor='', version='', multipath='')
 APP_DIR = dirs.user_data_dir
 BASE_PATH = (os.getcwd())
 
