@@ -149,7 +149,7 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
  Finished !!
 ```
 
-# Query Parquet File with PySpak
+# Query Parquet File with PySpark
 
 The next phase is to run read / query tests with [PySpark][], [Python] and 
 [Scala] DataSet in a distributed manner.
