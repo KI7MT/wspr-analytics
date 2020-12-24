@@ -111,12 +111,12 @@ NOTE : The File Sizes Are Approximated = (file bytes / 1048576)
 
 ### PyArrow Read tests Results
 
-These results are using [Apache Arrow][] straigh from the box. No Spark
+These results are using [Apache Arrow][] straight from the box. No Spark
 engines are deplyed yet.
 
 To say it's fast is an understatement.
 
-> NOTE : check the CSV Rad Time and Compare it to [Pandas][] from above.
+> NOTE : check the CSV Read Time and Compare it to [Pandas][] from above.
 
 ```bash
 Running Read Tests Using Apache Arrow
