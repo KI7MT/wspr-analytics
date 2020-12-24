@@ -1,9 +1,9 @@
 # General Use Scripts
 
-The scripts in this directory are used for testing and exploring [PySpark][], [Apache Arrow][], and other frameworks while the main [wsprana][] application
-is being reworked.
+The scripts in this directory are used for testing and exploring [PySpark][], [Apache Arrow][],
+and other frameworks while the main [wsprana][] application is being reworked.
 
-All of the test scripts will be incorporated into the main app. Some of the
+All of the example scripts will be incorporated into the main app. Some of the
 scripts in this folder will just be test scripts, like the `pandas_convert_csv.py`
 and `pyarrow_read.py`, but they provide some insight as to what can be done
 to reduce processing time and imporve file storage footprints.
@@ -49,7 +49,7 @@ Here's the commands from the shell
 cd $USER/Downlaods
 
 # Change directories and install dependencies
-cd $HOME/Downlaods/wsprana-spark-python/testing
+cd $HOME/Downlaods/wsprana-spark-python/examples
 
 pip install -r requirements.txt
 
@@ -107,7 +107,7 @@ NOTE : The File Sizes Are Approximated = (file bytes / 1048576)
  Finished !!
 ```
 
-### PyArrow Read tests Results
+### PyArrow Read Tests Results
 
 These results are using [Apache Arrow][] straight from the box. No Spark
 engines are deplyed yet.
