@@ -14,7 +14,7 @@ read_types = ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
 def clear():
     """
-    Clear screen function for Windows Linux and MacOS
+    Clear screen function for Windows, Linux and MacOS
     """
     if name == 'nt': 
         _ = system('cls') 
@@ -33,13 +33,14 @@ def get_file_size(csvfile, comp_type):
 
 def pyarrow_read(csvfile):
     """
-    Read the files with varying reads
+    Loop through all read_types and time each itteration.
     """
     print("Running Read Tests Using Apache Arrow")
     print(f"Compression Types : {read_types}\n")
     for f in read_types:
         ext = str(f.lower())
         
+        # if the file is csv, don't change the name
         if f.lower() == 'csv':
             file_name = csvfile
             short_name = os.path.basename(csvfile)
@@ -49,7 +50,8 @@ def pyarrow_read(csvfile):
             short_name = os.path.basename(file_name)
             print(f'* Reading file  : {short_name}')
         
-        # PyArrow uses a different read method for CSV files (read_csv v.s. read_table)
+        # PyArrow: uses a different read method or CSV files
+        # => (read_csv v.s. read_table for parquet)
         start = time.time()
         if f.lower() == 'csv':
             reader = pv.read_csv(file_name)

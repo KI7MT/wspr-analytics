@@ -69,7 +69,7 @@ def get_file_size(csvfile, comp_type):
 
 def pandas_convert_csv(csvfile):
     """
-    Convert the CSV file using parquet_type compression
+    Convert CSV file using parquet_type compression
     """
     file_name = os.path.basename(csvfile)
 
