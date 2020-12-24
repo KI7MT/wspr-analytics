@@ -151,8 +151,8 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
 # Query Parquet File with PySpark
 
-The next phase is to run read / query tests with [PySpark][], [Python] and 
-[Scala] DataSet in a distributed manner.
+The next phase is to run read / query with [PySpark][] and [Python] and 
+in a distributed manner.
 
 
 See [WSPR Query Notebook][] for details.
