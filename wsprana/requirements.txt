@@ -1,5 +1,5 @@
-pyspark
-beautifulsoup4>=4.4.1
-requests>=2.9.1
-appdirs>=1.4.0
+beautifulsoup4
+requests
 clint
+pandas
+pyspark
