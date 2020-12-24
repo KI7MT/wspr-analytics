@@ -11,8 +11,8 @@ CREATE TABLE appdata(
 );
 INSERT INTO appdata(author,copyright,license,version,email,status) VALUES
     ('Greg Beam',
-    '2016',
-    'GPLv3',
+    '2020',
+    'Apache 2.0',
     '0.1.0',
     'ki7mt@yahoo.com',
     'Development'

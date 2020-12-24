@@ -23,47 +23,105 @@ import datetime
 import glob
 import gzip
 import hashlib
-import mmap
 import os
 import sqlite3
 import subprocess
 import sys
 import time
-from time import gmtime
 from builtins import input
+from os.path import expanduser
 
 import requests
 from bs4 import BeautifulSoup
 from clint.textui import progress
-from appdirs import AppDirs
-from wsprana import utils as ut
 
-#--------------------------------------------------- global variables and paths
+from . import __title__
+from . import utils as ut
 
-# set FSH path locations using AppDirs
-dirs = APP_DIR = AppDirs("wsprana", appauthor='', version='', multipath='')
-APP_DIR = dirs.user_data_dir
-BASE_PATH = (os.getcwd())
+home_dir = expanduser("~")
+"""User home directory for Linux: /home/$USER"""
 
-# set db and sql names
-DB_NAME = 'wsprana.db'
-SQL_FILE = (BASE_PATH + (os.sep) + 'wsprana.sql')
+if os.name == 'nt':
+    wsprana_share = os.path.join(os.environ['LOCALAPPDATA'], __title__)
+else:
+    wsprana_share = os.path.join(home_dir, '.local', 'share', __title__)
+r"""
+    User share directory
+        Linux: /home/$USER/share
+        MacOS: /Users/$USER/share
+        Win32: C:\Users\%USERNAME%\AppData\local\wsprana
+"""
 
-# set path vvariables
-CSV_PATH = (APP_DIR + (os.sep) + "csvd")
-DB_PATH = (APP_DIR + (os.sep) + DB_NAME)
-REPORTS_PATH = (APP_DIR + (os.sep) + "reports")
-SRC_PATH = (APP_DIR + (os.sep) + 'srcd')
-R_SCRIPT_PATH = (os.getcwd() + (os.sep) + "rscripts")
+if os.name == 'nt':
+    wsprana_config = wsprana_share
+else:
+    wsprana_config = os.path.join(home_dir, '.config', __title__)
+r"""
+    User share directory: /home/$USER/.config/wsprana
+        Linux: /home/$USER/share/wsprana
+        MacOS: /Users/$USER/share/wsprana
+        Win32: C:\Users\%USERNAME%\AppData\local\wsprana
+"""
+
+csv_dir = os.path.join(wsprana_share, 'csvd')
+r"""
+    CSV share for access to decompressed files
+        Linux: /home/$USER/.local/share/wsprana/csvd
+        MacOS: /Users/$USER/.local/share/wsprana/csvd
+        Win32: C:\Users\%USERNAME%\AppData\local\wsprana\csvd
+"""
+
+src_dir = os.path.join(wsprana_share, 'srcd')
+r"""
+    SRCD path for downloaded files
+        Linux: /home/$USER/.local/share/wsprana/srcd
+        MacOS: /Users/$USER/.local/share/wsprana/srcd
+        Win32: C:\Users\%USERNAME%\AppData\local\wsprana\srcd
+"""
+
+parquet_dir = os.path.join(wsprana_share, 'parquet')
+r"""
+    Parquest share for converted parquet files
+        Linux: /home/$USER/.local/share/wsprana/parquet
+        MacOS: /Users/$USER/.local/share/wsprana/parquet
+        Win32: C:\Users\%USERNAME%\AppData\local\wsprana\parquet
+"""
+
+reports_dir = os.path.join(wsprana_share, 'reports')
+r"""
+    Folder for 
+        Linux: /home/$USER/.local/share/wsprana/parquet
+        MacOS: /Users/$USER/.local/share/wsprana/parquet
+        Win32: C:\Users\%USERNAME%\AppData\local\wsprana\parquet
+"""
+
+__sqldir__ = os.path.join(
+                os.path.dirname(
+                    os.path.abspath(__file__)), 'resources/sql')
+"""Path to sql scripts after install"""
+
+__rscripts__ = os.path.join(
+                os.path.dirname(
+                    os.path.abspath(__file__)), 'resources/rscripts')
+"""Path to R scripts after instasll"""
+
+db_name = __title__+'.db'
+"""The `database name`"""
+
+db_path = os.path.join(wsprana_share, 'wsprana.db')
+"""Path and name to wsprana database"""
+
+sql_file = os.path.join(__sqldir__, 'wsprana.sql')
+"""DB init sql script"""
 
 # general variables
-DIR_LIST = [APP_DIR, SRC_PATH, CSV_PATH, REPORTS_PATH]
-DATE_TIME = datetime.date.today()
-DWN_LIST = []
+dir_list = [csv_dir, src_dir, parquet_dir, reports_dir]
+
+
+date_time = datetime.date.today()
+dwn_list = []
 BASE_URL = "http://wsprnet.org/archive/"
 OS_EXT = ''
-
-#------------------------------------------------------ Help and Docstring Data
 
 
 def a_help():
@@ -97,10 +155,10 @@ def a_help():
     INSTALLATION and USAGE:
 
     If you have already downloaded all the archive files from WSPRnet.org,
-    copy them to the SRC_PATH directory after cloning.
+    copy them to the src_dir directory after cloning.
 
         1. git clone git://git.code.sf.net/u/ki7mt/wspr-ana
-        2. Copy previously downloaded WSPRNet archive files to ./wspr-ana/SRC_PATH
+        2. Copy previously downloaded WSPRNet archive files to ./wspr-ana/src_dir
         3. To run, type: ./wsprana.py
         4. For the first run, select Option-1 to sync archive files
         5. Aer initial database sync, you can search all or the current
@@ -128,11 +186,11 @@ def a_help():
 
     The folder and file structures are as follows:
 
-        SRC_PATH ......: Directory for WSPRNet archive files
-        CSV_PATH ......: Directory for extracted csv files
-        REPORTS_PATH ..: Directory for output files
+        src_dir ......: Directory for WSPRNet archive files
+        csv_dir ......: Directory for extracted csv files
+        reports_dir ..: Directory for output files
         wsprana .......: SQLite3 Database
-        SQL_FILE ......: SQL template for pre-loading the database
+        sql_file ......: SQL template for pre-loading the database
         wsprana.py ....: Main script
 
 
@@ -147,7 +205,7 @@ def a_help():
      column ....: the number of columns for the archive file
      records ...: the number of records in the archive .csv file"""
 
-#----------------------------------------------------------- Set file extension
+
 def set_ext():
     """Set Archive File Extension
 
@@ -162,36 +220,34 @@ def set_ext():
 
     return OS_EXT
 
-#----------------------------------------------------------- Create directories
+
 def create_dirs():
     """Create Script Directories
 
     Actions Performed:
         1. Creates directories if they do no exist"""
-    for d in DIR_LIST:
+    for d in dir_list:
         if not os.path.exists(d):
             os.makedirs(d)
 
 
-#----------------------------------------------------------------- Reset timers
 def reset_timers():
     """Reset Timer Values
 
     Actions Performed:
         1. Resets timers used in various functions"""
-    qt1 = 0 # pylint: disable=unused-variable
-    qt2 = 0 # pylint: disable=unused-variable
-    qt3 = 0 # pylint: disable=unused-variable
-    qt4 = 0 # pylint: disable=unused-variable
-    qt5 = 0 # pylint: disable=unused-variable
-    qt6 = 0 # pylint: disable=unused-variable
-    qt7 = 0 # pylint: disable=unused-variable
-    qt8 = 0 # pylint: disable=unused-variable
-    qt9 = 0 # pylint: disable=unused-variable
-    qt10 = 0 # pylint: disable=unused-variable
+    # qt1 = 0  # pylint: disable=unused-variable
+    # qt2 = 0  # pylint: disable=unused-variable
+    # qt3 = 0  # pylint: disable=unused-variable
+    # qt4 = 0  # pylint: disable=unused-variable
+    # qt5 = 0  # pylint: disable=unused-variable
+    # qt6 = 0  # pylint: disable=unused-variable
+    # qt7 = 0  # pylint: disable=unused-variable
+    # qt8 = 0  # pylint: disable=unused-variable
+    # qt9 = 0  # pylint: disable=unused-variable
+    # qt10 = 0  # pylint: disable=unused-variable
 
 
-#----------------------------------------------------------------- Clean Screen
 def clear_screen():
     """Clear Screen Based On Platform Type
 
@@ -204,7 +260,6 @@ def clear_screen():
         os.system('clear')
 
 
-#--------------------------------------------------------------- Pause function
 def pause():
     """Pause Statement
 
@@ -212,7 +267,7 @@ def pause():
         1. Prompt the user for input to create a pause"""
     input("\nPress [ ENTER ] to continue...")
 
-#--------------------------------------------------- Under Development Message
+
 def under_development():
     print("\n" + 45 * '-')
     print(" Under Development")
@@ -221,7 +276,6 @@ def under_development():
     print("")
 
 
-#---------------------------------------------------------- Initialize Database
 def init_db():
     """Create Main Database
 
@@ -236,9 +290,9 @@ def init_db():
     print(50 * '-')
 
     # connect to SQLite3 database
-    with sqlite3.connect(DB_PATH) as conn:
+    with sqlite3.connect(db_path) as conn:
         cur = conn.cursor()
-        fd = open(SQL_FILE, 'r')
+        fd = open(sql_file, 'r')
         script = fd.read()
         cur.executescript(script)
         fd.close()
@@ -246,7 +300,7 @@ def init_db():
         cur.execute('SELECT SQLITE_VERSION()')
         sv = cur.fetchone()
 
-        cur.execute('SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1')
+        cur.execute('''SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1''')
         for row in cur.fetchall():
             aut = row[0]
             cop = row[1]
@@ -259,7 +313,7 @@ def init_db():
 
     qt2 = (time.time() - qt1)
     print(" SQLite Version ....: %s" % sv)
-    print(" Database Name .....: %s" % DB_NAME)
+    print(" Database Name .....: %s" % db_name)
     print(" Database Version ..: %s" % ver)
     print(" Author ............: %s" % aut)
     print(" Contact ...........: %s" % cnt)
@@ -272,21 +326,20 @@ def init_db():
     time.sleep(2)
 
 
-#------------------------------------------------------------ Get database info
 def check_db():
     """Check Database Connection
 
     Actions Performed:
-        1. Connect to database via the DB_PATH() function
+        1. Connect to database via the db_path() function
         2. If the database does not exist, create it with init_db()"""
-    if os.path.isfile(DB_PATH):
+    if os.path.isfile(db_path):
         try:
             version_db()
             print(50 * '-')
             print(" WSPR Database Stats")
             print(50 * '-')
             qt1 = time.time()
-            with sqlite3.connect(DB_PATH) as conn:
+            with sqlite3.connect(db_path) as conn:
                 cur = conn.cursor()
                 cur.execute('SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1')
                 for row in cur.fetchall():
@@ -299,7 +352,7 @@ def check_db():
             conn.close()
 
             qt2 = (time.time() - qt1)
-            print(" Database Name .....: %s" % DB_NAME)
+            print(" Database Name .....: %s" % db_name)
             print(" Database Version ..: %s" % ver)
             print(" Author ............: %s" % aut)
             print(" Contact ...........: %s" % cnt)
@@ -311,23 +364,21 @@ def check_db():
 
         except NameError as err:
             print("Name error: {0}".format(err))
-            print("Creating Database..: {}".format(DB_NAME))
+            print("Creating Database..: {}".format(db_name))
             raise
-            init_db()
     else:
         init_db()
 
 
-#------------------------------------------------------------- Database version
 def version_db():
     """Get WSPR-Ana Version
 
     Actions Performedie database
         2. Fetch the appdata version"""
     try:
-        with sqlite3.connect(DB_PATH) as conn:
+        with sqlite3.connect(db_path) as conn:
             cur = conn.cursor()
-            cur.execute('SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1')
+            cur.execute('''SELECT * FROM appdata ORDER BY ROWID ASC LIMIT 1''')
             for row in cur.fetchall():
                 dbv = row[3]
         conn.close()
@@ -341,7 +392,7 @@ def version_db():
         print("")
         init_db()
 
-#----------------------------------------------------------- MD5SUM csv.gz file
+
 def md5(fname):
     """Inactive Function - ( For Future Development )
 
@@ -359,7 +410,6 @@ def md5(fname):
     return hash_md5.hexdigest()
 
 
-#----------------------------------------------------------- Add CSV data to db
 def add_csv_file(value):
     """Inactive Function - ( For Future Development )
 
@@ -372,14 +422,13 @@ def add_csv_file(value):
         4. Add data to Status Table
 
         NOTE: Some versions 13 fields while others have 14 or 15"""
-    print("* Database .......: {}".format(DB_NAME))
-    csvfile = (APP_DIR + (os.sep) + value)
+    print("* Database .......: {}".format(db_name))
+    csvfile = (csv_dir + os.sep + value)
     fname = (csvfile)
     MD5 = (md5(fname))
     print("* CSV File Name ..: {}".format(os.path.basename(csvfile)))
     print("* CSV MD5 Sum ....: {}".format(MD5))
     csv_lines = sum(1 for line in open(csvfile))
-    cvs_lines.close()
 
     csv_cols = 0
     with open(csvfile) as f:
@@ -389,7 +438,7 @@ def add_csv_file(value):
         print("* CSV Columns ....: {}".format(csv_cols))
     f.close()
 
-    with sqlite3.connect(DB_PATH) as conn:
+    with sqlite3.connect(db_path) as conn:
         cur = conn.cursor()
         data = csv.reader(open(csvfile))
 
@@ -399,13 +448,13 @@ def add_csv_file(value):
                             reporter_grid,snr,frequency,call_sign,grid,power,
                             drift,distance,azimuth,band)
                             values (?,?,?,?,?,?,?,?,?,?,?,?,?);''', data)
-         # some files have 14 fields
+        # some files have 14 fields
         elif csv_cols == 14:
             cur.executemany('''INSERT into records(spot_id,timestamp,reporter,
                             reporter_grid,snr,frequency,call_sign,grid,power,
                             drift,distance,azimuth,band,version)
                             values (?,?,?,?,?,?,?,?,?,?,?,?,?,?);''', data)
-         # current  files have 15 fields
+        # current  files have 15 fields
         else:
             cur.executemany('''INSERT into records(spot_id,timestamp,reporter,
                             reporter_grid,snr,frequency,call_sign,grid,power,
@@ -417,7 +466,7 @@ def add_csv_file(value):
 
     # update the status table
     utime = time.strftime("%Y-%b-%d", time.gmtime())
-    with sqlite3.connect(DB_PATH) as conn:
+    with sqlite3.connect(db_path) as conn:
         cur = conn.cursor()
         cur.execute('''REPLACE into status(name,date_added,columns,records)
                     values (?,?,?,?);''', (os.path.basename(csvfile),
@@ -425,24 +474,23 @@ def add_csv_file(value):
         conn.commit()
     conn.close()
 
-#--------------------------------------------- Remove all .csv files from CSV_PATH
-def clean_csv_path():
+
+def clean_csv_dir():
     """Removes All CSV Files from CSV Directory
 
     Actions Performed:
-        1. Change directory to CSV_PATH
+        1. Change directory to csv_dir
         2. Glob list of csv files
         3. Remove the files
         4. Change back to APP_DIR"""
-    os.chdir(CSV_PATH)
+    os.chdir(csv_dir)
     file_list = glob.glob("*.csv")
     for f in file_list:
         os.remove(f)
 
-    os.chdir(APP_DIR)
+    os.chdir(wsprana_share)
 
 
-#-------------------------------------------------------------- Parse html page
 def csvf(BASE_URL):
     """Parse wsprnet.org HTML Page and Extracts Archive File Names
 
@@ -454,14 +502,13 @@ def csvf(BASE_URL):
         yield a['href']
 
 
-#--------------------------------------------------------------- Download Files
 def download_files(value):
     """Download WSPRNet Archive Files
 
     Actions Performed:
         1. Gets archive name from WSPRNet, then downloads the file
-        2. Updates the databse via update_status() function"""
-    os.chdir(SRC_PATH)
+        2. Updates the database via update_status() function"""
+    os.chdir(src_dir)
     print("")
     r = requests.get(BASE_URL + value, stream=True)
     with open(value, 'wb') as f:
@@ -473,17 +520,17 @@ def download_files(value):
                 f.flush()
     f.close()
 
-    # now that the file has been downloaded to SRC_PATH, update the status table
+    # now that the file has been downloaded to src_dir, update the status table
     extract_file(value)
     fname = (value)
     utime = time.strftime("%Y-%b-%d", time.gmtime())
     lines = (records)
     columns = (csv_cols)
-    
-    update_stats(value, utime, columns, lines)
-    clean_csv_path()
 
-#------------------------------------------------- Update database status table
+    update_stats(value, utime, columns, lines)
+    clean_csv_dir()
+
+
 def update_stats(value, utime, columns, lines):
     """Update Database Stats Table
 
@@ -495,7 +542,7 @@ def update_stats(value, utime, columns, lines):
     version_db()
 
     # add the update to database status table
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(db_path)
     cur = conn.cursor()
     cur.execute('''REPLACE into status(name,date_added,columns,records)
                 values (?,?,?,?);''', (value, utime, columns, lines))
@@ -503,10 +550,9 @@ def update_stats(value, utime, columns, lines):
     conn.close()
 
 
-#------------------------------------------------------ Extract monthly archive
 def extract_current_month(value):
-    src = (SRC_PATH + (os.sep) + value)
-    dest_dir = (CSV_PATH)
+    src = (src_dir + os.sep + value)
+    dest_dir = (csv_dir)
     dest_name = os.path.join(dest_dir, value[:-3])
     with gzip.open(src, 'rb') as infile:
         with open(dest_name, 'wb') as outfile:
@@ -516,7 +562,6 @@ def extract_current_month(value):
     outfile.close()
 
 
-#--------------------------------------------------------- Extract archive file
 def extract_file(value):
     """Extract Downloaded Archive Files
 
@@ -531,9 +576,9 @@ def extract_file(value):
     fsize = 0
     csv_cols = 0
     records = 0
-    os.chdir(APP_DIR)
-    src = (SRC_PATH + (os.sep) + value)
-    dest_dir = (CSV_PATH)
+    os.chdir(src_dir)
+    src = (src_dir + os.sep + value)
+    dest_dir = (csv_dir)
     dest_name = os.path.join(dest_dir, value[:-3])
     qt1 = time.time()
 
@@ -576,9 +621,9 @@ def extract_file(value):
     print("* Extraction Time .....: %.2f seconds" % qt2)
     print("* Record Query Time ...: %.2f seconds" % qt4)
     return fsize, csv_cols, records
-    clean_csv_path()
+    clean_csv_dir()
 
-#--------------------------------------------------------- Check the db archive
+
 def download_all():
     """Check Archive File For Changes
 
@@ -602,10 +647,10 @@ def download_all():
             remote_size = (req.headers['content-length'])
 
             # get local file size
-            checkfile = (SRC_PATH + (os.sep) + l)
+            checkfile = (src_dir + os.sep + l)
             if os.path.isfile(checkfile):
                 try:
-                    local_size = (os.path.getsize(SRC_PATH + (os.sep) + l))
+                    local_size = (os.path.getsize(src_dir + os.sep + l))
                 except:
                     local_size = 0
                     pass
@@ -613,7 +658,7 @@ def download_all():
                 local_size = 0
 
             if (int(remote_size)) != (int(local_size)):
-                DWN_LIST.append(l)
+                dwn_list.append(l)
             else:
                 print("* {} size {:,} bytes is Up To Date".format(l, local_size))
 
@@ -621,16 +666,16 @@ def download_all():
     for l in csvf(BASE_URL):
         if l.endswith(OS_EXT):
             lcount += 1
-            conn = sqlite3.connect(DB_PATH)
+            conn = sqlite3.connect(db_path)
             cur = conn.cursor()
             cur.execute('SELECT name FROM status WHERE name=?', (l,))
             d = cur.fetchall()
             conn.close()
             if not d:
-                DWN_LIST.append(l)
+                dwn_list.append(l)
 
     # print needed updates and run
-    ix = len(DWN_LIST)
+    ix = len(dwn_list)
     print("\n")
     print(45 * '-')
     print(" Archive Summary")
@@ -638,11 +683,10 @@ def download_all():
     print("* Total Archives ..: %s " % lcount)
     print("* Updates Needed ..: %s \n" % ix)
     if ix > 0:
-        for value in sorted(DWN_LIST):
+        for value in sorted(dwn_list):
             download_files(value)
 
 
-#---------------------------------------------------- Update current month only
 def update_current_month():
     """Download The Latest Monthly Archive File
 
@@ -672,10 +716,10 @@ def update_current_month():
     print(45 * '-')
 
     # download a new archive file if Local and Remote sizes do not match
-    checkfile = (SRC_PATH + (os.sep) + value)
+    checkfile = (src_dir + os.sep + value)
     if os.path.isfile(checkfile):
         try:
-            local_size = (os.path.getsize(SRC_PATH + (os.sep) + value))
+            local_size = (os.path.getsize(src_dir + os.sep + value))
         except:
             local_size = 0
     else:
@@ -692,7 +736,7 @@ def update_current_month():
         print("* Local File Size ....: {:,} bytes".format(l))
         print("* Local File Status ..: Up to Date\n")
 
-#--------------------------------------------------------------- Unpack archive
+
 def update_status_table():
     """Update Database Status Table For Each Archive File
 
@@ -712,7 +756,7 @@ def update_status_table():
     total_size = 0
 
     # create the update list
-    for fname in os.listdir(SRC_PATH):
+    for fname in os.listdir(src_dir):
         if fname.endswith(OS_EXT):
             ulist.append(fname)
 
@@ -740,7 +784,6 @@ def update_status_table():
     print(" * Processing Time ...: %.1f minutes \n" % ttime2)
 
 
-#---------------------------------------- Create csv file from all tar.gz files
 def search_all_months_for_callsign(call):
     """Search All Archive Files For A Given Callsign
 
@@ -756,11 +799,11 @@ def search_all_months_for_callsign(call):
     reset_timers()
 
     # create the output file name and open the file for writing
-    mylogfile = REPORTS_PATH + (os.sep) + call + "-all" + ".csv"
+    mylogfile = reports_dir + os.sep + call + "-all" + ".csv"
     w = open(mylogfile, "w")
 
     # get the list and count of all archive files
-    months = sorted(glob.glob(SRC_PATH + (os.sep) + '*.gz'), key=os.path.basename)
+    months = sorted(glob.glob(src_dir + os.sep + '*.gz'), key=os.path.basename)
     nmonths = len(months)
     print("\n" + 45 * '-')
     print(" Searching %s Archive Files for [ %s ]" % (str(nmonths), call))
@@ -776,17 +819,17 @@ def search_all_months_for_callsign(call):
             if call in line:
                 # split data fields
                 x = line.split(',')
-                if (x[2] == call) or (x[6] == call):        # callsign or reporter fields only
+                if (x[2] == call) or (x[6] == call):  # callsign or reporter fields only
                     # decode and replace time stamp
                     s = float(x[1])
-                    d = tme.strftime('%Y-%m-%d', time.gmtime(s))
+                    d = time.strftime('%Y-%m-%d', time.gmtime(s))
                     t = time.strftime('%H%M', time.gmtime(s))
                     timestamp = str(d) + ',' + str(t)
                     newl = x[0] + ',' + timestamp
-                    for count in range(len(x) - 2):                    # copy rest of the line
+                    for count in range(len(x) - 2):  # copy rest of the line
                         newl = newl + ',' + x[count + 2]
                     # write line to output file
-                    w.write(newl,)
+                    w.write(newl, )
     r.close()
     w.close()
     qt2 = ((time.time() - qt1) / 60)
@@ -810,7 +853,6 @@ def search_all_months_for_callsign(call):
     print("* File Location ....: %s " % mylogfile)
 
 
-#-------------------------------------------- Search current month for callsign
 def search_current_month_for_callsign(callargs):
     """Search Current Month For A Given Callsign
 
@@ -823,19 +865,19 @@ def search_current_month_for_callsign(callargs):
     """
     # get date parameters
 
-    now = DATE_TIME.strftime("%Y-%m")
-    sdate = DATE_TIME.strftime("%Y-%m-01")
-    edate = DATE_TIME.strftime("%Y-%m-%d")
+    now = date_time.strftime("%Y-%m")
+    sdate = date_time.strftime("%Y-%m-01")
+    edate = date_time.strftime("%Y-%m-%d")
 
     # create the reports directory ../reports/yyyy-mm-dd
-    rpt_dir = (REPORTS_PATH + (os.sep) + edate)
+    rpt_dir = (reports_dir + os.sep + edate)
     if not os.path.exists(rpt_dir):
         os.makedirs(rpt_dir)
 
     # Extrace Zip/GZ file name to search
     gzName = 'wsprspots-' + now + '.csv.' + OS_EXT
-    source = (SRC_PATH + (os.sep) + 'wsprspots-' + now + '.csv.' + OS_EXT)
-    csvfile = CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv'
+    source = (src_dir + os.sep + 'wsprspots-' + now + '.csv.' + OS_EXT)
+    csvfile = csv_dir + os.sep + 'wsprspots-' + now + '.csv'
 
     # Decompress the archive file
     # TO-DO: Make this a generic method for "ALL" and single Archive files
@@ -844,8 +886,8 @@ def search_current_month_for_callsign(callargs):
     print("\n" + 50 * '-')
     print(" Decompressing Source [ %s ] " % gzName)
     print(50 * '-')
-    gzFile = gzip.open(source,"rb")
-    ucFile = open(csvfile,"wb")
+    gzFile = gzip.open(source, "rb")
+    ucFile = open(csvfile, "wb")
     decoded = gzFile.read()
     ucFile.write(decoded)
     gzFile.close()
@@ -862,18 +904,18 @@ def search_current_month_for_callsign(callargs):
     # loop through each callsign
     for call in callargs:
         print(' Processing .... : %s' % call.upper())
-        callfile = rpt_dir + (os.sep) + now + '-' + call.lower() + '-raw' + '.csv'
+        callfile = rpt_dir + os.sep + now + '-' + call.lower() + '-raw' + '.csv'
         call = call.upper()
 
         # Process the CSV file
         print(" Searching ......: %s " % gzName[:-3])
         search_for = call
         counter = 0
-        with open(csvfile) as inf, open(callfile,'w') as outf:
+        with open(csvfile) as inf, open(callfile, 'w') as outf:
             reader = csv.reader(inf)
             writer = csv.writer(outf)
             for row in reader:
-                counter +=1
+                counter += 1
                 sys.stdout.flush()
                 if (row[2] == call) or (row[6] == call):
                     writer.writerow(row)
@@ -895,7 +937,6 @@ def search_current_month_for_callsign(callargs):
         print(" File Location ..: %s \n" % callfile)
 
 
-#----------------------------------------------------------- Raw Input Callsign
 def enter_callsign():
     """Enter callsign to seach for"""
     global callargs
@@ -924,120 +965,13 @@ def enter_callsign():
     return callargs
 
 
-###############################################################################
-# USER SUPPLIED REPORT GENERATORS
-###############################################################################
-
-
-#---------------------------------------------------------- Pavel Demin REPORTS_PATH
-def pavel_rscripts():
-    """Pavel Demin Provides the WSPR Analysis Script written in R
-       Source: git clone https://github.com/pavel-demin/wsprspots-analyzer.git
-    The following has been constructed to feed each of the three script via
-    Python.
-    Requirements:
-        * R Language base
-        * R Packages: ggplot, data-table + Deps
-    R Language Installation: (may very depending on distribution)
-        # In performed in the Gnome terminal:
-        sudo apt-get install r-base r-base-dev  libcurl4-gnutls-dev
-        # Actions performed in the R console:
-        sudo R
-        update.packages()
-        install.packages("ggplot2", dependencies=TRUE, repos='http://cran.rstudio.com/'
-        install.packages("data.table", dependencies=TRUE, repos='http://cran.rstudio.com/')
-        quit("no")
-    Function Notes:
-        * Generates Graph of WSPR Spots Per Hour Per Band using ggplot
-        * Generates Average SNR Different Per Day using ggplot
-        * Generates SNR over PWR normalized using ggplot
-    Each R script requires 5 variables in the following format
-        * Input         file-call.csv               # current monthly archive file
-        * Output        file-per-hour-call.png      # output image file
-        * Call(s)       KI7MT,K1ABC,K1DEF           # callsign(s) to search in archive
-        * Start Date    2016-04-01                  # first day of the current month
-        * End Date      2016-01-18                  # current day in the month"""
-    # setup variables
-    now = DATE_TIME.strftime("%Y-%m")
-    sdate = DATE_TIME.strftime("%Y-%m-01")
-    edate = DATE_TIME.strftime("%Y-%m-%d")
-    arg = []
-
-    # this gets passed to the gz extract script
-    value = ("wsprspots-" + now + ".csv." + OS_EXT)
-    srccsv = (CSV_PATH + (os.sep) + 'wsprspots-' + now + '.csv')
-
-    # create the reports directory ../reports/yyyy-mm-dd
-    rpt_dir = (REPORTS_PATH + (os.sep) + edate)
-    if not os.path.exists(rpt_dir):
-        os.makedirs(rpt_dir)
-    
-    print("\n" + 45 * '-')
-    print(" Pavel Demin's R-Script Report Generator")
-    print(45 * '-')
-    print(" * Separate Calls with a ',' example: KI7MT,K1ABC,K1DEF")
-    callargs = input(" * Enter Callsigns : ").split(',')
-    callcount = 0
-
-    # used for snr-diff ( not implemented yet )
-    for call in callargs:
-        try:
-            int(call)
-        except ValueError:
-            callcount += 1
-    #print(" * Processing [ %s ] call(s)" % callcount)
-    # loop through the calls and call the R script
-    for call in callargs:
-        call = call.upper()
-        # search_current_month_no_split(call)
-        mylogfile = rpt_dir + (os.sep) + now + '-' + call.lower() + '-raw.csv'
-        arg1 = (mylogfile)
-        arg3 = call
-        arg4 = sdate
-        arg5 = edate
-        os.chdir(R_SCRIPT_PATH)
-
-        # script 1
-        print(" * Generate Spots Per Hour Plot for [ %s ]" % call)
-        scr1 = (rpt_dir + (os.sep) + 'wsprspots-per-hour-' + call.lower() + '.png')
-        args = (arg1 + ' ' + scr1 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
-        with open(os.devnull) as devnull:
-            if os.path.isfile(mylogfile):
-                subprocess.call(
-                    "Rscript wsprspots-per-hour.r " + args,
-                    shell=True,
-                    stdout=subprocess.PIPE,
-                    stderr=devnull)
-            else:
-                print("   [ %s] Missing CSV. Please generate from the main menu." % call.upper())
-        # script 2 ( Not Implemented Yet )
-        # print(" * Generate Report ..: SNR DIFF")
-        # scr2 = (REPORTS_PATH + (os.sep) + 'wsprspots-snr-diff-' + call + '.png')
-        # args = (arg1 + ' ' + scr2 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
-        # subprocess.call("Rscript wsprspots-snr-diff.r " + args, shell=True)
-
-        # script 3 ( Not Implemented Yet )
-        #print(" * Report ......: SNR Normal")
-        #scr3 = (REPORTS_PATH + (os.sep) + 'wsprspots-snr-norm-' + call + '.png')
-        #args = (arg1 + ' ' + scr3 + ' ' + arg3 + ' ' + arg4 + ' ' + arg5)
-        #with open(os.devnull) as devnull:
-        #    subprocess.call(
-        #        "Rscript wsprspots-snr-norm.r " + args,
-        #        shell=True,
-        #        stdout=subprocess.PIPE)
-
-    pause()
-    return
-
-
-#---------------------------------------------------------- Main Menu Functions
 def main():
     """Main Menu Functions
 
     Function Notes:
         * Creates required directories
         * Sets the archive file extension based on the platform
-        * After each action the CSV_PATH directory is cleaned
+        * After each action the csv_dir directory is cleaned
         * The pause statement sets up return to main menu
 
     Option Notes:
@@ -1052,13 +986,13 @@ def main():
 
         NOTE: Entries must match the items in print_menu() function.
     """
-    
+
     # make sure directories exist
     create_dirs()
 
     # check that wsprana database exists
     version_db()
-    
+
     # set the archive extension
     set_ext()
 
@@ -1071,12 +1005,12 @@ def main():
         if selection == '1':
             download_all()
             pause()
-            menu()
+            main_menu()
         # search all archives for call
         if selection == '2':
             under_development()
-            #enter_callsign()
-            #search_all_months_for_callsign(call)
+            # enter_callsign()
+            # search_all_months_for_callsign(call)
             pause()
             main()
         # update current month from WSPRnet
@@ -1096,13 +1030,13 @@ def main():
         if selection == '5':
             clear_screen()
             enter_callsign()
-            now = DATE_TIME.strftime("%Y-%m")
-            edate = DATE_TIME.strftime("%Y-%m-%d")
+            now = date_time.strftime("%Y-%m")
+            edate = date_time.strftime("%Y-%m-%d")
             for call in callargs:
-                csv_in = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call.lower() + '-raw.csv'
-                csv_out = REPORTS_PATH + (os.sep) + edate + (os.sep) + now + '-' + call.lower() + '-converted.csv'
-                ut.convert_epoch_lines(call,csv_in,csv_out)
-            os.chdir(BASE_PATH)
+                csv_in = reports_dir + os.sep + edate + os.sep + now + '-' + call.lower() + '-raw.csv'
+                csv_out = reports_dir + os.sep + edate + os.sep + now + '-' + call.lower() + '-converted.csv'
+                ut.convert_epoch_lines(call, csv_in, csv_out)
+            os.chdir(home_dir)
             pause()
             main()
 
@@ -1116,7 +1050,7 @@ def main():
             main()
         # Clean up csvd directory, removes all csv files
         if selection == '8':
-            afiles = len(glob.glob1(CSV_PATH, "*.csv"))
+            afiles = len(glob.glob1(csv_dir, "*.csv"))
             print("\n" + 45 * '-')
             print(" Cleanup CSV Directory")
             print(45 * '-')
@@ -1124,7 +1058,7 @@ def main():
                 print(" * CSV Directory Is Clean, Nothing To Be Done \n")
             else:
                 print(" * Removing [ %s ] files from CSV Directory" % afiles)
-                clean_csv_path()
+                clean_csv_dir()
                 print(" * Finished Cleanup")
 
             pause()
@@ -1137,7 +1071,6 @@ def main():
             return
 
 
-#---------------------------------------------------------- Main Menu Functions
 def report_selection():
     """Report Functions"""
     clear_screen()
@@ -1146,7 +1079,9 @@ def report_selection():
         selection = input("Selection: ")
 
         if selection == '1':
-            pavel_rscripts()
+            pause()
+            main()
+            #pavel_rscripts()
 
         if selection == '2':
             main()
@@ -1158,34 +1093,32 @@ def report_selection():
             report_menu()
 
 
-#-------------------------------------------------------------------- Main Menu
 def main_menu():
     """Prints The Main Menu"""
-    cmon = DATE_TIME.strftime("%B")
+    cmon = date_time.strftime("%B")
     print(45 * "-")
     print(" WSPR Analysis Main Menu")
     print(45 * "-")
-    print("\n ALL ARCHIVE FUNCTIONS")    
+    print("\n ALL ARCHIVE FUNCTIONS")
     print("   1. Update All Archive Files")
     print("   2. Search All Archives for Call")
-    print("\n CURRENT MONTH FUNCTIONS - [ %s ]" % cmon)    
+    print("\n CURRENT MONTH FUNCTIONS - [ %s ]" % cmon)
     print("   3. Update Archive")
     print("   4. Search Archive For Call")
     print("   5. Convert raw csv from epoch")
     print("\n REPORT FUNCTIONS")
     print("   6. Reports Menu")
-    print("\n UTILITIES")    
+    print("\n UTILITIES")
     print("   7. Check Database")
     print("   8. Clean CSV Directory")
     print("   9. Exit")
     print("")
 
 
-#------------------------------------------------------------------ Report Menu
 def report_menu():
     """Prints The Report menu"""
     clear_screen()
-    cmon = DATE_TIME.strftime("%B")
+    date_time.strftime("%B")
     print(45 * "-")
     print(" WSPR Analysis Report Menu")
     print(45 * "-")
@@ -1194,8 +1127,7 @@ def report_menu():
     print(" 3. Exit")
     print("")
 
+
 if __name__ == "__main__":
     create_dirs()
     main()
-
-# END WSPR-Ana
