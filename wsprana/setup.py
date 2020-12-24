@@ -42,13 +42,15 @@ setuptools.setup(
         'beautifulsoup4',
         'requests',
         'appdirs',
+        'clint',
     ],
     package_data={
         'wsprana': [
+            'wsprana/resources/wsprana.sql',
         ]
     },
     entry_points={
-        'console_scripts': ['wsprana = wsprana.cli:main'],
+        'console_scripts': ['wsprana = wsprana.wsprana:main'],
     },
     zip_safe=False,
     classifiers=[

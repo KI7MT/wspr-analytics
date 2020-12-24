@@ -40,7 +40,7 @@ import requests
 from bs4 import BeautifulSoup
 from clint.textui import progress
 from appdirs import AppDirs
-import utils as ut
+from wsprana import utils as ut
 
 #--------------------------------------------------- global variables and paths
 
@@ -132,12 +132,12 @@ def a_help():
 
     The folder and file structures are as follows:
 
-        SRC_PATH ........: Directory for WSPRNet archive files
-        CSV_PATH ........: Directory for extracted csv files
-        REPORTS_PATH .....: Directory for output files
-        wsprana .....: SQLite3 Database
-        SQL_FILE ........: SQL template for pre-loading the database
-        wsprana.py ..: Main script
+        SRC_PATH ......: Directory for WSPRNet archive files
+        CSV_PATH ......: Directory for extracted csv files
+        REPORTS_PATH ..: Directory for output files
+        wsprana .......: SQLite3 Database
+        SQL_FILE ......: SQL template for pre-loading the database
+        wsprana.py ....: Main script
 
 
      DEFAULT DATABASE:
