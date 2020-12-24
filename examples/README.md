@@ -109,8 +109,9 @@ NOTE : The File Sizes Are Approximated = (file bytes / 1048576)
 
 ### PyArrow Read Tests Results
 
-These results are using [Apache Arrow][] straight from the box. No Spark
-engines are deplyed yet.
+The results below are from [Apache Arrow][] straight from the box. No Spark
+engines are deplyed yet, no optimizations applied. [Apache Arrow][] uses
+threads by default.
 
 To say it's fast is an understatement.
 
