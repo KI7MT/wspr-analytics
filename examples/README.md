@@ -117,6 +117,11 @@ To say it's fast is an understatement.
 > NOTE : check the CSV Read Time and Compare it to [Pandas][] from above.
 
 ```bash
+# You run the read script the same way
+python pyarrow_read.py -f $csvfile
+
+# Results below
+
 Running Read Tests Using Apache Arrow
 Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
