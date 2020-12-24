@@ -18,7 +18,7 @@ Folder | Frameworks | Description
 |:--- |:--- |:---
 |docs|Python, MkDocs| General repository documentation
 |examples|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
-|notebooks|Jupyter Notebooks| Notbooks to demonstrates features an capabilities
+|notebooks|Jupyter Notebooks| Notebooks to demonstrate features an capabilities
 |scala|Scala| Scapa programs to query files
 |wsprana|Python|Python package to manage downloading CSV files
 
