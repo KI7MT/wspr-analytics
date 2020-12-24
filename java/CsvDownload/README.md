@@ -1,8 +1,9 @@
 # Java Examples
 
-This folder holds various Java Apps used in process WSPR files.
-the primary use for Java in the project will be dealing with Avro
-files formats and  schemas.
+This folder holds a basic Java App used to download WSPR CSV files.
+
+The primary use for Java in this project will be dealing with Avro
+files formats and schemas.
 
 At present, all this app does is download a CSV from [WSPRNet][]
 You can change what file is pulls by editing the script itself.
@@ -10,7 +11,8 @@ In the future, this may be converted to a command line optins
 format, but for now it's manual.
 
 ```java
-// File: DownloadArchive.java
+// package com.ki7mt.spark.utils;
+// Class: DownloadArchive.java
 
 // Edit the following:
 // Adjust Year and Month only
