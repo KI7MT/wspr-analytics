@@ -6,15 +6,15 @@ The primary use for Java in this project will be dealing with Avro
 files formats and schemas.
 
 At present, all this app does is download a CSV from [WSPRnet][]
-You can change what file is pulls by editing the script itself.
-In the future, this may be converted to a command line optins
-format, but for now it's manual.
+You can change what file gets pulled by editing the script itself.
+
+In the future, this may be converted to a command-line option
+format, but for now, it's manual.
 
 ```java
 // package com.ki7mt.spark.utils;
 // Class: DownloadArchive.java
 
-// Edit the following:
 // Adjust Year and Month only
 
     public static void main(String[] args) {
