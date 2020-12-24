@@ -10,8 +10,8 @@ to reduce processing time and imporve file storage footprints.
 
 ## Environment Setup
 
-If you are on `Windows -10` It's highly recommended that you use
-`Windows Subsystem Linux v2`. Doing so will be far easier than setting up
+If you are on `Windows 10` it is highly recommended that you use
+`Windows Subsystem Linux v2`. Doing so will be far easier for setting up
 [Apache Spark][] and you can follow the directions below to get things
 going.
 
@@ -22,10 +22,10 @@ environment to keep package bloat to a minimum.
 ## Running The Tests
 
 The first two tests will illistrate the speed increase in using [Apache Arrow][]
-to process both CSV and [Apache Parquet][] Compressed binaries. The major difference
+to process both CSV and [Apache Parquet][] compressed binaries. The major difference
 between the native CSV file, and those compressed by the `pandas_convert_csv.py`
 script is, the CSV file has no schema nor header information accompanying
-the file whereas the compressed binaries have full headers and types included.
+the file whereas the compressed binaries have full headers and data-types included.
 
 [Pandas][], buy default, is a single thread reader/writer. It can be made to
 pool, but it's not configured to do so out of the box. You will see the
