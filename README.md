@@ -40,6 +40,21 @@ You must have Python, Java, PySpark/Spark available from the command line.
 - Spark 3.0.1
 - PostgreSQL Database (local, remote, Docker, etc)
 
+### Optional
+
+If you plan to run on a true cluster, or plan on partitioning your data, installing one or more of the following could be useful.
+
+- Hadoop
+- Cassandra
+- Hive
+- Pig
+- K8S
+- Docker
+- Submarine
+
+For a full list of tooling, see the [Apache Foundation Project List][].
+
+
 An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
 one to install virtually any combination of tools you need without
@@ -93,3 +108,4 @@ by many of the apps and scripts.
 [Anaconda Python]: https://www.anaconda.com/
 [sdkman]: https://sdkman.io/
 [PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
+[Apache Foundation Project List]: https://apache.org/index.html#projects-list
