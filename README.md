@@ -28,8 +28,7 @@ respective scripts.
 
 ## Basic Tool Requirements
 
->NOTE: During development, this package **is not** intended for pip installaiton yet, but will be.
->It should be checked out and run from source at present.
+>NOTE: During development, the wsprana package **is not** intended for pip installaiton yet, but will be.It should be checked out and run from source at present.
 
 You must have Python, Java, PySpark/Spark available from the command line.
 
