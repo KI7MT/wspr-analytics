@@ -149,11 +149,56 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
  Finished !!
 ```
 
-# Whats Next
+# Query Parquet File with PySpak
 
 The next phase is to run read / query tests with [PySpark][], [Python] and 
 [Scala] DataSet in a distributed manner.
 
+
+See [WSPR Query Notebook][] for details.
+
+
+This is impressive as well. It took 1.5 sec to read 47+ Million rows, and
+4.8 seconds to do a group by query.
+
+```bash
+* Reading file ..: wsprspots-2020-02.parquet
+* File Size .....: 490,259,730 bytes compressed
+* Read Time .....: 1.50256 sec
+
+* Counting Records
+* Record Count ..: 47,310,649
+* Count Time ....: 0.87839 sec
+
+* Running Group by Count Query and return the dataframe
++--------+------+
+|Reporter| count|
++--------+------+
+|   DK6UG|838081|
+|  OE9GHV|690104|
+|  EA8BFK|648670|
+|   KD2OM|589003|
+|KA7OEI-1|576788|
+|   K4RCG|571445|
+|     KPH|551690|
+|    K9AN|480759|
+|   DF5FH|480352|
+|   DJ9PC|474211|
+|  HB9TMC|472900|
+|    ND7M|461383|
+|  IW2NKE|455781|
+|    WO7I|437582|
+|   ON5KQ|427628|
+|  N6GN/K|361590|
+|  WA2ZKD|328003|
+|  KJ6MKI|318174|
+|   LX1DQ|309909|
+|   W2GNN|308290|
++--------+------+
+only showing top 20 rows
+
+* Query Time ....: 4.85043 sec
+```
 
 [PySpark]: https://databricks.com/glossary/pyspark
 [wsprana]: https://github.com/KI7MT/wsprana-spark-python
@@ -167,3 +212,4 @@ The next phase is to run read / query tests with [PySpark][], [Python] and
 [wsprspots-2020-02.csv.gz]: http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 [Apache Arrow]: https://arrow.apache.org/
 [Scala]: https://www.scala-lang.org/
+[WSPR Query Notebook]: https://github.com/KI7MT/wsprana-spark-python
