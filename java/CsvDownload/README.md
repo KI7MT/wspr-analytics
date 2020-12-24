@@ -1,4 +1,4 @@
-# Java Examples
+# Java CSV Downloader
 
 This folder holds a basic Java App used to download WSPR CSV files.
 
