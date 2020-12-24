@@ -70,7 +70,7 @@ increases, so does the length of time it takes to create the file. However,
 the disk savings are substantial. Using [Apache Spark][], read times are on par
 with the results you'll see form the [Apache Arrow][] read tests ( Very Fast !! ), 
 
->NOTE : make note of the CSV Read Time while using [Pandas] a Single Thead 
+>NOTE : make note of the CSV Read Time while using [Pandas] in a a `Single Thead` 
 
 ```bash
 Pandas CSV Conversion Method
@@ -151,8 +151,8 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
 # Whats Next
 
-The next phase is to run read / query tests with [Spark and Scala][] and 
-PySPak DataSets via Python.
+The next phase is to run read / query tests with [PySpark][], [Python] and 
+[Scala] DataSet in a distributed manner.
 
 
 [PySpark]: https://databricks.com/glossary/pyspark
@@ -166,3 +166,4 @@ PySPak DataSets via Python.
 [Spark and Scala]: https://github.com/KI7MT/wsprana-spark-scala
 [wsprspots-2020-02.csv.gz]: http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 [Apache Arrow]: https://arrow.apache.org/
+[Scala]: https://www.scala-lang.org/
