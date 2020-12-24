@@ -34,11 +34,11 @@ respective scripts.
 You must have Python, Java, PySpark/Spark available from the command line.
 
 - Java openjdk version 1.8.0_275 or later
-- Spark 3.0.1
 - Python 3.7+
+- PySpark from PyPi
 - Apache Arrow 2.0+
 - Scala 2.12+
-- PySpark from PyPi
+- Spark 3.0.1
 - PostgreSQL Database (local, remote, Docker, etc)
 
 An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
