@@ -19,6 +19,8 @@ You must have Python, Java, PySpark/Spark available from the command line.
 - Java openjdk version 1.8.0_275 or later
 - Spark 3.0.1
 - Python 3.7+
+- Apache Arrow 2.0+
+- Scala 2.12+
 - PySpark from PyPi (optional)
 - PostgreSQL Database (local, remote, Docker, etc)
 
