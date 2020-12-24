@@ -9,6 +9,23 @@ This repository contains tools used to download, clean, transform and otherwise 
 original CSV files from [WSPRnet][]. Other tools will be used to generate additional datasets for
 analytics purposes.
 
+## Folder Descriptions
+
+Several frameworks are used in the repository as there is no central applications. The following
+is a descript of each, and their intended purpose.
+
+Folder | Frameworks | Description
+|:--- |:--- |:---
+|docs|Python, MkDocs| General repository documentation
+|examples|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
+|notebooks|Jupyter Notebooks| Notbooks to demonstrates features an capabilities
+|scala|Scala| Scapa programs to query files
+|wsprana|Python|Python package to manage downloding CSV files
+
+Each folder has a top level README, as do each sub-folder project. One should pay close
+attention to these files as they lay out how to setup the tools needed to run their
+respective scripts.
+
 ## Basic Tool Requirments
 
 >NOTE: During development, this package **is not** intended for pip installaiton yet, but will be.
