@@ -37,7 +37,7 @@ To run the two test scripts, perform the following:
 - Download the [wsprana repository][]
 - Change directories into the testing directory `wsprana-spark-python/testing`
 - Using pip, install the requires dependencies
-- Make a data directory and download the wsprspots-2020-02.csv.gz file to it
+- Make a data directory and download the [wsprspots-2020-02.csv.gz][] file to it
 - Unzip the wsprspot archiive
 - Now you can run the conversion and read test scripts
 
@@ -158,3 +158,4 @@ PySPak DataSets via Python.
 [Apache Parquet]: https://parquet.apache.org/
 [wsprana repository]: https://github.com/KI7MT/wsprana-spark-python
 [Spark and Scala]: https://github.com/KI7MT/wsprana-spark-scala
+[wsprspots-2020-02.csv.gz]: http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
