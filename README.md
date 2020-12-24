@@ -1,4 +1,4 @@
-# WSPR Analytics CSV Utilities
+# WSPR Analytics
 
 In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
 that number has increased to over 46 Million per month at last count, and shows no sign of abatement.
