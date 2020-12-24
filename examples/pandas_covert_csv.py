@@ -7,11 +7,14 @@ from os.path import getsize
 
 import pandas as pd
 
-# if you get a seg-fualt on LZ4 or BROTLI, incewase the sleep a by .5 or 1.0
+# if you get a seg-fualt on LZ4 or BROTLI, increase the sleep a by .5 or 1.0
 sleep_time = 2.5
 
+# These are the common Parquet compression types. Parquet's default in 'snappy'.
 parquet_types = ['SNAPPY', 'LZ4', 'ZSTD', 'GZIP', 'BROTLI']
 
+
+# Defind the stat structures for the original CSV file
 spot_dtype = {'Spot_ID': 'string',
               'TimeStamp': 'int',
               'Reporter': 'string',
@@ -29,6 +32,8 @@ spot_dtype = {'Spot_ID': 'string',
               'Code': 'int'
               }
 
+
+# Column names for the dataframe
 column_names = ['Spot_ID',
                 'TimeStamp',
                 'Reporter',
@@ -45,18 +50,15 @@ column_names = ['Spot_ID',
                 'Version',
                 'Code'
                 ]
-
-
-# define our clear function 
-def clear(): 
-  
-    # for windows 
+def clear():
+    """
+    Clear screen function for Windows Linux and MacOS
+    """
     if name == 'nt': 
         _ = system('cls') 
-  
-    # for mac and linux(here, os.name is 'posix') 
     else: 
-        _ = system('clear') 
+        _ = system('clear')
+
 
 def get_file_size(csvfile, comp_type):
     """Get the size of a fiz in MB"""
@@ -65,7 +67,6 @@ def get_file_size(csvfile, comp_type):
     return getsize(file_path) / 1048576
 
 
-# Use Pandas to read CSV files
 def pandas_convert_csv(csvfile):
     """
     Convert the CSV file using parquet_type compression
