@@ -49,7 +49,7 @@ def pyarrow_read(csvfile):
             short_name = os.path.basename(file_name)
             print(f'* Reading file  : {short_name}')
         
-        # PyArrow uses a different reade for CSV files (read_csv v.s. read_table)
+        # PyArrow uses a different read method for CSV files (read_csv v.s. read_table)
         start = time.time()
         if f.lower() == 'csv':
             reader = pv.read_csv(file_name)
