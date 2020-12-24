@@ -11,8 +11,8 @@ analytics purposes.
 
 ## Folder Descriptions
 
-Several frameworks are used in the repository as there is no central applications. The following
-is a descript of each, and their intended purpose.
+Several frameworks are used in this repository as there is no central application. The following
+is a shor description of each, and their intended purpose.
 
 Folder | Frameworks | Description
 |:--- |:--- |:---
