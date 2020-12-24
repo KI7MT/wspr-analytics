@@ -147,8 +147,8 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
 # Whats Nest
 
-The next phase it to puch read and query tests with [SpPark and Scala][]. alsong
-with PySPak queries using Python.
+The next phase it to run read and query tests with [Spark and Scala][] and 
+PySPak DataSet queries via Python.
 
 
 [PySpark]: https://databricks.com/glossary/pyspark
