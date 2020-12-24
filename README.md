@@ -26,7 +26,7 @@ Each folder has a top level README, as do each sub-folder project. One should pa
 attention to these files as they lay out how to setup the tools needed to run their
 respective scripts.
 
-## Basic Tool Requirments
+## Basic Tool Requirements
 
 >NOTE: During development, this package **is not** intended for pip installaiton yet, but will be.
 >It should be checked out and run from source at present.
@@ -38,7 +38,7 @@ You must have Python, Java, PySpark/Spark available from the command line.
 - Python 3.7+
 - Apache Arrow 2.0+
 - Scala 2.12+
-- PySpark from PyPi (optional)
+- PySpark from PyPi
 - PostgreSQL Database (local, remote, Docker, etc)
 
 An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
