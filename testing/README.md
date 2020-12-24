@@ -1,13 +1,12 @@
 # General Use Scripts
 
-The scripts in this directory are used for testing and exploring [PySpark][]
-[PyArrow][], and others frameworks while the main [wsprana][] application
+The scripts in this directory are used for testing and exploring [PySpark][], [Apache Arrow][], and other frameworks while the main [wsprana][] application
 is being reworked.
 
 All of the test scripts will be incorporated into the main app. Some of the
-scripts in this folder are just test scripts, like the `pandas_convert_csv.py`
+scripts in this folder will just be test scripts, like the `pandas_convert_csv.py`
 and `pyarrow_read.py`, but they provide some insight as to what can be done
-ti reduse processing time and imporve file storage footprints.
+to reduce processing time and imporve file storage footprints.
 
 ## Environment Setup
 
@@ -16,32 +15,31 @@ If you are on `Windows -10` It's highly recommended that you use
 [Apache Spark][] and you can follow the directions below to get things
 going.
 
-You need a `Python` Environment, either from [Anaconda Python] or the standard
+You need a `Python` Environment, either from [Anaconda Python][] or the standard
 [Python][] installer. Either way, you should run the tests in a virtual
 environment to keep package bloat to a minimum.
 
 ## Running The Tests
 
-The first two tests will illistrate the speed increase in using [Ahache Arrow][]
+The first two tests will illistrate the speed increase in using [Apache Arrow][]
 to process both CSV and [Apache Parquet][] Compressed binaries. The major difference
 between the native CSV file, and those compressed by the `pandas_convert_csv.py`
 script is, the CSV file has no schema nor header information accompanying
-the file whereas the compressed binaries have full headers and types in
-the files.
+the file whereas the compressed binaries have full headers and types included.
 
 [Pandas][], buy default, is a single thread reader/writer. It can be made to
-pool, but but it's not configured to do so out of the box. You will see the
+pool, but it's not configured to do so out of the box. You will see the
 difference in reading the Raw CSV file using [Pandas][] during the compression
 run and that of [PyArrow][] running in parallel doing the same task.
 
-To run the two test script that have been added, performa the following:
+To run the two test scripts, perform the following:
 
 - Download the [wsprana repository][]
 - Change directories into the testing directory `wsprana-spark-python/testing`
 - Using pip, install the requires dependencies
-- Make a data directory and download the wsprspots-2020-02.csv.gz file
-- Unzip the wsprspot archiive.
-- Now you cna run the conversion and read test scripts
+- Make a data directory and download the wsprspots-2020-02.csv.gz file to it
+- Unzip the wsprspot archiive
+- Now you can run the conversion and read test scripts
 
 Here's the commands from the shell
 
