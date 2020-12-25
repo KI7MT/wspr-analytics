@@ -157,12 +157,10 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
 # Query Parquet File with PySpark
 
-The next phase is to run read / query with [PySpark][] and [Python] and 
+The next phase is to run a query using [PySpark][] and [Python] and 
 in a distributed manner.
 
-
 See [WSPR Query Notebook][] for details.
-
 
 This is impressive as well. It took 1.5 sec to read 47+ Million rows, and
 4.8 seconds to do a group by query.
@@ -218,4 +216,4 @@ only showing top 20 rows
 [wsprspots-2020-02.csv.gz]: http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 [Apache Arrow]: https://arrow.apache.org/
 [Scala]: https://www.scala-lang.org/
-[WSPR Query Notebook]: https://github.com/KI7MT/wsprana-spark-python
+[WSPR Query Notebook]: https://github.com/KI7MT/wspr-analytics/blob/main/notebooks/WSPR-Query-Using-PySpark.ipynb
