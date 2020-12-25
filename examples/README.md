@@ -44,21 +44,27 @@ To run the two test scripts, perform the following:
 Here's the commands from the shell
 
 ```bash
-
-# Clone the repo
-cd $USER/Downlaods
-
-# Change directories and install dependencies
-cd $HOME/Downlaods/wsprana-spark-python/examples
-
-pip install -r requirements.txt
+# chage this to whatever folder you prefer
+cd ~/Downloads
+wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
+gzip -dk wsprspots-2020-02.csv.gz
 
 # Set the path of the downloaded and extracted CSV file
 # I am using the $USER Downlaods folder as an example
-csvfile="$HOME/Downloads/wsprspots-2002-02.csv"
+csvfile=$PWD/wsprspots-2020-02.csv
+
+# clone the repo
+git clone https://github.com/KI7MT/wspr-analytics.git
+
+# Change directories and install dependencies
+cd ~/Downloads/wspr-analytics/examples
+
+# NOTE: Be sure you are in a virtual environment "before"
+# installing Python packages
+python -m pip install -r requirement.txt
 
 # Now run the converter script
-python pandas_convert_csy.py $csvfile
+python pandas_covert_csv.py -f $csvfile
 ```
 
 ### Pandas Compression Test Results
