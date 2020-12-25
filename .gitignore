@@ -29,6 +29,9 @@ var/
 .installed.cfg
 *.egg
 
+# Local History for Visual Studio Code
+.history/
+
 # source files
 srcd/
 csvd/
@@ -161,3 +164,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# VS Code# VS Code
+.vscode/*
+*.code-workspace
