@@ -169,5 +169,6 @@ fabric.properties
 *.code-workspace
 
 # Documentation
+site/
 docs/site/
 
