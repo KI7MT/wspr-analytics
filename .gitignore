@@ -167,3 +167,7 @@ fabric.properties
 # VS Code# VS Code
 .vscode/*
 *.code-workspace
+
+# Documentation
+docs/site/
+
