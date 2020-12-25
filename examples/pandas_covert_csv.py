@@ -1,3 +1,39 @@
+"""
+    Filename: pandas_convert_csv.py
+
+    This script takes in one command-line argument -f <filename> and
+    converts the CSV in to an Apache Parquet compressed format (x5)
+
+    Formats: 'SNAPPY', 'LZ4', 'ZSTD', 'GZIP', 'BROTLI'
+
+    The default format for Parguet is "SNAPPY". The end result is
+    five new files:
+
+        wsprspots-yyyy-mm.['snappy', 'lz4', 'zstd', 'gzip', 'brotli']
+
+    The script uses Pandas, which is not the fastest library we could
+    use to do the convertion. It's here as a reference to compare
+    other methods of converstion.
+
+    This script applies the data_type listed beliow, as well as
+    column headers for reference. There is "No" data transformation,
+    though it is needed.
+
+    Transformation (for analytics only)
+
+        Areas where the original CSV could be improved (new file schema):
+        - timestame: break out into <2020-MM-DD>
+        - timestame: break the time into 0000 UTC
+        - band: should be converted to common language (20m, 10m, 80m, etc)
+        - power: convert dbm to actual power level 1w, 1mw, etc
+        - version: fill in nulls with some value. Early years did not rport this column
+
+    Partitioning (for analytics only):
+
+        There are a number of partitioning schemas that could serve the data set well.
+        Getting general agreement on how it should be broken out would be a challange
+        due to the vast number of use cases.
+"""
 import os
 import time
 import argparse
