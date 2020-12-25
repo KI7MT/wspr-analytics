@@ -1,0 +1,49 @@
+site_name: WSPR Analytics
+site_description: Big Data utilities for WSPR DataSets
+
+theme:
+    name: 'material'
+    features:
+      - navigation.tabs
+
+repo_name: KI7MT/wspr-analytics
+repo_url: https://github.com/KI7MT/wspr-analytics
+edit_uri: ""
+copyright: Copyright &copy; 2016 - 2020 Greg Beam
+
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.tabbed
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Setup:
+    - Overview: 'setup/overview.md'
+    - Installing Python: 'setup/install-python.md'
+    - Installing Java: 'setup/install-java.md'
+    - Installing Sdkman: 'setup/install-sdkman.md'
+    - Installing Scala: 'setup/install-scala.md'
+  - PySpark:
+    - Overview: 'pyspark/overview.md'
+  - Scala:
+    - Overview: 'scala/overview.md'
+  - Jupyter:
+    - Overview: 'notebooks/overview.md'
+  - Examples:
+    - Overview: 'examples/overview.md'
+
+
+
