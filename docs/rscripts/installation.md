@@ -4,7 +4,7 @@ At the time of this writing, usage has only been tested on Linux x86-64 and.
 There is no particular reason why installation and usage could not be done on
 Windows or Mac OSX if the Requirements are met.
 
-It is `Highly Recommended` to use [Anaconda][] from Continuum Analytics`. 
+It is `Highly Recommended` to use [Anaconda][] from Continuum Analytics. 
 It's free, supports all major operating systems, is well supported, does not
 interfere with system level packaging, can be installed on a per user basics
 and provides everything needed for **Comprehensive WSPR Data Analysis**.
@@ -14,9 +14,8 @@ and provides everything needed for **Comprehensive WSPR Data Analysis**.
 Installing [Anaconda][] is very easy. Simply download the shell script and
 run it in a terminal:
 
-```bash
-bash Anaconda3-4.0.0-Linux-x86_64.sh
-```
+Use their [Install Instructions][] paying particular atention to the additional
+package needs for Qt.
 
 Follow the prompts and when asked, I elected to add the the source scripts to
 my `.bashrc` but that is entirely up to you. I also used the default
@@ -25,7 +24,6 @@ installation direcotry of:
 ```bash
 /home/$USER/anaconda3
 ```
-
 
 ## Upgrade Anaconda
 
@@ -79,3 +77,4 @@ conda install -c r r-gridextra
 [conda]:  http://conda.pydata.org/docs/using/pkgs.html
 [Pip]: https://pypi.python.org/pypi/pip
 [AppDirs]: https://pypi.python.org/pypi/appdirs
+[Install Instructions]: https://docs.anaconda.com/anaconda/install/linux/
