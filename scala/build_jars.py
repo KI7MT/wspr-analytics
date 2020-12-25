@@ -15,7 +15,7 @@ def build_jar_files(dir):
     Build a list of directories via SBT    
     """
     print(f"\n* Building Jar files {dir}\n")
-    cmd = f"cd scala/{dir} && sbt clean package"
+    cmd = f"cd {dir}/ && sbt clean package"
     
     exit_status = os.system(cmd)
     
