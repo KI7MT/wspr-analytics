@@ -40,6 +40,8 @@ nav:
     - Overview: 'pyspark/overview.md'
   - Scala:
     - Overview: 'scala/overview.md'
+  - R-Scripts:
+    - Installation: 'rscripts/installation.rst'
   - Jupyter:
     - Overview: 'notebooks/overview.md'
   - Examples:
