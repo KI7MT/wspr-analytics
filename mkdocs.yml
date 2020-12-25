@@ -41,7 +41,7 @@ nav:
   - Scala:
     - Overview: 'scala/overview.md'
   - R-Scripts:
-    - Installation: 'rscripts/installation.rst'
+    - Installation: 'rscripts/installation.md'
   - Jupyter:
     - Overview: 'notebooks/overview.md'
   - Examples:

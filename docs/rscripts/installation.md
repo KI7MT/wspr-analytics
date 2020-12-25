@@ -14,9 +14,9 @@ and provides everything needed for **Comprehensive WSPR Data Analysis**.
 Installing [Anaconda][] is very easy. Simply download the shell script and
 run it in a terminal:
 
-.. code-block:: bash
-
-   bash Anaconda3-4.0.0-Linux-x86_64.sh
+```bash
+bash Anaconda3-4.0.0-Linux-x86_64.sh
+```
 
 Follow the prompts and when asked, I elected to add the the source scripts to
 my `.bashrc` but that is entirely up to you. I also used the default
