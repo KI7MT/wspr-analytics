@@ -1,3 +1,1 @@
-Installing Scala
-
 Under Development

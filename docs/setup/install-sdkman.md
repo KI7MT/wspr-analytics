@@ -1,3 +1,2 @@
-Installing Sdkman
 
 Under Development
