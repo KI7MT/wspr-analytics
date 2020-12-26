@@ -18,14 +18,15 @@ area:
 
 ...and many others.
 
-All of the example scripts will be incorporated into a main application at some point, however, 
-some will just be for testing.
+All of the example scripts will be incorporated into a main application at some point,
+however, some will just be for testing.
 
-Additional tests will be done using [Scala][] and / or [Java][]. Initial tests will be run using 
-Python, or more sustinct, [PySpark][], which lends itself to rapid-deployment scenarios.
+Additional tests will be done using [Scala][] and / or [Java][] for performance
+cvomparison. Initial tests will be run using Python, or more sustinct, [PySpark][],
+as it lends itself to rapid-deployment scenarios.
 
 >NOTE: This exercise is not a full-blown scientific experiment. Rather, its more
->of a feasability or proof of concept exercize.
+>of a feasability or proof of concept exercise.
 
 ## Compute Constraints
 
@@ -36,10 +37,10 @@ the over all cost at an acceptable level. In other words: a hefty workstation,
 a stack of Raspberry PI's, or an over-powered laptop should be capable of
 performing the tasks with minimal effort.
 
-## Compute Environmen
+## Compute Environment
 
 If you are on `Windows 10`, I would highly recommended using `Windows Subsystem Linux v2`.
-Doing so will make things much easier to set up [Apache Spark][], and you can follow
+Doing so will make setting up [Apache Spark][] much easier, and you can follow
 the directions below with mininal frustration.
 
 ### Java
@@ -50,14 +51,13 @@ supports `Java-11`.
 
 ### Python
 
-You need a `Python` Environment, either from [Anaconda Python][] or the standard
+You need a `Python` environment, either from [Anaconda Python][] or the standard
 [Python][] installer and `venv`. Either way, you should run the tests in a virtual
-environment to keep package bloat to a minimum.
-
+environment to keep these packages from interfeering with your core operating system.
 ### SDK Manager
 
-While running tests, it can be challanng to manage a matrix of frameworks. The use
-of [sdkman][] can make quick work of this chore.
+While running tests, it can be frustraighting to manage a matrix of frameworks. The use
+of [sdkman][] can make quick work of this chore; it's up to you though.
 
 ## Running The Tests
 
@@ -66,44 +66,44 @@ to process both CSV and [Apache Parquet][] compressed binaries. The major differ
 between the native CSV file, and those compressed by the `pandas_convert_csv.py`
 script is, the CSV file has no schema nor header information accompanying
 the file whereas the compressed binaries have full headers and data-type
-structures included.
+structures defined. While using inferred-schema does work, it is not without error.
+This is the primary reason to fully define the structures beforehand.
 
 [Pandas][], buy default, is a single thread reader/writer. It can be made to
 pool, but it's not configured to do so out of the box. You will see the
-difference in reading raw CSV files using [Pandas][] during the compression
+difference in reading raw CSV files during the compression
 run and that of [PyArrow][] running in parallel doing the same task.
 
-To run the two test scripts, perform the following:
+To run the test scripts, perform the following:
 
 - Download and extract a WSPR Archive
 - Clone the [wspr-analytics][] repository
-- Set up a path variable
-- Install Python Requirments
-- Runs the tests
+- Set a path variable
+- Install Python package requirments
+- Runs the test scripts
 
-Here's the commands from the shell
+Here are the exact commands to run.
 
 ```bash
-# change this to whatever folder you prefer
+# change the download location to whatever you prefer
 cd ~/Downloads
 wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 gzip -dk wsprspots-2020-02.csv.gz
 
-# Set the path of the downloaded and extracted CSV file
-# I am using the $USER Downlaods folder as an example
+# set the path of the downloaded and extracted CSV file
 csvfile=$PWD/wsprspots-2020-02.csv
 
 # clone the repo
 git clone https://github.com/KI7MT/wspr-analytics.git
 
-# Change directories and install dependencies
+# change directories and install dependencies
 cd ~/Downloads/wspr-analytics/experiments
 
 # NOTE: Be sure you are in a virtual environment "before"
 # installing Python packages
 python -m pip install -r requirement.txt
 
-# Now run the converter script
+# run the conversion script
 python pandas_convert_csv.py -f $csvfile
 ```
 
