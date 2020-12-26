@@ -1,4 +1,4 @@
-# General Use Scripts
+# Example Scripts
 
 The scripts in this directory are used for testing and exploring [PySpark][], [Apache Arrow][],
 and other frameworks while the main [wsprana][] application is being reworked.
