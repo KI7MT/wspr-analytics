@@ -16,7 +16,7 @@ If you are on `Windows 10` it is highly recommended that you use
 going.
 
 You need a `Python` Environment, either from [Anaconda Python][] or the standard
-[Python][] installer. Either way, you should run the tests in a virtual
+[Python][] installer and `venv`. Either way, you should run the tests in a virtual
 environment to keep package bloat to a minimum.
 
 ## Running The Tests
@@ -70,13 +70,18 @@ python pandas_convert_csv.py -f $csvfile
 ### Pandas Compression Test Results
 
 The follwing data shows the results of converting several [Apache Parquet][]
-formats. Substantial disk space conservation can be achived with little
-very impact using as you'll see in the read tests. As the compression
-increases, so does the length of time it takes to create the file. However,
-the disk savings are substantial. Using [Apache Spark][], read times are on par
-with the results you'll see form the [Apache Arrow][] read tests ( Very Fast !! ), 
+formats. Substantial disk space conservation can be achived with 
+very little impact when readind as you'll see in the read tests.
+
+Generally, as the compression increases so does the length of time it takes
+to create the file. However, the disk savings are substantial. Using
+[Apache Spark][], read times are on par with the results you'll see from the
+the read tests below ( Very Fast !! ).
 
 >NOTE : make note of the CSV Read Time while using [Pandas] in a a `Single Thead` 
+
+Disk space savings range from `>= 5 : 1` to `8 : 1` depending on the compression
+you'd like to use. It's a `substantial` savings.
 
 ```bash
 Pandas CSV Conversion Method
@@ -157,13 +162,23 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
 # Query Parquet File with PySpark
 
-The next phase is to run a query using [PySpark][] and [Python] and 
+The next phase is to run a simple query using [PySpark][] in  
 in a distributed manner.
+
+As this is all happening on a single msater host node, it is more
+of a parralized action rather than distributed, but the results are
+far superior to what any single threaded implementation could achieve.
 
 See [WSPR Query Notebook][] for details.
 
-This is impressive as well. It took 1.5 sec to read 47+ Million rows, and
-4.8 seconds to do a group by query.
+The read speed is impressive. It takes `~1.5` seccond to read
+`47+ Million` rows, and `~4.8` seconds to do a group by query.
+
+Row count speeds (  `0.87 sec` ) are on par with using ( `wc -l` )
+from the Linux shell.
+
+Now matter how one looks at this approach, it's a viable alternative
+to a raw csv read and process action.
 
 ```bash
 * Reading file ..: wsprspots-2020-02.parquet
