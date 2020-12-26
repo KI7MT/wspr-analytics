@@ -4,7 +4,7 @@ The scripts in this directory are used for exploring the use of [Spark][], [Apac
 [Scala][] and other Big Data frameworks to: 
 
 1. Reduce WSPR CSV on-disk storage space
-1. Improve read-times and portability
+1. Improve CSV read times and portability
 1. Improve query performance
 1. Produce a cost effective, yet scalable, analytics solution for WSPR data
 
@@ -25,20 +25,22 @@ Additional tests will be done using [Scala][] and / or [Java][]. Initial tests w
 Python, or more sustinct, [PySpark][], which lends itself to rapid-deployment scenarios.
 
 >NOTE: This exercise is not a full-blown scientific experiment. Rather, its more
->of a feasability or proof of concept step.
+>of a feasability or proof of concept exercize.
 
 ## Compute Constraints
 
 While there is no shortage of cloud-based Big Data solutions these days ( 
 [AWS EMR][], [Azure Synapse][], [Databricks][], [GCP][], [Google Big Query][], etc),
 these tests will look at commonidty based on-prem resources in order to keep
-the over all cost at an acceptable level.
+the over all cost at an acceptable level. In other words: a hefty workstation,
+a stack of Raspberry PI's, or an over-powered laptop should be capable of
+performing the tasks with minimal effort.
 
-## Environment Setup
+## Compute Environmen
 
 If you are on `Windows 10`, I would highly recommended using `Windows Subsystem Linux v2`.
-Doing so will be far easier for setting up [Apache Spark][] and you can follow the directions
-below to get things going.
+Doing so will make things much easier to set up [Apache Spark][], and you can follow
+the directions below with mininal frustration.
 
 ### Java
 
@@ -63,26 +65,26 @@ The first two tests will illistrate the speed increase in using [Apache Arrow][]
 to process both CSV and [Apache Parquet][] compressed binaries. The major difference
 between the native CSV file, and those compressed by the `pandas_convert_csv.py`
 script is, the CSV file has no schema nor header information accompanying
-the file whereas the compressed binaries have full headers and data-types included.
+the file whereas the compressed binaries have full headers and data-type
+structures included.
 
 [Pandas][], buy default, is a single thread reader/writer. It can be made to
 pool, but it's not configured to do so out of the box. You will see the
-difference in reading the Raw CSV file using [Pandas][] during the compression
+difference in reading raw CSV files using [Pandas][] during the compression
 run and that of [PyArrow][] running in parallel doing the same task.
 
 To run the two test scripts, perform the following:
 
-- Download the [wsprana repository][]
-- Change directories into the testing directory `wsprana-spark-python/testing`
-- Using pip, install the requires dependencies
-- Make a data directory and download the [wsprspots-2020-02.csv.gz][] file to it
-- Unzip the wsprspot archiive
-- Now you can run the conversion and read test scripts
+- Download and extract a WSPR Archive
+- Clone the [wspr-analytics][] repository
+- Set up a path variable
+- Install Python Requirments
+- Runs the tests
 
 Here's the commands from the shell
 
 ```bash
-# chage this to whatever folder you prefer
+# change this to whatever folder you prefer
 cd ~/Downloads
 wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 gzip -dk wsprspots-2020-02.csv.gz
@@ -95,7 +97,7 @@ csvfile=$PWD/wsprspots-2020-02.csv
 git clone https://github.com/KI7MT/wspr-analytics.git
 
 # Change directories and install dependencies
-cd ~/Downloads/wspr-analytics/examples
+cd ~/Downloads/wspr-analytics/experiments
 
 # NOTE: Be sure you are in a virtual environment "before"
 # installing Python packages
@@ -105,7 +107,7 @@ python -m pip install -r requirement.txt
 python pandas_convert_csv.py -f $csvfile
 ```
 
-### Pandas Compression Test
+### Pandas Parquet Compression Test
 
 * `CSV Reader` - Python Pandas
 * `Parquet Writer` - Python Pandas To Parquet
@@ -158,7 +160,7 @@ NOTE : File Sizes Are Approximated with = (file bytes / 1048576)
 Finished !!
 ```
 
-### PyArrow Read Tests
+### PyArrow Read Test
 
 * `Reader` - PyArrow
 
@@ -207,7 +209,7 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
  Finished !!
 ```
 
-# Query Parquet File with PySpark
+# Query Parquet File Using PySpark
 
 The next phase is to run a simple query using [PySpark][] in  
 in a distributed manner.
@@ -289,3 +291,5 @@ only showing top 20 rows
 [Spark Streaming]: https://spark.apache.org/streaming/
 [Apache Flink]: https://flink.apache.org/
 [Spark]: https://spark.apache.org/
+[Java]: https://adoptopenjdk.net/
+[wspr-analytics]: https://github.com/KI7MT/wspr-analytics
