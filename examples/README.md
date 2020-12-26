@@ -64,7 +64,7 @@ cd ~/Downloads/wspr-analytics/examples
 python -m pip install -r requirement.txt
 
 # Now run the converter script
-python pandas_covert_csv.py -f $csvfile
+python pandas_convert_csv.py -f $csvfile
 ```
 
 ### Pandas Compression Test Results
