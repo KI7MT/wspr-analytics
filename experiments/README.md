@@ -33,9 +33,9 @@ as it lends itself to rapid-deployment scenarios.
 While there is no shortage of cloud-based Big Data solutions these days ( 
 [AWS EMR][], [Azure Synapse][], [Databricks][], [GCP][], [Google Big Query][], etc),
 these tests will look at commonidty based on-prem resources in order to keep
-the over all cost at an acceptable level. In other words: a hefty workstation,
+the overall cost to an acceptable level. In other words: a hefty workstation,
 a stack of Raspberry PI's, or an over-powered laptop should be capable of
-performing the tasks with minimal effort.
+performing the tasks for the use case at hand.
 
 ## Compute Environment
 
