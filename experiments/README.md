@@ -46,28 +46,32 @@ the directions below with mininal frustration.
 ### Java
 
 No matter which method of compute is employed, [Java][] forms the foundation.
-I chose to use `openjdk version "1.8.0_275`, however, [Spark][] now fully
-supports `Java-11`.
+I chose to use `openjdk version 1.8.0_275`, however, [Spark][] now fully
+supports `Java-11`. I've also ran `Java-14`, but prefer to stick with LTS
+versions becasue not all frameworks support the `"latest and greatest"` JVM.
 
 ### Python
 
 You need a `Python` environment, either from [Anaconda Python][] or the standard
 [Python][] installer and `venv`. Either way, you should run the tests in a virtual
-environment to keep these packages from interfeering with your core operating system.
+Python environment to keep these packages from interfering with your core
+operating system.
+
 ### SDK Manager
 
-While running tests, it can be frustraighting to manage a matrix of frameworks. The use
-of [sdkman][] can make quick work of this chore; it's up to you though.
+While running tests, it can be frustraighting to manage the large matrix of
+frameworks. The use of [sdkman][] can make quick work of this chore; it's up to
+you though.
 
 ## Running The Tests
 
 The first two tests will illustrate the speed increase by using [Apache Arrow][]
 to process both CSV and [Apache Parquet][] compressed binaries. The major difference
 between the native CSV file, and those compressed by the `pandas_convert_csv.py`
-script is, the CSV file has no schema nor header information accompanying
-the file whereas the compressed binaries have full headers and data-type
-structures defined. While using inferred-schema does work, it is not without error.
-This is the primary reason to fully define the structures beforehand.
+script is, the CSV file has no schema header information accompanying the file
+whereas the [Apache Parquet][] binaries have full headers and data-type structures
+defined. Using inferred-schema does work, but it is not without error.
+This is the primary reason to fully define the schemas beforehand.
 
 [Pandas][], buy default, is a single thread reader/writer. It can be made to
 pool, but it's not configured to do so out of the box. You will see the
@@ -83,7 +87,7 @@ To run the test scripts, perform the following:
 - Install Python package requirments
 - Runs the test scripts
 
-Here are the exact commands to run.
+Here are the `Bash` commands I used to run the tests.
 
 ```bash
 # change the download location to whatever you prefer
@@ -112,6 +116,10 @@ python pandas_convert_csv.py -f $csvfile
 
 * `CSV Reader` - Python Pandas
 * `Parquet Writer` - Python Pandas To Parquet
+
+>NOTE: Additional tests will be added to check the read/write
+>speeds using [Apache Arrow][] only while leaving [Pandas][]
+>out of the mix completely.
 
 The following data shows the results of converting a CSV file to 
 several [Apache Parquet][] formats. Substantial disk-space
