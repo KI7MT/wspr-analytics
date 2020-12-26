@@ -3,13 +3,14 @@
 The scripts in this directory are used for exploring the use of [Spark][], [Apache Arrow][],
 [Scala][] and other Big Data frameworks to: 
 
-1. Reduce CSV on-disk storage space
-1. Improve CSV read-times and portability
+1. Reduce WSPR CSV on-disk storage space
+1. Improve read-times and portability
 1. Improve query performance
 1. Produce a cost effective, yet scalable, analytics solution for WSPR data
 
-An additional deminsion that could be explored is streaming. There are many
-frameworks that can be employed in this area for those with suffecient energy.
+An additional dimension that could be explored is streaming. For those with
+suffecient energy, there are many frameworks that can be employed in this
+area:
 
 * [Apache Storm][]
 * [Spark Streaming][]
@@ -20,11 +21,11 @@ frameworks that can be employed in this area for those with suffecient energy.
 All of the example scripts will be incorporated into a main application at some point, however, 
 some will just be for testing.
 
-Additional tests will be done using [Scala][] and / or [Java][], but initial tests will be run using 
+Additional tests will be done using [Scala][] and / or [Java][]. Initial tests will be run using 
 Python, or more sustinct, [PySpark][], which lends itself to rapid-deployment scenarios.
 
 >NOTE: This exercise is not a full-blown scientific experiment. Rather, its more
-> of a feasability or proof of concept step.
+>of a feasability or proof of concept step.
 
 ## Compute Constraints
 
@@ -287,3 +288,4 @@ only showing top 20 rows
 [Apache Storm]: https://storm.apache.org/
 [Spark Streaming]: https://spark.apache.org/streaming/
 [Apache Flink]: https://flink.apache.org/
+[Spark]: https://spark.apache.org/
