@@ -61,7 +61,7 @@ of [sdkman][] can make quick work of this chore; it's up to you though.
 
 ## Running The Tests
 
-The first two tests will illistrate the speed increase in using [Apache Arrow][]
+The first two tests will illustrate the speed increase by using [Apache Arrow][]
 to process both CSV and [Apache Parquet][] compressed binaries. The major difference
 between the native CSV file, and those compressed by the `pandas_convert_csv.py`
 script is, the CSV file has no schema nor header information accompanying
@@ -72,7 +72,8 @@ This is the primary reason to fully define the structures beforehand.
 [Pandas][], buy default, is a single thread reader/writer. It can be made to
 pool, but it's not configured to do so out of the box. You will see the
 difference in reading raw CSV files during the compression
-run and that of [PyArrow][] running in parallel doing the same task.
+run and that of [Apache Arrow][] (e.g. PyArrow with Python) running in parallel
+doing the same task.
 
 To run the test scripts, perform the following:
 
@@ -293,3 +294,4 @@ only showing top 20 rows
 [Spark]: https://spark.apache.org/
 [Java]: https://adoptopenjdk.net/
 [wspr-analytics]: https://github.com/KI7MT/wspr-analytics
+[PyArrow]:
