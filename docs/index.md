@@ -1,33 +1,44 @@
 # WSPR Analytics
 
 In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
-that number has increased to over 46 Million per month at last count, and shows no sign of abatement.
-By any reasonable definition, it is safe to say, [WSPR][] has entered the realm of [Big Data][].
+that number has increased to over 47 Million per month and shows no sign of abatement.
+By any reasonable definition, it is safe to say that [WSPR][] has entered the realm of [Big Data][].
 
-WSPR Analytics CSV Utilities is one of several packages surrouning the WSPR Analytics Suite of tools.
-This repository contains tools used to download, clean, transform and otherwise manage the
-original CSV files from [WSPRnet][]. Other tools will be used to generate additional datasets for
-analytics purposes.
+## Project Goal
+
+The goal of this project is to provide a set of tools to download, manage, transform and query
+WSPR DataSets using modern [Big Data][] frameworks.
+
+## Documentation
+
+Each folder will contain a seris of `README` files that explain the content, and where warrented,
+usage. Additionally, project documentation website can be used for more extensive and exhaustinve 
+explination of the project and its contence.
+
+* [WSPR Analytics Docs][] - bookmark this location for future reference
+
 
 ## Folder Descriptions
 
-Several frameworks are used in this repository as there is no central application. The following
-is a shor description of each, and their intended purpose.
+Several frameworks are used in this repository. The following matrix provides a short description
+of each, and their intended purpose.
 
-* `docs` - Python, MkDocs for General repository documentation
-* `examples` - Python, Spark, PyArrow to manage CSV & Parquet files
-* `java` - Java, Maven, SBT for basic RDD and Avro examples
-* `notebooks` - Jupyter Notebooks to demonstrate features an capabilities
-* `scala` - Scala programs to query DataSets
-* `wsprana` - Python package to manage downloading of CSV files
+Folder | Frameworks | Description
+|:--- |:--- |:---
+|docs|Python, MkDocs| General repository documentation
+|experiments|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
+|java|Java, Maven, SBT| Basic Java apps for RDD and Avro examples
+|notebooks|Jupyter Notebooks| Notebooks to demonstrate features an capabilities
+|scala|Scala| Scapa programs to query files
+|wsprana|Python|Python package to manage downloading CSV files
 
-Each folder has a top level README, as do each sub-folder project. One should pay close
-attention to these files as they lay out how to setup the tools needed to run their
-respective scripts.
+Pay close attention to the `README` files as they lay out how to setup the
+tools needed to run their respective scripts or application.
 
 ## Basic Tool Requirements
 
->NOTE: During development, the wsprana package **is not** intended for pip installaiton yet, but will be.It should be checked out and run from source at present.
+>NOTE: During development, the wsprana package **is not** intended for pip installaiton
+>yet, but will be.It should be checked out and run from source at present.
 
 You must have Python, Java, PySpark/Spark available from the command line.
 
@@ -39,22 +50,7 @@ You must have Python, Java, PySpark/Spark available from the command line.
 - Spark 3.0.1
 - PostgreSQL Database (local, remote, Docker, etc)
 
-### Optional
-
-If you plan to run on a true cluster, or plan on partitioning your data, installing one or more of the following could be useful.
-
-- Hadoop
-- Cassandra
-- Hive
-- Pig
-- K8S
-- Docker
-- Submarine
-
-For a full list of tooling, see the [Apache Foundation Project List][].
-
-
-An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
+An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
 one to install virtually any combination of tools you need without
 affecting your root file system. With the exception of Python,
@@ -73,6 +69,8 @@ namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dram
 However, there is a drawback, one cannot simply view a binary file as they can with raw text files. The
 original CSV will remain in place, but all bulk processing will be pulled from [Parquet][].
 During these transformations is where [PyArrow][] + [PySpark][] will earn it's keep.
+
+## Persistant Storage
 
 A [PostgreSQL][] database server will be needed. There are many ways to perform this installation (local, remote,
 [Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively
@@ -109,3 +107,4 @@ by many of the apps and scripts.
 [sdkman]: https://sdkman.io/
 [PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
 [Apache Foundation Project List]: https://apache.org/index.html#projects-list
+[WSPR Analytics Docs]: https://ki7mt.github.io/wspr-analytics/
