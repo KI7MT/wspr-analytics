@@ -349,6 +349,20 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#project-goal" class="md-nav__link">
+    Project Goal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#folder-descriptions" class="md-nav__link">
     Folder Descriptions
   </a>
@@ -360,24 +374,18 @@
     Basic Tool Requirements
   </a>
   
-    <nav class="md-nav" aria-label="Basic Tool Requirements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#optional" class="md-nav__link">
-    Optional
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
   <a href="#data-sources-and-processing" class="md-nav__link">
     Data Sources and Processing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persistant-storage" class="md-nav__link">
+    Persistant Storage
   </a>
   
 </li>
@@ -718,6 +726,20 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#project-goal" class="md-nav__link">
+    Project Goal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentation" class="md-nav__link">
+    Documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#folder-descriptions" class="md-nav__link">
     Folder Descriptions
   </a>
@@ -729,24 +751,18 @@
     Basic Tool Requirements
   </a>
   
-    <nav class="md-nav" aria-label="Basic Tool Requirements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#optional" class="md-nav__link">
-    Optional
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
   <a href="#data-sources-and-processing" class="md-nav__link">
     Data Sources and Processing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#persistant-storage" class="md-nav__link">
+    Persistant Storage
   </a>
   
 </li>
@@ -766,29 +782,35 @@
                 
                 <h1 id="wspr-analytics">WSPR Analytics<a class="headerlink" href="#wspr-analytics" title="Permanent link">&para;</a></h1>
 <p>In the early days (March 2008), <a href="http://www.wsprnet.org/drupal/wsprnet/activity">WSPR Spots</a> measured in the hundreds of thousands per month. Today,
-that number has increased to over 46 Million per month at last count, and shows no sign of abatement.
-By any reasonable definition, it is safe to say, <a href="https://www.physics.princeton.edu/pulsar/k1jt/wspr.html">WSPR</a> has entered the realm of <a href="https://www.oracle.com/big-data/what-is-big-data.html">Big Data</a>.</p>
-<p>WSPR Analytics CSV Utilities is one of several packages surrouning the WSPR Analytics Suite of tools.
-This repository contains tools used to download, clean, transform and otherwise manage the
-original CSV files from <a href="http://www.wsprnet.org">WSPRnet</a>. Other tools will be used to generate additional datasets for
-analytics purposes.</p>
-<h2 id="folder-descriptions">Folder Descriptions<a class="headerlink" href="#folder-descriptions" title="Permanent link">&para;</a></h2>
-<p>Several frameworks are used in this repository as there is no central application. The following
-is a shor description of each, and their intended purpose.</p>
+that number has increased to over 47 Million per month and shows no sign of abatement.
+By any reasonable definition, it is safe to say that <a href="https://www.physics.princeton.edu/pulsar/k1jt/wspr.html">WSPR</a> has entered the realm of <a href="https://www.oracle.com/big-data/what-is-big-data.html">Big Data</a>.</p>
+<h2 id="project-goal">Project Goal<a class="headerlink" href="#project-goal" title="Permanent link">&para;</a></h2>
+<p>The goal of this project is to provide a set of tools to download, manage, transform and query
+WSPR DataSets using modern <a href="https://www.oracle.com/big-data/what-is-big-data.html">Big Data</a> frameworks.</p>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
+<p>Each folder will contain a seris of <code>README</code> files that explain the content, and where warrented,
+usage. Additionally, project documentation website can be used for more extensive and exhaustinve 
+explination of the project and its contence.</p>
 <ul>
-<li><code>docs</code> - Python, MkDocs for General repository documentation</li>
-<li><code>examples</code> - Python, Spark, PyArrow to manage CSV &amp; Parquet files</li>
-<li><code>java</code> - Java, Maven, SBT for basic RDD and Avro examples</li>
-<li><code>notebooks</code> - Jupyter Notebooks to demonstrate features an capabilities</li>
-<li><code>scala</code> - Scala programs to query DataSets</li>
-<li><code>wsprana</code> - Python package to manage downloading of CSV files</li>
+<li><a href="https://ki7mt.github.io/wspr-analytics/">WSPR Analytics Docs</a> - bookmark this location for future reference</li>
 </ul>
-<p>Each folder has a top level README, as do each sub-folder project. One should pay close
-attention to these files as they lay out how to setup the tools needed to run their
-respective scripts.</p>
+<h2 id="folder-descriptions">Folder Descriptions<a class="headerlink" href="#folder-descriptions" title="Permanent link">&para;</a></h2>
+<p>Several frameworks are used in this repository. The following matrix provides a short description
+of each, and their intended purpose.</p>
+<p>Folder | Frameworks | Description
+|:--- |:--- |:---
+|docs|Python, MkDocs| General repository documentation
+|experiments|Python, Spark, PyArrow| Scripts to manage CSV &amp; Parquet files
+|java|Java, Maven, SBT| Basic Java apps for RDD and Avro examples
+|notebooks|Jupyter Notebooks| Notebooks to demonstrate features an capabilities
+|scala|Scala| Scapa programs to query files
+|wsprana|Python|Python package to manage downloading CSV files</p>
+<p>Pay close attention to the <code>README</code> files as they lay out how to setup the
+tools needed to run their respective scripts or application.</p>
 <h2 id="basic-tool-requirements">Basic Tool Requirements<a class="headerlink" href="#basic-tool-requirements" title="Permanent link">&para;</a></h2>
 <blockquote>
-<p>NOTE: During development, the wsprana package <strong>is not</strong> intended for pip installaiton yet, but will be.It should be checked out and run from source at present.</p>
+<p>NOTE: During development, the wsprana package <strong>is not</strong> intended for pip installaiton
+yet, but will be.It should be checked out and run from source at present.</p>
 </blockquote>
 <p>You must have Python, Java, PySpark/Spark available from the command line.</p>
 <ul>
@@ -800,19 +822,7 @@ respective scripts.</p>
 <li>Spark 3.0.1</li>
 <li>PostgreSQL Database (local, remote, Docker, etc)</li>
 </ul>
-<h3 id="optional">Optional<a class="headerlink" href="#optional" title="Permanent link">&para;</a></h3>
-<p>If you plan to run on a true cluster, or plan on partitioning your data, installing one or more of the following could be useful.</p>
-<ul>
-<li>Hadoop</li>
-<li>Cassandra</li>
-<li>Hive</li>
-<li>Pig</li>
-<li>K8S</li>
-<li>Docker</li>
-<li>Submarine</li>
-</ul>
-<p>For a full list of tooling, see the <a href="https://apache.org/index.html#projects-list">Apache Foundation Project List</a>.</p>
-<p>An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
+<p>An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
 through an management tool called <a href="https://sdkman.io/">sdkman</a>. This tool allows
 one to install virtually any combination of tools you need without
 affecting your root file system. With the exception of Python,
@@ -827,6 +837,7 @@ namely, <a href="https://parquet.apache.org/">Parquet</a>. Read speeds, storage 
 However, there is a drawback, one cannot simply view a binary file as they can with raw text files. The
 original CSV will remain in place, but all bulk processing will be pulled from <a href="https://parquet.apache.org/">Parquet</a>.
 During these transformations is where <a href="https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208">PyArrow</a> + <a href="https://databricks.com/glossary/pyspark">PySpark</a> will earn it's keep.</p>
+<h2 id="persistant-storage">Persistant Storage<a class="headerlink" href="#persistant-storage" title="Permanent link">&para;</a></h2>
 <p>A <a href="https://www.postgresql.org/">PostgreSQL</a> database server will be needed. There are many ways to perform this installation (local, remote,
 <a href="https://docs.docker.com/engine/examples/postgresql_service/">Dockerize PostgreSQL</a>, <a href="https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant">PostgreSQL with Vagrant</a>, etc). Whichever method you chose, it will be used extensively
 by many of the apps and scripts.</p>
