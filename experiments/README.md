@@ -23,6 +23,8 @@ some will just be for testing.
 Additional tests will be done using [Scala][] and / or [Java][], but initial tests will be run using 
 Python, or more sustinct, [PySpark][], which lends itself to rapid-deployment scenarios.
 
+>NOTE: This exercise is not a full-blown scientific experiment. Rather, its more
+> of a feasability or proof of concept step.
 
 ## Compute Constraints
 
