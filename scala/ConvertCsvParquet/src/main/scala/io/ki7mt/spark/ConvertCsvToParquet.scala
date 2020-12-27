@@ -137,7 +137,7 @@ object ConvertCsvToParquet {
 
     // Print results from the dataset
     println("- Execute the Query\n")
-    time {sortedResults.show(20)}
+    time {sortedResults.show(10)}
 
     // shutdown spark engine
     spark.stop()

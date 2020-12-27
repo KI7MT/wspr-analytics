@@ -1,11 +1,10 @@
 # Build Process
 
-This is a sample Application using [Scala][] via [Spark SQL][]
-to get the Top Ten Reporters Grouped By Count for the designated
-wsprspot year + month csv file. This example could easily be extended
-to perform much more than it does currently.
+This is a sample application using [Scala][] that performs the following:
 
-See [ToDo](#todo) for planned additions.
+* Reads the Original CSV into a Spark DataFrame
+* Performas a Query Count on Reporters Ordered Descending
+* Reports Top (10) by spot count
 
 ## Framework Requirements
 
@@ -22,7 +21,7 @@ one to install virtually any combination of tools you need without
 affecting your root file system. All the above requirements
 can be installed and managed via [sdkman][].
 
-## Test File Specs
+### Test File Specs
 
 The specs on the test file are:
 
@@ -38,19 +37,25 @@ the relative location to the script when running.
 Run the following commands in order, and check your results.
 
 ```bash
-#
-# Download   : http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
-# Extract to : data/wsprspots-2020-02.csv
-# 
+cd ~/Downloads
+wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
+gzip -dk wsprspots-2020-02.csv.gz
 
-# clean
-sbt clean
+# set the path of the downloaded and extracted CSV file
+csvfile=$PWD/wsprspots-2020-02.csv
 
-# build the fat Jar
-sbt assembly
+# clone the repo
+git clone https://github.com/KI7MT/wspr-analytics.git
+
+# change directories and build the assembly
+cd ./wspr-analytics/scala/TopTenReporters
+
+# clean and build
+cd 
+sbt clean assembly
 
 # Runs the following command
-spark-submit target/scala-2.12/toptenreporter_2.12-3.0.1-1.0.jar data/wsprspots-2020-02.csv
+spark-submit --master local[8] target/scala-2.12/TopTenReporter-assembly-1.0.jar $csvfile
 ```
 
 ### Results
@@ -61,8 +66,8 @@ You should get results similar to the following:
 
 ```bash
 Application  : TopTenReporter
-Process File : data/wsprspots-2020-02.csv
-Tiimestame   : 2020-12-22T03:17:29.973
+Process File : wsprspots-2020-02.csv
+Tiimestame   : 2020-12-27 T 02:36:01.265
 Description  : Returns the Top Ten Reporters Grouped by Count
 
 Process Steps for this application
@@ -89,26 +94,7 @@ Process Steps for this application
 +--------+------+
 only showing top 10 rows
 
-Query Time : 5.52 sec
-```
-
-## ToDo
-
-This script could be much more generic, and will be in the future
-
-- Change the name to be more generic
-- Add command-line option for which column to count
-- Add command-line option to set the number of rows to return
-
-### Example
-```scala
-
-// <filename> the full path and file name to process
-// <column-name> the column from the csv file to process
-// <number> the number of rows to return
-
-spark-submit CountByColumn-assembly-1.0.jar <file-name> <column-name> <number>
-
+Query Time : 5.821 sec
 ```
 
 [wpsrspots-2020-02.csv.zip]: http://wsprnet.org/archive/wsprspots-2020-02.csv.zip

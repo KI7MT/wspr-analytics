@@ -4,7 +4,8 @@ This is a sample Application using [Scala][] that performs the following:
 
 * Reads the Original CSV into a Spark DataFrame
 * Creates a Parquet file set
-* Performas a Query Count on Reporters ordered Descending
+* Performas a Query Count on Reporters Ordered Descending
+* Reports Top (10) by spot count
 * The Parquet compression is set to default => "snappy"
 
 If you re-run the script, you need to remove the previous
@@ -54,7 +55,7 @@ csvfile=$PWD/wsprspots-2020-02.csv
 # clone the repo
 git clone https://github.com/KI7MT/wspr-analytics.git
 
-# change directories abd build the assembly
+# change directories and build the assembly
 cd ./wspr-analytics/scala/ConvertCsvParquet
 
 # clean and build
@@ -80,7 +81,7 @@ You should get results similar to the following:
 Application   : ConvertCsvToParquet
 Process File  : wsprspots-2020-02.csv
 File Out Path : /tmp/wsprspots/2020/02
-Tiimestame    : 2020-12-27T02:17:23.863
+Tiimestame    : 2020-12-27 T 02:45:14.346
 Description   : Convert CSV to Parquet and Query Reporters
 
 Process Steps to Create Parquet File(s)
@@ -89,7 +90,7 @@ Process Steps to Create Parquet File(s)
 - Read The CSV into a DataSet
 - Write Parquet File(s), please wait...
 
-Elapsed Time : 21.077 sec
+Elapsed Time : 30.836 sec
 
 Process Steps to Query Reporters from Parquet Files(s)
 - Read Parquet File(s)
@@ -111,20 +112,10 @@ Process Steps to Query Reporters from Parquet Files(s)
 |    K9AN|480759|
 |   DF5FH|480352|
 |   DJ9PC|474211|
-|  HB9TMC|472900|
-|    ND7M|461383|
-|  IW2NKE|455781|
-|    WO7I|437582|
-|   ON5KQ|427628|
-|  N6GN/K|361590|
-|  WA2ZKD|328003|
-|  KJ6MKI|318174|
-|   LX1DQ|309909|
-|   W2GNN|308290|
 +--------+------+
-only showing top 20 rows
+only showing top 10 rows
 
-Elapsed Time : 1.38 sec
+Elapsed Time : 1.769 sec
 ```
 
 [wpsrspots-2020-02.csv.zip]: http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
