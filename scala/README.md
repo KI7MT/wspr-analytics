@@ -38,7 +38,7 @@ The following is a list of sample applications that can be performed on the vari
 [Amazon AWS EBR]: https://aws.amazon.com/emr/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc
 [Microsoft Cloud Analytics]: https://azure.microsoft.com/en-us/solutions/big-data/#products
 [Google Smart Analytics]: https://cloud.google.com/solutions/smart-analytics/
-[Apache Spark]: https://spark.apache.org/PySpark
+[Apache Spark]: https://spark.apache.org
 [PySpark]: https://databricks.com/glossary/pyspark
 [Anaconda Python]: https://www.anaconda.com/
 [Scala]: https://docs.scala-lang.org
