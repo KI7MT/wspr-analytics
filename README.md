@@ -11,7 +11,7 @@ WSPR DataSets using modern [Big Data][] frameworks.
 
 ## Documentation
 
-Each folder will contain a seris of `README` files that explain the content, and where warrented,
+Each folder will contain a series of `README` files that explain the content, and where warrented,
 usage. Additionally, project documentation website can be used for more extensive and exhaustinve 
 explination of the project and its contence.
 
@@ -28,8 +28,8 @@ Folder | Frameworks | Description
 |docs|Python, MkDocs| General repository documentation
 |experiments|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
 |java|Java, Maven, SBT| Basic Java apps for RDD and Avro examples
-|notebooks|Jupyter Notebooks| Notebooks to demonstrate features an capabilities
-|scala|Scala| Scapa programs to query files
+|notebooks|Jupyter Notebooks| Notebooks to test and demonstrate capabilities
+|scala|Scala| Scala programs to query files
 |wsprana|Python|Python package to manage downloading CSV files (soon to be retired)
 
 Pay close attention to the `README` files as they lay out how to setup the
