@@ -86,7 +86,7 @@ Description   : Convert CSV to Parquet and Query Reporters
 Process Steps to Create Parquet File(s)
 - Create a Spark Session
 - Add The Spot Schema
-- Read The CSV into DataSet
+- Read The CSV into a DataSet
 - Write Parquet File(s), please wait...
 
 Elapsed Time : 21.077 sec
