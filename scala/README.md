@@ -62,4 +62,4 @@ The following is a list of sample applications that can be performed on the vari
 
 
 [Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
-[Convert CSV to Parquet]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/ConvertCsvParquet
+[Convert CSV to Parquet]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/TopTenReporters
