@@ -5,10 +5,10 @@ This is a sample Application using [Scala][] that performs the folloing:
 * Reads the Original CSV into a Spark DataFrame
 * Creates a Parquet file set
 * Performas a Query Count on Reporters ordered Descending
-* The parquest compression in set to the default 'snappy"
+* The Parquet compression is set to default => "snappy"
 
 If you re-run the script, you need to remove the previous
-directory beforehand as df.wite.parquet() will not overwrite
+directory beforehand as df.wite.parquet() will `not` overwrite
 existing data.
 
 ## Framework Requirements
@@ -33,7 +33,6 @@ The specs on the test file are:
 - Test File : wsprspots-2020-02.csv
 - Rows : 47,310,649 spots
 - File Size Decompressed : 3.964 GB
-
 
 ## Build and Run The App
 
