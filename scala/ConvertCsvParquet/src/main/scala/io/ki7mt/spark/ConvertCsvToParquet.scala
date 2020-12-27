@@ -105,7 +105,7 @@ object ConvertCsvToParquet {
       .add("Code", IntegerType, nullable = true)
 
     // Read the CSV into the DataSet
-    println("- Read The CSV into DataSet")
+    println("- Read The CSV into a DataSet")
     import spark.implicits._
     val ds = spark.read
       .schema(spotSchema)
@@ -120,7 +120,7 @@ object ConvertCsvToParquet {
     time { df.write.parquet(outputDir) }
 
     println("Process Steps to Query Reporters from Parquet Files(s)")
-    println("- Reading Parquet File")
+    println("- Read Parquet File(s)")
     val ds1 = spark.read.parquet(outputDir)
     
     // Select only the reporter column as that's all we need
@@ -136,8 +136,8 @@ object ConvertCsvToParquet {
     val sortedResults = rank.sort(desc("Count"))
 
     // Print results from the dataset
-    println("- Query Execution\n")
-    time {sortedResults.show(10)}
+    println("- Execute the Query\n")
+    time {sortedResults.show(20)}
 
     // shutdown spark engine
     spark.stop()

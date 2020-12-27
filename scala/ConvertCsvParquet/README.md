@@ -1,6 +1,6 @@
 # Build Process
 
-This is a sample Application using [Scala][] that performs the folloing:
+This is a sample Application using [Scala][] that performs the following:
 
 * Reads the Original CSV into a Spark DataFrame
 * Creates a Parquet file set
@@ -8,7 +8,7 @@ This is a sample Application using [Scala][] that performs the folloing:
 * The Parquet compression is set to default => "snappy"
 
 If you re-run the script, you need to remove the previous
-directory beforehand as df.wite.parquet() will `not` overwrite
+directory beforehand as `df.wite.parquet()` will `not` overwrite
 existing data.
 
 ## Framework Requirements
@@ -39,6 +39,10 @@ The specs on the test file are:
 Run the following commands in order, and check your results.
 
 ```bash
+#
+# All commands are run from a terminal
+#
+
 # change the download location to whatever you prefer
 cd ~/Downloads
 wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
@@ -76,7 +80,7 @@ You should get results similar to the following:
 Application   : ConvertCsvToParquet
 Process File  : wsprspots-2020-02.csv
 File Out Path : /tmp/wsprspots/2020/02
-Tiimestame    : 2020-12-26 T 18:59:16.030
+Tiimestame    : 2020-12-27T02:17:23.863
 Description   : Convert CSV to Parquet and Query Reporters
 
 Process Steps to Create Parquet File(s)
@@ -85,14 +89,14 @@ Process Steps to Create Parquet File(s)
 - Read The CSV into DataSet
 - Write Parquet File(s), please wait...
 
-Elapsed Time : 30.327 sec
+Elapsed Time : 21.077 sec
 
 Process Steps to Query Reporters from Parquet Files(s)
-- Reading Parquet File
+- Read Parquet File(s)
 - Select Reporters
 - GroupBy and Count Reporters
 - Sort Reporters Descending
-- Query Execution
+- Execute the Query
 
 +--------+------+
 |Reporter| count|
@@ -107,10 +111,20 @@ Process Steps to Query Reporters from Parquet Files(s)
 |    K9AN|480759|
 |   DF5FH|480352|
 |   DJ9PC|474211|
+|  HB9TMC|472900|
+|    ND7M|461383|
+|  IW2NKE|455781|
+|    WO7I|437582|
+|   ON5KQ|427628|
+|  N6GN/K|361590|
+|  WA2ZKD|328003|
+|  KJ6MKI|318174|
+|   LX1DQ|309909|
+|   W2GNN|308290|
 +--------+------+
-only showing top 10 rows
+only showing top 20 rows
 
-Elapsed Time : 1.78 sec
+Elapsed Time : 1.38 sec
 ```
 
 [wpsrspots-2020-02.csv.zip]: http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
