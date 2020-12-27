@@ -1,17 +1,14 @@
 # WSPR Analytics Using Scala
 
-In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
-that number has increased to over 46 Million per month at last count, and shows no sign of abatment.
-By any reasonable definition, it is safe to say, [WSPR] has entered the realm of [Big Data][].
+This apps in the directory are used for exploring the use of
+[Spark][] with [Scala][].
 
-With this entry comes a unique set of challanges to draw meaningful results in a timely manner.
-The `WSPR Analytics` project will contain a seris of documents, small modules, example
-applications, code snippets and various utilities centerd around [Apache Spark][], [Apache Hadoop][],
-[Jupyter Notebooks][], [Scala][] and other [Big Data][] tooling to help with this challange.
+1. Converting CSV files to Parquet
+1. Query both raw CSV files and Parquet partitions
 
 ## Basic Tool and Build Instructions
 
-In each folder under `src`, you'll find instructions for compiling and running each
+In each folder under you'll find instructions for compiling and running each
 project or script as appropriate.
 
 You must have Python, Java, Scala, Spark and SBT available from the command line.
@@ -20,30 +17,20 @@ You must have Python, Java, Scala, Spark and SBT available from the command line
 - Scala Version 2.12.12
 - Spark 3.0.1
 - SBT Tools 1.4.5
-- Python 3.7+
 
-An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
+An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
 one to install virtually any combination of tools you need without
 affecting your root file system. With the exception of Python,
 All the above requirements can be installed and managed via [sdkman][].
 
-For Python, the recomendation is to use [Anaconda Python][], the full version,
-as it provides all the analytics tooling you'll need for this project and more.
-
-## Visualization
-
-The presentation layer very much depends on the users needs. One may be writing a paper and only needs specific
-data blocks presented in [Jupyter Notebooks][] while others are generating data for use with a [Full Stack Flask][] app.
-No matter the case, examples will be provided to show how this can eaily be achived with the language framework
-we've chosen to use. See this example ([Flask-Pandas-App][]) to illistrate the point resepctive to Data Science.
-
 ## Sample Applications
 
 The following is a list of sample applications that can be performed on the various
-[WSPR Spots][] CSV Files. As new script are written, then will appear in the list below.
+[WSPR Spots][] CSV Files. As new script are written, they will appear in the list below.
 
-- [Top Ten Reporters][]
+* [Top Ten Reporters][]
+* [Convert CSV to Parquet][]
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPR]: https://www.physics.princeton.edu/pulsar/k1jt/wspr.html
@@ -75,3 +62,4 @@ The following is a list of sample applications that can be performed on the vari
 
 
 [Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
+[Convert CSV to Parquet]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/ConvertCsvParquet
