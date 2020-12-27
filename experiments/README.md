@@ -169,7 +169,7 @@ NOTE : The File Sizes Are Approximated = (file bytes / 1048576)
 Finished !!
 ```
 
-### PyArrow Read Test
+### Apache Arrow (PyArrow) Read Test
 
 * `Reader` - PyArrow
 
@@ -292,4 +292,4 @@ only showing top 10 rows
 [Spark]: https://spark.apache.org/
 [Java]: https://adoptopenjdk.net/
 [wspr-analytics]: https://github.com/KI7MT/wspr-analytics
-[PyArrow]:
+[PyArrow]: https://arrow.apache.org/
