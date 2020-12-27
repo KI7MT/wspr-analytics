@@ -52,7 +52,7 @@ csvfile=$PWD/wsprspots-2020-02.csv
 git clone https://github.com/KI7MT/wspr-analytics.git
 
 # change directories abd build the assembly
-cd ~/Downloads/wspr-analytics/scala/ConvertCsvParquet
+cd ./wspr-analytics/scala/ConvertCsvParquet
 
 # clean and build
 cd 
@@ -62,7 +62,7 @@ sbt clean assembly
 # Change 2020 and 02 to the year and month of CSV file being tested
 rm -rf /tmp/wsprspots/2020/02
 
-# Runs the following command
+# Run the following command
 # NOTE : set local[8] to half of your total CPU count. 
 spark-submit --master local[8] target/scala-2.12/ConvertCsvToParquet-assembly-1.0.jar $csvfile
 ```
