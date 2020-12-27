@@ -11,7 +11,7 @@ This apps in the directory are used for exploring the use of
 In each folder under you'll find instructions for compiling and running each
 project or script as appropriate.
 
-You must have Python, Java, Scala, Spark and SBT available from the command line.
+You must have Java, Scala, Spark and SBT available from the command line.
 
 - Java openjdk version 1.8.0_275 or later
 - Scala Version 2.12.12
