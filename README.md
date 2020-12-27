@@ -1,7 +1,7 @@
 # WSPR Analytics
 
 In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
-that number has increased to over 47 Million per month and shows no sign of abatement.
+that number has increased to over 75+ Million per month and shows no sign of abatement.
 By any reasonable definition, it is safe to say that [WSPR][] has entered the realm of [Big Data][].
 
 ## Project Goal
