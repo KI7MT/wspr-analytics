@@ -1,7 +1,7 @@
 # WSPR Analytics Using Scala
 
 This apps in the directory are used for exploring the use of
-[Spark][] with [Scala](https://docs.scala-lang.org).
+[Apache Spark][] with [Scala](https://docs.scala-lang.org).
 
 1. Converting CSV files to Parquet
 1. Query both raw CSV files and Parquet partitions
