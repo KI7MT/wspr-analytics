@@ -55,7 +55,6 @@ git clone https://github.com/KI7MT/wspr-analytics.git
 cd ./wspr-analytics/scala/TopTenReporters
 
 # clean and build
-cd 
 sbt clean assembly
 
 # Runs the following command

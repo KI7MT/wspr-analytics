@@ -59,7 +59,6 @@ git clone https://github.com/KI7MT/wspr-analytics.git
 cd ./wspr-analytics/scala/ConvertCsvParquet
 
 # clean and build
-cd 
 sbt clean assembly
 
 # Ensure the output directory is free from previous runs
