@@ -74,6 +74,7 @@ A [PostgreSQL][] database server will be needed. There are many ways to perform 
 [Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively
 by many of the apps and scripts.
 
+<p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPRnet]: http://www.wsprnet.org
