@@ -142,29 +142,29 @@ Sit back and relax, this takes a while!!
 * Reading file  : wsprspots-2020-02.csv
 * Spot Count    : 47,310,649
 * File Size     : 3780.94 MB
-* Elapsed Time  : 80.42 sec
+* Elapsed Time  : 79.448 sec
 
 * Converting CSV to -> snappy
 * File Size     : 667.07 MB
-* Elapsed Time  : 30.039 sec
+* Elapsed Time  : 29.579 sec
 
 * Converting CSV to -> lz4
 * File Size     : 627.88 MB
-* Elapsed Time  : 30.442 sec
+* Elapsed Time  : 29.702 sec
 
 * Converting CSV to -> zstd
 * File Size     : 520.19 MB
-* Elapsed Time  : 31.384 sec
+* Elapsed Time  : 30.778 sec
 
 * Converting CSV to -> gzip
 * File Size     : 467.55 MB
-* Elapsed Time  : 107.864 sec
+* Elapsed Time  : 107.244 sec
 
 * Converting CSV to -> brotli
 * File Size     : 446.58 MB
-* Elapsed Time  : 90.93 sec
+* Elapsed Time  : 89.529 sec
 
-NOTE : File Sizes Are Approximated with = (file bytes / 1048576)
+NOTE : The File Sizes Are Approximated = (file bytes / 1048576)
 
 Finished !!
 ```
@@ -197,23 +197,23 @@ Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
 
 * Reading file  : wsprspots-2020-02.csv
 * File Size     : 3780.94 MB
-* Elapsed Time  : 2.213
+* Elapsed Time  : 2.185
 
 * Reading file  : wsprspots-2020-02.snappy
 * File Size     : 667.07 MB
-* Elapsed Time  : 2.031
+* Elapsed Time  : 2.011
 
 * Reading file  : wsprspots-2020-02.zstd
 * File Size     : 520.19 MB
-* Elapsed Time  : 1.758
+* Elapsed Time  : 1.769
 
 * Reading file  : wsprspots-2020-02.gzip
 * File Size     : 467.55 MB
-* Elapsed Time  : 3.603
+* Elapsed Time  : 3.654
 
 * Reading file  : wsprspots-2020-02.brotli
 * File Size     : 446.58 MB
-* Elapsed Time  : 2.096
+* Elapsed Time  : 2.102
 
  Finished !!
 ```
@@ -241,11 +241,11 @@ to a raw csv read and process action.
 ```bash
 * Reading file ..: wsprspots-2020-02.parquet
 * File Size .....: 490,259,730 bytes compressed
-* Read Time .....: 1.50256 sec
+* Read Time .....: 1.51834 sec
 
 * Counting Records
 * Record Count ..: 47,310,649
-* Count Time ....: 0.87839 sec
+* Count Time ....: 0.90268 sec
 
 * Running Group by Count Query and return the dataframe
 +--------+------+
@@ -261,20 +261,10 @@ to a raw csv read and process action.
 |    K9AN|480759|
 |   DF5FH|480352|
 |   DJ9PC|474211|
-|  HB9TMC|472900|
-|    ND7M|461383|
-|  IW2NKE|455781|
-|    WO7I|437582|
-|   ON5KQ|427628|
-|  N6GN/K|361590|
-|  WA2ZKD|328003|
-|  KJ6MKI|318174|
-|   LX1DQ|309909|
-|   W2GNN|308290|
 +--------+------+
-only showing top 20 rows
+only showing top 10 rows
 
-* Query Time ....: 4.85043 sec
+* Query Time ....: 4.94034 sec
 ```
 
 [PySpark]: https://databricks.com/glossary/pyspark
