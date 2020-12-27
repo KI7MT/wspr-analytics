@@ -1,7 +1,7 @@
 # WSPR Analytics
 
 In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thousands per month. Today,
-that number has increased to over 47 Million per month and shows no sign of abatement.
+that number has increased to over 75+ Million per month and shows no sign of abatement.
 By any reasonable definition, it is safe to say that [WSPR][] has entered the realm of [Big Data][].
 
 ## Project Goal
@@ -23,14 +23,12 @@ explination of the project and its contence.
 Several frameworks are used in this repository. The following matrix provides a short description
 of each, and their intended purpose.
 
-Folder | Frameworks | Description
-|:--- |:--- |:---
-|docs|Python, MkDocs| General repository documentation
-|experiments|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
-|java|Java, Maven, SBT| Basic Java apps for RDD and Avro examples
-|notebooks|Jupyter Notebooks| Notebooks to demonstrate features an capabilities
-|scala|Scala| Scapa programs to query files
-|wsprana|Python|Python package to manage downloading CSV files
+* `docs` - Python, MkDocs for General repository documentation
+* `experiments` - Python, Spark, PyArrow Scripts to manage CSV & Parquet files
+* `java` - |Java, Maven, SBT Basic Java apps for RDD and Avro examples
+* `notebooks` - Jupyter Notebooks Notebooks to demonstrate features an capabilities
+* `scala` - Scala programs to query files and convert csv files
+* `wsprana` - Python package to manage downloading CSV files (soon to be retired)
 
 Pay close attention to the `README` files as they lay out how to setup the
 tools needed to run their respective scripts or application.
@@ -76,7 +74,6 @@ A [PostgreSQL][] database server will be needed. There are many ways to perform 
 [Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively
 by many of the apps and scripts.
 
-<p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPRnet]: http://www.wsprnet.org

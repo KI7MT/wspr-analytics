@@ -30,7 +30,7 @@ Folder | Frameworks | Description
 |java|Java, Maven, SBT| Basic Java apps for RDD and Avro examples
 |notebooks|Jupyter Notebooks| Notebooks to demonstrate features an capabilities
 |scala|Scala| Scapa programs to query files
-|wsprana|Python|Python package to manage downloading CSV files
+|wsprana|Python|Python package to manage downloading CSV files (soon to be retired)
 
 Pay close attention to the `README` files as they lay out how to setup the
 tools needed to run their respective scripts or application.
