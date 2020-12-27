@@ -65,7 +65,7 @@ object ConvertCsvToParquet {
 
     // set the output directory
     // example: /tmp/wsprspots/2020/02
-    val outputDir : String = "/tmp/" + nameArray(0) + "/" + nameArray(1) + "/" + nameArray(2)
+    val outputDir : String = "/tmp/" + nameArray(0) + "/" + nameArray(1) + "/" + nameArray(2).replace(".csv", "")
 
     println(s"\nApplication   : $appname")
     println(s"Process File  : $csvfile" )
