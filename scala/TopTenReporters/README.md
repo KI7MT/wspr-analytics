@@ -4,7 +4,7 @@ This is a sample application using [Scala][] that performs the following:
 
 * Reads the Original CSV into a Spark DataFrame
 * Performas a Query Count on Reporters Ordered Descending
-* Reports Top (10) by spot count
+* Reports Top (10) by spot count 
 
 ## Framework Requirements
 
@@ -37,6 +37,10 @@ the relative location to the script when running.
 Run the following commands in order, and check your results.
 
 ```bash
+#
+# All commands are run from a terminal
+#
+
 cd ~/Downloads
 wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 gzip -dk wsprspots-2020-02.csv.gz
