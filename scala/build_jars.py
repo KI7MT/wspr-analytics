@@ -16,9 +16,8 @@ def build_jar_files(dir):
     """
     Build a list of directories via SBT    
     """
-    print(f"* Building Jar files {dir}")
+    print(f"[info] Building Jar file for: {dir}")
     cmd = f"cd {dir}/ && sbt clean assembly"
-    
     exit_status = os.system(cmd)
     
     if exit_status:
@@ -36,14 +35,12 @@ if __name__ == '__main__':
     p.terminate()
 
     # Note: This is not dynamic, as the Scala version is set manually above
-    print("\nCopy All Jar Packages")
     for f in folders:
         file_path = os.path.join(os.getcwd(),f,scala_dir)
         files = glob.iglob(os.path.join(file_path, "*.jar"))
         for file in files:
             if os.path.isfile(file):
-                print(f"* {file}")
+                print(f"[info] copy jar file: {file}")
                 shutil.copy2(file, jars_dir)
-
-    print(f"\nJar Location : {jars_dir}\n")
+    print(f"[info] jar location: {jars_dir}")
     print("\nFinished\n")
