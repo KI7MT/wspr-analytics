@@ -46,6 +46,7 @@ gzip -dk wsprspots-2020-02.csv.gz
 
 # set the path of the downloaded and extracted CSV file
 csvfile=$PWD/wsprspots-2020-02.csv
+outdir=$PWD/wspr/parquet/2020/02
 
 # clone the repo
 git clone https://github.com/KI7MT/wspr-analytics.git
@@ -58,12 +59,19 @@ sbt clean assembly
 
 # Run the following command
 # NOTE : set local[8] to half of your total CPU count. 
-spark-submit --master local[8] target/scala-2.12/ConvertCsvParquet-assembly-1.0.jar $csvfile
+spark-submit --master local[8] target/scala-2.12/ConvertCsvParquet-assembly-1.0.jar $infile $outdir
 ```
 
 ### Results
 
 You should get results similar to the following:
+
+* Out Directopry $PWD/wspr/parquet/2020/02
+* Compressed Size ~615 MB on-disk
+* Pricess Time was =< 21sec
+
+The example below will differ somewhat due to my CSV
+input and output choices.
 
 >NOTE The time it takes will depend on your system resources (CPU, RAM, etc)
 
