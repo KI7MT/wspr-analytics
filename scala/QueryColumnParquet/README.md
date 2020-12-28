@@ -44,6 +44,8 @@ Run the following commands in order, and check your results.
 
 # set the path to where you created the Parquet partition
 inFolder="/data/wspr/raw/parquet/2020/02"
+
+# set the colum you wish to GroupBy and Count
 column="Reporter"
 
 # clone the repo
