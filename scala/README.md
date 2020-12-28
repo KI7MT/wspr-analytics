@@ -5,6 +5,7 @@ This apps in the directory are used for exploring the use of
 
 1. Converting CSV files to Parquet
 1. Query both raw CSV files and Parquet partitions
+1. Query Parquet Folders and GroupBy and Count Columns.
 
 ## Basic Tool and Build Instructions
 
@@ -29,6 +30,7 @@ All the above requirements can be installed and managed via [sdkman][].
 The following is a list of sample applications that can be performed on the various
 [WSPR Spots][] CSV Files. As new script are written, they will appear in the list below.
 
+* [Query Columns using Parquet Folders][]
 * [Top Ten Reporters][]
 * [Convert CSV to Parquet][]
 
@@ -61,5 +63,6 @@ The following is a list of sample applications that can be performed on the vari
 [PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
 
 
+[Query Columns using Parquet Folders]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/QueryColumnParquet
 [Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
 [Convert CSV to Parquet]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/ConvertCsvParquet
