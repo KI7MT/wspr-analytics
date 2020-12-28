@@ -6,8 +6,11 @@ import multiprocessing
 from multiprocessing import Pool
 
 cpu = multiprocessing.cpu_count() - 1
-jars_dir = os.getcwd() + "/jars"
-target_dir = 'target/scala-2.12'
+jars_dir = os.path.join(os.getcwd(), "jars")
+scala_dir = 'target/scala-2.12'
+
+if not os.path.exists(jars_dir):
+    os.makedirs(jars_dir)
 
 def build_jar_files(dir):
     """
@@ -32,14 +35,15 @@ if __name__ == '__main__':
     p.close()
     p.terminate()
 
-    print("\nCopy All Jar Assemblys")
+    # Note: This is not dynamic, as the Scala version is set manually above
+    print("\nCopy All Jar Packages")
     for f in folders:
-        file_path = f+"/"+target_dir+"/"
+        file_path = os.path.join(os.getcwd(),f,scala_dir)
         files = glob.iglob(os.path.join(file_path, "*.jar"))
         for file in files:
             if os.path.isfile(file):
                 print(f"* {file}")
                 shutil.copy2(file, jars_dir)
 
-
-    print("\n* Finished\n")
+    print(f"\nJar Location : {jars_dir}\n")
+    print("\nFinished\n")
