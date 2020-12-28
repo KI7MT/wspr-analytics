@@ -1,4 +1,4 @@
-package io.ki7mt.spark
+package com.ki7mt.spark
 
 import java.time.LocalDateTime
 
@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
 // Get The Top Ten Reporters by Count
-object ConvertCsvToParquet {
+object QueryColumnParquet {
 
   case class Spot(SpotId: Integer, 
                   TimeStamp: Integer,

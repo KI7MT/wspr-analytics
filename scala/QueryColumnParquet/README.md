@@ -4,9 +4,13 @@ This is a sample Application using [Scala][] that performs the following:
 
 * Reads the Original CSV into a Spark DataFrame
 * Creates a Parquet file set
+* Performas a Query Count on Reporters Ordered Descending
+* Reports Top (10) by spot count
+* The Parquet compression is set to default => "snappy"
 
-If you re-run the script, the output Parquet directory will
-be overwritten.
+If you re-run the script, you need to remove the previous
+directory beforehand as `df.wite.parquet()` will `not` overwrite
+existing data.
 
 ## Framework Requirements
 
@@ -57,9 +61,13 @@ cd ./wspr-analytics/scala/ConvertCsvParquet
 # clean and build
 sbt clean assembly
 
+# Ensure the output directory is free from previous runs
+# Change 2020 and 02 to the year and month of CSV file being tested
+rm -rf /tmp/wsprspots/2020/02
+
 # Run the following command
 # NOTE : set local[8] to half of your total CPU count. 
-spark-submit --master local[8] target/scala-2.12/ConvertCsvParquet-assembly-1.0.jar $csvfile
+spark-submit --master local[8] target/scala-2.12/ConvertCsvToParquet-assembly-1.0.jar $csvfile
 ```
 
 ### Results
@@ -69,20 +77,44 @@ You should get results similar to the following:
 >NOTE The time it takes will depend on your system resources (CPU, RAM, etc)
 
 ```bash
-Object        : ConvertCsvParquet
-Process File  : /data/wspr/raw/csv/wsprspots-2020-02.csv
-File Out Path : /data/wspr/raw/parquet/2020/02
-Tiimestame    : 2020-12-28 T 04:36:29.941
-Description   : Convert CSV to Parquet
+Application   : ConvertCsvToParquet
+Process File  : wsprspots-2020-02.csv
+File Out Path : /tmp/wsprspots/2020/02
+Tiimestame    : 2020-12-27 T 02:45:14.346
+Description   : Convert CSV to Parquet and Query Reporters
 
 Process Steps to Create Parquet File(s)
 - Create a Spark Session
-- Create the Spot Schema
-- Read the CSV file into a DataSet
+- Add The Spot Schema
+- Read The CSV into a DataSet
 - Write Parquet File(s), please wait...
 
-Elapsed Time : 20.456 sec
+Elapsed Time : 30.836 sec
 
+Process Steps to Query Reporters from Parquet Files(s)
+- Read Parquet File(s)
+- Select Reporters
+- GroupBy and Count Reporters
+- Sort Reporters Descending
+- Execute the Query
+
++--------+------+
+|Reporter| count|
++--------+------+
+|   DK6UG|838081|
+|  OE9GHV|690104|
+|  EA8BFK|648670|
+|   KD2OM|589003|
+|KA7OEI-1|576788|
+|   K4RCG|571445|
+|     KPH|551690|
+|    K9AN|480759|
+|   DF5FH|480352|
+|   DJ9PC|474211|
++--------+------+
+only showing top 10 rows
+
+Elapsed Time : 1.769 sec
 ```
 
 [wpsrspots-2020-02.csv.zip]: http://wsprnet.org/archive/wsprspots-2020-02.csv.zip
