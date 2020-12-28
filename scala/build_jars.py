@@ -24,13 +24,12 @@ def build_jar_files(dir):
         os._exit(exit_status)
     return exit_status
 
+
 if __name__ == '__main__':
-    
-    # List of folders to build
+
     folders = ['ConvertCsvToParquet', 'QueryColumnParquet']
     with Pool(cpu) as p:
         p.map(build_jar_files, folders)
-    
     p.close()
     p.terminate()
 
