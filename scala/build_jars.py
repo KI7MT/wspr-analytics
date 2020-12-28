@@ -5,7 +5,7 @@ import shutil
 import multiprocessing
 from multiprocessing import Pool
 
-cpu = multiprocessing.cpu_count() - 1
+cpu = multiprocessing.cpu_count() - 2
 jars_dir = os.path.join(os.getcwd(), "jars")
 scala_dir = 'target/scala-2.12'
 
