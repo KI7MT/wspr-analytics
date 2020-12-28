@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
 // Get The Top Ten Reporters by Count
-object ConvertCsvParquet {
+object ConvertCsvToParquet {
 
   // DataSet case class
   case class Spot(SpotId: Integer, 

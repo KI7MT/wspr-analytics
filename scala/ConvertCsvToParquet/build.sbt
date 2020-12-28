@@ -2,7 +2,7 @@ organization := "io.ki7mt.spark"
 
 version := "1.0"
 
-name := "ConvertCsvParquet"
+name := "ConvertCsvToParquet"
 
 scalaVersion := "2.12.12"
 

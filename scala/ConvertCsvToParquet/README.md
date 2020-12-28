@@ -1,11 +1,11 @@
-# Build Process
+# Convert CSV File to Parquet
 
 This is a sample Application using [Scala][] that performs the following:
 
-* Reads a WSPRnet CSV from a path (/data/wspr/csv)
-* Creates a Parquet file set to an output path (e.g /data/wspr/parquet/2020/02)
+* Reads a WSPRnet CSV from an input path e.g /data/wspr/csv.wsprspots-2020-02.csv
+* Creates a Parquet file set to an output path e.g /data/wspr/parquet/2020/02
 
->NOTE If you re-run the script, the output Parquet directory will be overwritten.
+>NOTE If you re-run the script, the output Parquet directory `will be` overwritten.
 
 ## Framework Requirements
 
@@ -45,30 +45,30 @@ wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 gzip -dk wsprspots-2020-02.csv.gz
 
 # set the path of the downloaded and extracted CSV file
-csvfile=$PWD/wsprspots-2020-02.csv
+infile=$PWD/wsprspots-2020-02.csv
 outdir=$PWD/wspr/parquet/2020/02
 
 # clone the repo
 git clone https://github.com/KI7MT/wspr-analytics.git
 
 # change directories and build the assembly
-cd ./wspr-analytics/scala/ConvertCsvParquet
+cd ./wspr-analytics/scala/ConvertCsvToParquet
 
 # clean and build
 sbt clean assembly
 
 # Run the following command
-# NOTE : set local[8] to half of your total CPU count. 
-spark-submit --master local[8] target/scala-2.12/ConvertCsvParquet-assembly-1.0.jar $infile $outdir
+# NOTE : set local[16] to half of your total CPU count. 
+spark-submit --master local[16] target/scala-2.12/ConvertCsvToParquet-assembly-1.0.jar $infile $outdir
 ```
 
 ### Results
 
 You should get results similar to the following:
 
-* Out Directopry $PWD/wspr/parquet/2020/02
+* Out Directory $PWD/wspr/parquet/2020/02
 * Compressed Size ~615 MB on-disk
-* Pricess Time was =< 21sec
+* Process Time was =< 21sec
 
 The example below will differ somewhat due to my CSV
 input and output choices.
@@ -76,7 +76,7 @@ input and output choices.
 >NOTE The time it takes will depend on your system resources (CPU, RAM, etc)
 
 ```bash
-Object        : ConvertCsvParquet
+Object        : ConvertCsvToParquet
 Process File  : /data/wspr/raw/csv/wsprspots-2020-02.csv
 File Out Path : /data/wspr/raw/parquet/2020/02
 Tiimestame    : 2020-12-28 T 04:36:29.941

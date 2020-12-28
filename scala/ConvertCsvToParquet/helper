@@ -41,4 +41,4 @@ export outdir="$PARQUET_DIR/$YEAR/$MONTH"
 echo "In File ......: $infile"
 echo "Out Dir ......: $outdir"
 echo ""
-echo 'Execute Cmd ..: . helper && spark-submit --master local[16] target/scala-2.12/ConvertCsvParquet-assembly-1.0.jar $infile $outdir'
+echo 'Execute Cmd ..: . helper && spark-submit --master local[16] target/scala-2.12/ConvertCsvToParquet-assembly-1.0.jar $infile $outdir'
