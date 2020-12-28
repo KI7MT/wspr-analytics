@@ -27,13 +27,13 @@ def build_jar_files(dir):
 
 if __name__ == '__main__':
 
-    folders = ['ConvertCsvToParquet', 'QueryColumnParquet']
+    folders = ['ConvertCsvToParquet', 'QueryColumnParquet', 'TopTenReporters']
     with Pool(cpu) as p:
         p.map(build_jar_files, folders)
     p.close()
     p.terminate()
 
-    # Note: This is not dynamic, as the Scala version is set manually above
+    # Note: This is not dynamic. The Scala version is set manually above
     for f in folders:
         file_path = os.path.join(os.getcwd(),f,scala_dir)
         files = glob.iglob(os.path.join(file_path, "*.jar"))
