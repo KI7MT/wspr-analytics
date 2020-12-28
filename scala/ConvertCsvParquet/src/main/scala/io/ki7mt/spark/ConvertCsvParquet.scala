@@ -109,8 +109,10 @@ object ConvertCsvParquet {
         val df = ds.toDF()
         time { df.write.mode("overwrite").parquet(outDir) } // set to overwrite mode
 
-      // shutdown spark engine
-      spark.stop()
+        // shutdown spark engine
+        spark.stop()
+
+        println("Finished\n")
 
     } else { // if the script could not find input file
 

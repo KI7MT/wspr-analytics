@@ -2,20 +2,19 @@
 
 This is a sample Application using [Scala][] that performs the following:
 
-* Reads the Original CSV into a Spark DataFrame
-* Creates a Parquet file set
+* Reads a WSPRnet CSV from a path (/data/wspr/csv)
+* Creates a Parquet file set to an output path (e.g /data/wspr/parquet/2020/02)
 
-If you re-run the script, the output Parquet directory will
-be overwritten.
+>NOTE If you re-run the script, the output Parquet directory will be overwritten.
 
 ## Framework Requirements
 
 You must have Java, Scala, Spark and SBT available from the command line.
 
-- Java openjdk version 1.8.0_275 or later
-- Scala Version 2.12.12
-- Spark 3.0.1
-- SBT Tools 1.4.5
+* Java openjdk version 1.8.0_275 or later
+* Scala Version 2.12.12
+* Spark 3.0.1
+* SBT Tools 1.4.5
 
 An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
@@ -27,9 +26,9 @@ can be installed and managed via [sdkman][].
 
 The specs on the test file are:
 
-- Test File : wsprspots-2020-02.csv
-- Rows : 47,310,649 spots
-- File Size Decompressed : 3.964 GB
+* Test File : wsprspots-2020-02.csv
+* Rows : 47,310,649 spots
+* File Size Decompressed : 3.964 GB
 
 ## Build and Run The App
 
@@ -82,6 +81,8 @@ Process Steps to Create Parquet File(s)
 - Write Parquet File(s), please wait...
 
 Elapsed Time : 20.456 sec
+
+Finished
 
 ```
 
