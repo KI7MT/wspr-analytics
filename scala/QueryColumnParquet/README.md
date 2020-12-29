@@ -39,7 +39,7 @@ Run the following commands in order, and check your results.
 #
 
 # NOTE: You must have previously run ConvertCvsToParquet before
-#       useing this app, as it is looking for a Parquet folder,
+#       using this app, as it is looking for a Parquet folder,
 #       not a CSV file.
 
 # set the path to where you created the Parquet partition
