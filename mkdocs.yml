@@ -46,6 +46,6 @@ nav:
     - Top Ten Reporters: 'scala/top-ten-reporters.md'
     - Spark Examples: 'scala/spark-examples.md'
   - R-Scripts:
-    - Installation: 'rscripts/installation.md'
+    - Overview: 'rscripts/overview.md'
   - Jupyter:
     - Overview: 'notebooks/overview.md'

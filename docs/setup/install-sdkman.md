@@ -2,4 +2,4 @@
 
 >Under Development
 
-This section will discuss the variour ways to install sdkman.
+This section will discuss the various ways to install sdkman.
