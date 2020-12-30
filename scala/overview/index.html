@@ -59,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#framework-requirements" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -239,22 +244,6 @@
     <li class="md-tabs__item">
       <a href="../../notebooks/overview/" class="md-tabs__link">
         Jupyter
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../examples/overview/" class="md-tabs__link">
-        Examples
       </a>
     </li>
   
@@ -450,6 +439,19 @@
   </li>
 
         
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../pyspark/basic-examples/" class="md-nav__link">
+      Basic Examples
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -494,10 +496,76 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Overview
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Overview
     </a>
     
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#framework-requirements" class="md-nav__link">
+    Framework Requirements
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../convert-csv-parquet/" class="md-nav__link">
+      Convert To Parquet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../query-with-parquet/" class="md-nav__link">
+      Query With Parquet
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../top-ten-reporters/" class="md-nav__link">
+      Top Ten Reporters
+    </a>
   </li>
 
         
@@ -590,54 +658,41 @@
   </li>
 
     
-      
-      
-      
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
-    
-    <label class="md-nav__link" for="nav-7">
-      Examples
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Examples" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
-        <span class="md-nav__icon md-icon"></span>
-        Examples
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../../examples/overview/" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
   </ul>
 </nav>
                   </div>
                 </div>
               </div>
             
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#framework-requirements" class="md-nav__link">
+    Framework Requirements
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
             
           
           <div class="md-content">
@@ -647,7 +702,27 @@
                 
                   <h1>Overview</h1>
                 
-                <p>Under development</p>
+                <blockquote>
+<p>Scala combines object-oriented and functional programming in one concise,
+high-level language. Scala's static types help avoid bugs in complex applications,
+and its JVM and JavaScript runtimes let you build high-performance systems with
+easy access to huge ecosystems of libraries.</p>
+<p><cite><a href="https://scala-lang.org/">The Scala Project</a></cite></p>
+</blockquote>
+<h2 id="framework-requirements">Framework Requirements<a class="headerlink" href="#framework-requirements" title="Permanent link">&para;</a></h2>
+<p>You must have Java, Scala, Spark and SBT available from the command line for all
+<a href="https://scala-lang.org/">Scala Projects</a> listed in this section.</p>
+<ul>
+<li>Java openjdk version 1.8.0_275 or later</li>
+<li>Scala Version 2.12.12</li>
+<li>Spark 3.0.1</li>
+<li>SBT Tools 1.4.5</li>
+</ul>
+<p>An easy way (on Linux / MacOS) to mange Java, Spark, Scala and SBT is
+through an management tool called [sdkman][]. This tool allows
+one to install virtually any combination of tools you need without
+affecting your root file system. All the above requirements
+can be installed and managed via [sdkman][].</p>
                 
               
               
@@ -666,7 +741,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../pyspark/overview/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../pyspark/basic-examples/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -675,19 +750,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Overview
+                Basic Examples
               </div>
             </div>
           </a>
         
         
-          <a href="../../rscripts/installation/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../convert-csv-parquet/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Installation
+                Convert To Parquet
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

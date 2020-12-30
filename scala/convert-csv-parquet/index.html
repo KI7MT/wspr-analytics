@@ -16,7 +16,7 @@
     
     
       
-        <title>Installing Python - WSPR Analytics</title>
+        <title>Convert To Parquet - WSPR Analytics</title>
       
     
     
@@ -59,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#convert-csv-file-to-parquet" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -87,7 +92,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Installing Python
+              Convert To Parquet
             
           </span>
         </div>
@@ -165,15 +170,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../overview/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../setup/overview/" class="md-tabs__link">
         Setup
       </a>
     </li>
@@ -199,13 +202,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../scala/overview/" class="md-tabs__link">
+      <a href="../overview/" class="md-tabs__link md-tabs__link--active">
         Scala
       </a>
     </li>
@@ -308,14 +313,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
     
     <label class="md-nav__link" for="nav-2">
       Setup
@@ -336,7 +339,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../overview/" class="md-nav__link">
+    <a href="../../setup/overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -347,18 +350,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../setup/install-python/" class="md-nav__link">
       Installing Python
     </a>
-    
   </li>
 
         
@@ -369,7 +365,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-java/" class="md-nav__link">
+    <a href="../../setup/install-java/" class="md-nav__link">
       Installing Java
     </a>
   </li>
@@ -382,7 +378,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-sdkman/" class="md-nav__link">
+    <a href="../../setup/install-sdkman/" class="md-nav__link">
       Installing Sdkman
     </a>
   </li>
@@ -395,7 +391,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-scala/" class="md-nav__link">
+    <a href="../../setup/install-scala/" class="md-nav__link">
       Installing Scala
     </a>
   </li>
@@ -466,12 +462,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Scala
@@ -492,7 +490,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../scala/overview/" class="md-nav__link">
+    <a href="../overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -503,11 +501,69 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../scala/convert-csv-parquet/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Convert To Parquet
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Convert To Parquet
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#file-specs" class="md-nav__link">
+    File Specs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-and-run" class="md-nav__link">
+    Build and Run
+  </a>
+  
+    <nav class="md-nav" aria-label="Build and Run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -518,7 +574,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../scala/query-with-parquet/" class="md-nav__link">
+    <a href="../query-with-parquet/" class="md-nav__link">
       Query With Parquet
     </a>
   </li>
@@ -531,7 +587,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../scala/top-ten-reporters/" class="md-nav__link">
+    <a href="../top-ten-reporters/" class="md-nav__link">
       Top Ten Reporters
     </a>
   </li>
@@ -633,15 +689,134 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#file-specs" class="md-nav__link">
+    File Specs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-and-run" class="md-nav__link">
+    Build and Run
+  </a>
+  
+    <nav class="md-nav" aria-label="Build and Run">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#results" class="md-nav__link">
+    Results
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Installing Python</h1>
-                
-                <p>Under Development</p>
+                <h1 id="convert-csv-file-to-parquet">Convert CSV File to Parquet<a class="headerlink" href="#convert-csv-file-to-parquet" title="Permanent link">&para;</a></h1>
+<p>This is a sample Application using <a href="https://scala-lang.org/">Scala</a> that performs the following:</p>
+<ul>
+<li>Reads a WSPRnet CSV from an input path e.g /data/wspr/csv.wsprspots-2020-02.csv</li>
+<li>Creates a Parquet file set to an output path e.g /data/wspr/parquet/2020/02</li>
+<li>If you re-run the script, the output Parquet directory <code>will be</code> overwritten.</li>
+</ul>
+<h2 id="file-specs">File Specs<a class="headerlink" href="#file-specs" title="Permanent link">&para;</a></h2>
+<p>The specs on the test file are:</p>
+<ul>
+<li>Test File : wsprspots-2020-02.csv</li>
+<li>Rows : 47,310,649 spots</li>
+<li>File Size Decompressed : 3.964 GB</li>
+</ul>
+<h2 id="build-and-run">Build and Run<a class="headerlink" href="#build-and-run" title="Permanent link">&para;</a></h2>
+<p>Run the following commands in order, and check your results.</p>
+<pre><code class="language-bash">#
+# All commands are run from a terminal
+#
+
+# change the download location to whatever you prefer
+cd ~/Downloads
+wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
+gzip -dk wsprspots-2020-02.csv.gz
+
+# set the path of the downloaded and extracted CSV file
+infile=$PWD/wsprspots-2020-02.csv
+outdir=$PWD/wspr/parquet/2020/02
+
+# clone the repo
+git clone https://github.com/KI7MT/wspr-analytics.git
+
+# change directories and build the assembly
+cd ./wspr-analytics/scala/ConvertCsvToParquet
+
+# clean and build
+sbt clean assembly
+
+# Run the following command
+# NOTE : set local[16] to half of your total CPU count. 
+spark-submit --master local[16] target/scala-2.12/ConvertCsvToParquet-assembly-1.0.jar $infile $outdir
+</code></pre>
+<h3 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
+<p>You should get results similar to the following:</p>
+<ul>
+<li>Out Directory $PWD/wspr/parquet/2020/02</li>
+<li>Compressed Size ~615 MB on-disk</li>
+<li>Process Time was =&lt; 21sec</li>
+</ul>
+<p>The example below will differ somewhat due to my CSV
+input and output choices.</p>
+<blockquote>
+<p>NOTE The time it takes will depend on your system resources (CPU, RAM, etc)</p>
+</blockquote>
+<pre><code class="language-bash">Object        : ConvertCsvToParquet
+Process File  : /data/wspr/raw/csv/wsprspots-2020-02.csv
+File Out Path : /data/wspr/raw/parquet/2020/02
+Tiimestame    : 2020-12-28 T 04:36:29.941
+Description   : Convert CSV to Parquet
+
+Process Steps to Create Parquet File(s)
+- Create a Spark Session
+- Create the Spot Schema
+- Read the CSV file into a DataSet
+- Write Parquet File(s), please wait...
+
+Elapsed Time : 20.456 sec
+
+Finished
+
+</code></pre>
                 
               
               
@@ -675,13 +850,13 @@
           </a>
         
         
-          <a href="../install-java/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../query-with-parquet/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Installing Java
+                Query With Parquet
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

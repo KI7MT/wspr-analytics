@@ -16,7 +16,7 @@
     
     
       
-        <title>Installation - WSPR Analytics</title>
+        <title>Basic Examples - WSPR Analytics</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#installation" class="md-skip">
+        <a href="#basic-examples" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Installation
+              Basic Examples
             
           </span>
         </div>
@@ -186,13 +186,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../pyspark/overview/" class="md-tabs__link">
+      <a href="../overview/" class="md-tabs__link md-tabs__link--active">
         PySpark
       </a>
     </li>
@@ -218,15 +220,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
+      <a href="../../rscripts/installation/" class="md-tabs__link">
         R-Scripts
       </a>
     </li>
@@ -407,12 +407,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       PySpark
@@ -433,7 +435,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../pyspark/overview/" class="md-nav__link">
+    <a href="../overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -444,11 +446,110 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../pyspark/basic-examples/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Basic Examples
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Basic Examples
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#compute-constraints" class="md-nav__link">
+    Compute Constraints
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compute-environment" class="md-nav__link">
+    Compute Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Compute Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    Java
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    Python
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdk-manager" class="md-nav__link">
+    SDK Manager
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-the-tests" class="md-nav__link">
+    Running The Tests
+  </a>
+  
+    <nav class="md-nav" aria-label="Running The Tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pandas-parquet-compression-test" class="md-nav__link">
+    Pandas Parquet Compression Test
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apache-arrow-pyarrow-read-test" class="md-nav__link">
+    Apache Arrow (PyArrow) Read Test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -543,14 +644,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
     
     <label class="md-nav__link" for="nav-5">
       R-Scripts
@@ -569,70 +668,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Installation
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../rscripts/installation/" class="md-nav__link">
       Installation
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installing-anaconda" class="md-nav__link">
-    Installing Anaconda
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upgrade-anaconda" class="md-nav__link">
-    Upgrade Anaconda
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#additional-python-modules" class="md-nav__link">
-    Additional Python Modules
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-r" class="md-nav__link">
-    Installing R
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -708,30 +748,70 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installing-anaconda" class="md-nav__link">
-    Installing Anaconda
+  <a href="#compute-constraints" class="md-nav__link">
+    Compute Constraints
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#upgrade-anaconda" class="md-nav__link">
-    Upgrade Anaconda
+  <a href="#compute-environment" class="md-nav__link">
+    Compute Environment
   </a>
+  
+    <nav class="md-nav" aria-label="Compute Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java" class="md-nav__link">
+    Java
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    Python
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdk-manager" class="md-nav__link">
+    SDK Manager
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#additional-python-modules" class="md-nav__link">
-    Additional Python Modules
+  <a href="#running-the-tests" class="md-nav__link">
+    Running The Tests
+  </a>
+  
+    <nav class="md-nav" aria-label="Running The Tests">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pandas-parquet-compression-test" class="md-nav__link">
+    Pandas Parquet Compression Test
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-r" class="md-nav__link">
-    Installing R
+        
+          <li class="md-nav__item">
+  <a href="#apache-arrow-pyarrow-read-test" class="md-nav__link">
+    Apache Arrow (PyArrow) Read Test
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -748,49 +828,239 @@
               
                 
                 
-                <h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
-<p>At the time of this writing, usage has only been tested on Linux x86-64 and.
-There is no particular reason why installation and usage could not be done on
-Windows or Mac OSX if the Requirements are met.</p>
-<p>It is <code>Highly Recommended</code> to use <a href="https://www.continuum.io/downloads">Anaconda</a> from Continuum Analytics. 
-It's free, supports all major operating systems, is well supported, does not
-interfere with system level packaging, can be installed on a per user basics
-and provides everything needed for <strong>Comprehensive WSPR Data Analysis</strong>.</p>
-<h2 id="installing-anaconda">Installing Anaconda<a class="headerlink" href="#installing-anaconda" title="Permanent link">&para;</a></h2>
-<p>Installing <a href="https://www.continuum.io/downloads">Anaconda</a> is very easy. Simply download the shell script and
-run it in a terminal:</p>
-<p>Use their <a href="https://docs.anaconda.com/anaconda/install/linux/">Install Instructions</a> paying particular atention to the additional
-package needs for Qt.</p>
-<p>Follow the prompts and when asked, I elected to add the the source scripts to
-my <code>.bashrc</code> but that is entirely up to you. I also used the default
-installation direcotry of:</p>
-<pre><code class="language-bash">/home/$USER/anaconda3
+                <h1 id="basic-examples">Basic Examples<a class="headerlink" href="#basic-examples" title="Permanent link">&para;</a></h1>
+<p>The scripts in this directory are used for exploring the use of <a href="https://spark.apache.org/">Spark</a>, <a href="https://arrow.apache.org/">Apache Arrow</a>,
+<a href="https://www.scala-lang.org/">Scala</a> and other Big Data frameworks to: </p>
+<ol>
+<li>Reduce WSPR CSV on-disk storage space</li>
+<li>Improve CSV read times and portability</li>
+<li>Improve query performance</li>
+<li>Produce a cost effective, yet scalable, analytics solution for WSPR data</li>
+</ol>
+<p>An additional dimension that could be explored is streaming. For those with
+suffecient energy, there are many frameworks that can be employed in this
+area:</p>
+<ul>
+<li><a href="https://storm.apache.org/">Apache Storm</a></li>
+<li><a href="https://spark.apache.org/streaming/">Spark Streaming</a></li>
+<li><a href="https://flink.apache.org/">Apache Flink</a></li>
+</ul>
+<p>...and many others.</p>
+<p>All of the example scripts will be incorporated into a main application at some point,
+however, some will just be for testing.</p>
+<p>Additional tests will be done using <a href="https://www.scala-lang.org/">Scala</a> and / or <a href="https://adoptopenjdk.net/">Java</a> for performance
+cvomparison. Initial tests will be run using Python, or more sustinct, <a href="https://databricks.com/glossary/pyspark">PySpark</a>,
+as it lends itself to rapid-deployment scenarios.</p>
+<blockquote>
+<p>NOTE: This exercise is not a full-blown scientific experiment. Rather, its more
+of a feasability or proof of concept exercise.</p>
+</blockquote>
+<h2 id="compute-constraints">Compute Constraints<a class="headerlink" href="#compute-constraints" title="Permanent link">&para;</a></h2>
+<p>While there is no shortage of cloud-based Big Data solutions these days ( 
+[AWS EMR][], <a href="https://azure.microsoft.com/en-us/services/synapse-analytics/">Azure Synapse</a>, <a href="https://databricks.com/">Databricks</a>, <a href="https://cloud.google.com/compute/">GCP</a>, <a href="https://cloud.google.com/bigquery/">Google Big Query</a>, etc),
+these tests will look at commonidty based on-prem resources in order to keep
+the overall cost to an acceptable level. In other words: a hefty workstation,
+a stack of Raspberry PI's, or an over-powered laptop should be capable of
+performing the tasks for the use case at hand.</p>
+<h2 id="compute-environment">Compute Environment<a class="headerlink" href="#compute-environment" title="Permanent link">&para;</a></h2>
+<p>If you are on <code>Windows 10</code>, I would highly recommended using <code>Windows Subsystem Linux v2</code>.
+Doing so will make setting up <a href="https://spark.apache.org/PySpark">Apache Spark</a> much easier, and you can follow
+the directions below with mininal frustration.</p>
+<h3 id="java">Java<a class="headerlink" href="#java" title="Permanent link">&para;</a></h3>
+<p>No matter which method of compute is employed, <a href="https://adoptopenjdk.net/">Java</a> forms the foundation.
+I chose to use <code>openjdk version 1.8.0_275</code>, however, <a href="https://spark.apache.org/">Spark</a> now fully
+supports <code>Java-11</code>. I've also ran <code>Java-14</code>, but prefer to stick with LTS
+versions becasue not all frameworks support the <code>"latest and greatest"</code> JVM.</p>
+<h3 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h3>
+<p>You need a <code>Python</code> environment, either from <a href="https://www.anaconda.com/">Anaconda Python</a> or the standard
+<a href="https://www.python.org">Python</a> installer and <code>venv</code>. Either way, you should run the tests in a virtual
+Python environment to keep these packages from interfering with your core
+operating system.</p>
+<h3 id="sdk-manager">SDK Manager<a class="headerlink" href="#sdk-manager" title="Permanent link">&para;</a></h3>
+<p>While running tests, it can be frustraighting to manage the large matrix of
+frameworks. The use of <a href="https://sdkman.io/">sdkman</a> can make quick work of this chore; it's up to
+you though.</p>
+<h2 id="running-the-tests">Running The Tests<a class="headerlink" href="#running-the-tests" title="Permanent link">&para;</a></h2>
+<p>The first two tests will illustrate the speed increase by using <a href="https://arrow.apache.org/">Apache Arrow</a>
+to process both CSV and <a href="https://parquet.apache.org/">Apache Parquet</a> compressed binaries. The major difference
+between the native CSV file, and those compressed by the <code>pandas_convert_csv.py</code>
+script is, the CSV file has no schema header information accompanying the file
+whereas the <a href="https://parquet.apache.org/">Apache Parquet</a> binaries have full headers and data-type structures
+defined. Using inferred-schema does work, but it is not without error.
+This is the primary reason to fully define the schemas beforehand.</p>
+<p><a href="https://pandas.pydata.org/">Pandas</a>, buy default, is a single thread reader/writer. It can be made to
+pool, but it's not configured to do so out of the box. You will see the
+difference in reading raw CSV files during the compression
+run and that of <a href="https://arrow.apache.org/">Apache Arrow</a> (e.g. PyArrow with Python) running in parallel
+doing the same task.</p>
+<p>To run the test scripts, perform the following:</p>
+<ul>
+<li>Download and extract a WSPR Archive</li>
+<li>Clone the <a href="https://github.com/KI7MT/wspr-analytics">wspr-analytics</a> repository</li>
+<li>Set a path variable</li>
+<li>Install Python package requirments</li>
+<li>Runs the test scripts</li>
+</ul>
+<p>Here are the <code>Bash</code> commands I used to run the tests.</p>
+<pre><code class="language-bash"># change the download location to whatever you prefer
+cd ~/Downloads
+wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
+gzip -dk wsprspots-2020-02.csv.gz
+
+# set the path of the downloaded and extracted CSV file
+csvfile=$PWD/wsprspots-2020-02.csv
+
+# clone the repo
+git clone https://github.com/KI7MT/wspr-analytics.git
+
+# change directories and install dependencies
+cd ~/Downloads/wspr-analytics/experiments
+
+# NOTE: Be sure you are in a virtual environment &quot;before&quot;
+# installing Python packages
+python -m pip install -r requirement.txt
+
+# run the conversion script
+python pandas_convert_csv.py -f $csvfile
 </code></pre>
-<h2 id="upgrade-anaconda">Upgrade Anaconda<a class="headerlink" href="#upgrade-anaconda" title="Permanent link">&para;</a></h2>
-<p>This is part of <a href="http://conda.pydata.org/docs/test-drive.html">30 Minute Conda</a> getting started page, but for completeness,
-I'm adding what was needed for my environment. All actions are performed in a
-terminal, open as required on your system, then:</p>
-<p>First,  <a href="https://www.continuum.io/downloads">Anaconda</a> should be upgraded:</p>
-<pre><code class="language-bash">conda update conda
+<h3 id="pandas-parquet-compression-test">Pandas Parquet Compression Test<a class="headerlink" href="#pandas-parquet-compression-test" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>CSV Reader</code> - Python Pandas</li>
+<li><code>Parquet Writer</code> - Python Pandas To Parquet</li>
+</ul>
+<blockquote>
+<p>NOTE: Additional tests will be added to check the read/write
+speeds using <a href="https://arrow.apache.org/">Apache Arrow</a> only while leaving <a href="https://pandas.pydata.org/">Pandas</a>
+out of the mix completely.</p>
+</blockquote>
+<p>The following data shows the results of converting a CSV file to 
+several <a href="https://parquet.apache.org/">Apache Parquet</a> formats. Substantial disk-space
+savings can be achived using these methods.</p>
+<p>Generally speaking, as the compression increases so does the length
+of time it takes to create the file. However, the disk-space savings
+are impressive.</p>
+<blockquote>
+<p>NOTE : Make note of the CSV Read Time while using <a href="https://pandas.pydata.org/">Pandas</a> in a <code>Single Thead</code> </p>
+</blockquote>
+<p>Disk space savings range from <code>&gt;= 5 : 1</code> to <code>8 : 1</code> depending on the compression
+you'd like to use. It's a <code>substantial</code> savings no matter which you chose.</p>
+<pre><code class="language-bash">Pandas CSV Conversion Method
+Parquet Compression Types : ['SNAPPY', 'LZ4', 'ZSTD', 'GZIP', 'BROTLI']
+Sit back and relax, this takes a while!!
+
+* Reading file  : wsprspots-2020-02.csv
+* Spot Count    : 47,310,649
+* File Size     : 3780.94 MB
+* Elapsed Time  : 79.448 sec
+
+* Converting CSV to -&gt; snappy
+* File Size     : 667.07 MB
+* Elapsed Time  : 29.579 sec
+
+* Converting CSV to -&gt; lz4
+* File Size     : 627.88 MB
+* Elapsed Time  : 29.702 sec
+
+* Converting CSV to -&gt; zstd
+* File Size     : 520.19 MB
+* Elapsed Time  : 30.778 sec
+
+* Converting CSV to -&gt; gzip
+* File Size     : 467.55 MB
+* Elapsed Time  : 107.244 sec
+
+* Converting CSV to -&gt; brotli
+* File Size     : 446.58 MB
+* Elapsed Time  : 89.529 sec
+
+NOTE : The File Sizes Are Approximated = (file bytes / 1048576)
+
+Finished !!
 </code></pre>
-<p>Next, update the conda-env scripts:</p>
-<pre><code class="language-bash">conda update conda-env
+<h3 id="apache-arrow-pyarrow-read-test">Apache Arrow (PyArrow) Read Test<a class="headerlink" href="#apache-arrow-pyarrow-read-test" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Reader</code> - PyArrow</li>
+</ul>
+<p>The results below are from using <a href="https://arrow.apache.org/">Apache Arrow</a> to read each of the
+compressed-file formats created above.</p>
+<p>No Spark nodes are deployed, only a single master with no special
+optimizations applied. <a href="https://arrow.apache.org/">Apache Arrow</a> uses threads by default which
+is the main difference in using <a href="https://pandas.pydata.org/">Pandas</a> to read original CSV read.</p>
+<p>To say it's fast is an understatement.</p>
+<blockquote>
+<p>NOTE : Check the CSV Read Time below and compare it to the <a href="https://pandas.pydata.org/">Pandas</a>
+CSV read time from above; it's an <code>36 : 1</code> read-speed improvement or
+( <code>80.32 sec</code> v.s. <code>2.213 sec</code> )</p>
+</blockquote>
+<pre><code class="language-bash"># You run the read script the same way
+python pyarrow_read.py -f $csvfile
+
+# Results:
+
+Running Read Tests Using Apache Arrow
+Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
+
+* Reading file  : wsprspots-2020-02.csv
+* File Size     : 3780.94 MB
+* Elapsed Time  : 2.185
+
+* Reading file  : wsprspots-2020-02.snappy
+* File Size     : 667.07 MB
+* Elapsed Time  : 2.011
+
+* Reading file  : wsprspots-2020-02.zstd
+* File Size     : 520.19 MB
+* Elapsed Time  : 1.769
+
+* Reading file  : wsprspots-2020-02.gzip
+* File Size     : 467.55 MB
+* Elapsed Time  : 3.654
+
+* Reading file  : wsprspots-2020-02.brotli
+* File Size     : 446.58 MB
+* Elapsed Time  : 2.102
+
+ Finished !!
 </code></pre>
-<p>That is all for the basic <a href="https://www.continuum.io/downloads">Anaconda</a> installation and update. You should
-close, then re-open your terminal to ensure all the paths and updates are
-working proerpy.</p>
-<h2 id="additional-python-modules">Additional Python Modules<a class="headerlink" href="#additional-python-modules" title="Permanent link">&para;</a></h2>
-<p>One package that is not available is a <a href="http://conda.pydata.org/docs/using/pkgs.html">conda</a> package is <a href="https://pypi.python.org/pypi/appdirs">AppDirs</a> but can
-be installed with <a href="https://pypi.python.org/pypi/pip">Pip</a>. In the terinal:</p>
-<pre><code class="language-bash">pip install appdirs clint
-</code></pre>
-<h2 id="installing-r">Installing R<a class="headerlink" href="#installing-r" title="Permanent link">&para;</a></h2>
-<p>The <a href="https://www.r-project.org/about.html">R-Scripting</a> language in not part of the base <a href="https://www.continuum.io/downloads">Anaconda</a> installation,
-however, installation is fairly easy using <a href="http://conda.pydata.org/docs/using/pkgs.html">conda</a>, the <a href="https://www.continuum.io/downloads">Anaconda</a> package
-manager.</p>
-<p>Again, in the terminal, perform the following:</p>
-<pre><code class="language-bash">conda install -c r r-essentials
-conda install -c r r-gridextra
+<h1 id="query-parquet-file-using-pyspark">Query Parquet File Using PySpark<a class="headerlink" href="#query-parquet-file-using-pyspark" title="Permanent link">&para;</a></h1>
+<p>The next phase is to run a simple query using <a href="https://databricks.com/glossary/pyspark">PySpark</a> in<br />
+in a distributed manner.</p>
+<p>As this is all happening on a single msater host node, it is more
+of a parralized action rather than distributed, but the results are
+far superior to what any single threaded implementation could achieve.</p>
+<p>See <a href="https://github.com/KI7MT/wspr-analytics/blob/main/notebooks/WSPR-Query-Using-PySpark.ipynb">WSPR Query Notebook</a> for details.</p>
+<p>The read speed is impressive. It takes <code>~1.5</code> seccond to read
+<code>47+ Million</code> rows, and <code>~4.8</code> seconds to do a group by query.</p>
+<p>Row count speeds (  <code>0.87 sec</code> ) are on par with using ( <code>wc -l</code> )
+from a Linux shell.</p>
+<p>Now matter how one looks at this approach, it's a viable alternative
+to a raw csv read and process action.</p>
+<pre><code class="language-bash">* Reading file ..: wsprspots-2020-02.parquet
+* File Size .....: 490,259,730 bytes compressed
+* Read Time .....: 1.51834 sec
+
+* Counting Records
+* Record Count ..: 47,310,649
+* Count Time ....: 0.90268 sec
+
+* Running Group by Count Query and return the dataframe
++--------+------+
+|Reporter| count|
++--------+------+
+|   DK6UG|838081|
+|  OE9GHV|690104|
+|  EA8BFK|648670|
+|   KD2OM|589003|
+|KA7OEI-1|576788|
+|   K4RCG|571445|
+|     KPH|551690|
+|    K9AN|480759|
+|   DF5FH|480352|
+|   DJ9PC|474211|
++--------+------+
+only showing top 10 rows
+
+* Query Time ....: 4.94034 sec
 </code></pre>
                 
               
@@ -810,7 +1080,7 @@ conda install -c r r-gridextra
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../scala/top-ten-reporters/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../overview/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -819,13 +1089,13 @@ conda install -c r r-gridextra
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Top Ten Reporters
+                Overview
               </div>
             </div>
           </a>
         
         
-          <a href="../../notebooks/overview/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../scala/overview/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
