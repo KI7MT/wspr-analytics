@@ -16,7 +16,7 @@
     
     
       
-        <title>Query With Parquet - WSPR Analytics</title>
+        <title>Installing R-Tools - WSPR Analytics</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#query-column-using-parquet-files" class="md-skip">
+        <a href="#installation" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Query With Parquet
+              Installing R-Tools
             
           </span>
         </div>
@@ -170,13 +170,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../setup/overview/" class="md-tabs__link">
+      <a href="../overview/" class="md-tabs__link md-tabs__link--active">
         Setup
       </a>
     </li>
@@ -202,15 +204,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../overview/" class="md-tabs__link md-tabs__link--active">
+      <a href="../../scala/overview/" class="md-tabs__link">
         Scala
       </a>
     </li>
@@ -329,12 +329,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Setup
@@ -355,7 +357,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../setup/overview/" class="md-nav__link">
+    <a href="../overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -368,7 +370,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../setup/install-python/" class="md-nav__link">
+    <a href="../install-python/" class="md-nav__link">
       Installing Python
     </a>
   </li>
@@ -381,7 +383,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../setup/install-java/" class="md-nav__link">
+    <a href="../install-java/" class="md-nav__link">
       Installing Java
     </a>
   </li>
@@ -394,7 +396,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../setup/install-sdkman/" class="md-nav__link">
+    <a href="../install-sdkman/" class="md-nav__link">
       Installing Sdkman
     </a>
   </li>
@@ -407,7 +409,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../setup/install-scala/" class="md-nav__link">
+    <a href="../install-scala/" class="md-nav__link">
       Installing Scala
     </a>
   </li>
@@ -418,11 +420,70 @@
           
 
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../setup/install-r/" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Installing R-Tools
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
       Installing R-Tools
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installing-anaconda" class="md-nav__link">
+    Installing Anaconda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upgrade-anaconda" class="md-nav__link">
+    Upgrade Anaconda
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-python-modules" class="md-nav__link">
+    Additional Python Modules
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installing-r" class="md-nav__link">
+    Installing R
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -433,7 +494,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../setup/install-grafana/" class="md-nav__link">
+    <a href="../install-grafana/" class="md-nav__link">
       Installing Graphana
     </a>
   </li>
@@ -446,7 +507,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../setup/install-postgresql/" class="md-nav__link">
+    <a href="../install-postgresql/" class="md-nav__link">
       Installing PostgreSQL
     </a>
   </li>
@@ -517,14 +578,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" >
     
     <label class="md-nav__link" for="nav-4">
       Scala
@@ -545,7 +604,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../overview/" class="md-nav__link">
+    <a href="../../scala/overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -558,7 +617,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../convert-csv-parquet/" class="md-nav__link">
+    <a href="../../scala/convert-csv-parquet/" class="md-nav__link">
       Convert To Parquet
     </a>
   </li>
@@ -569,84 +628,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Query With Parquet
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../../scala/query-with-parquet/" class="md-nav__link">
       Query With Parquet
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#file-specs" class="md-nav__link">
-    File Specs
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#build-and-run" class="md-nav__link">
-    Build and Run
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
-    Results
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-by-reporter" class="md-nav__link">
-    Query by Reporter
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-by-callsign" class="md-nav__link">
-    Query by CallSign
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-by-version" class="md-nav__link">
-    Query by Version
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -657,7 +643,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../top-ten-reporters/" class="md-nav__link">
+    <a href="../../scala/top-ten-reporters/" class="md-nav__link">
       Top Ten Reporters
     </a>
   </li>
@@ -670,7 +656,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../spark-examples/" class="md-nav__link">
+    <a href="../../scala/spark-examples/" class="md-nav__link">
       Spark Examples
     </a>
   </li>
@@ -832,43 +818,29 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#file-specs" class="md-nav__link">
-    File Specs
+  <a href="#installing-anaconda" class="md-nav__link">
+    Installing Anaconda
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#build-and-run" class="md-nav__link">
-    Build and Run
+  <a href="#upgrade-anaconda" class="md-nav__link">
+    Upgrade Anaconda
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#results" class="md-nav__link">
-    Results
+  <a href="#additional-python-modules" class="md-nav__link">
+    Additional Python Modules
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#query-by-reporter" class="md-nav__link">
-    Query by Reporter
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-by-callsign" class="md-nav__link">
-    Query by CallSign
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#query-by-version" class="md-nav__link">
-    Query by Version
+  <a href="#installing-r" class="md-nav__link">
+    Installing R
   </a>
   
 </li>
@@ -886,189 +858,49 @@
               
                 
                 
-                <h1 id="query-column-using-parquet-files">Query Column Using Parquet Files<a class="headerlink" href="#query-column-using-parquet-files" title="Permanent link">&para;</a></h1>
-<p>This is a sample Application using <a href="https://scala-lang.org/">Scala</a> that performs the following:</p>
-<ul>
-<li>Reads a Parquet folder specificed by the user e.g. /data/wspr/raw/parquet/2020/02</li>
-<li>Performs a Query Count on a column specified by the user e.g. Reporter</li>
-<li>Reports GoubyBy Count and returns the Top (10) </li>
-</ul>
-<h2 id="file-specs">File Specs<a class="headerlink" href="#file-specs" title="Permanent link">&para;</a></h2>
-<p>The specs on the test file are:</p>
-<ul>
-<li>Test File : wsprspots-2020-02.csv</li>
-<li>Rows : 47,310,649 spots</li>
-<li>File Size Decompressed : 3.964 GB</li>
-</ul>
-<h2 id="build-and-run">Build and Run<a class="headerlink" href="#build-and-run" title="Permanent link">&para;</a></h2>
-<p>Run the following commands in order, and check your results.</p>
-<pre><code class="language-bash">#
-# All commands are run from a terminal
-#
-
-# NOTE: You must have previously run ConvertCvsToParquet before
-#       using this app, as it is looking for a Parquet folder,
-#       not a CSV file.
-
-# set the path to where you created the Parquet partition
-inFolder=&quot;/data/wspr/raw/parquet/2020/02&quot;
-
-# set the colum you wish to GroupBy and Count
-column=&quot;Reporter&quot;
-
-# clone the repo
-git clone https://github.com/KI7MT/wspr-analytics.git
-
-# change directories and build the assembly
-cd ./wspr-analytics/scala/QueryColumnParquet
-
-# clean and build
-sbt clean assembly
-
-# Run the following command
-# NOTE : set local[8] to half of your total CPU count. 
-spark-submit --master local[8] target/scala-2.12/QueryColumnParquet-assembly-1.0.jar $inFolder $column
+                <h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
+<p>At the time of this writing, usage has only been tested on Linux x86-64 and.
+There is no particular reason why installation and usage could not be done on
+Windows or Mac OSX if the Requirements are met.</p>
+<p>It is <code>Highly Recommended</code> to use <a href="https://www.continuum.io/downloads">Anaconda</a> from Continuum Analytics. 
+It's free, supports all major operating systems, is well supported, does not
+interfere with system level packaging, can be installed on a per user basics
+and provides everything needed for <strong>Comprehensive WSPR Data Analysis</strong>.</p>
+<h2 id="installing-anaconda">Installing Anaconda<a class="headerlink" href="#installing-anaconda" title="Permanent link">&para;</a></h2>
+<p>Installing <a href="https://www.continuum.io/downloads">Anaconda</a> is very easy. Simply download the shell script and
+run it in a terminal:</p>
+<p>Use their <a href="https://docs.anaconda.com/anaconda/install/linux/">Install Instructions</a> paying particular atention to the additional
+package needs for Qt.</p>
+<p>Follow the prompts and when asked, I elected to add the the source scripts to
+my <code>.bashrc</code> but that is entirely up to you. I also used the default
+installation direcotry of:</p>
+<pre><code class="language-bash">/home/$USER/anaconda3
 </code></pre>
-<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
-<p>You should get results similar to the following:</p>
-<blockquote>
-<p>NOTE The time it takes will depend on your system resources (CPU, RAM, etc)</p>
-</blockquote>
-<pre><code class="language-bash">Application   : QueryColumnParquet
-Folder        : /data/wspr/raw/parquet/2020/02
-Column        : Reporter
-Tiimestame    : 2020-12-28T07:36:35.389
-Description   : Query Column and Count using Parquet Folders
-
-Process Steps to Query Reporter from Parquet Files(s)
-- Create a Spark Session
-- Read Parquet File(s)
-- Select Reporter
-- GroupBy and Count Reporter
-- Sort Reporter Descending
-- Execute the Query
-
-+--------+------+
-|Reporter| count|
-+--------+------+
-|   DK6UG|838081|
-|  OE9GHV|690104|
-|  EA8BFK|648670|
-|   KD2OM|589003|
-|KA7OEI-1|576788|
-|   K4RCG|571445|
-|     KPH|551690|
-|    K9AN|480759|
-|   DF5FH|480352|
-|   DJ9PC|474211|
-+--------+------+
-only showing top 10 rows
-
-Elapsed Time : 2.843 sec
+<h2 id="upgrade-anaconda">Upgrade Anaconda<a class="headerlink" href="#upgrade-anaconda" title="Permanent link">&para;</a></h2>
+<p>This is part of <a href="http://conda.pydata.org/docs/test-drive.html">30 Minute Conda</a> getting started page, but for completeness,
+I'm adding what was needed for my environment. All actions are performed in a
+terminal, open as required on your system, then:</p>
+<p>First,  <a href="https://www.continuum.io/downloads">Anaconda</a> should be upgraded:</p>
+<pre><code class="language-bash">conda update conda
 </code></pre>
-<h2 id="query-by-reporter">Query by Reporter<a class="headerlink" href="#query-by-reporter" title="Permanent link">&para;</a></h2>
-<p>For Comparrison, here is the data from <code>2020-11</code>. November 2020 had over <strong>70 Million</strong> reports.</p>
-<pre><code class="language-bash">Application   : QueryColumnParquet
-Folder        : /data/wspr/raw/parquet/2020/11
-Column        : Reporter
-Tiimestame    : 2020-12-28 T 07:42:09.275
-Description   : Query Column and Count using Parquet Folders
-
-Process Steps to Query Reporter from Parquet Files(s)
-- Create a Spark Session
-- Read Parquet File(s)
-- Select Reporter
-- GroupBy and Count Reporter
-- Sort Reporter Descending
-- Execute the Query
-
-+--------+-------+
-|Reporter|  count|
-+--------+-------+
-|  EA8BFK|1120739|
-|  OE9GHV|1103335|
-|   WA2TP| 847124|
-|   KD2OM| 834896|
-|  IW2NKE| 818315|
-|   LX1DQ| 803347|
-|   DK6UG| 794675|
-|KA7OEI-1| 748356|
-|   ON5KQ| 744727|
-|  OE9HLH| 733580|
-+--------+-------+
-only showing top 10 rows
-
-Elapsed Time : 2.8 sec
-
+<p>Next, update the conda-env scripts:</p>
+<pre><code class="language-bash">conda update conda-env
 </code></pre>
-<h2 id="query-by-callsign">Query by CallSign<a class="headerlink" href="#query-by-callsign" title="Permanent link">&para;</a></h2>
-<p>This query is from the <code>CallSign</code> column.</p>
-<pre><code class="language-bash">Application   : QueryColumnParquet
-Folder        : /data/wspr/raw/parquet/2020/11
-Column        : CallSign
-Tiimestame    : 2020-12-28 T 07:44:16.711
-Description   : Query Column and Count using Parquet Folders
-
-Process Steps to Query CallSign from Parquet Files(s)
-- Create a Spark Session
-- Read Parquet File(s)
-- Select CallSign
-- GroupBy and Count CallSign
-- Sort CallSign Descending
-- Execute the Query
-
-+--------+------+
-|CallSign| count|
-+--------+------+
-|   DK2DB|662784|
-|   K4APC|600895|
-|   ON7KO|557477|
-|   KD6RF|541418|
-|  WA4KFZ|531006|
-|   W6LVP|466346|
-|   DL6NL|438741|
-|   N8VIM|438260|
-|   DK8JP|403667|
-|   G0CCL|386570|
-+--------+------+
-only showing top 10 rows
-
-Elapsed Time : 2.445 sec
-
+<p>That is all for the basic <a href="https://www.continuum.io/downloads">Anaconda</a> installation and update. You should
+close, then re-open your terminal to ensure all the paths and updates are
+working proerpy.</p>
+<h2 id="additional-python-modules">Additional Python Modules<a class="headerlink" href="#additional-python-modules" title="Permanent link">&para;</a></h2>
+<p>One package that is not available is a <a href="http://conda.pydata.org/docs/using/pkgs.html">conda</a> package is <a href="https://pypi.python.org/pypi/appdirs">AppDirs</a> but can
+be installed with <a href="https://pypi.python.org/pypi/pip">Pip</a>. In the terinal:</p>
+<pre><code class="language-bash">pip install appdirs clint
 </code></pre>
-<h2 id="query-by-version">Query by Version<a class="headerlink" href="#query-by-version" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">Application   : QueryColumnParquet
-Folder        : /data/wspr/raw/parquet/2020/11
-Column        : Version
-Tiimestame    : 2020-12-28 T 07:50:17.725
-Description   : Query Column and Count using Parquet Folders
-
-Process Steps to Query Version from Parquet Files(s)
-- Create a Spark Session
-- Read Parquet File(s)
-- Select Version
-- GroupBy and Count Version
-- Sort Version Descending
-- Execute the Query
-
-+---------+--------+
-|  Version|   count|
-+---------+--------+
-|     null|27015499|
-| 1.3 Kiwi|13207118|
-|    2.2.2|11199415|
-|    2.1.2| 5906973|
-|2.3.0-rc1| 2952306|
-|    2.1.0| 2602903|
-|2.3.0-rc2| 2366520|
-|0.9_r4178| 2033622|
-|    2.2.1| 2027954|
-|    2.0.0| 1482597|
-+---------+--------+
-only showing top 10 rows
-
-Elapsed Time : 2.492 sec
-
+<h2 id="installing-r">Installing R<a class="headerlink" href="#installing-r" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://www.r-project.org/about.html">R-Scripting</a> language in not part of the base <a href="https://www.continuum.io/downloads">Anaconda</a> installation,
+however, installation is fairly easy using <a href="http://conda.pydata.org/docs/using/pkgs.html">conda</a>, the <a href="https://www.continuum.io/downloads">Anaconda</a> package
+manager.</p>
+<p>Again, in the terminal, perform the following:</p>
+<pre><code class="language-bash">conda install -c r r-essentials
+conda install -c r r-gridextra
 </code></pre>
                 
               
@@ -1088,7 +920,7 @@ Elapsed Time : 2.492 sec
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../convert-csv-parquet/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../install-scala/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1097,19 +929,19 @@ Elapsed Time : 2.492 sec
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Convert To Parquet
+                Installing Scala
               </div>
             </div>
           </a>
         
         
-          <a href="../top-ten-reporters/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../install-grafana/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Top Ten Reporters
+                Installing Graphana
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
