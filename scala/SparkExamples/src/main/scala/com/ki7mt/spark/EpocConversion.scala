@@ -54,7 +54,7 @@ object EpocConversion {
       .option("delimiter", ",")
       .option("header", "false")
       .schema(spotSchema)
-      .csv(path = "/home/ki7mt/Dev/Data/wspr/wsprspots-2020-11.csv")
+      .csv(path = "data/spots-2020-02-100K.csv")
       .as[RawSpot]
 
     println("- Select the column we want to process")
