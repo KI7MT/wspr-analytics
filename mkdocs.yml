@@ -44,6 +44,7 @@ nav:
     - Convert To Parquet: 'scala/convert-csv-parquet.md'
     - Query With Parquet: 'scala/query-with-parquet.md'
     - Top Ten Reporters: 'scala/top-ten-reporters.md'
+    - Spark Examples: 'scala/spark-examples.md'
   - R-Scripts:
     - Installation: 'rscripts/installation.md'
   - Jupyter:
