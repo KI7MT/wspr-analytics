@@ -38,6 +38,7 @@ nav:
     - Installing Scala: 'setup/install-scala.md'
   - PySpark:
     - Overview: 'pyspark/overview.md'
+    - Experiments: 'pyspark/experiments.md'
   - Scala:
     - Overview: 'scala/overview.md'
   - R-Scripts:
