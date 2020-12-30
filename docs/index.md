@@ -9,15 +9,6 @@ By any reasonable definition, it is safe to say that [WSPR][] has entered the re
 The goal of this project is to provide a set of tools to download, manage, transform and query
 WSPR DataSets using modern [Big Data][] frameworks.
 
-## Documentation
-
-Each folder will contain a seris of `README` files that explain the content, and where warrented,
-usage. Additionally, project documentation website can be used for more extensive and exhaustinve 
-explination of the project and its contence.
-
-* [WSPR Analytics Docs][] - bookmark this location for future reference
-
-
 ## Folder Descriptions
 
 Several frameworks are used in this repository. The following matrix provides a short description
