@@ -1,0 +1,4 @@
+*.rb linguist-language=Scala
+*.glyphs linguist-language=OpenStep-Property-List
+project-docs/* linguist-documentation
+docs/formatter.rb -linguist-documentation
