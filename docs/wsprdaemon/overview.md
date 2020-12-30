@@ -10,16 +10,27 @@
 * Reports spots and noise to a Timescale database with Grafana visualisation interface
 * Serves data to 3rd party apps including [VK7JJ][] and [WSPR Watch][]
 
-## Resoureces
+## Project Resoureces
 
-* [Noise Graphs][]
+Main Project Links
+
 * [WSPR Daemon Groups IO Site][]
 * [Github Project][]
 * [Help guides][]
 * [Presentations][]
 * [Technical][]
+
+Visuialization and Other Tools
+
+* [Noise Graphs][]
+* [Grafana Server][]
+* [Grafana Help Guide][]
+
+Third Party Integrations Apps and Sites
+
 * [VK7JJ][]
 * [WSPR Watch][]
+
 
 [WsprDaemon]: http://wsprdaemon.org/index.html
 [From The WSPR Daemon Site]: http://wsprdaemon.org/
@@ -30,4 +41,6 @@
 [Technical]: http://wsprdaemon.org/technical.html
 [VK7JJ]: http://wsprd.vk7jj.com/
 [WSPR Watch]: https://apps.apple.com/us/app/wspr-watch/id532487317
-[Nooise Graphs]: http://wsprdaemon.org/graphs/index.html 
+[Noise Graphs]: http://wsprdaemon.org/graphs/index.html
+[Grafana Server]: http://logs.wsprdaemon.org:3000/?orgId=2
+[Grafana Help Guide]: http://wsprdaemon.org/ewExternalFiles/Setting_up_Timescale_Grafana_dashboards_V2-2.pdf
