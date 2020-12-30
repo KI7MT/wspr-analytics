@@ -44,8 +44,3 @@ nav:
     - Installation: 'rscripts/installation.md'
   - Jupyter:
     - Overview: 'notebooks/overview.md'
-  - Examples:
-    - Overview: 'examples/overview.md'
-
-
-
