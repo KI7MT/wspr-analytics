@@ -36,6 +36,8 @@ nav:
     - Installing Java: 'setup/install-java.md'
     - Installing Sdkman: 'setup/install-sdkman.md'
     - Installing Scala: 'setup/install-scala.md'
+    - Installing Graphana: 'setup/install-grafana.md'
+    - Installing PostgreSQL: 'setup/install-postgresql.md'
   - PySpark:
     - Overview: 'pyspark/overview.md'
     - Basic Examples: 'pyspark/basic-examples.md'
@@ -49,3 +51,5 @@ nav:
     - Overview: 'rscripts/overview.md'
   - Jupyter:
     - Overview: 'notebooks/overview.md'
+  - WSPR-Daemon:
+    - Overview: 'wsprdaemon/overview.md'
