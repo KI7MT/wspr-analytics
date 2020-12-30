@@ -23,3 +23,4 @@ can be installed and managed via [sdkman][].
 
 [The Scala Project]: https://scala-lang.org/
 [Scala Projects]: https://scala-lang.org/
+[sdkman]: https://sdkman.io/
