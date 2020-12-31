@@ -21,7 +21,7 @@ one to install virtually any combination of tools you need without
 affecting your root file system. All the above requirements
 can be installed and managed via [sdkman][].
 
-If you can't run run, type: `scala`` and have it present the REPL,
+If you can't run run, type: `scala` and have it present the REPL,
 see [Installing Scalla](setup/install-scala/)
 
 >NOTE: You're version of Java and Scala may be different.
@@ -32,7 +32,11 @@ see [Installing Scalla](setup/install-scala/)
 Welcome to Scala 2.12.12 (OpenJDK 64-Bit Server VM, Java 1.8.0_275).
 Type in expressions for evaluation. Or try :help.
 
-scala> 
+scala> val nums = Seq(1,2,3)
+nums: Seq[Int] = List(1, 2, 3)
+
+scala> val doubledNums = for (n <- nums) yield n * 2
+doubledNums: Seq[Int] = List(2, 4, 6)
 
 ```
 

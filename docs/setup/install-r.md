@@ -1,5 +1,3 @@
-# Installation
-
 At the time of this writing, usage has only been tested on Linux x86-64 and.
 There is no particular reason why installation and usage could not be done on
 Windows or Mac OSX if the Requirements are met.
