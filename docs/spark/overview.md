@@ -19,8 +19,8 @@ one to install virtually any combination of tools you need without
 affecting your root file system. All the above requirements
 can be installed and managed via [sdkman][].
 
-If you can't run run, type: `scala` and have it present the REPL,
-see [Installing Scalla](setup/install-scala/)
+If you can't run run, type: `spark-shell` and have it present the REPL,
+see [Installing Spark](setup/install-spark/)
 
 >NOTE: You're version of Java and Scala may be different.
 
@@ -42,8 +42,24 @@ Type in expressions to have them evaluated.
 Type :help for more information.
 
 scala> 
-
 ```
+
+### Read and Queery DataSet
+
+```scala
+   // Read the CSV into the DataSet
+    println("- Reading CSV into DataSet")
+    import spark.implicits._
+    val reporterDS = spark.read
+      .schema(reporterSchema)
+      .csv(csvfile)
+      .as[Reporter]
+
+    // Print results from the dataset
+    println("- Query Execution\n")
+    time {sortedResults.show(10)}
+```
+
 
 [Apache Spark Project]: https://spark.apache.org/
 [Scala Projects]: https://scala-lang.org/
