@@ -44,7 +44,7 @@ Type :help for more information.
 scala> 
 ```
 
-### Read and Queery DataSet
+### Read and Query DataSet
 
 ```scala
    // Read the CSV into the DataSet
