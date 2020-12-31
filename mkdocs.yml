@@ -35,8 +35,9 @@ nav:
     - Installing Python: 'setup/install-python.md'
     - Installing Java: 'setup/install-java.md'
     - Installing Sdkman: 'setup/install-sdkman.md'
+    - Installing Spark: 'setup/install-spark.md'
     - Installing Scala: 'setup/install-scala.md'
-    - Installing R-: 'setup/install-r.md'
+    - Installing R: 'setup/install-r.md'
     - Installing Graphana: 'setup/install-grafana.md'
     - Installing PostgreSQL: 'setup/install-postgresql.md'
   - Spark:

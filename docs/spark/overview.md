@@ -20,7 +20,7 @@ affecting your root file system. All the above requirements
 can be installed and managed via [sdkman][].
 
 If you can't run : `spark-shell` and have it present the REPL,
-see [Installing Spark](setup/install-spark/install-spark.md)
+see [Installing Spark](../setup/install-spark.md)
 
 >NOTE: Your version of Java and Scala may be different.
 
