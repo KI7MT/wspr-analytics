@@ -17,7 +17,6 @@ explination of the project and its contence.
 
 * [WSPR Analytics Docs][] - bookmark this location for future reference
 
-
 ## Folder Descriptions
 
 Several frameworks are used in this repository. The following matrix provides a short description
