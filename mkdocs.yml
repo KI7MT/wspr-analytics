@@ -44,7 +44,7 @@ nav:
     - Convert To Parquet: 'spark/convert-csv-parquet.md'
     - Query With Parquet: 'spark/query-with-parquet.md'
     - Top Ten Reporters: 'spark/top-ten-reporters.md'
-    - Spark Examples: 'sspark/spark-examples.md'
+    - Spark Examples: 'spark/spark-examples.md'
   - PySpark:
     - Overview: 'pyspark/overview.md'
     - Basic Examples: 'pyspark/basic-examples.md'
