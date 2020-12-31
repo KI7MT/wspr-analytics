@@ -21,6 +21,21 @@ one to install virtually any combination of tools you need without
 affecting your root file system. All the above requirements
 can be installed and managed via [sdkman][].
 
+If you can't run run, type: `scala`` and have it present the REPL,
+see [Installing Scalla](setup/install-scala/)
+
+>NOTE: You're version of Java and Scala may be different.
+
+```scala
+
+(wsprana) ki7mt@3950X:~ $ scala
+Welcome to Scala 2.12.12 (OpenJDK 64-Bit Server VM, Java 1.8.0_275).
+Type in expressions for evaluation. Or try :help.
+
+scala> 
+
+```
+
 [The Scala Project]: https://scala-lang.org/
 [Scala Projects]: https://scala-lang.org/
 [sdkman]: https://sdkman.io/
