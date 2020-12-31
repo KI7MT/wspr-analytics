@@ -14,12 +14,14 @@ WSPR DataSets using modern [Big Data][] frameworks.
 Several frameworks are used in this repository. The following matrix provides a short description
 of each, and their intended purpose.
 
-* `docs` - Python, MkDocs for General repository documentation
-* `experiments` - Python, Spark, PyArrow Scripts to manage CSV & Parquet files
-* `java` - |Java, Maven, SBT Basic Java apps for RDD and Avro examples
-* `notebooks` - Jupyter Notebooks Notebooks to demonstrate features an capabilities
-* `scala` - Scala programs to query files and convert csv files
-* `wsprana` - Python package to manage downloading CSV files (soon to be retired)
+* `docs` - Python, MkDocs for repository documentation
+* `java` - Java, Maven, and SBT apps for RDD and Avro examples
+* `notebooks` - Jupyter Notebooks  for basic test and visualization
+* `pyspark` - Python, PyArrow scripts that interact with CSV and Parquet files
+* `spark` -Scala programs to perform tasks
+* `wsprdaemon` - Python, Scala, Psql utilities related to the WSPR Daemon project
+* `wsprana` - Python, (soon to be retired)
+
 
 Pay close attention to the `README` files as they lay out how to setup the
 tools needed to run their respective scripts or application.
