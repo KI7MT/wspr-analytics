@@ -26,10 +26,10 @@ of each, and their intended purpose.
 Folder       | Frameworks          | Description
 |:---        |:---                 |:---
 |docs        | Python, MkDocs      | General repository documentation
-|java        | Java, Maven, SBT    | Basic Java apps for RDD and Avro examples
-|notebooks   | Jupyter Notebooks   | Notebooks to test and demonstrate capabilities
+|java        | Java, Maven, SBT    | Java apps for RDD and Avro examples
+|notebooks   | Jupyter Notebooks   | Notebooks for basic test and visualization
 |pyspark     | Python, PyArrow     | Scripts that interact with CSV and Parquet files
-|scala       | Scala               | Scala programs to perform query's
+|spark       | Scala               | Scala programs to perform tasks
 |wsprdaemon  | Python, Scala, Psql | Utilities related to the WSPR Daemon project
 |wsprana     | Python              | (soon to be retired)
 
