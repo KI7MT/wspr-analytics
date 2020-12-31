@@ -23,22 +23,17 @@ explination of the project and its contence.
 Several frameworks are used in this repository. The following matrix provides a short description
 of each, and their intended purpose.
 
-Folder | Frameworks | Description
-|:--- |:--- |:---
-|docs|Python, MkDocs| General repository documentation
-|experiments|Python, Spark, PyArrow| Scripts to manage CSV & Parquet files
-|java|Java, Maven, SBT| Basic Java apps for RDD and Avro examples
-|notebooks|Jupyter Notebooks| Notebooks to test and demonstrate capabilities
-|scala|Scala| Scala programs to query files
-|wsprana|Python|Python package to manage downloading CSV files (soon to be retired)
-
-Pay close attention to the `README` files as they lay out how to setup the
-tools needed to run their respective scripts or application.
+Folder       | Frameworks          | Description
+|:---        |:---                 |:---
+|docs        | Python, MkDocs      | General repository documentation
+|java        | Java, Maven, SBT    | Basic Java apps for RDD and Avro examples
+|notebooks   | Jupyter Notebooks   | Notebooks to test and demonstrate capabilities
+|pyspark     | Python, PyArrow     | Scripts that interact with CSV and Parquet files
+|scala       | Scala               | Scala programs to perform query's
+|wsprdaemon  | Python, Scala, Psql | Utilities related to the WSPR Daemon project
+|wsprana     | Python              | (soon to be retired)
 
 ## Basic Tool Requirements
-
->NOTE: During development, the wsprana package **is not** intended for pip installaiton
->yet, but will be.It should be checked out and run from source at present.
 
 You must have Python, Java, PySpark/Spark available from the command line.
 
