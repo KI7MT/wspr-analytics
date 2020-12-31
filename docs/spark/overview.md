@@ -1,9 +1,7 @@
->Scala combines object-oriented and functional programming in one concise,
->high-level language. Scala's static types help avoid bugs in complex applications,
->and its JVM and JavaScript runtimes let you build high-performance systems with
->easy access to huge ecosystems of libraries.
+
+>Apache Spark™ is a unified analytics engine for large-scale data processing. 
 >
-><cite>[The Scala Project][]</cite>
+><cite>[Apache Spark Project][]</cite>
 
 ## Framework Requirements
 
@@ -28,18 +26,25 @@ see [Installing Scalla](setup/install-scala/)
 
 ```scala
 
-(wsprana) ki7mt@3950X:~ $ scala
-Welcome to Scala 2.12.12 (OpenJDK 64-Bit Server VM, Java 1.8.0_275).
-Type in expressions for evaluation. Or try :help.
+(wsprana) ki7mt@3950X:~ $ spark-shell 
+Spark context Web UI available at http://localhost:4040
+Spark context available as 'sc' (master = local[*], app id = local-1609375750950).
+Spark session available as 'spark'.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 3.0.1
+      /_/
+         
+Using Scala version 2.12.10 (OpenJDK 64-Bit Server VM, Java 1.8.0_275)
+Type in expressions to have them evaluated.
+Type :help for more information.
 
-scala> val nums = Seq(1,2,3)
-nums: Seq[Int] = List(1, 2, 3)
-
-scala> val doubledNums = for (n <- nums) yield n * 2
-doubledNums: Seq[Int] = List(2, 4, 6)
+scala> 
 
 ```
 
-[The Scala Project]: https://scala-lang.org/
+[Apache Spark Project]: https://spark.apache.org/
 [Scala Projects]: https://scala-lang.org/
 [sdkman]: https://sdkman.io/
