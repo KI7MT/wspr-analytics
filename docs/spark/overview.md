@@ -19,10 +19,10 @@ one to install virtually any combination of tools you need without
 affecting your root file system. All the above requirements
 can be installed and managed via [sdkman][].
 
-If you can't run run, type: `spark-shell` and have it present the REPL,
-see [Installing Spark](setup/install-spark/)
+If you can't run : `spark-shell` and have it present the REPL,
+see [Installing Spark](setup/install-spark/install-spark.md)
 
->NOTE: You're version of Java and Scala may be different.
+>NOTE: Your version of Java and Scala may be different.
 
 ```scala
 
@@ -59,7 +59,6 @@ scala>
     println("- Query Execution\n")
     time {sortedResults.show(10)}
 ```
-
 
 [Apache Spark Project]: https://spark.apache.org/
 [Scala Projects]: https://scala-lang.org/
