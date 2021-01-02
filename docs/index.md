@@ -101,6 +101,7 @@ desired tab will render the command or content relevant to that distribution.
     sudo apt-get update
     sudo ap-get install dkms
     ```
+
 === "Fedora"
     a. Update your fedora release
 
