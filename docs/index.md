@@ -163,25 +163,146 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 === "Java"
     
     ``` java
-    println("Hello World")
+        private static void DownloadFile(String inFileUrl, String outFile) {
+        try {
+            URL url = new URL(inFileUrl);
+            File dest_file = new File(outFile);
+            FileUtils.copyURLToFile(url, dest_file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(2);
+        }
+    } // END - DownloadFile method
+
+    private static void UnzipFile(String zipFilePath, String destDir) {
+        File dir = new File(destDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        FileInputStream fis;
+        byte[] buffer = new byte[1024];
+        try {
+            fis = new FileInputStream(zipFilePath);
+            ZipInputStream zis = new ZipInputStream(fis);
+            ZipEntry ze = zis.getNextEntry();
+            while (ze != null) {
+                String fileName = ze.getName();
+                File newFile = new File(destDir + File.separator + fileName);
+                System.out.println("* Unzipping to " + newFile.getAbsolutePath());
+
+                new File(newFile.getParent()).mkdirs();
+                FileOutputStream fos = new FileOutputStream(newFile);
+                int len;
+
+                while ((len = zis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
+                }
+                fos.close();
+
+                //close this ZipEntry
+                zis.closeEntry();
+                ze = zis.getNextEntry();
+            }
+            //close last ZipEntry
+            zis.closeEntry();
+            zis.close();
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(2);
+        }
+    } // END - UnzipFile method
     ```
 
 === "Scala"
 
     ``` scala
-    println("Hello World")
-    ```
+    def main(args: Array[String]): Unit = {
+        PropertyConfigurator.configure("log4j/log4j.properties")
 
-=== "Python2"
+        val debug: Boolean = false
 
-    ``` python
-    print "Hello World"
+        // IMPORTANT: When converting EPOCH times, you must do so with the
+        // to_utc_timestamp method. This requires telling the system what Zone
+        // your computer is in (the one doing the conversion) in order to get
+        // the correct unix time.
+        val z = ZoneId.systemDefault()
+        val zoneId = z.getId
+
+        println("Process Steps For Processing A CSV File")
+        println("- Create a Spark Session")
+
+        val spark: SparkSession = SparkSession.builder()
+        .appName("Read CSV and Show Schema")
+        .master("local[16]")
+        .getOrCreate()
+
+        println("- Create the Spot Schema")
+        val spotSchema = new StructType()
+        .add("SpotID", LongType, nullable = false)
+        .add("Timestamp", IntegerType, nullable = false)
+        .add("Reporter", StringType, nullable = false)
+        .add("RxGrid", StringType, nullable = false)
+        .add("SNR", ByteType, nullable = false)
+        .add("Frequency", DoubleType, nullable = false)
+        .add("CallSign", StringType, nullable = false)
+        .add("Grid", StringType, nullable = false)
+        .add("Power", ByteType, nullable = false)
+        .add("Drift", ByteType, nullable = false)
+        .add("Distance", ShortType, nullable = false)
+        .add("Azimuth", ByteType, nullable = false)
+        .add("Band", ByteType, nullable = false)
+        .add("Version", StringType, nullable = true)
+        .add("Code", ByteType, nullable = true)
+
+        println("- Read the CSV file into a DataSet")
+        import spark.implicits._
+        val ds = spark.read
+        .option("delimiter", ",")
+        .option("header", "false")
+        .schema(spotSchema)
+        .csv(path = "data/spots-2020-02-100K.csv")
+        .as[RawSpot]
     ```
 
 === "Python3"
 
     ``` python3
-    print("Hello World")
+    def pandas_convert_csv(csvfile):
+        """
+        Convert CSV file using parquet_type compression
+        """
+        file_name = os.path.basename(csvfile)
+
+        clear()
+        print("\nPandas CSV Conversion Method")
+        print(f"Parquet Compression Types : {parquet_types}")
+        print("Sit back and relax, this takes a while!!\n")
+        print(f'* Reading file  : {file_name}')
+    
+        start = time.time()
+        df = pd.read_csv(csvfile, dtype=spot_dtype, names=column_names, header=None)
+        rc = df.shape[0]
+        print(f"* Spot Count    : {rc:,}")
+        end = time.time()
+        print(f"* File Size     : {round(get_file_size(csvfile, 'csv'), 2)} MB")
+        print(f"* Elapsed Time  : {round((end - start), 3)} sec")
+
+        for f in parquet_types:
+            compression_type = str(f.upper())
+            file_name = csvfile.replace('csv', f.lower())
+            if compression_type == "PARQUET":
+                comp_type = "NONE"
+            else:
+                comp_type = compression_type.upper()
+            print(f'\n* Converting CSV to -> {f.lower()}')
+            start = time.time()
+            df.to_parquet(file_name, compression=str(comp_type.upper()))
+            end = time.time()
+            time.sleep(sleep_time) # prevent seg-fault on reads that are too quick
+
+            print(f"* File Size     : {round(get_file_size(csvfile, comp_type), 2)} MB")
+            print(f"* Elapsed Time  : {round((end - start), 3)} sec")
     ```
 ```
 
