@@ -70,7 +70,7 @@ by many of the apps and scripts.
 
 ## Distribution Tabs
 
-In many of the instalaltion sections, you will see Tabs for a particular distribution. Clicking on the 
+In many of the installation sections, you will see Tabs for a particular distribution. Clicking on the 
 desired tab will render the command or content relevant to that distribution.
 
 >NOTE: These are just examples, and not intended for actual use.
@@ -163,6 +163,12 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 === "Scala"
 
     ``` scala
+    /**
+    *
+    * Convert Epoch in WSPRnet CSV files
+    *
+    */
+
     def main(args: Array[String]): Unit = {
         
         val debug: Boolean = false
@@ -226,7 +232,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
             res.printSchema()
         }
 
-        // See not above about ZoneId, it's important.
+        // See note above about ZoneId, it's important!
         println("- Setup Epoh Conversion")
         val res1 = res.select("*")
             .withColumn("x_timestamp", to_utc_timestamp(col("x_TimeStamp"), zoneId))
@@ -249,6 +255,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
             res1.show(5)
         }
 
+        // Print the final row count
         println("\nGetting final row count, please wait...")
         time {
             val rowcount = res1.count()
