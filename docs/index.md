@@ -168,7 +168,6 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     * Convert Epoch in WSPRnet CSV files
     *
     */
-
     def main(args: Array[String]): Unit = {
         
         val debug: Boolean = false
@@ -268,9 +267,8 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 
     ``` python
     def pandas_convert_csv(csvfile):
-        """
-        Convert CSV file using parquet_type compression
-        """
+        """Convert CSV file using parquet_type compression"""
+
         file_name = os.path.basename(csvfile)
 
         clear()
@@ -308,6 +306,11 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 === "Java"
 
     ``` java
+    /**
+    *
+    * Static Mathod: Unzip a file to a path location
+    *
+    */
     private static void UnzipFile(String zipFilePath, String destDir) {
 
         File dir = new File(destDir);
