@@ -164,9 +164,11 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 
     ``` scala
     def main(args: Array[String]): Unit = {
-        PropertyConfigurator.configure("log4j/log4j.properties")
-
+        
         val debug: Boolean = false
+
+        // make Java's log4j warnings be quiet
+        PropertyConfigurator.configure("log4j/log4j.properties")
 
         // IMPORTANT: When converting EPOCH times, you must do so with the
         // to_utc_timestamp method. This requires telling the system what Zone
@@ -203,7 +205,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
             .add("Version", StringType, nullable = true)
             .add("Code", ByteType, nullable = true)
 
-        // Create the SparkData Set ( using small 200K csv )
+        // Create the Spark DataSet ( using small 100K csv )
         println("- Read the CSV file into a DataSet")
         import spark.implicits._
         val ds = spark.read
@@ -269,9 +271,12 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 
         byte[] buffer = new byte[1024];
         try {
+            
             fis = new FileInputStream(zipFilePath);
             ZipInputStream zis = new ZipInputStream(fis);
             ZipEntry ze = zis.getNextEntry();
+
+            // outer-loop
             while (ze != null) {
                 String fileName = ze.getName();
                 File newFile = new File(destDir + File.separator + fileName);
@@ -281,6 +286,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
                 FileOutputStream fos = new FileOutputStream(newFile);
                 int len;
 
+                // inner-loop
                 while ((len = zis.read(buffer)) > 0) {
                     fos.write(buffer, 0, len);
                 }
@@ -291,7 +297,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
                 ze = zis.getNextEntry();
             }
 
-            //close last ZipEntry
+            // close the ZipEntry
             zis.closeEntry();
             zis.close();
             fis.close();
