@@ -178,37 +178,40 @@ tab shows the syntax for the stated language. This is the same behaviour as with
         println("Process Steps For Processing A CSV File")
         println("- Create a Spark Session")
 
+        // Create the SPark Session
         val spark: SparkSession = SparkSession.builder()
-        .appName("Read CSV and Show Schema")
-        .master("local[16]")
-        .getOrCreate()
+            .appName("Read CSV and Show Schema")
+            .master("local[16]")
+            .getOrCreate()
 
+        // Add Type-Safe Schema
         println("- Create the Spot Schema")
         val spotSchema = new StructType()
-        .add("SpotID", LongType, nullable = false)
-        .add("Timestamp", IntegerType, nullable = false)
-        .add("Reporter", StringType, nullable = false)
-        .add("RxGrid", StringType, nullable = false)
-        .add("SNR", ByteType, nullable = false)
-        .add("Frequency", DoubleType, nullable = false)
-        .add("CallSign", StringType, nullable = false)
-        .add("Grid", StringType, nullable = false)
-        .add("Power", ByteType, nullable = false)
-        .add("Drift", ByteType, nullable = false)
-        .add("Distance", ShortType, nullable = false)
-        .add("Azimuth", ByteType, nullable = false)
-        .add("Band", ByteType, nullable = false)
-        .add("Version", StringType, nullable = true)
-        .add("Code", ByteType, nullable = true)
+            .add("SpotID", LongType, nullable = false)
+            .add("Timestamp", IntegerType, nullable = false)
+            .add("Reporter", StringType, nullable = false)
+            .add("RxGrid", StringType, nullable = false)
+            .add("SNR", ByteType, nullable = false)
+            .add("Frequency", DoubleType, nullable = false)
+            .add("CallSign", StringType, nullable = false)
+            .add("Grid", StringType, nullable = false)
+            .add("Power", ByteType, nullable = false)
+            .add("Drift", ByteType, nullable = false)
+            .add("Distance", ShortType, nullable = false)
+            .add("Azimuth", ByteType, nullable = false)
+            .add("Band", ByteType, nullable = false)
+            .add("Version", StringType, nullable = true)
+            .add("Code", ByteType, nullable = true)
 
+        // Create the SparkData Set ( using small 200K csv )
         println("- Read the CSV file into a DataSet")
         import spark.implicits._
         val ds = spark.read
-        .option("delimiter", ",")
-        .option("header", "false")
-        .schema(spotSchema)
-        .csv(path = "data/spots-2020-02-100K.csv")
-        .as[RawSpot]
+            .option("delimiter", ",")
+            .option("header", "false")
+            .schema(spotSchema)
+            .csv(path = "data/spots-2020-02-100K.csv")
+            .as[RawSpot]
     ```
 
 === "Python"
@@ -231,6 +234,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
         rc = df.shape[0]
         print(f"* Spot Count    : {rc:,}")
         end = time.time()
+        
         print(f"* File Size     : {round(get_file_size(csvfile, 'csv'), 2)} MB")
         print(f"* Elapsed Time  : {round((end - start), 3)} sec")
 
@@ -255,11 +259,14 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 
     ``` java
     private static void UnzipFile(String zipFilePath, String destDir) {
+
         File dir = new File(destDir);
         if (!dir.exists()) {
             dir.mkdirs();
         }
+
         FileInputStream fis;
+
         byte[] buffer = new byte[1024];
         try {
             fis = new FileInputStream(zipFilePath);
@@ -283,6 +290,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
                 zis.closeEntry();
                 ze = zis.getNextEntry();
             }
+
             //close last ZipEntry
             zis.closeEntry();
             zis.close();
