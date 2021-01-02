@@ -187,44 +187,45 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 
         // Create the SPark Session
         val spark: SparkSession = SparkSession.builder()
-            .appName("Read CSV and Show Schema")
-            .master("local[16]")
-            .getOrCreate()
+          .appName("Read CSV and Show Schema")
+          .master("local[16]")
+          .getOrCreate()
 
         // Add Type-Safe Schema
         println("- Create the Spot Schema")
         val spotSchema = new StructType()
-            .add("SpotID", LongType, nullable = false)
-            .add("Timestamp", IntegerType, nullable = false)
-            .add("Reporter", StringType, nullable = false)
-            .add("RxGrid", StringType, nullable = false)
-            .add("SNR", ByteType, nullable = false)
-            .add("Frequency", DoubleType, nullable = false)
-            .add("CallSign", StringType, nullable = false)
-            .add("Grid", StringType, nullable = false)
-            .add("Power", ByteType, nullable = false)
-            .add("Drift", ByteType, nullable = false)
-            .add("Distance", ShortType, nullable = false)
-            .add("Azimuth", ByteType, nullable = false)
-            .add("Band", ByteType, nullable = false)
-            .add("Version", StringType, nullable = true)
-            .add("Code", ByteType, nullable = true)
+          .add("SpotID", LongType, nullable = false)
+          .add("Timestamp", IntegerType, nullable = false)
+          .add("Reporter", StringType, nullable = false)
+          .add("RxGrid", StringType, nullable = false)
+          .add("SNR", ByteType, nullable = false)
+          .add("Frequency", DoubleType, nullable = false)
+          .add("CallSign", StringType, nullable = false)
+          .add("Grid", StringType, nullable = false)
+          .add("Power", ByteType, nullable = false)
+          .add("Drift", ByteType, nullable = false)
+          .add("Distance", ShortType, nullable = false)
+          .add("Azimuth", ByteType, nullable = false)
+          .add("Band", ByteType, nullable = false)
+          .add("Version", StringType, nullable = true)
+          .add("Code", ByteType, nullable = true)
 
         // Create the Spark DataSet ( using small 100K csv )
         println("- Read the CSV file into a DataSet")
         import spark.implicits._
         val ds = spark.read
-            .option("delimiter", ",")
-            .option("header", "false")
-            .schema(spotSchema)
-            .csv(path = "data/spots-2020-02-100K.csv")
-            .as[RawSpot]
-            println("- Select the column we want to process")
+          .option("delimiter", ",")
+          .option("header", "false")
+          .schema(spotSchema)
+          .csv(path = "data/spots-2020-02-100K.csv")
+          .as[RawSpot]
+        
+        println("- Select the column we want to process")
 
         // Filter the data set 
         val res = ds.select("*")
-        .withColumn("x_TimeStamp", date_format(col("TimeStamp")
-            .cast(DataTypes.TimestampType), "yyyy-MM-dd HH:mm:ss"))
+          .withColumn("x_TimeStamp", date_format(col("TimeStamp")
+          .cast(DataTypes.TimestampType), "yyyy-MM-dd HH:mm:ss"))
 
         // only print the schema in Debug Mode
         if (debug) {
@@ -234,13 +235,13 @@ tab shows the syntax for the stated language. This is the same behaviour as with
         // See note above about ZoneId, it's important!
         println("- Setup Epoh Conversion")
         val res1 = res.select("*")
-            .withColumn("x_timestamp", to_utc_timestamp(col("x_TimeStamp"), zoneId))
-            .withColumn("x_date", to_date(col("x_TimeStamp")))
-            .withColumn("x_year", year(col("x_TimeStamp")).cast(ShortType))
-            .withColumn("x_month", month(col("x_TimeStamp")).cast(ByteType))
-            .withColumn("x_day", dayofmonth(col("x_TimeStamp")).cast(ByteType))
-            .withColumn("x_hour", hour(col("x_TimeStamp")).cast(ByteType))
-            .withColumn("x_minute", minute(col("x_TimeStamp")).cast(ByteType))
+          .withColumn("x_timestamp", to_utc_timestamp(col("x_TimeStamp"), zoneId))
+          .withColumn("x_date", to_date(col("x_TimeStamp")))
+          .withColumn("x_year", year(col("x_TimeStamp")).cast(ShortType))
+          .withColumn("x_month", month(col("x_TimeStamp")).cast(ByteType))
+          .withColumn("x_day", dayofmonth(col("x_TimeStamp")).cast(ByteType))
+          .withColumn("x_hour", hour(col("x_TimeStamp")).cast(ByteType))
+          .withColumn("x_minute", minute(col("x_TimeStamp")).cast(ByteType))
 
         // only print the schema in Debug Mode
         if (debug) {
