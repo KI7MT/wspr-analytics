@@ -4,9 +4,9 @@ Gwyn Griffiths, G3ZIL at [WSPR Daemon Org][].
 The examples providered are simply re-formated for easier readablity
 in Markdown Web Page Docs and included in code-blocks.
 
-If a Python examples does not exist for a particular Pgsql query, 
-a sample script may be provided depending on the input parameter
-complexity.
+If a Python example does not exist for a particular Pgsql query, 
+a sample script may be provided depending on input parameter
+complexity and desired ouput.
 
 ## Authors and Credits
 

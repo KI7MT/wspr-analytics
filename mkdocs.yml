@@ -57,3 +57,4 @@ nav:
     - Overview: 'notebooks/overview.md'
   - WSPR-Daemon:
     - Overview: 'wsprdaemon/overview.md'
+    - Database Notes: 'wsprdaemon/database-notes.md'
