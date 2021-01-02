@@ -214,6 +214,45 @@ tab shows the syntax for the stated language. This is the same behaviour as with
             .schema(spotSchema)
             .csv(path = "data/spots-2020-02-100K.csv")
             .as[RawSpot]
+            println("- Select the column we want to process")
+
+        // Filter the data set 
+        val res = ds.select("*")
+        .withColumn("x_TimeStamp", date_format(col("TimeStamp")
+            .cast(DataTypes.TimestampType), "yyyy-MM-dd HH:mm:ss"))
+
+        // only print the schema in Debug Mode
+        if (debug) {
+            res.printSchema()
+        }
+
+        // See not above about ZoneId, it's important.
+        println("- Setup Epoh Conversion")
+        val res1 = res.select("*")
+            .withColumn("x_timestamp", to_utc_timestamp(col("x_TimeStamp"), zoneId))
+            .withColumn("x_date", to_date(col("x_TimeStamp")))
+            .withColumn("x_year", year(col("x_TimeStamp")).cast(ShortType))
+            .withColumn("x_month", month(col("x_TimeStamp")).cast(ByteType))
+            .withColumn("x_day", dayofmonth(col("x_TimeStamp")).cast(ByteType))
+            .withColumn("x_hour", hour(col("x_TimeStamp")).cast(ByteType))
+            .withColumn("x_minute", minute(col("x_TimeStamp")).cast(ByteType))
+
+        if (debug) {
+            println("- Print Res1 Schema")
+            res1.printSchema()
+        }
+
+        println("- Execute the Query")
+        time {
+            res1.show(5)
+        }
+
+        println("\nGetting final row count, please wait...")
+        time {
+            val rowcount = res1.count()
+            println(f"Epoch Conversion Processed : ($rowcount%,d) Spots ")
+        }
+    } // END - Main CLass
     ```
 
 === "Python"
