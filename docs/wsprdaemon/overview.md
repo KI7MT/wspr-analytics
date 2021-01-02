@@ -21,7 +21,7 @@
 The links on this page are pulled directly from [WSPR Daemon Org][] and placed
 here for quick reference. Please see the site for additioanl resources.
 
-Additional resources that should be reviewed:
+Additional content that should be reviewed:
 
 - [Wspr Daemon Timescale Databases Notes][] by Gwyn Griffiths, G3ZIL
 
