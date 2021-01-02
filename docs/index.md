@@ -67,6 +67,122 @@ A [PostgreSQL][] database server will be needed. There are many ways to perform 
 [Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively
 by many of the apps and scripts.
 
+
+## Distribution Tabs
+
+I many of the instalaltion sections, you will see Tabs for a particular distribution. Clicking on the 
+desired tab will render the command or content relevant to that distribution.
+
+=== "Alpine"
+    - Update the package list
+    ```bash
+    apk update
+    ```
+    - Add a package
+    ```bash
+    apk add openssh
+    apk add openssh opentp vim
+    ```
+
+
+=== "Ubuntu"
+    Upgrade the host System Packages.
+
+    ```shell
+    # Run the following command
+    sudo apt-get update && sudo apt-get upgrade
+    ```
+
+=== "Mint"
+    Install a pre-requesite package for VirtualBox.
+
+    ```shell
+    # Run the following command
+    sudo apt-get update
+    sudo ap-get install dkms
+    ```
+=== "Fedora"
+    a. Update your fedora release
+
+    ```bash
+    sudo dnf upgrade --refresh
+    ```
+
+    b. Install a plugin
+
+    ```bash
+    sudo dnf install dnf-plugin-system-upgrade
+    ```
+
+    c. Download upgraded packages
+    ```bash
+    sudo dnf system-upgrade download --refresh --releasever=33
+    ```
+
+=== "Windows"
+    Lets not and say we did!
+
+    ```batch
+    REM Run the following command
+    echo Spark runs better on Linux.
+    echo   Please consider using SPark aps in Virtual
+    echo   VirtualBox to run Spark applications
+    echo   if you^'re host os is Windows
+    ```
+
+
+## Super Fences
+
+I many examples you may see several tabs relatting to a particular code-blocks. Clicking on each tab shows the syntax
+for that particular language.
+
+=== "C"
+
+    ``` c
+    #include <stdio.h>
+
+    int main(void) {
+      printf("Hello world!\n");
+      return 0;
+    }
+    ```
+
+=== "C++"
+
+    ``` c++
+    #include <iostream>
+
+    int main(void) {
+      std::cout << "Hello world!" << std::endl;
+      return 0;
+    }
+    ```
+
+=== "Java"
+    
+    ``` java
+    println("Hello World")
+    ```
+
+=== "Scala"
+
+    ``` scala
+    println("Hello World")
+    ```
+
+=== "Python2"
+
+    ``` python
+    print "Hello World"
+    ```
+
+=== "Python3"
+
+    ``` python3
+    print("Hello World")
+    ```
+```
+
 <p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
