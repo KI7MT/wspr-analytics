@@ -73,6 +73,8 @@ by many of the apps and scripts.
 I many of the instalaltion sections, you will see Tabs for a particular distribution. Clicking on the 
 desired tab will render the command or content relevant to that distribution.
 
+>NOTE: These are just examples, and not intended for actual use.
+
 === "Alpine"
     - Update the package list
     ```bash
@@ -129,7 +131,6 @@ desired tab will render the command or content relevant to that distribution.
     echo   Please consider running Spark apps in
     echo   VirtualBox if your host os is Windows!!
     ```
-
 
 ## Super Fencing
 
