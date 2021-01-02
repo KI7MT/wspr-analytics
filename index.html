@@ -1093,37 +1093,40 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;Process Steps For Processing A CSV File&quot;</span><span class="o">)</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;- Create a Spark Session&quot;</span><span class="o">)</span>
 
+    <span class="c1">// Create the SPark Session</span>
     <span class="k">val</span> <span class="n">spark</span><span class="k">:</span> <span class="kt">SparkSession</span> <span class="o">=</span> <span class="nc">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">()</span>
-    <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="s">&quot;Read CSV and Show Schema&quot;</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">master</span><span class="o">(</span><span class="s">&quot;local[16]&quot;</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
+        <span class="o">.</span><span class="n">appName</span><span class="o">(</span><span class="s">&quot;Read CSV and Show Schema&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">master</span><span class="o">(</span><span class="s">&quot;local[16]&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">getOrCreate</span><span class="o">()</span>
 
+    <span class="c1">// Add Type-Safe Schema</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;- Create the Spot Schema&quot;</span><span class="o">)</span>
     <span class="k">val</span> <span class="n">spotSchema</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StructType</span><span class="o">()</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;SpotID&quot;</span><span class="o">,</span> <span class="nc">LongType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Timestamp&quot;</span><span class="o">,</span> <span class="nc">IntegerType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Reporter&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;RxGrid&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;SNR&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Frequency&quot;</span><span class="o">,</span> <span class="nc">DoubleType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;CallSign&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Grid&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Power&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Drift&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Distance&quot;</span><span class="o">,</span> <span class="nc">ShortType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Azimuth&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Band&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Version&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Code&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;SpotID&quot;</span><span class="o">,</span> <span class="nc">LongType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Timestamp&quot;</span><span class="o">,</span> <span class="nc">IntegerType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Reporter&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;RxGrid&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;SNR&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Frequency&quot;</span><span class="o">,</span> <span class="nc">DoubleType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;CallSign&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Grid&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Power&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Drift&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Distance&quot;</span><span class="o">,</span> <span class="nc">ShortType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Azimuth&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Band&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Version&quot;</span><span class="o">,</span> <span class="nc">StringType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">add</span><span class="o">(</span><span class="s">&quot;Code&quot;</span><span class="o">,</span> <span class="nc">ByteType</span><span class="o">,</span> <span class="n">nullable</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
 
+    <span class="c1">// Create the SparkData Set ( using small 200K csv )</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;- Read the CSV file into a DataSet&quot;</span><span class="o">)</span>
     <span class="k">import</span> <span class="nn">spark.implicits._</span>
     <span class="k">val</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
-    <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;delimiter&quot;</span><span class="o">,</span> <span class="s">&quot;,&quot;</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;header&quot;</span><span class="o">,</span> <span class="s">&quot;false&quot;</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">schema</span><span class="o">(</span><span class="n">spotSchema</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">csv</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;data/spots-2020-02-100K.csv&quot;</span><span class="o">)</span>
-    <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">RawSpot</span><span class="o">]</span>
+        <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;delimiter&quot;</span><span class="o">,</span> <span class="s">&quot;,&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">option</span><span class="o">(</span><span class="s">&quot;header&quot;</span><span class="o">,</span> <span class="s">&quot;false&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">schema</span><span class="o">(</span><span class="n">spotSchema</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">csv</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">&quot;data/spots-2020-02-100K.csv&quot;</span><span class="o">)</span>
+        <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">RawSpot</span><span class="o">]</span>
 </code></pre></div>
 </div>
 <input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Python</label><div class="tabbed-content">
@@ -1144,6 +1147,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     <span class="n">rc</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* Spot Count    : </span><span class="si">{</span><span class="n">rc</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* File Size     : </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">get_file_size</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="s1">&#39;csv&#39;</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> MB&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* Elapsed Time  : </span><span class="si">{</span><span class="nb">round</span><span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2"> sec&quot;</span><span class="p">)</span>
 
@@ -1166,11 +1170,14 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 </div>
 <input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">Java</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">UnzipFile</span><span class="p">(</span><span class="n">String</span> <span class="n">zipFilePath</span><span class="p">,</span> <span class="n">String</span> <span class="n">destDir</span><span class="p">)</span> <span class="p">{</span>
+
     <span class="n">File</span> <span class="n">dir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">destDir</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dir</span><span class="p">.</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
         <span class="n">dir</span><span class="p">.</span><span class="na">mkdirs</span><span class="p">();</span>
     <span class="p">}</span>
+
     <span class="n">FileInputStream</span> <span class="n">fis</span><span class="p">;</span>
+
     <span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">]</span><span class="p">;</span>
     <span class="k">try</span> <span class="p">{</span>
         <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">zipFilePath</span><span class="p">);</span>
@@ -1194,6 +1201,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
             <span class="n">zis</span><span class="p">.</span><span class="na">closeEntry</span><span class="p">();</span>
             <span class="n">ze</span> <span class="o">=</span> <span class="n">zis</span><span class="p">.</span><span class="na">getNextEntry</span><span class="p">();</span>
         <span class="p">}</span>
+
         <span class="c1">//close last ZipEntry</span>
         <span class="n">zis</span><span class="p">.</span><span class="na">closeEntry</span><span class="p">();</span>
         <span class="n">zis</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
