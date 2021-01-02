@@ -16,7 +16,7 @@
     
     
       
-        <title>Overview - WSPR Analytics</title>
+        <title>Database notes - WSPR Analytics</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#project-resoureces" class="md-skip">
+        <a href="#authors-and-credits" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Overview
+              Database notes
             
           </span>
         </div>
@@ -250,15 +250,13 @@
         
   
   
-    
-  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
+      <a href="../overview/" class="md-tabs__link">
         WSPR-Daemon
       </a>
     </li>
@@ -734,14 +732,12 @@
       
 
 
-  
-
 
   
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
     
     <label class="md-nav__link" for="nav-7">
       WSPR-Daemon
@@ -760,72 +756,11 @@
           
 
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Overview
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../overview/" class="md-nav__link">
       Overview
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#project-resoureces" class="md-nav__link">
-    Project Resoureces
-  </a>
-  
-    <nav class="md-nav" aria-label="Project Resoureces">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#primary-links" class="md-nav__link">
-    Primary Links
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visuialization-and-tools" class="md-nav__link">
-    Visuialization and Tools
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#third-party-integrations" class="md-nav__link">
-    Third Party Integrations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -857,36 +792,16 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#project-resoureces" class="md-nav__link">
-    Project Resoureces
-  </a>
-  
-    <nav class="md-nav" aria-label="Project Resoureces">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#primary-links" class="md-nav__link">
-    Primary Links
+  <a href="#authors-and-credits" class="md-nav__link">
+    Authors and Credits
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#visuialization-and-tools" class="md-nav__link">
-    Visuialization and Tools
+      
+        <li class="md-nav__item">
+  <a href="#schmenas-and-data-types" class="md-nav__link">
+    Schmenas and Data Types
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#third-party-integrations" class="md-nav__link">
-    Third Party Integrations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -903,61 +818,25 @@
               
                 
                 
-                  <h1>Overview</h1>
+                  <h1>Database notes</h1>
                 
-                <blockquote>
-<p>WsprDaemon is a robust application for Linux systems that:</p>
+                <p>The content on the page are derived directly from the work of 
+Gwyn Griffiths, G3ZIL at <a href="http://wsprdaemon.org/">WSPR Daemon Org</a>. </p>
+<p>The examples providered are simply re-formated for easier readablity
+in Markdown Web Page Docs and included in code-blocks.</p>
+<p>If a Python example does not exist for a particular Pgsql query, 
+a sample script may be provided depending on the input parameter
+complexity and desired ouput.</p>
+<h2 id="authors-and-credits">Authors and Credits<a class="headerlink" href="#authors-and-credits" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>Decodes Weak Signal Propagation Reporter (WSPR) signals (Franke/Taylor wsprd* program)</p>
-</li>
-<li>
-<p>Operates with networked KiwiSDRs for multi-channel spot acquisition (at least 8 channels)</p>
-</li>
-<li>
-<p>Includes baseband audio input option</p>
-</li>
-<li>
-<p>Provides a complete, robust and reliable reporting function to the wsprnet.org database</p>
-</li>
-<li>
-<p>Estimates noise using RMS and FFT methods at same time and frequencies as WSPR spots</p>
-</li>
-<li>
-<p>Reports spots and noise to a Timescale database with Grafana visualisation interface</p>
-</li>
-<li>
-<p>Serves data to 3<sup>rd</sup> party apps including <a href="http://wsprd.vk7jj.com/">VK7JJ</a> and <a href="https://apps.apple.com/us/app/wspr-watch/id532487317">WSPR Watch</a></p>
-</li>
+<li><code>Principal Author</code> - Gwyn Griffiths, G3ZIL</li>
+<li><code>Doc ref</code> - <a href="https://groups.io/g/wsprdaemon/message/53">Wspr Daemon Timescale Databases Notes</a></li>
 </ul>
-</blockquote>
-<p><cite>-- <a href="http://wsprdaemon.org/">WSPR Daemon Org</a> --</cite></p>
-<h2 id="project-resoureces">Project Resoureces<a class="headerlink" href="#project-resoureces" title="Permanent link">&para;</a></h2>
-<p>The links on this page are pulled directly from <a href="http://wsprdaemon.org/">WSPR Daemon Org</a> and placed
-here for quick reference. Please see the site for additioanl resources.</p>
-<p>Additional content that should be reviewed:</p>
-<ul>
-<li><a href="https://groups.io/g/wsprdaemon/message/53">Wspr Daemon Timescale Databases Notes</a> by Gwyn Griffiths, G3ZIL</li>
-</ul>
-<h3 id="primary-links">Primary Links<a class="headerlink" href="#primary-links" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="https://groups.io/g/wsprdaemon/topics">WSPR Daemon Groups IO Site</a></li>
-<li><a href="https://github.com/rrobinett/wsprdaemon">Github Project</a></li>
-<li><a href="http://wsprdaemon.org/help.html">Help guides</a></li>
-<li><a href="http://wsprdaemon.org/presentations.html">Presentations</a></li>
-<li><a href="http://wsprdaemon.org/technical.html">Technical</a></li>
-</ul>
-<h3 id="visuialization-and-tools">Visuialization and Tools<a class="headerlink" href="#visuialization-and-tools" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="http://wsprdaemon.org/graphs/index.html">Noise Graphs</a></li>
-<li><a href="http://logs.wsprdaemon.org:3000/?orgId=2">Grafana Server</a></li>
-<li><a href="http://wsprdaemon.org/ewExternalFiles/Setting_up_Timescale_Grafana_dashboards_V2-2.pdf">Grafana Help Guide</a></li>
-</ul>
-<h3 id="third-party-integrations">Third Party Integrations<a class="headerlink" href="#third-party-integrations" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="http://wsprd.vk7jj.com/">VK7JJ</a></li>
-<li><a href="https://apps.apple.com/us/app/wspr-watch/id532487317">WSPR Watch</a></li>
-</ul>
+<p>Before working through these example, one should read the reference
+material in its entirity before using anything from this site.</p>
+<h2 id="schmenas-and-data-types">Schmenas and Data Types<a class="headerlink" href="#schmenas-and-data-types" title="Permanent link">&para;</a></h2>
+<p>The database schema and data-types are defined in the <a href="#authors-and-credits">Reference Document</a>. Any
+deviation from the reference should be clearly understood by those running or authoring additional scripts.</p>
                 
               
               
@@ -972,27 +851,6 @@ here for quick reference. Please see the site for additioanl resources.</p>
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../../notebooks/overview/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Overview
-              </div>
-            </div>
-          </a>
-        
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
