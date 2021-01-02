@@ -1077,59 +1077,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 <span class="p">}</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code>    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">DownloadFile</span><span class="p">(</span><span class="n">String</span> <span class="n">inFileUrl</span><span class="p">,</span> <span class="n">String</span> <span class="n">outFile</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="n">URL</span> <span class="n">url</span> <span class="o">=</span> <span class="k">new</span> <span class="n">URL</span><span class="p">(</span><span class="n">inFileUrl</span><span class="p">);</span>
-        <span class="n">File</span> <span class="n">dest_file</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">outFile</span><span class="p">);</span>
-        <span class="n">FileUtils</span><span class="p">.</span><span class="na">copyURLToFile</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dest_file</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span> <span class="c1">// END - DownloadFile method</span>
-
-<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">UnzipFile</span><span class="p">(</span><span class="n">String</span> <span class="n">zipFilePath</span><span class="p">,</span> <span class="n">String</span> <span class="n">destDir</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">File</span> <span class="n">dir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">destDir</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dir</span><span class="p">.</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
-        <span class="n">dir</span><span class="p">.</span><span class="na">mkdirs</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="n">FileInputStream</span> <span class="n">fis</span><span class="p">;</span>
-    <span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">]</span><span class="p">;</span>
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">zipFilePath</span><span class="p">);</span>
-        <span class="n">ZipInputStream</span> <span class="n">zis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ZipInputStream</span><span class="p">(</span><span class="n">fis</span><span class="p">);</span>
-        <span class="n">ZipEntry</span> <span class="n">ze</span> <span class="o">=</span> <span class="n">zis</span><span class="p">.</span><span class="na">getNextEntry</span><span class="p">();</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">ze</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">ze</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span>
-            <span class="n">File</span> <span class="n">newFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">destDir</span> <span class="o">+</span> <span class="n">File</span><span class="p">.</span><span class="na">separator</span> <span class="o">+</span> <span class="n">fileName</span><span class="p">);</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;* Unzipping to &quot;</span> <span class="o">+</span> <span class="n">newFile</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span>
-
-            <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">newFile</span><span class="p">.</span><span class="na">getParent</span><span class="p">()).</span><span class="na">mkdirs</span><span class="p">();</span>
-            <span class="n">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">newFile</span><span class="p">);</span>
-            <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
-
-            <span class="k">while</span> <span class="p">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">zis</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">fos</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="n">fos</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-
-            <span class="c1">//close this ZipEntry</span>
-            <span class="n">zis</span><span class="p">.</span><span class="na">closeEntry</span><span class="p">();</span>
-            <span class="n">ze</span> <span class="o">=</span> <span class="n">zis</span><span class="p">.</span><span class="na">getNextEntry</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="c1">//close last ZipEntry</span>
-        <span class="n">zis</span><span class="p">.</span><span class="na">closeEntry</span><span class="p">();</span>
-        <span class="n">zis</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-        <span class="n">fis</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span> <span class="c1">// END - UnzipFile method</span>
-</code></pre></div>
-</div>
-<input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Scala</label><div class="tabbed-content">
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Scala</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
     <span class="nc">PropertyConfigurator</span><span class="o">.</span><span class="n">configure</span><span class="o">(</span><span class="s">&quot;log4j/log4j.properties&quot;</span><span class="o">)</span>
 
@@ -1178,7 +1126,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">RawSpot</span><span class="o">]</span>
 </code></pre></div>
 </div>
-<input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">Python3</label><div class="tabbed-content">
+<input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Python</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pandas_convert_csv</span><span class="p">(</span><span class="n">csvfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert CSV file using parquet_type compression</span>
@@ -1216,8 +1164,48 @@ tab shows the syntax for the stated language. This is the same behaviour as with
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* Elapsed Time  : </span><span class="si">{</span><span class="nb">round</span><span class="p">((</span><span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2"> sec&quot;</span><span class="p">)</span>
 </code></pre></div>
 </div>
+<input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">Java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">UnzipFile</span><span class="p">(</span><span class="n">String</span> <span class="n">zipFilePath</span><span class="p">,</span> <span class="n">String</span> <span class="n">destDir</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">File</span> <span class="n">dir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">destDir</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dir</span><span class="p">.</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">dir</span><span class="p">.</span><span class="na">mkdirs</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">FileInputStream</span> <span class="n">fis</span><span class="p">;</span>
+    <span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="mi">1024</span><span class="o">]</span><span class="p">;</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="n">fis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="n">zipFilePath</span><span class="p">);</span>
+        <span class="n">ZipInputStream</span> <span class="n">zis</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ZipInputStream</span><span class="p">(</span><span class="n">fis</span><span class="p">);</span>
+        <span class="n">ZipEntry</span> <span class="n">ze</span> <span class="o">=</span> <span class="n">zis</span><span class="p">.</span><span class="na">getNextEntry</span><span class="p">();</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">ze</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">String</span> <span class="n">fileName</span> <span class="o">=</span> <span class="n">ze</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span>
+            <span class="n">File</span> <span class="n">newFile</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">destDir</span> <span class="o">+</span> <span class="n">File</span><span class="p">.</span><span class="na">separator</span> <span class="o">+</span> <span class="n">fileName</span><span class="p">);</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;* Unzipping to &quot;</span> <span class="o">+</span> <span class="n">newFile</span><span class="p">.</span><span class="na">getAbsolutePath</span><span class="p">());</span>
+
+            <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">newFile</span><span class="p">.</span><span class="na">getParent</span><span class="p">()).</span><span class="na">mkdirs</span><span class="p">();</span>
+            <span class="n">FileOutputStream</span> <span class="n">fos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">FileOutputStream</span><span class="p">(</span><span class="n">newFile</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+
+            <span class="k">while</span> <span class="p">((</span><span class="n">len</span> <span class="o">=</span> <span class="n">zis</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">buffer</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">fos</span><span class="p">.</span><span class="na">write</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">fos</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+
+            <span class="c1">//close this ZipEntry</span>
+            <span class="n">zis</span><span class="p">.</span><span class="na">closeEntry</span><span class="p">();</span>
+            <span class="n">ze</span> <span class="o">=</span> <span class="n">zis</span><span class="p">.</span><span class="na">getNextEntry</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="c1">//close last ZipEntry</span>
+        <span class="n">zis</span><span class="p">.</span><span class="na">closeEntry</span><span class="p">();</span>
+        <span class="n">zis</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+        <span class="n">fis</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span> <span class="c1">// END - UnzipFile method</span>
+</code></pre></div>
 </div>
-<p>```</p>
+</div>
 <p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
                 
               
