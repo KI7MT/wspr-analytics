@@ -160,60 +160,6 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     }
     ```
 
-=== "Java"
-    
-    ``` java
-        private static void DownloadFile(String inFileUrl, String outFile) {
-        try {
-            URL url = new URL(inFileUrl);
-            File dest_file = new File(outFile);
-            FileUtils.copyURLToFile(url, dest_file);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(2);
-        }
-    } // END - DownloadFile method
-
-    private static void UnzipFile(String zipFilePath, String destDir) {
-        File dir = new File(destDir);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        FileInputStream fis;
-        byte[] buffer = new byte[1024];
-        try {
-            fis = new FileInputStream(zipFilePath);
-            ZipInputStream zis = new ZipInputStream(fis);
-            ZipEntry ze = zis.getNextEntry();
-            while (ze != null) {
-                String fileName = ze.getName();
-                File newFile = new File(destDir + File.separator + fileName);
-                System.out.println("* Unzipping to " + newFile.getAbsolutePath());
-
-                new File(newFile.getParent()).mkdirs();
-                FileOutputStream fos = new FileOutputStream(newFile);
-                int len;
-
-                while ((len = zis.read(buffer)) > 0) {
-                    fos.write(buffer, 0, len);
-                }
-                fos.close();
-
-                //close this ZipEntry
-                zis.closeEntry();
-                ze = zis.getNextEntry();
-            }
-            //close last ZipEntry
-            zis.closeEntry();
-            zis.close();
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(2);
-        }
-    } // END - UnzipFile method
-    ```
-
 === "Scala"
 
     ``` scala
@@ -265,9 +211,9 @@ tab shows the syntax for the stated language. This is the same behaviour as with
         .as[RawSpot]
     ```
 
-=== "Python3"
+=== "Python"
 
-    ``` python3
+    ``` python
     def pandas_convert_csv(csvfile):
         """
         Convert CSV file using parquet_type compression
@@ -304,7 +250,49 @@ tab shows the syntax for the stated language. This is the same behaviour as with
             print(f"* File Size     : {round(get_file_size(csvfile, comp_type), 2)} MB")
             print(f"* Elapsed Time  : {round((end - start), 3)} sec")
     ```
-```
+
+=== "Java"
+
+    ``` java
+    private static void UnzipFile(String zipFilePath, String destDir) {
+        File dir = new File(destDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        FileInputStream fis;
+        byte[] buffer = new byte[1024];
+        try {
+            fis = new FileInputStream(zipFilePath);
+            ZipInputStream zis = new ZipInputStream(fis);
+            ZipEntry ze = zis.getNextEntry();
+            while (ze != null) {
+                String fileName = ze.getName();
+                File newFile = new File(destDir + File.separator + fileName);
+                System.out.println("* Unzipping to " + newFile.getAbsolutePath());
+
+                new File(newFile.getParent()).mkdirs();
+                FileOutputStream fos = new FileOutputStream(newFile);
+                int len;
+
+                while ((len = zis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
+                }
+                fos.close();
+
+                //close this ZipEntry
+                zis.closeEntry();
+                ze = zis.getNextEntry();
+            }
+            //close last ZipEntry
+            zis.closeEntry();
+            zis.close();
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(2);
+        }
+    } // END - UnzipFile method
+    ```
 
 <p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
 
