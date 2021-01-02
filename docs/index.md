@@ -99,7 +99,7 @@ desired tab will render the command or content relevant to that distribution.
     ```shell
     # Run the following command
     sudo apt-get update
-    sudo ap-get install dkms
+    sudo apt-get install dkms
     ```
 
 === "Fedora"
