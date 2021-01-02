@@ -1006,7 +1006,7 @@ During these transformations is where <a href="https://towardsdatascience.com/di
 <a href="https://docs.docker.com/engine/examples/postgresql_service/">Dockerize PostgreSQL</a>, <a href="https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant">PostgreSQL with Vagrant</a>, etc). Whichever method you chose, it will be used extensively
 by many of the apps and scripts.</p>
 <h2 id="distribution-tabs">Distribution Tabs<a class="headerlink" href="#distribution-tabs" title="Permanent link">&para;</a></h2>
-<p>In many of the instalaltion sections, you will see Tabs for a particular distribution. Clicking on the 
+<p>In many of the installation sections, you will see Tabs for a particular distribution. Clicking on the 
 desired tab will render the command or content relevant to that distribution.</p>
 <blockquote>
 <p>NOTE: These are just examples, and not intended for actual use.</p>
@@ -1078,7 +1078,12 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 </code></pre></div>
 </div>
 <input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Scala</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">*</span>
+<span class="cm">* Convert Epoch in WSPRnet CSV files</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="k">def</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Array</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span>
 
     <span class="k">val</span> <span class="n">debug</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
 
@@ -1141,7 +1146,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
         <span class="n">res</span><span class="o">.</span><span class="n">printSchema</span><span class="o">()</span>
     <span class="o">}</span>
 
-    <span class="c1">// See not above about ZoneId, it&#39;s important.</span>
+    <span class="c1">// See note above about ZoneId, it&#39;s important!</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;- Setup Epoh Conversion&quot;</span><span class="o">)</span>
     <span class="k">val</span> <span class="n">res1</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">select</span><span class="o">(</span><span class="s">&quot;*&quot;</span><span class="o">)</span>
         <span class="o">.</span><span class="n">withColumn</span><span class="o">(</span><span class="s">&quot;x_timestamp&quot;</span><span class="o">,</span> <span class="n">to_utc_timestamp</span><span class="o">(</span><span class="n">col</span><span class="o">(</span><span class="s">&quot;x_TimeStamp&quot;</span><span class="o">),</span> <span class="n">zoneId</span><span class="o">))</span>
@@ -1164,6 +1169,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
         <span class="n">res1</span><span class="o">.</span><span class="n">show</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span>
     <span class="o">}</span>
 
+    <span class="c1">// Print the final row count</span>
     <span class="n">println</span><span class="o">(</span><span class="s">&quot;\nGetting final row count, please wait...&quot;</span><span class="o">)</span>
     <span class="n">time</span> <span class="o">{</span>
         <span class="k">val</span> <span class="n">rowcount</span> <span class="o">=</span> <span class="n">res1</span><span class="o">.</span><span class="n">count</span><span class="o">()</span>
@@ -1174,9 +1180,8 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 </div>
 <input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Python</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pandas_convert_csv</span><span class="p">(</span><span class="n">csvfile</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert CSV file using parquet_type compression</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Convert CSV file using parquet_type compression&quot;&quot;&quot;</span>
+
     <span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
 
     <span class="n">clear</span><span class="p">()</span>
@@ -1212,7 +1217,12 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 </code></pre></div>
 </div>
 <input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">Java</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">UnzipFile</span><span class="p">(</span><span class="n">String</span> <span class="n">zipFilePath</span><span class="p">,</span> <span class="n">String</span> <span class="n">destDir</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">*</span>
+<span class="cm">* Static Mathod: Unzip a file to a path location</span>
+<span class="cm">*</span>
+<span class="cm">*/</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">UnzipFile</span><span class="p">(</span><span class="n">String</span> <span class="n">zipFilePath</span><span class="p">,</span> <span class="n">String</span> <span class="n">destDir</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="n">File</span> <span class="n">dir</span> <span class="o">=</span> <span class="k">new</span> <span class="n">File</span><span class="p">(</span><span class="n">destDir</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">dir</span><span class="p">.</span><span class="na">exists</span><span class="p">())</span> <span class="p">{</span>
