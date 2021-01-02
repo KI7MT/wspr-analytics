@@ -125,9 +125,8 @@ desired tab will render the command or content relevant to that distribution.
     ```batch
     REM Run the following command
     echo Spark runs better on Linux.
-    echo   Please consider using SPark aps in Virtual
-    echo   VirtualBox to run Spark applications
-    echo   if you^'re host os is Windows
+    echo   Please consider running Spark apps in
+    echo   VirtualBox if you^'re host os is Windows
     ```
 
 
