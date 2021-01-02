@@ -21,5 +21,6 @@ material in its entirity before using anything from this site.
 The database schema and data-types are defined in the [Reference Document](#authors-and-credits). Any
 deviation from the reference should be clearly understood by those running or authoring additional scripts.
 
+
 [WSPR Daemon Org]: http://wsprdaemon.org/
 [Wspr Daemon Timescale Databases Notes]: https://groups.io/g/wsprdaemon/message/53
