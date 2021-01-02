@@ -70,7 +70,7 @@ by many of the apps and scripts.
 
 ## Distribution Tabs
 
-I many of the instalaltion sections, you will see Tabs for a particular distribution. Clicking on the 
+In many of the instalaltion sections, you will see Tabs for a particular distribution. Clicking on the 
 desired tab will render the command or content relevant to that distribution.
 
 >NOTE: These are just examples, and not intended for actual use.

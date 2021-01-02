@@ -20,7 +20,7 @@
         This file creates the (rdaas) Role and Database:
             Role      =  rdaas
             Password  =  rdaas
-            Database  =  wsprnet
+            Database  =  test_wsprnet, test_tutorial
 
         * Clone the repository
             git clone https://github.com/KI7MT/wspr-analytics
@@ -32,6 +32,8 @@
 
 -- Script variables (Change this to what you want)
 \set name rdaas
+\set db1 test_wsprnet
+\set db2 test_tutorial
 
 \echo ''
 \echo Initializing Roles and Databases
@@ -41,30 +43,35 @@
 -----------------------------------------------------------
 -- SESSION TERMINATION
 -----------------------------------------------------------
-\echo 'Terminating ( :name ) Sessions'
+\echo Terminating ( :name ) Session
 SELECT
  pg_terminate_backend (pg_stat_activity.pid)
 FROM
  pg_stat_activity
 WHERE
- pg_stat_activity.datname = :name;
+ pg_stat_activity.datname = 'rdaas';
 
 -----------------------------------------------------------
 -- DATABASE TERMINATION
 -----------------------------------------------------------
-\echo 'Drop ( :name ) Database if exists'
-DROP DATABASE IF EXISTS :name;
+\! clear
+\echo ''
+\echo Drop ( :db1 and :db2 ) Database if exists
+DROP DATABASE IF EXISTS :db1;
+DROP DATABASE IF EXISTS :db2;
 
 -----------------------------------------------------------
 -- ROLE CREATION
 -----------------------------------------------------------
-\echo 'Drop ( :name ) Role if exists'
+\echo ''
+\echo Drop ( :name ) Role if exists
 DROP USER IF EXISTS :name;
 
 -----------------------------------------------------------
 -- ROLE CREATION
 -----------------------------------------------------------
-\ech 'Creating Role ( :name )'
+\echo ''
+\echo Creating Role ( :name )
 CREATE USER :name WITH
 	LOGIN
 	SUPERUSER
@@ -73,38 +80,142 @@ CREATE USER :name WITH
 	INHERIT
 	REPLICATION
 	CONNECTION LIMIT -1
-	PASSWORD :name;
+	PASSWORD 'rdaas';
 COMMENT ON ROLE :name IS 'Role for use with Wspr Daemon Applications';
 
 -- -----------------------------------------------------------------------------
 -- DATABASE CREATION - wsprnet
 -- -----------------------------------------------------------------------------
-\\echo 'Creating Database : wsprnet'
-CREATE DATABASE wsprnet
+\echo ''
+\echo Creating Database : :db1
+CREATE DATABASE :db1
     WITH 
     OWNER = :name
     ENCODING = 'UTF8'
     CONNECTION LIMIT = -1;
-COMMENT ON DATABASE :name IS 'WSPR Daemon Production Database';
+COMMENT ON DATABASE :db1 IS 'WSPR Daemon Production Database';
 
 -- -----------------------------------------------------------------------------
 -- DATABASE CREATION - tutorial
 -- -----------------------------------------------------------------------------
-\\echo 'Creating Database : tutorial'
-CREATE DATABASE tutorial
+\echo ''
+\echo Creating Database : :db2
+CREATE DATABASE :db2
     WITH 
     OWNER = :name
     ENCODING = 'UTF8'
     CONNECTION LIMIT = -1;
-COMMENT ON DATABASE :name IS 'WSPR Daemon Tutorial Database';
+COMMENT ON DATABASE :db2 IS 'WSPR Daemon Tutorial Database';
 
 -- -----------------------------------------------------------------------------
 -- GRANT PERMISSIONS
 -- -----------------------------------------------------------------------------
-\\echo 'Cranting permossions for ( :name )'
-GRANT ALL ON DATABASE wsprnet TO :name;
-GRANT ALL ON DATABASE tutorial TO :name;
+\echo ''
+\echo Granting permissions for : ( :name )
+GRANT ALL ON DATABASE :db1 TO :name;
+GRANT ALL ON DATABASE :db2 TO :name;
 
-\echo 'Finished !!'
+-- -----------------------------------------------------------------------------
+-- CREATE TABLE - test_wsprnet
+-- -----------------------------------------------------------------------------
+\echo ''
+\echo 'Use Default Password is : rdaas'
+\connect :db1 :name
+\echo ''
+
+CREATE TABLE IF NOT EXISTS spots (
+    wd_time TIMESTAMP
+    , Spotnum BIGINT
+    , Date INTEGER
+    , Reporter TEXT
+    , ReporterGrid CHARACTER(6)
+    , dB SMALLINT
+    , MHz DOUBLE PRECISION
+    , CallSign TEXT
+    , Grid CHARACTER(6)
+    , Power SMALLINT
+    , Drift SMALLINT
+    , distance SMALLINT
+    , azimuth SMALLINT
+    , Band SMALLINT
+    , version CHARACTER(10)
+    , code SMALLINT
+    , wd_band TEXT
+    , wd_c2_noise REAL
+    , wd_rms_noise REAL
+    , wd_rx_az REAL
+    , wd_rx_lat REAL
+    , wd_rx_lon REAL
+    , wd_tx_az REAL
+    , wd_tx_lat REAL
+    , wd_tx_lon REAL
+    , wd_v_lat REAL
+    , wd_v_lon REAL
+);
+
+/*
+    Add comments to wsprnet `spots` table and columns
+
+    1. Do not assume Spotnum to increment uniformly with time, a spot that arrives late,
+       e.g. an Internet outage at the reporter, will have a Spotnum issued at the time it
+       is received at wsprnet.org, and not related to the time the spot was decoded.
+*/
+
+-- Add comments to table and Columns
+COMMENT ON TABLE spots IS 'WSPR Daemon - wsprnet custom spot table';
+COMMENT ON COLUMN spots.wd_time IS 'UTC time of the start of the two minute interval for a WSPR cycle and is in the format 2018-11-19 18:30:00';
+COMMENT ON COLUMN spots.Spotnum IS 'An unique identifier assigned by wsprnet to an incoming spot as they are received at wsprnet.org.';
+COMMENT ON COLUMN spots.Date IS 'Unix epoch format in seconds, 1604915400 use converter, e.g. at https://www.epochconverter.com/to convert to human readable date.';
+COMMENT ON COLUMN spots.Reporter IS 'Identifier as provided by the uploader of the WSPR data, e.g. KD0J, and may include a suffix such as /A, /P etc.';
+COMMENT ON COLUMN spots.ReporterGrid IS 'Maidenhead grid locator of the Reporter. It will be 6 characters if wsprnet.org has that information.';
+COMMENT ON COLUMN spots.dB IS 'Signal to noise ratio (SNR) as estimated within the decoder within WSJT-X';
+COMMENT ON COLUMN spots.MHz  IS 'Frequency in MHz as seen at the receiver by adding the measured audio frequency to the `dial` frequency for the selected band, reported to 6 decimal places, i.e. 1Hz.';
+COMMENT ON COLUMN spots.CallSign IS 'Identifier for the transmitting station, as decoded from the WSPR transmission.';
+COMMENT ON COLUMN spots.Grid IS 'Maidenhead grid locator of the Reporter. It will be 6 characters if wsprnet.org has a record for that CallSign.';
+COMMENT ON COLUMN spots.Power IS 'Power reported by the transmitting station in dBm. 30 dBm = 1 Watt.';
+COMMENT ON COLUMN spots.Drift IS 'Drift of the transmitted signal in Hz over the duration of the WSPR message seen by the receiver (which may also drift).';
+COMMENT ON COLUMN spots.distance IS 'Distance in km calculated from the receiver and transmitter grid squares. Accuracy will be best with two 6-character locators.';
+COMMENT ON COLUMN spots.azimuth IS 'Azimuth in degrees of the receiver as seen at the transmitter assuming a great circle short path. Clockwise from north.';
+COMMENT ON COLUMN spots.Band IS 'This is the band designator assigned by wsprnet.org as thefrequency in MHz as an integer except that 136 kHz is listed as -1. Note that there are spurious entries, e.g. 49 with 7074, 41 with 2 (out of 238 million spots)';
+COMMENT ON COLUMN spots.version IS 'Where available, the version of the WSJT-X software in use';
+COMMENT ON COLUMN spots.code IS 'A mode designator code: 1 is `standard` WSPR2 and the new mode FST4W-120, 2 is WSPR15 and FST4W-900, 4 is FST4W-300 and 8 is FST4W-1800.';
+COMMENT ON COLUMN spots.wd_band IS 'Determined from the frequency by WsprDaemon preprocessing software, expressed in metres for 2200 -2 metres, with 70cm and 23cm as 70 and 23.Where an appropriate bandcannot be determined it is listed as 9999 (26,057 in 238 million).';
+COMMENT ON COLUMN spots.wd_c2_noise IS 'Set to absent data currently, i.e. -999.0';
+COMMENT ON COLUMN spots.wd_rms_noise IS 'Set to absent data currently, i.e. -999.0';
+COMMENT ON COLUMN spots.wd_rx_az IS 'Azimuth in degrees of the incoming signal at the receiver assuming a great circleshort path from the transmitter. Clockwise from north.';
+COMMENT ON COLUMN spots.wd_rx_lat IS 'Latitude in degrees of the receiver calculated from Grid. Negative is south. These numeric latitude and longitude fields allow for numeric SELECT statements in postgreSQL queries.';
+COMMENT ON COLUMN spots.wd_rx_lon IS 'Longitude in degrees of the receiver calculated from the rx_grid. Negative is west.';
+COMMENT ON COLUMN spots.wd_tx_az IS '';
+COMMENT ON COLUMN spots.wd_tx_lat IS 'Latitude in degrees of the transmitter calculated from the tx_grid. Negative is south.';
+COMMENT ON COLUMN spots.wd_tx_lon IS 'Longitude in degrees of the transmitter calculated from the tx_grid. Negative is west.';
+COMMENT ON COLUMN spots.wd_v_lat IS 'Latitude in degrees of the vertex of the great circle path between receiver and transmitter. The vertex is the most northerly, or southerly, point on the path. There are, of course, instances where the vertex is at the receiver or transmitter. This is calculated by WsprDaemon and can be useful when studying paths that are near to or within the polar Auroral Ovals.';
+COMMENT ON COLUMN spots.wd_v_lon IS 'Longitude in degrees of the vertex of the great circle path between receiver and transmitter.';
+
+\echo ''
+\echo Test simple select from ( :db1 spots table )
+\echo ''
+
+SELECT
+	wd_time,
+	COUNT (wd_time) AS spot_count
+FROM
+	spots
+GROUP BY
+	wd_time;
+
+-- -----------------------------------------------------------------------------
+-- CREATE TABLE - test_tutorial
+-- -----------------------------------------------------------------------------
+
+\echo ''
+\echo 'Use Default Password is : rdaas'
+\connect :db2 :name
+\echo ''
+
+
+
+\echo ''
+\echo 'Finished !'
+\echo ''
 
 -- END DB INIT
