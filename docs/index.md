@@ -127,7 +127,7 @@ desired tab will render the command or content relevant to that distribution.
     REM Run the following command
     echo Spark runs better on Linux.
     echo   Please consider running Spark apps in
-    echo   VirtualBox if you^'re host os is Windows
+    echo   VirtualBox if your host os is Windows!!
     ```
 
 
