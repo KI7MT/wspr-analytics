@@ -913,40 +913,40 @@
 the relative location to the script when running.</p>
 <h2 id="build-and-run">Build and Run<a class="headerlink" href="#build-and-run" title="Permanent link">&para;</a></h2>
 <p>Run the following commands in order, and check your results.</p>
-<pre><code class="language-bash">#
-# All commands are run from a terminal
-#
+<div class="highlight"><pre><span></span><code><span class="c1">#</span>
+<span class="c1"># All commands are run from a terminal</span>
+<span class="c1">#</span>
 
-cd ~/Downloads
+<span class="nb">cd</span> ~/Downloads
 wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 gzip -dk wsprspots-2020-02.csv.gz
 
-# set the path of the downloaded and extracted CSV file
-csvfile=$PWD/wsprspots-2020-02.csv
+<span class="c1"># set the path of the downloaded and extracted CSV file</span>
+<span class="nv">csvfile</span><span class="o">=</span><span class="nv">$PWD</span>/wsprspots-2020-02.csv
 
-# clone the repo
+<span class="c1"># clone the repo</span>
 git clone https://github.com/KI7MT/wspr-analytics.git
 
-# change directories and build the assembly
-cd ./wspr-analytics/scala/TopTenReporters
+<span class="c1"># change directories and build the assembly</span>
+<span class="nb">cd</span> ./wspr-analytics/scala/TopTenReporters
 
-# clean and build
+<span class="c1"># clean and build</span>
 sbt clean assembly
 
-# Runs the following command
-spark-submit --master local[8] target/scala-2.12/TopTenReporter-assembly-1.0.jar $csvfile
-</code></pre>
+<span class="c1"># Runs the following command</span>
+spark-submit --master local<span class="o">[</span><span class="m">8</span><span class="o">]</span> target/scala-2.12/TopTenReporter-assembly-1.0.jar <span class="nv">$csvfile</span>
+</code></pre></div>
 <h3 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
 <p>You should get results similar to the following:</p>
 <blockquote>
 <p>NOTE The time it takes will depend on your system resources (CPU, RAM, etc)</p>
 </blockquote>
-<pre><code class="language-bash">Application  : TopTenReporter
+<div class="highlight"><pre><span></span><code>Application  : TopTenReporter
 Process File : wsprspots-2020-02.csv
-Tiimestame   : 2020-12-27 T 02:36:01.265
+Tiimestame   : <span class="m">2020</span>-12-27 T <span class="m">02</span>:36:01.265
 Description  : Returns the Top Ten Reporters Grouped by Count
 
-Process Steps for this application
+Process Steps <span class="k">for</span> this application
 - Creating the Schema
 - Reading CSV into DataSet
 - Selecting Reporters
@@ -955,23 +955,23 @@ Process Steps for this application
 - Query Execution
 
 +--------+------+
-|Reporter| count|
+<span class="p">|</span>Reporter<span class="p">|</span> count<span class="p">|</span>
 +--------+------+
-|   DK6UG|838081|
-|  OE9GHV|690104|
-|  EA8BFK|648670|
-|   KD2OM|589003|
-|KA7OEI-1|576788|
-|   K4RCG|571445|
-|     KPH|551690|
-|    K9AN|480759|
-|   DF5FH|480352|
-|   DJ9PC|474211|
+<span class="p">|</span>   DK6UG<span class="p">|</span><span class="m">838081</span><span class="p">|</span>
+<span class="p">|</span>  OE9GHV<span class="p">|</span><span class="m">690104</span><span class="p">|</span>
+<span class="p">|</span>  EA8BFK<span class="p">|</span><span class="m">648670</span><span class="p">|</span>
+<span class="p">|</span>   KD2OM<span class="p">|</span><span class="m">589003</span><span class="p">|</span>
+<span class="p">|</span>KA7OEI-1<span class="p">|</span><span class="m">576788</span><span class="p">|</span>
+<span class="p">|</span>   K4RCG<span class="p">|</span><span class="m">571445</span><span class="p">|</span>
+<span class="p">|</span>     KPH<span class="p">|</span><span class="m">551690</span><span class="p">|</span>
+<span class="p">|</span>    K9AN<span class="p">|</span><span class="m">480759</span><span class="p">|</span>
+<span class="p">|</span>   DF5FH<span class="p">|</span><span class="m">480352</span><span class="p">|</span>
+<span class="p">|</span>   DJ9PC<span class="p">|</span><span class="m">474211</span><span class="p">|</span>
 +--------+------+
-only showing top 10 rows
+only showing top <span class="m">10</span> rows
 
-Query Time : 5.821 sec
-</code></pre>
+Query Time : <span class="m">5</span>.821 sec
+</code></pre></div>
                 
               
               

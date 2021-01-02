@@ -383,6 +383,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#distribution-tabs" class="md-nav__link">
+    Distribution Tabs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#super-fences" class="md-nav__link">
+    Super Fences
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -896,6 +910,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#distribution-tabs" class="md-nav__link">
+    Distribution Tabs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#super-fences" class="md-nav__link">
+    Super Fences
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -964,6 +992,89 @@ During these transformations is where <a href="https://towardsdatascience.com/di
 <p>A <a href="https://www.postgresql.org/">PostgreSQL</a> database server will be needed. There are many ways to perform this installation (local, remote,
 <a href="https://docs.docker.com/engine/examples/postgresql_service/">Dockerize PostgreSQL</a>, <a href="https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant">PostgreSQL with Vagrant</a>, etc). Whichever method you chose, it will be used extensively
 by many of the apps and scripts.</p>
+<h2 id="distribution-tabs">Distribution Tabs<a class="headerlink" href="#distribution-tabs" title="Permanent link">&para;</a></h2>
+<p>I many of the instalaltion sections, you will see Tabs for a particular distribution. Clicking on the 
+desired tab will render the command or content relevant to that distribution.</p>
+<div class="tabbed-set" data-tabs="1:5"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Alpine</label><div class="tabbed-content">
+<ul>
+<li>Update the package list
+<div class="highlight"><pre><span></span><code>apk update
+</code></pre></div></li>
+<li>Add a package
+<div class="highlight"><pre><span></span><code>apk add openssh
+apk add openssh opentp vim
+</code></pre></div></li>
+</ul>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
+<p>Upgrade the host System Packages.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command</span>
+sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade
+</code></pre></div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Mint</label><div class="tabbed-content">
+<p>Install a pre-requesite package for VirtualBox.</p>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Fedora</label><div class="tabbed-content">
+<p>a. Update your fedora release</p>
+<div class="highlight"><pre><span></span><code>sudo dnf upgrade --refresh
+</code></pre></div>
+<p>b. Install a plugin</p>
+<div class="highlight"><pre><span></span><code>sudo dnf install dnf-plugin-system-upgrade
+</code></pre></div>
+<p>c. Download upgraded packages
+<div class="highlight"><pre><span></span><code>sudo dnf system-upgrade download --refresh --releasever<span class="o">=</span><span class="m">33</span>
+</code></pre></div></p>
+</div>
+<input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><label for="__tabbed_1_5">Windows</label><div class="tabbed-content">
+<p>Lets not and say we did!</p>
+<div class="highlight"><pre><span></span><code><span class="c1">REM Run the following command</span>
+<span class="k">echo</span> Spark runs better on Linux.
+<span class="k">echo</span>   Please consider using SPark aps in Virtual
+<span class="k">echo</span>   VirtualBox to run Spark applications
+<span class="k">echo</span>   if you<span class="se">^&#39;</span>re host os is Windows
+</code></pre></div>
+</div>
+</div>
+<h2 id="super-fences">Super Fences<a class="headerlink" href="#super-fences" title="Permanent link">&para;</a></h2>
+<p>I many examples you may see several tabs relatting to a particular code-blocks. Clicking on each tab shows the syntax
+for that particular language.</p>
+<div class="tabbed-set" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><label for="__tabbed_2_1">C</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Hello world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><label for="__tabbed_2_2">C++</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello world!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><label for="__tabbed_2_3">Java</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><label for="__tabbed_2_4">Scala</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="n">println</span><span class="o">(</span><span class="s">&quot;Hello World&quot;</span><span class="o">)</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><label for="__tabbed_2_5">Python2</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nb">print</span> <span class="s2">&quot;Hello World&quot;</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><label for="__tabbed_2_6">Python3</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<p>```</p>
 <p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
                 
               

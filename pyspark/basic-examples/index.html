@@ -1051,27 +1051,27 @@ doing the same task.</p>
 <li>Runs the test scripts</li>
 </ul>
 <p>Here are the <code>Bash</code> commands I used to run the tests.</p>
-<pre><code class="language-bash"># change the download location to whatever you prefer
-cd ~/Downloads
+<div class="highlight"><pre><span></span><code><span class="c1"># change the download location to whatever you prefer</span>
+<span class="nb">cd</span> ~/Downloads
 wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 gzip -dk wsprspots-2020-02.csv.gz
 
-# set the path of the downloaded and extracted CSV file
-csvfile=$PWD/wsprspots-2020-02.csv
+<span class="c1"># set the path of the downloaded and extracted CSV file</span>
+<span class="nv">csvfile</span><span class="o">=</span><span class="nv">$PWD</span>/wsprspots-2020-02.csv
 
-# clone the repo
+<span class="c1"># clone the repo</span>
 git clone https://github.com/KI7MT/wspr-analytics.git
 
-# change directories and install dependencies
-cd ~/Downloads/wspr-analytics/experiments
+<span class="c1"># change directories and install dependencies</span>
+<span class="nb">cd</span> ~/Downloads/wspr-analytics/experiments
 
-# NOTE: Be sure you are in a virtual environment &quot;before&quot;
-# installing Python packages
+<span class="c1"># NOTE: Be sure you are in a virtual environment &quot;before&quot;</span>
+<span class="c1"># installing Python packages</span>
 python -m pip install -r requirement.txt
 
-# run the conversion script
-python pandas_convert_csv.py -f $csvfile
-</code></pre>
+<span class="c1"># run the conversion script</span>
+python pandas_convert_csv.py -f <span class="nv">$csvfile</span>
+</code></pre></div>
 <h3 id="pandas-parquet-compression-test">Pandas Parquet Compression Test<a class="headerlink" href="#pandas-parquet-compression-test" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>CSV Reader</code> - Python Pandas</li>
@@ -1093,39 +1093,39 @@ are impressive.</p>
 </blockquote>
 <p>Disk space savings range from <code>&gt;= 5 : 1</code> to <code>8 : 1</code> depending on the compression
 you'd like to use. It's a <code>substantial</code> savings no matter which you chose.</p>
-<pre><code class="language-bash">Pandas CSV Conversion Method
-Parquet Compression Types : ['SNAPPY', 'LZ4', 'ZSTD', 'GZIP', 'BROTLI']
-Sit back and relax, this takes a while!!
+<div class="highlight"><pre><span></span><code>Pandas CSV Conversion Method
+Parquet Compression Types : <span class="o">[</span><span class="s1">&#39;SNAPPY&#39;</span>, <span class="s1">&#39;LZ4&#39;</span>, <span class="s1">&#39;ZSTD&#39;</span>, <span class="s1">&#39;GZIP&#39;</span>, <span class="s1">&#39;BROTLI&#39;</span><span class="o">]</span>
+Sit back and relax, this takes a <span class="k">while</span>!!
 
 * Reading file  : wsprspots-2020-02.csv
-* Spot Count    : 47,310,649
-* File Size     : 3780.94 MB
-* Elapsed Time  : 79.448 sec
+* Spot Count    : <span class="m">47</span>,310,649
+* File Size     : <span class="m">3780</span>.94 MB
+* Elapsed Time  : <span class="m">79</span>.448 sec
 
 * Converting CSV to -&gt; snappy
-* File Size     : 667.07 MB
-* Elapsed Time  : 29.579 sec
+* File Size     : <span class="m">667</span>.07 MB
+* Elapsed Time  : <span class="m">29</span>.579 sec
 
 * Converting CSV to -&gt; lz4
-* File Size     : 627.88 MB
-* Elapsed Time  : 29.702 sec
+* File Size     : <span class="m">627</span>.88 MB
+* Elapsed Time  : <span class="m">29</span>.702 sec
 
 * Converting CSV to -&gt; zstd
-* File Size     : 520.19 MB
-* Elapsed Time  : 30.778 sec
+* File Size     : <span class="m">520</span>.19 MB
+* Elapsed Time  : <span class="m">30</span>.778 sec
 
 * Converting CSV to -&gt; gzip
-* File Size     : 467.55 MB
-* Elapsed Time  : 107.244 sec
+* File Size     : <span class="m">467</span>.55 MB
+* Elapsed Time  : <span class="m">107</span>.244 sec
 
 * Converting CSV to -&gt; brotli
-* File Size     : 446.58 MB
-* Elapsed Time  : 89.529 sec
+* File Size     : <span class="m">446</span>.58 MB
+* Elapsed Time  : <span class="m">89</span>.529 sec
 
-NOTE : The File Sizes Are Approximated = (file bytes / 1048576)
+NOTE : The File Sizes Are <span class="nv">Approximated</span> <span class="o">=</span> <span class="o">(</span>file bytes / <span class="m">1048576</span><span class="o">)</span>
 
 Finished !!
-</code></pre>
+</code></pre></div>
 <h3 id="apache-arrow-pyarrow-read-test">Apache Arrow (PyArrow) Read Test<a class="headerlink" href="#apache-arrow-pyarrow-read-test" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>Reader</code> - PyArrow</li>
@@ -1141,36 +1141,36 @@ is the main difference in using <a href="https://pandas.pydata.org/">Pandas</a> 
 CSV read time from above; it's an <code>36 : 1</code> read-speed improvement or
 ( <code>80.32 sec</code> v.s. <code>2.213 sec</code> )</p>
 </blockquote>
-<pre><code class="language-bash"># You run the read script the same way
-python pyarrow_read.py -f $csvfile
+<div class="highlight"><pre><span></span><code><span class="c1"># You run the read script the same way</span>
+python pyarrow_read.py -f <span class="nv">$csvfile</span>
 
-# Results:
+<span class="c1"># Results:</span>
 
 Running Read Tests Using Apache Arrow
-Compression Types : ['CSV', 'SNAPPY', 'ZSTD', 'GZIP', 'BROTLI']
+Compression Types : <span class="o">[</span><span class="s1">&#39;CSV&#39;</span>, <span class="s1">&#39;SNAPPY&#39;</span>, <span class="s1">&#39;ZSTD&#39;</span>, <span class="s1">&#39;GZIP&#39;</span>, <span class="s1">&#39;BROTLI&#39;</span><span class="o">]</span>
 
 * Reading file  : wsprspots-2020-02.csv
-* File Size     : 3780.94 MB
-* Elapsed Time  : 2.185
+* File Size     : <span class="m">3780</span>.94 MB
+* Elapsed Time  : <span class="m">2</span>.185
 
 * Reading file  : wsprspots-2020-02.snappy
-* File Size     : 667.07 MB
-* Elapsed Time  : 2.011
+* File Size     : <span class="m">667</span>.07 MB
+* Elapsed Time  : <span class="m">2</span>.011
 
 * Reading file  : wsprspots-2020-02.zstd
-* File Size     : 520.19 MB
-* Elapsed Time  : 1.769
+* File Size     : <span class="m">520</span>.19 MB
+* Elapsed Time  : <span class="m">1</span>.769
 
 * Reading file  : wsprspots-2020-02.gzip
-* File Size     : 467.55 MB
-* Elapsed Time  : 3.654
+* File Size     : <span class="m">467</span>.55 MB
+* Elapsed Time  : <span class="m">3</span>.654
 
 * Reading file  : wsprspots-2020-02.brotli
-* File Size     : 446.58 MB
-* Elapsed Time  : 2.102
+* File Size     : <span class="m">446</span>.58 MB
+* Elapsed Time  : <span class="m">2</span>.102
 
  Finished !!
-</code></pre>
+</code></pre></div>
 <h1 id="query-parquet-file-using-pyspark">Query Parquet File Using PySpark<a class="headerlink" href="#query-parquet-file-using-pyspark" title="Permanent link">&para;</a></h1>
 <p>The next phase is to run a simple query using <a href="https://databricks.com/glossary/pyspark">PySpark</a> in<br />
 in a distributed manner.</p>
@@ -1184,33 +1184,33 @@ far superior to what any single threaded implementation could achieve.</p>
 from a Linux shell.</p>
 <p>Now matter how one looks at this approach, it's a viable alternative
 to a raw csv read and process action.</p>
-<pre><code class="language-bash">* Reading file ..: wsprspots-2020-02.parquet
-* File Size .....: 490,259,730 bytes compressed
-* Read Time .....: 1.51834 sec
+<div class="highlight"><pre><span></span><code>* Reading file ..: wsprspots-2020-02.parquet
+* File Size .....: <span class="m">490</span>,259,730 bytes compressed
+* Read Time .....: <span class="m">1</span>.51834 sec
 
 * Counting Records
-* Record Count ..: 47,310,649
-* Count Time ....: 0.90268 sec
+* Record Count ..: <span class="m">47</span>,310,649
+* Count Time ....: <span class="m">0</span>.90268 sec
 
-* Running Group by Count Query and return the dataframe
+* Running Group by Count Query and <span class="k">return</span> the dataframe
 +--------+------+
-|Reporter| count|
+<span class="p">|</span>Reporter<span class="p">|</span> count<span class="p">|</span>
 +--------+------+
-|   DK6UG|838081|
-|  OE9GHV|690104|
-|  EA8BFK|648670|
-|   KD2OM|589003|
-|KA7OEI-1|576788|
-|   K4RCG|571445|
-|     KPH|551690|
-|    K9AN|480759|
-|   DF5FH|480352|
-|   DJ9PC|474211|
+<span class="p">|</span>   DK6UG<span class="p">|</span><span class="m">838081</span><span class="p">|</span>
+<span class="p">|</span>  OE9GHV<span class="p">|</span><span class="m">690104</span><span class="p">|</span>
+<span class="p">|</span>  EA8BFK<span class="p">|</span><span class="m">648670</span><span class="p">|</span>
+<span class="p">|</span>   KD2OM<span class="p">|</span><span class="m">589003</span><span class="p">|</span>
+<span class="p">|</span>KA7OEI-1<span class="p">|</span><span class="m">576788</span><span class="p">|</span>
+<span class="p">|</span>   K4RCG<span class="p">|</span><span class="m">571445</span><span class="p">|</span>
+<span class="p">|</span>     KPH<span class="p">|</span><span class="m">551690</span><span class="p">|</span>
+<span class="p">|</span>    K9AN<span class="p">|</span><span class="m">480759</span><span class="p">|</span>
+<span class="p">|</span>   DF5FH<span class="p">|</span><span class="m">480352</span><span class="p">|</span>
+<span class="p">|</span>   DJ9PC<span class="p">|</span><span class="m">474211</span><span class="p">|</span>
 +--------+------+
-only showing top 10 rows
+only showing top <span class="m">10</span> rows
 
-* Query Time ....: 4.94034 sec
-</code></pre>
+* Query Time ....: <span class="m">4</span>.94034 sec
+</code></pre></div>
                 
               
               

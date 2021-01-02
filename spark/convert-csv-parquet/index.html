@@ -911,32 +911,32 @@
 </ul>
 <h2 id="build-and-run">Build and Run<a class="headerlink" href="#build-and-run" title="Permanent link">&para;</a></h2>
 <p>Run the following commands in order, and check your results.</p>
-<pre><code class="language-bash">#
-# All commands are run from a terminal
-#
+<div class="highlight"><pre><span></span><code><span class="c1">#</span>
+<span class="c1"># All commands are run from a terminal</span>
+<span class="c1">#</span>
 
-# change the download location to whatever you prefer
-cd ~/Downloads
+<span class="c1"># change the download location to whatever you prefer</span>
+<span class="nb">cd</span> ~/Downloads
 wget -c http://wsprnet.org/archive/wsprspots-2020-02.csv.gz
 gzip -dk wsprspots-2020-02.csv.gz
 
-# set the path of the downloaded and extracted CSV file
-infile=$PWD/wsprspots-2020-02.csv
-outdir=$PWD/wspr/parquet/2020/02
+<span class="c1"># set the path of the downloaded and extracted CSV file</span>
+<span class="nv">infile</span><span class="o">=</span><span class="nv">$PWD</span>/wsprspots-2020-02.csv
+<span class="nv">outdir</span><span class="o">=</span><span class="nv">$PWD</span>/wspr/parquet/2020/02
 
-# clone the repo
+<span class="c1"># clone the repo</span>
 git clone https://github.com/KI7MT/wspr-analytics.git
 
-# change directories and build the assembly
-cd ./wspr-analytics/scala/ConvertCsvToParquet
+<span class="c1"># change directories and build the assembly</span>
+<span class="nb">cd</span> ./wspr-analytics/scala/ConvertCsvToParquet
 
-# clean and build
+<span class="c1"># clean and build</span>
 sbt clean assembly
 
-# Run the following command
-# NOTE : set local[16] to half of your total CPU count. 
-spark-submit --master local[16] target/scala-2.12/ConvertCsvToParquet-assembly-1.0.jar $infile $outdir
-</code></pre>
+<span class="c1"># Run the following command</span>
+<span class="c1"># NOTE : set local[16] to half of your total CPU count. </span>
+spark-submit --master local<span class="o">[</span><span class="m">16</span><span class="o">]</span> target/scala-2.12/ConvertCsvToParquet-assembly-1.0.jar <span class="nv">$infile</span> <span class="nv">$outdir</span>
+</code></pre></div>
 <h3 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
 <p>You should get results similar to the following:</p>
 <ul>
@@ -949,23 +949,22 @@ input and output choices.</p>
 <blockquote>
 <p>NOTE The time it takes will depend on your system resources (CPU, RAM, etc)</p>
 </blockquote>
-<pre><code class="language-bash">Object        : ConvertCsvToParquet
+<div class="highlight"><pre><span></span><code>Object        : ConvertCsvToParquet
 Process File  : /data/wspr/raw/csv/wsprspots-2020-02.csv
 File Out Path : /data/wspr/raw/parquet/2020/02
-Tiimestame    : 2020-12-28 T 04:36:29.941
+Tiimestame    : <span class="m">2020</span>-12-28 T <span class="m">04</span>:36:29.941
 Description   : Convert CSV to Parquet
 
-Process Steps to Create Parquet File(s)
+Process Steps to Create Parquet File<span class="o">(</span>s<span class="o">)</span>
 - Create a Spark Session
 - Create the Spot Schema
 - Read the CSV file into a DataSet
-- Write Parquet File(s), please wait...
+- Write Parquet File<span class="o">(</span>s<span class="o">)</span>, please wait...
 
-Elapsed Time : 20.456 sec
+Elapsed Time : <span class="m">20</span>.456 sec
 
 Finished
-
-</code></pre>
+</code></pre></div>
                 
               
               

@@ -941,174 +941,171 @@
 </ul>
 <h2 id="build-and-run">Build and Run<a class="headerlink" href="#build-and-run" title="Permanent link">&para;</a></h2>
 <p>Run the following commands in order, and check your results.</p>
-<pre><code class="language-bash">#
-# All commands are run from a terminal
-#
+<div class="highlight"><pre><span></span><code><span class="c1">#</span>
+<span class="c1"># All commands are run from a terminal</span>
+<span class="c1">#</span>
 
-# NOTE: You must have previously run ConvertCvsToParquet before
-#       using this app, as it is looking for a Parquet folder,
-#       not a CSV file.
+<span class="c1"># NOTE: You must have previously run ConvertCvsToParquet before</span>
+<span class="c1">#       using this app, as it is looking for a Parquet folder,</span>
+<span class="c1">#       not a CSV file.</span>
 
-# set the path to where you created the Parquet partition
-inFolder=&quot;/data/wspr/raw/parquet/2020/02&quot;
+<span class="c1"># set the path to where you created the Parquet partition</span>
+<span class="nv">inFolder</span><span class="o">=</span><span class="s2">&quot;/data/wspr/raw/parquet/2020/02&quot;</span>
 
-# set the colum you wish to GroupBy and Count
-column=&quot;Reporter&quot;
+<span class="c1"># set the colum you wish to GroupBy and Count</span>
+<span class="nv">column</span><span class="o">=</span><span class="s2">&quot;Reporter&quot;</span>
 
-# clone the repo
+<span class="c1"># clone the repo</span>
 git clone https://github.com/KI7MT/wspr-analytics.git
 
-# change directories and build the assembly
-cd ./wspr-analytics/scala/QueryColumnParquet
+<span class="c1"># change directories and build the assembly</span>
+<span class="nb">cd</span> ./wspr-analytics/scala/QueryColumnParquet
 
-# clean and build
+<span class="c1"># clean and build</span>
 sbt clean assembly
 
-# Run the following command
-# NOTE : set local[8] to half of your total CPU count. 
-spark-submit --master local[8] target/scala-2.12/QueryColumnParquet-assembly-1.0.jar $inFolder $column
-</code></pre>
+<span class="c1"># Run the following command</span>
+<span class="c1"># NOTE : set local[8] to half of your total CPU count. </span>
+spark-submit --master local<span class="o">[</span><span class="m">8</span><span class="o">]</span> target/scala-2.12/QueryColumnParquet-assembly-1.0.jar <span class="nv">$inFolder</span> <span class="nv">$column</span>
+</code></pre></div>
 <h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
 <p>You should get results similar to the following:</p>
 <blockquote>
 <p>NOTE The time it takes will depend on your system resources (CPU, RAM, etc)</p>
 </blockquote>
-<pre><code class="language-bash">Application   : QueryColumnParquet
+<div class="highlight"><pre><span></span><code>Application   : QueryColumnParquet
 Folder        : /data/wspr/raw/parquet/2020/02
 Column        : Reporter
-Tiimestame    : 2020-12-28T07:36:35.389
+Tiimestame    : <span class="m">2020</span>-12-28T07:36:35.389
 Description   : Query Column and Count using Parquet Folders
 
-Process Steps to Query Reporter from Parquet Files(s)
+Process Steps to Query Reporter from Parquet Files<span class="o">(</span>s<span class="o">)</span>
 - Create a Spark Session
-- Read Parquet File(s)
+- Read Parquet File<span class="o">(</span>s<span class="o">)</span>
 - Select Reporter
 - GroupBy and Count Reporter
 - Sort Reporter Descending
 - Execute the Query
 
 +--------+------+
-|Reporter| count|
+<span class="p">|</span>Reporter<span class="p">|</span> count<span class="p">|</span>
 +--------+------+
-|   DK6UG|838081|
-|  OE9GHV|690104|
-|  EA8BFK|648670|
-|   KD2OM|589003|
-|KA7OEI-1|576788|
-|   K4RCG|571445|
-|     KPH|551690|
-|    K9AN|480759|
-|   DF5FH|480352|
-|   DJ9PC|474211|
+<span class="p">|</span>   DK6UG<span class="p">|</span><span class="m">838081</span><span class="p">|</span>
+<span class="p">|</span>  OE9GHV<span class="p">|</span><span class="m">690104</span><span class="p">|</span>
+<span class="p">|</span>  EA8BFK<span class="p">|</span><span class="m">648670</span><span class="p">|</span>
+<span class="p">|</span>   KD2OM<span class="p">|</span><span class="m">589003</span><span class="p">|</span>
+<span class="p">|</span>KA7OEI-1<span class="p">|</span><span class="m">576788</span><span class="p">|</span>
+<span class="p">|</span>   K4RCG<span class="p">|</span><span class="m">571445</span><span class="p">|</span>
+<span class="p">|</span>     KPH<span class="p">|</span><span class="m">551690</span><span class="p">|</span>
+<span class="p">|</span>    K9AN<span class="p">|</span><span class="m">480759</span><span class="p">|</span>
+<span class="p">|</span>   DF5FH<span class="p">|</span><span class="m">480352</span><span class="p">|</span>
+<span class="p">|</span>   DJ9PC<span class="p">|</span><span class="m">474211</span><span class="p">|</span>
 +--------+------+
-only showing top 10 rows
+only showing top <span class="m">10</span> rows
 
-Elapsed Time : 2.843 sec
-</code></pre>
+Elapsed Time : <span class="m">2</span>.843 sec
+</code></pre></div>
 <h2 id="query-by-reporter">Query by Reporter<a class="headerlink" href="#query-by-reporter" title="Permanent link">&para;</a></h2>
 <p>For Comparrison, here is the data from <code>2020-11</code>. November 2020 had over <strong>70 Million</strong> reports.</p>
-<pre><code class="language-bash">Application   : QueryColumnParquet
+<div class="highlight"><pre><span></span><code>Application   : QueryColumnParquet
 Folder        : /data/wspr/raw/parquet/2020/11
 Column        : Reporter
-Tiimestame    : 2020-12-28 T 07:42:09.275
+Tiimestame    : <span class="m">2020</span>-12-28 T <span class="m">07</span>:42:09.275
 Description   : Query Column and Count using Parquet Folders
 
-Process Steps to Query Reporter from Parquet Files(s)
+Process Steps to Query Reporter from Parquet Files<span class="o">(</span>s<span class="o">)</span>
 - Create a Spark Session
-- Read Parquet File(s)
+- Read Parquet File<span class="o">(</span>s<span class="o">)</span>
 - Select Reporter
 - GroupBy and Count Reporter
 - Sort Reporter Descending
 - Execute the Query
 
 +--------+-------+
-|Reporter|  count|
+<span class="p">|</span>Reporter<span class="p">|</span>  count<span class="p">|</span>
 +--------+-------+
-|  EA8BFK|1120739|
-|  OE9GHV|1103335|
-|   WA2TP| 847124|
-|   KD2OM| 834896|
-|  IW2NKE| 818315|
-|   LX1DQ| 803347|
-|   DK6UG| 794675|
-|KA7OEI-1| 748356|
-|   ON5KQ| 744727|
-|  OE9HLH| 733580|
+<span class="p">|</span>  EA8BFK<span class="p">|</span><span class="m">1120739</span><span class="p">|</span>
+<span class="p">|</span>  OE9GHV<span class="p">|</span><span class="m">1103335</span><span class="p">|</span>
+<span class="p">|</span>   WA2TP<span class="p">|</span> <span class="m">847124</span><span class="p">|</span>
+<span class="p">|</span>   KD2OM<span class="p">|</span> <span class="m">834896</span><span class="p">|</span>
+<span class="p">|</span>  IW2NKE<span class="p">|</span> <span class="m">818315</span><span class="p">|</span>
+<span class="p">|</span>   LX1DQ<span class="p">|</span> <span class="m">803347</span><span class="p">|</span>
+<span class="p">|</span>   DK6UG<span class="p">|</span> <span class="m">794675</span><span class="p">|</span>
+<span class="p">|</span>KA7OEI-1<span class="p">|</span> <span class="m">748356</span><span class="p">|</span>
+<span class="p">|</span>   ON5KQ<span class="p">|</span> <span class="m">744727</span><span class="p">|</span>
+<span class="p">|</span>  OE9HLH<span class="p">|</span> <span class="m">733580</span><span class="p">|</span>
 +--------+-------+
-only showing top 10 rows
+only showing top <span class="m">10</span> rows
 
-Elapsed Time : 2.8 sec
-
-</code></pre>
+Elapsed Time : <span class="m">2</span>.8 sec
+</code></pre></div>
 <h2 id="query-by-callsign">Query by CallSign<a class="headerlink" href="#query-by-callsign" title="Permanent link">&para;</a></h2>
 <p>This query is from the <code>CallSign</code> column.</p>
-<pre><code class="language-bash">Application   : QueryColumnParquet
+<div class="highlight"><pre><span></span><code>Application   : QueryColumnParquet
 Folder        : /data/wspr/raw/parquet/2020/11
 Column        : CallSign
-Tiimestame    : 2020-12-28 T 07:44:16.711
+Tiimestame    : <span class="m">2020</span>-12-28 T <span class="m">07</span>:44:16.711
 Description   : Query Column and Count using Parquet Folders
 
-Process Steps to Query CallSign from Parquet Files(s)
+Process Steps to Query CallSign from Parquet Files<span class="o">(</span>s<span class="o">)</span>
 - Create a Spark Session
-- Read Parquet File(s)
+- Read Parquet File<span class="o">(</span>s<span class="o">)</span>
 - Select CallSign
 - GroupBy and Count CallSign
 - Sort CallSign Descending
 - Execute the Query
 
 +--------+------+
-|CallSign| count|
+<span class="p">|</span>CallSign<span class="p">|</span> count<span class="p">|</span>
 +--------+------+
-|   DK2DB|662784|
-|   K4APC|600895|
-|   ON7KO|557477|
-|   KD6RF|541418|
-|  WA4KFZ|531006|
-|   W6LVP|466346|
-|   DL6NL|438741|
-|   N8VIM|438260|
-|   DK8JP|403667|
-|   G0CCL|386570|
+<span class="p">|</span>   DK2DB<span class="p">|</span><span class="m">662784</span><span class="p">|</span>
+<span class="p">|</span>   K4APC<span class="p">|</span><span class="m">600895</span><span class="p">|</span>
+<span class="p">|</span>   ON7KO<span class="p">|</span><span class="m">557477</span><span class="p">|</span>
+<span class="p">|</span>   KD6RF<span class="p">|</span><span class="m">541418</span><span class="p">|</span>
+<span class="p">|</span>  WA4KFZ<span class="p">|</span><span class="m">531006</span><span class="p">|</span>
+<span class="p">|</span>   W6LVP<span class="p">|</span><span class="m">466346</span><span class="p">|</span>
+<span class="p">|</span>   DL6NL<span class="p">|</span><span class="m">438741</span><span class="p">|</span>
+<span class="p">|</span>   N8VIM<span class="p">|</span><span class="m">438260</span><span class="p">|</span>
+<span class="p">|</span>   DK8JP<span class="p">|</span><span class="m">403667</span><span class="p">|</span>
+<span class="p">|</span>   G0CCL<span class="p">|</span><span class="m">386570</span><span class="p">|</span>
 +--------+------+
-only showing top 10 rows
+only showing top <span class="m">10</span> rows
 
-Elapsed Time : 2.445 sec
-
-</code></pre>
+Elapsed Time : <span class="m">2</span>.445 sec
+</code></pre></div>
 <h2 id="query-by-version">Query by Version<a class="headerlink" href="#query-by-version" title="Permanent link">&para;</a></h2>
-<pre><code class="language-bash">Application   : QueryColumnParquet
+<div class="highlight"><pre><span></span><code>Application   : QueryColumnParquet
 Folder        : /data/wspr/raw/parquet/2020/11
 Column        : Version
-Tiimestame    : 2020-12-28 T 07:50:17.725
+Tiimestame    : <span class="m">2020</span>-12-28 T <span class="m">07</span>:50:17.725
 Description   : Query Column and Count using Parquet Folders
 
-Process Steps to Query Version from Parquet Files(s)
+Process Steps to Query Version from Parquet Files<span class="o">(</span>s<span class="o">)</span>
 - Create a Spark Session
-- Read Parquet File(s)
+- Read Parquet File<span class="o">(</span>s<span class="o">)</span>
 - Select Version
 - GroupBy and Count Version
 - Sort Version Descending
 - Execute the Query
 
 +---------+--------+
-|  Version|   count|
+<span class="p">|</span>  Version<span class="p">|</span>   count<span class="p">|</span>
 +---------+--------+
-|     null|27015499|
-| 1.3 Kiwi|13207118|
-|    2.2.2|11199415|
-|    2.1.2| 5906973|
-|2.3.0-rc1| 2952306|
-|    2.1.0| 2602903|
-|2.3.0-rc2| 2366520|
-|0.9_r4178| 2033622|
-|    2.2.1| 2027954|
-|    2.0.0| 1482597|
+<span class="p">|</span>     null<span class="p">|</span><span class="m">27015499</span><span class="p">|</span>
+<span class="p">|</span> <span class="m">1</span>.3 Kiwi<span class="p">|</span><span class="m">13207118</span><span class="p">|</span>
+<span class="p">|</span>    <span class="m">2</span>.2.2<span class="p">|</span><span class="m">11199415</span><span class="p">|</span>
+<span class="p">|</span>    <span class="m">2</span>.1.2<span class="p">|</span> <span class="m">5906973</span><span class="p">|</span>
+<span class="p">|</span><span class="m">2</span>.3.0-rc1<span class="p">|</span> <span class="m">2952306</span><span class="p">|</span>
+<span class="p">|</span>    <span class="m">2</span>.1.0<span class="p">|</span> <span class="m">2602903</span><span class="p">|</span>
+<span class="p">|</span><span class="m">2</span>.3.0-rc2<span class="p">|</span> <span class="m">2366520</span><span class="p">|</span>
+<span class="p">|</span><span class="m">0</span>.9_r4178<span class="p">|</span> <span class="m">2033622</span><span class="p">|</span>
+<span class="p">|</span>    <span class="m">2</span>.2.1<span class="p">|</span> <span class="m">2027954</span><span class="p">|</span>
+<span class="p">|</span>    <span class="m">2</span>.0.0<span class="p">|</span> <span class="m">1482597</span><span class="p">|</span>
 +---------+--------+
-only showing top 10 rows
+only showing top <span class="m">10</span> rows
 
-Elapsed Time : 2.492 sec
-
-</code></pre>
+Elapsed Time : <span class="m">2</span>.492 sec
+</code></pre></div>
                 
               
               

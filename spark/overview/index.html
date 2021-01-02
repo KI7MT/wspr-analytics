@@ -900,37 +900,36 @@ see <a href="../../tools/install-spark/">Installing Spark</a></p>
 <blockquote>
 <p>NOTE: Your version of Java and Scala may be different.</p>
 </blockquote>
-<pre><code class="language-scala">
-(wsprana) ki7mt@3950X:~ $ spark-shell 
-Spark context Web UI available at http://localhost:4040
-Spark context available as 'sc' (master = local[*], app id = local-1609375750950).
-Spark session available as 'spark'.
-Welcome to
-      ____              __
-     / __/__  ___ _____/ /__
-    _\ \/ _ \/ _ `/ __/  '_/
-   /___/ .__/\_,_/_/ /_/\_\   version 3.0.1
-      /_/
+<div class="highlight"><pre><span></span><code><span class="o">(</span><span class="n">wsprana</span><span class="o">)</span> <span class="n">ki7mt</span><span class="k">@</span><span class="mi">3950</span><span class="n">X</span><span class="o">:~</span> <span class="n">$</span> <span class="n">spark</span><span class="o">-</span><span class="n">shell</span> 
+<span class="nc">Spark</span> <span class="n">context</span> <span class="nc">Web</span> <span class="nc">UI</span> <span class="n">available</span> <span class="n">at</span> <span class="n">http</span><span class="o">://</span><span class="n">localhost</span><span class="k">:</span><span class="err">4040</span>
+<span class="kt">Spark</span> <span class="kt">context</span> <span class="kt">available</span> <span class="kt">as</span> <span class="err">&#39;</span><span class="kt">sc</span><span class="err">&#39;</span> <span class="o">(</span><span class="kt">master</span> <span class="o">=</span> <span class="kt">local</span><span class="o">[</span><span class="kt">*</span><span class="o">],</span> <span class="n">app</span> <span class="n">id</span> <span class="o">=</span> <span class="n">local</span><span class="o">-</span><span class="mi">1609375750950</span><span class="o">).</span>
+<span class="nc">Spark</span> <span class="n">session</span> <span class="n">available</span> <span class="n">as</span> <span class=" -Symbol">&#39;spark</span><span class="err">&#39;</span><span class="o">.</span>
+<span class="nc">Welcome</span> <span class="n">to</span>
+      <span class="nc">____</span>              <span class="nc">__</span>
+     <span class="o">/</span> <span class="nc">__/__</span>  <span class="nc">___</span> <span class="nc">_____</span><span class="o">/</span> <span class="o">/</span><span class="nc">__</span>
+    <span class="k">_</span><span class="o">\</span> <span class="o">\/</span> <span class="k">_</span> <span class="o">\/</span> <span class="k">_</span> <span class="err">`</span><span class="o">/</span> <span class="nc">__</span><span class="o">/</span>  <span class=" -Symbol">&#39;_/</span>
+   <span class="o">/</span><span class="nc">___</span><span class="o">/</span> <span class="o">.</span><span class="nc">__/\</span><span class="k">_</span><span class="o">,</span><span class="k">_</span><span class="o">/</span><span class="k">_</span><span class="o">/</span> <span class="o">/</span><span class="k">_</span><span class="o">/\</span><span class="k">_</span><span class="o">\</span>   <span class="n">version</span> <span class="mf">3.0</span><span class="o">.</span><span class="mi">1</span>
+      <span class="o">/</span><span class="k">_</span><span class="o">/</span>
 
-Using Scala version 2.12.10 (OpenJDK 64-Bit Server VM, Java 1.8.0_275)
-Type in expressions to have them evaluated.
-Type :help for more information.
+<span class="nc">Using</span> <span class="nc">Scala</span> <span class="n">version</span> <span class="mf">2.12</span><span class="o">.</span><span class="mi">10</span> <span class="o">(</span><span class="nc">OpenJDK</span> <span class="mi">64</span><span class="o">-</span><span class="nc">Bit</span> <span class="nc">Server</span> <span class="nc">VM</span><span class="o">,</span> <span class="nc">Java</span> <span class="mf">1.8</span><span class="o">.</span><span class="mi">0</span><span class="n">_275</span><span class="o">)</span>
+<span class="nc">Type</span> <span class="n">in</span> <span class="n">expressions</span> <span class="n">to</span> <span class="n">have</span> <span class="n">them</span> <span class="n">evaluated</span><span class="o">.</span>
+<span class="nc">Type</span> <span class="k">:</span><span class="kt">help</span> <span class="kt">for</span> <span class="kt">more</span> <span class="kt">information.</span>
 
-scala&gt; 
-</code></pre>
+<span class="kt">scala&gt;</span> 
+</code></pre></div>
 <h3 id="read-and-query-dataset">Read and Query DataSet<a class="headerlink" href="#read-and-query-dataset" title="Permanent link">&para;</a></h3>
-<pre><code class="language-scala">   // Read the CSV into the DataSet
-    println(&quot;- Reading CSV into DataSet&quot;)
-    import spark.implicits._
-    val reporterDS = spark.read
-      .schema(reporterSchema)
-      .csv(csvfile)
-      .as[Reporter]
+<div class="highlight"><pre><span></span><code>   <span class="c1">// Read the CSV into the DataSet</span>
+    <span class="n">println</span><span class="o">(</span><span class="s">&quot;- Reading CSV into DataSet&quot;</span><span class="o">)</span>
+    <span class="k">import</span> <span class="nn">spark.implicits._</span>
+    <span class="k">val</span> <span class="n">reporterDS</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span>
+      <span class="o">.</span><span class="n">schema</span><span class="o">(</span><span class="n">reporterSchema</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">csv</span><span class="o">(</span><span class="n">csvfile</span><span class="o">)</span>
+      <span class="o">.</span><span class="n">as</span><span class="o">[</span><span class="kt">Reporter</span><span class="o">]</span>
 
-    // Print results from the dataset
-    println(&quot;- Query Execution\n&quot;)
-    time {sortedResults.show(10)}
-</code></pre>
+    <span class="c1">// Print results from the dataset</span>
+    <span class="n">println</span><span class="o">(</span><span class="s">&quot;- Query Execution\n&quot;</span><span class="o">)</span>
+    <span class="n">time</span> <span class="o">{</span><span class="n">sortedResults</span><span class="o">.</span><span class="n">show</span><span class="o">(</span><span class="mi">10</span><span class="o">)}</span>
+</code></pre></div>
                 
               
               
