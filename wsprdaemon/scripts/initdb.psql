@@ -1,0 +1,110 @@
+/*
+    Project .....: WSPR Analytics
+    Author ......: Greg Beam, KI7MT
+    License .....: Apache 2.0
+
+    Source Org ..: WSPR Daemon, www.wsprdaemon.org
+    Target ......: WSPR Daemon Principal Database (wsprnet)
+    Reference ...: https://groups.io/g/wsprdaemon/message/53
+    Version .....: 2.0
+    Date ........: November 2020
+
+    Database
+        wsprnet
+
+    Description
+        Drops and Creates Database: wsprnet and turorial
+
+    Usage
+
+        This file creates the (rdaas) Role and Database:
+            Role      =  rdaas
+            Password  =  rdaas
+            Database  =  wsprnet
+
+        * Clone the repository
+            git clone https://github.com/KI7MT/wspr-analytics
+        
+        * Change directories and run the sql script
+            cd wspr-analytics/wsprdeamon/scripts
+            psql -v ON_ERROR_STOP=1 -U postgres -h http://localhost:5432 -f initdb.pgsql
+*/
+
+-- Script variables (Change this to what you want)
+\set name rdaas
+
+\echo ''
+\echo Initializing Roles and Databases
+\echo '-----------------------------------'
+\echo ''
+
+-----------------------------------------------------------
+-- SESSION TERMINATION
+-----------------------------------------------------------
+\echo 'Terminating ( :name ) Sessions'
+SELECT
+ pg_terminate_backend (pg_stat_activity.pid)
+FROM
+ pg_stat_activity
+WHERE
+ pg_stat_activity.datname = :name;
+
+-----------------------------------------------------------
+-- DATABASE TERMINATION
+-----------------------------------------------------------
+\echo 'Drop ( :name ) Database if exists'
+DROP DATABASE IF EXISTS :name;
+
+-----------------------------------------------------------
+-- ROLE CREATION
+-----------------------------------------------------------
+\echo 'Drop ( :name ) Role if exists'
+DROP USER IF EXISTS :name;
+
+-----------------------------------------------------------
+-- ROLE CREATION
+-----------------------------------------------------------
+\ech 'Creating Role ( :name )'
+CREATE USER :name WITH
+	LOGIN
+	SUPERUSER
+	CREATEDB
+	CREATEROLE
+	INHERIT
+	REPLICATION
+	CONNECTION LIMIT -1
+	PASSWORD :name;
+COMMENT ON ROLE :name IS 'Role for use with Wspr Daemon Applications';
+
+-- -----------------------------------------------------------------------------
+-- DATABASE CREATION - wsprnet
+-- -----------------------------------------------------------------------------
+\\echo 'Creating Database : wsprnet'
+CREATE DATABASE wsprnet
+    WITH 
+    OWNER = :name
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+COMMENT ON DATABASE :name IS 'WSPR Daemon Production Database';
+
+-- -----------------------------------------------------------------------------
+-- DATABASE CREATION - tutorial
+-- -----------------------------------------------------------------------------
+\\echo 'Creating Database : tutorial'
+CREATE DATABASE tutorial
+    WITH 
+    OWNER = :name
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+COMMENT ON DATABASE :name IS 'WSPR Daemon Tutorial Database';
+
+-- -----------------------------------------------------------------------------
+-- GRANT PERMISSIONS
+-- -----------------------------------------------------------------------------
+\\echo 'Cranting permossions for ( :name )'
+GRANT ALL ON DATABASE wsprnet TO :name;
+GRANT ALL ON DATABASE tutorial TO :name;
+
+\echo 'Finished !!'
+
+-- END DB INIT
