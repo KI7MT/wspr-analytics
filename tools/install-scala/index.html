@@ -16,7 +16,7 @@
     
     
       
-        <title>Installing R - WSPR Analytics</title>
+        <title>Installing Scala - WSPR Analytics</title>
       
     
     
@@ -59,11 +59,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#installing-anaconda" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -92,7 +87,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Installing R
+              Installing Scala
             
           </span>
         </div>
@@ -179,7 +174,7 @@
   
     <li class="md-tabs__item">
       <a href="../overview/" class="md-tabs__link md-tabs__link--active">
-        Setup
+        Tools
       </a>
     </li>
   
@@ -339,13 +334,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
-      Setup
+      Tools
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Setup" data-md-level="1">
+    <nav class="md-nav" aria-label="Tools" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
         <span class="md-nav__icon md-icon"></span>
-        Setup
+        Tools
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -420,19 +415,6 @@
           
 
 
-
-  <li class="md-nav__item">
-    <a href="../install-scala/" class="md-nav__link">
-      Installing Scala
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
   
 
 
@@ -441,58 +423,23 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Installing R
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
     <a href="./" class="md-nav__link md-nav__link--active">
-      Installing R
+      Installing Scala
     </a>
     
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installing-anaconda" class="md-nav__link">
-    Installing Anaconda
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upgrade-anaconda" class="md-nav__link">
-    Upgrade Anaconda
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#additional-python-modules" class="md-nav__link">
-    Additional Python Modules
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-r" class="md-nav__link">
-    Installing R
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../install-r/" class="md-nav__link">
+      Installing R
+    </a>
   </li>
 
         
@@ -809,107 +756,18 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installing-anaconda" class="md-nav__link">
-    Installing Anaconda
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#upgrade-anaconda" class="md-nav__link">
-    Upgrade Anaconda
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#additional-python-modules" class="md-nav__link">
-    Additional Python Modules
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installing-r" class="md-nav__link">
-    Installing R
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Installing R</h1>
+                  <h1>Installing Scala</h1>
                 
-                <p>At the time of this writing, usage has only been tested on Linux x86-64 and.
-There is no particular reason why installation and usage could not be done on
-Windows or Mac OSX if the Requirements are met.</p>
-<p>It is <code>Highly Recommended</code> to use <a href="https://www.continuum.io/downloads">Anaconda</a> from Continuum Analytics. 
-It's free, supports all major operating systems, is well supported, does not
-interfere with system level packaging, can be installed on a per user basics
-and provides everything needed for <strong>Comprehensive WSPR Data Analysis</strong>.</p>
-<h2 id="installing-anaconda">Installing Anaconda<a class="headerlink" href="#installing-anaconda" title="Permanent link">&para;</a></h2>
-<p>Installing <a href="https://www.continuum.io/downloads">Anaconda</a> is very easy. Simply download the shell script and
-run it in a terminal:</p>
-<p>Use their <a href="https://docs.anaconda.com/anaconda/install/linux/">Install Instructions</a> paying particular atention to the additional
-package needs for Qt.</p>
-<p>Follow the prompts and when asked, I elected to add the the source scripts to
-my <code>.bashrc</code> but that is entirely up to you. I also used the default
-installation direcotry of:</p>
-<pre><code class="language-bash">/home/$USER/anaconda3
-</code></pre>
-<h2 id="upgrade-anaconda">Upgrade Anaconda<a class="headerlink" href="#upgrade-anaconda" title="Permanent link">&para;</a></h2>
-<p>This is part of <a href="http://conda.pydata.org/docs/test-drive.html">30 Minute Conda</a> getting started page, but for completeness,
-I'm adding what was needed for my environment. All actions are performed in a
-terminal, open as required on your system, then:</p>
-<p>First,  <a href="https://www.continuum.io/downloads">Anaconda</a> should be upgraded:</p>
-<pre><code class="language-bash">conda update conda
-</code></pre>
-<p>Next, update the conda-env scripts:</p>
-<pre><code class="language-bash">conda update conda-env
-</code></pre>
-<p>That is all for the basic <a href="https://www.continuum.io/downloads">Anaconda</a> installation and update. You should
-close, then re-open your terminal to ensure all the paths and updates are
-working proerpy.</p>
-<h2 id="additional-python-modules">Additional Python Modules<a class="headerlink" href="#additional-python-modules" title="Permanent link">&para;</a></h2>
-<p>One package that is not available is a <a href="http://conda.pydata.org/docs/using/pkgs.html">conda</a> package is <a href="https://pypi.python.org/pypi/appdirs">AppDirs</a> but can
-be installed with <a href="https://pypi.python.org/pypi/pip">Pip</a>. In the terinal:</p>
-<pre><code class="language-bash">pip install appdirs clint
-</code></pre>
-<h2 id="installing-r">Installing R<a class="headerlink" href="#installing-r" title="Permanent link">&para;</a></h2>
-<p>The <a href="https://www.r-project.org/about.html">R-Scripting</a> language in not part of the base <a href="https://www.continuum.io/downloads">Anaconda</a> installation,
-however, installation is fairly easy using <a href="http://conda.pydata.org/docs/using/pkgs.html">conda</a>, the <a href="https://www.continuum.io/downloads">Anaconda</a> package
-manager.</p>
-<p>Again, in the terminal, perform the following:</p>
-<pre><code class="language-bash">conda install -c r r-essentials
-conda install -c r r-gridextra
-</code></pre>
+                <blockquote>
+<p>Under Development</p>
+</blockquote>
+<p>This section will discuss the various ways to install Scala</p>
                 
               
               
@@ -928,7 +786,7 @@ conda install -c r r-gridextra
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../install-scala/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../install-spark/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -937,19 +795,19 @@ conda install -c r r-gridextra
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Installing Scala
+                Installing Spark
               </div>
             </div>
           </a>
         
         
-          <a href="../install-grafana/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../install-r/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Installing Graphana
+                Installing R
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

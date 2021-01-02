@@ -178,8 +178,8 @@
   
   
     <li class="md-tabs__item">
-      <a href="setup/overview/" class="md-tabs__link">
-        Setup
+      <a href="tools/overview/" class="md-tabs__link">
+        Tools
       </a>
     </li>
   
@@ -403,13 +403,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
     
     <label class="md-nav__link" for="nav-2">
-      Setup
+      Tools
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Setup" data-md-level="1">
+    <nav class="md-nav" aria-label="Tools" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
         <span class="md-nav__icon md-icon"></span>
-        Setup
+        Tools
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -421,7 +421,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/overview/" class="md-nav__link">
+    <a href="tools/overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -434,7 +434,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-python/" class="md-nav__link">
+    <a href="tools/install-python/" class="md-nav__link">
       Installing Python
     </a>
   </li>
@@ -447,7 +447,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-java/" class="md-nav__link">
+    <a href="tools/install-java/" class="md-nav__link">
       Installing Java
     </a>
   </li>
@@ -460,7 +460,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-sdkman/" class="md-nav__link">
+    <a href="tools/install-sdkman/" class="md-nav__link">
       Installing Sdkman
     </a>
   </li>
@@ -473,7 +473,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-spark/" class="md-nav__link">
+    <a href="tools/install-spark/" class="md-nav__link">
       Installing Spark
     </a>
   </li>
@@ -486,7 +486,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-scala/" class="md-nav__link">
+    <a href="tools/install-scala/" class="md-nav__link">
       Installing Scala
     </a>
   </li>
@@ -499,7 +499,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-r/" class="md-nav__link">
+    <a href="tools/install-r/" class="md-nav__link">
       Installing R
     </a>
   </li>
@@ -512,7 +512,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-grafana/" class="md-nav__link">
+    <a href="tools/install-grafana/" class="md-nav__link">
       Installing Graphana
     </a>
   </li>
@@ -525,7 +525,7 @@
 
 
   <li class="md-nav__item">
-    <a href="setup/install-postgresql/" class="md-nav__link">
+    <a href="tools/install-postgresql/" class="md-nav__link">
       Installing PostgreSQL
     </a>
   </li>
@@ -894,12 +894,13 @@ WSPR DataSets using modern <a href="https://www.oracle.com/big-data/what-is-big-
 <p>Several frameworks are used in this repository. The following matrix provides a short description
 of each, and their intended purpose.</p>
 <ul>
-<li><code>docs</code> - Python, MkDocs for General repository documentation</li>
-<li><code>experiments</code> - Python, Spark, PyArrow Scripts to manage CSV &amp; Parquet files</li>
-<li><code>java</code> - |Java, Maven, SBT Basic Java apps for RDD and Avro examples</li>
-<li><code>notebooks</code> - Jupyter Notebooks Notebooks to demonstrate features an capabilities</li>
-<li><code>scala</code> - Scala programs to query files and convert csv files</li>
-<li><code>wsprana</code> - Python package to manage downloading CSV files (soon to be retired)</li>
+<li><code>docs</code> - Python, MkDocs for repository documentation</li>
+<li><code>java</code> - Java, Maven, and SBT apps for RDD and Avro examples</li>
+<li><code>notebooks</code> - Jupyter Notebooks  for basic test and visualization</li>
+<li><code>pyspark</code> - Python, PyArrow scripts that interact with CSV and Parquet files</li>
+<li><code>spark</code> -Scala programs to perform tasks</li>
+<li><code>wsprdaemon</code> - Python, Scala, Psql utilities related to the WSPR Daemon project</li>
+<li><code>wsprana</code> - Python, (soon to be retired)</li>
 </ul>
 <p>Pay close attention to the <code>README</code> files as they lay out how to setup the
 tools needed to run their respective scripts or application.</p>
@@ -957,7 +958,7 @@ by many of the apps and scripts.</p>
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
         
-          <a href="setup/overview/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="tools/overview/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
