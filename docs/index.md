@@ -237,11 +237,13 @@ tab shows the syntax for the stated language. This is the same behaviour as with
             .withColumn("x_hour", hour(col("x_TimeStamp")).cast(ByteType))
             .withColumn("x_minute", minute(col("x_TimeStamp")).cast(ByteType))
 
+        // only print the schema in Debug Mode
         if (debug) {
             println("- Print Res1 Schema")
             res1.printSchema()
         }
 
+        // When we call show(x), this is what triggers the run
         println("- Execute the Query")
         time {
             res1.show(5)
