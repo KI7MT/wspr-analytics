@@ -30,16 +30,16 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Setup:
-    - Overview: 'setup/overview.md'
-    - Installing Python: 'setup/install-python.md'
-    - Installing Java: 'setup/install-java.md'
-    - Installing Sdkman: 'setup/install-sdkman.md'
-    - Installing Spark: 'setup/install-spark.md'
-    - Installing Scala: 'setup/install-scala.md'
-    - Installing R: 'setup/install-r.md'
-    - Installing Graphana: 'setup/install-grafana.md'
-    - Installing PostgreSQL: 'setup/install-postgresql.md'
+  - Tools:
+    - Overview: 'tools/overview.md'
+    - Installing Python: 'tools/install-python.md'
+    - Installing Java: 'tools/install-java.md'
+    - Installing Sdkman: 'tools/install-sdkman.md'
+    - Installing Spark: 'tools/install-spark.md'
+    - Installing Scala: 'tools/install-scala.md'
+    - Installing R: 'tools/install-r.md'
+    - Installing Graphana: 'tools/install-grafana.md'
+    - Installing PostgreSQL: 'tools/install-postgresql.md'
   - Spark:
     - Overview: 'spark/overview.md'
     - Convert To Parquet: 'spark/convert-csv-parquet.md'
