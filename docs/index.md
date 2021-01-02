@@ -131,7 +131,7 @@ desired tab will render the command or content relevant to that distribution.
     ```
 
 
-## Super Fences
+## Super Fencing
 
 In many examples you may see multiple tabs relating to a particular code-block. Clicking on each
 tab shows the syntax for the stated language. This is the same behaviour as with
