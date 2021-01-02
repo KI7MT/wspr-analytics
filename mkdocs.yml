@@ -41,7 +41,7 @@ nav:
     - Install Graphana: 'tools/install-grafana.md'
     - Install PostgreSQL: 'tools/install-postgresql.md'
     - Install VirtualBox: 'tools/install-virtualbox.md'
-    - Install VAgrant: 'tools/install-vagrant.md'
+    - Install Vagrant: 'tools/install-vagrant.md'
   - Spark:
     - Overview: 'spark/overview.md'
     - Convert To Parquet: 'spark/convert-csv-parquet.md'
