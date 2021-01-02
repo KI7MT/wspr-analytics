@@ -1,14 +1,20 @@
-WsprDaemon is a robust application for Linux systems that:
+>WsprDaemon is a robust application for Linux systems that:
+>
+>- Decodes Weak Signal Propagation Reporter (WSPR) signals (Franke/Taylor wsprd* program)
+>
+>- Operates with networked KiwiSDRs for multi-channel spot acquisition (at least 8 channels)
+>
+>- Includes baseband audio input option
+>
+>- Provides a complete, robust and reliable reporting function to the wsprnet.org database
+>
+>- Estimates noise using RMS and FFT methods at same time and frequencies as WSPR spots
+>
+>- Reports spots and noise to a Timescale database with Grafana visualisation interface
+>
+>- Serves data to 3rd party apps including [VK7JJ][] and [WSPR Watch][]
 
-* Decodes Weak Signal Propagation Reporter (WSPR) signals (Franke/Taylor wsprd* program)
-* Operates with networked KiwiSDRs for multi-channel spot acquisition (at least 8 channels)
-* Includes baseband audio input option
-* Provides a complete, robust and reliable reporting function to the wsprnet.org database
-* Estimates noise using RMS and FFT methods at same time and frequencies as WSPR spots
-* Reports spots and noise to a Timescale database with Grafana visualisation interface
-* Serves data to 3rd party apps including [VK7JJ][] and [WSPR Watch][]
-
-<cite>[WSPR Daemon Org][]</cite>
+<cite>-- [WSPR Daemon Org][] --</cite>
 
 
 ## Project Resoureces
