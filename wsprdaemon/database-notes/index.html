@@ -16,7 +16,7 @@
     
     
       
-        <title>Database notes - WSPR Analytics</title>
+        <title>Database Notes - WSPR Analytics</title>
       
     
     
@@ -92,7 +92,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Database notes
+              Database Notes
             
           </span>
         </div>
@@ -250,13 +250,15 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../overview/" class="md-tabs__link">
+      <a href="../overview/" class="md-tabs__link md-tabs__link--active">
         WSPR-Daemon
       </a>
     </li>
@@ -732,12 +734,14 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
     
     <label class="md-nav__link" for="nav-7">
       WSPR-Daemon
@@ -761,6 +765,60 @@
     <a href="../overview/" class="md-nav__link">
       Overview
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Database Notes
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Database Notes
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#authors-and-credits" class="md-nav__link">
+    Authors and Credits
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schmenas-and-data-types" class="md-nav__link">
+    Schmenas and Data Types
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -818,14 +876,14 @@
               
                 
                 
-                  <h1>Database notes</h1>
+                  <h1>Database Notes</h1>
                 
                 <p>The content on the page are derived directly from the work of 
 Gwyn Griffiths, G3ZIL at <a href="http://wsprdaemon.org/">WSPR Daemon Org</a>. </p>
 <p>The examples providered are simply re-formated for easier readablity
 in Markdown Web Page Docs and included in code-blocks.</p>
 <p>If a Python example does not exist for a particular Pgsql query, 
-a sample script may be provided depending on the input parameter
+a sample script may be provided depending on input parameter
 complexity and desired ouput.</p>
 <h2 id="authors-and-credits">Authors and Credits<a class="headerlink" href="#authors-and-credits" title="Permanent link">&para;</a></h2>
 <ul>
@@ -851,6 +909,27 @@ deviation from the reference should be clearly understood by those running or au
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../overview/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
