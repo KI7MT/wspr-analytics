@@ -16,8 +16,16 @@
 
 <cite>-- [WSPR Daemon Org][] --</cite>
 
-
 ## Project Resoureces
+
+The links on this page are pulled directly from [WSPR Daemon Org][] and placed
+here for quick reference. Please see the site for additioanl resources.
+
+Additional resources that should be reviewed:
+
+- [Wspr Daemon Timescale Databases Notes][] by Gwyn Griffiths, G3ZIL
+
+### Primary Links
 
 * [WSPR Daemon Groups IO Site][]
 * [Github Project][]
@@ -25,13 +33,13 @@
 * [Presentations][]
 * [Technical][]
 
-## Visuialization and Tools
+### Visuialization and Tools
 
 * [Noise Graphs][]
 * [Grafana Server][]
 * [Grafana Help Guide][]
 
-## Third Party Integrations
+### Third Party Integrations
 
 * [VK7JJ][]
 * [WSPR Watch][]
@@ -49,3 +57,4 @@
 [Noise Graphs]: http://wsprdaemon.org/graphs/index.html
 [Grafana Server]: http://logs.wsprdaemon.org:3000/?orgId=2
 [Grafana Help Guide]: http://wsprdaemon.org/ewExternalFiles/Setting_up_Timescale_Grafana_dashboards_V2-2.pdf
+[Wspr Daemon Timescale Databases Notes]: https://groups.io/g/wsprdaemon/message/53
