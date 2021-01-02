@@ -165,7 +165,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     ``` scala
     /**
     *
-    * Convert Epoch in WSPRnet CSV files
+    * Convert Epoch in from WSPRnet CSV files
     *
     */
     def main(args: Array[String]): Unit = {
@@ -308,7 +308,7 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     ``` java
     /**
     *
-    * Static Mathod: Unzip a file to a path location
+    * Static Method: Unzip a file to a path location
     *
     */
     private static void UnzipFile(String zipFilePath, String destDir) {
