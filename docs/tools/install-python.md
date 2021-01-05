@@ -5,31 +5,32 @@ welcome to use whatever methods suits your work environment best.
 
 ## Anaconda Python Installation
 
-The [Anaconda Python Istall Instruction][] are quite good, so there's no need to
-reitterate their process. However, I will go over the steps I use.
+The [Anaconda Python Install Instruction](https://docs.anaconda.com/anaconda/install/linux/)
+for Linux are quite good, so there's no need to reitterate their process.
+However, I will go over the steps I use for an example.
 
 ### Install Prerequisites
 
 This step is recommended.
 
 If you plan on using any of the visual UX tools, ensure you install the
-[Rrerequisites](https://docs.anaconda.com/anaconda/install/linux/#prerequisites).
+[Prerequisites](https://docs.anaconda.com/anaconda/install/linux/#prerequisites).
 
 
 ### Install Anaconda
 
-Open a terminal and perform the following tasks.
+After installing the prerequisites, perform the following tasks in the same terminal.
 
 >NOTE: Check for the latest version at the bottom on the
 >[Install Page](https://www.anaconda.com/products/individual#linux). 
 >At the time of this writing, it was `Anancond3-2020-11`. Change the curl link
->below as appropriate.
+>below as needed. Any rescent version should suffice.
 
 ```bash
 # change directorys' download
 cd ~/Downlaods
 
-# Ensure you ahve curl installed
+# Ensure you have curl installed
 sudo apt update && sudo apt install curl -y
 
 # download the file
@@ -40,7 +41,7 @@ curl https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
 bash ~/Downloads/Anaconda3-2020.11-Linux-x86_64.sh
 
 # Install Notes:
-#   - Accept the the Defaults
+#   - Accept the the Defaults = yes
 #   - Add Anaconda to your path = yes
 #   - Close then re-open a terminal
 ```
