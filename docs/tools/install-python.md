@@ -9,13 +9,11 @@ However, I will go over the steps I use for an example.
 
 ## Install Prerequisites
 
-This step is recommended.
-
-If you plan on using any of the visual UX tools, ensure you install the
-[Prerequisites](https://docs.anaconda.com/anaconda/install/linux/#prerequisites).
+This step is recommended. If you plan on using any of the visual UX tools, ensure you
+install the [Prerequisites](https://docs.anaconda.com/anaconda/install/linux/#prerequisites).
 
 
-## Install Anaconda
+## Begin Installation
 
 After installing the prerequisites, perform the following tasks in the same terminal.
 
