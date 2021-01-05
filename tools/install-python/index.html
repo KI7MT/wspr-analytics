@@ -59,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#anaconda-python-installation" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -371,9 +376,77 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Install Python
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
       Install Python
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#anaconda-python-installation" class="md-nav__link">
+    Anaconda Python Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Anaconda Python Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-prerequisites" class="md-nav__link">
+    Install Prerequisites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-anaconda" class="md-nav__link">
+    Install Anaconda
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-installation" class="md-nav__link">
+    Post Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-virtial-environment" class="md-nav__link">
+    Create Virtial Environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -795,6 +868,76 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#anaconda-python-installation" class="md-nav__link">
+    Anaconda Python Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Anaconda Python Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-prerequisites" class="md-nav__link">
+    Install Prerequisites
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-anaconda" class="md-nav__link">
+    Install Anaconda
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post-installation" class="md-nav__link">
+    Post Installation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-virtial-environment" class="md-nav__link">
+    Create Virtial Environment
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -803,10 +946,92 @@
                 
                   <h1>Install Python</h1>
                 
-                <blockquote>
-<p>Under Development</p>
+                <p>Python is an extremely flexable language. There are many ways one can install and
+configure it. However, with Data Analytics, it's hard to beat [Ananconda Python][]
+as the platform was designed specificly for this type of work. You are more than
+welcome to use whatever methods suits your work environment best.</p>
+<h2 id="anaconda-python-installation">Anaconda Python Installation<a class="headerlink" href="#anaconda-python-installation" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://docs.anaconda.com/anaconda/install/linux/">Anaconda Python Install Instruction</a>
+for Linux are quite good, so there's no need to reitterate their process.
+However, I will go over the steps I use for an example.</p>
+<h3 id="install-prerequisites">Install Prerequisites<a class="headerlink" href="#install-prerequisites" title="Permanent link">&para;</a></h3>
+<p>This step is recommended.</p>
+<p>If you plan on using any of the visual UX tools, ensure you install the
+<a href="https://docs.anaconda.com/anaconda/install/linux/#prerequisites">Prerequisites</a>.</p>
+<h3 id="install-anaconda">Install Anaconda<a class="headerlink" href="#install-anaconda" title="Permanent link">&para;</a></h3>
+<p>After installing the prerequisites, perform the following tasks in the same terminal.</p>
+<blockquote>
+<p>NOTE: Check for the latest version at the bottom on the
+<a href="https://www.anaconda.com/products/individual#linux">Install Page</a>. 
+At the time of this writing, it was <code>Anancond3-2020-11</code>. Change the curl link
+below as needed. Any rescent version should suffice.</p>
 </blockquote>
-<p>This section will discuss the various ways to install Python.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># change directorys&#39; download</span>
+<span class="nb">cd</span> ~/Downlaods
+
+<span class="c1"># Ensure you have curl installed</span>
+sudo apt update <span class="o">&amp;&amp;</span> sudo apt install curl -y
+
+<span class="c1"># download the file</span>
+curl https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
+
+
+<span class="c1"># once downloaded, run the installer</span>
+bash ~/Downloads/Anaconda3-2020.11-Linux-x86_64.sh
+
+<span class="c1"># Install Notes:</span>
+<span class="c1">#   - Accept the the Defaults = yes</span>
+<span class="c1">#   - Add Anaconda to your path = yes</span>
+<span class="c1">#   - Close then re-open a terminal</span>
+</code></pre></div>
+<h3 id="post-installation">Post Installation<a class="headerlink" href="#post-installation" title="Permanent link">&para;</a></h3>
+<p>Upon reopening the terminal, you should see <code>(base)</code> in front of your path.
+If you dont, you can activate it with the following.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># activate base, this will auto-activate base each time you open a terminal</span>
+conda config --set auto_activate_base True
+
+<span class="c1"># source bashrc file</span>
+<span class="nb">source</span> ~/.bashrc
+
+<span class="c1"># check Python version</span>
+python -V
+
+<span class="c1"># check path to Python</span>
+which python
+
+<span class="c1"># the path to Python base should point to</span>
+/home/<span class="nv">$USER</span>/anaconda3/bin/python
+</code></pre></div>
+<h3 id="create-virtial-environment">Create Virtial Environment<a class="headerlink" href="#create-virtial-environment" title="Permanent link">&para;</a></h3>
+<p>You can create as many or few virtual environments as you wish.
+Generally, I create one per project, sometimes more depending on
+complexity and test requirments.</p>
+<p>You can name the virtual environments anything you like. I tend
+to name it after the project, in this case <code>wsprana</code>.</p>
+<p>Additionally, I normally stay one back from the latest relase of
+the <a href="https://www.python.org/downloads/">Mainstream Python</a>
+to help with package compatability. At the time of this writing it
+was <code>3.9.1</code>. Therefore, we'll create a <code>v3.8</code> virtual environment.</p>
+<p>In the terminal perform the following:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># create virtual environment</span>
+conda create -n wsprana -y <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.8
+
+<span class="c1"># after the creation, activate the new venv</span>
+conda activate wsprana
+
+<span class="c1"># update pip, optional, but helps with warnings</span>
+python -m pip install --upgrade pip
+</code></pre></div>
+<blockquote>
+<p>NOTE: Each time you close and re-open a terminal, you will be set back to
+the <code>(base)</code> environment (this is by design). You can change this behaviour
+by adding <code>conda activate wsprana</code> to your <code>~/.bashrc</code> file.</p>
+</blockquote>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<p>That completes the basic virtual environment installation.
+You should take a few moments and read through the
+<a href="https://docs.conda.io/projects/conda/en/latest/">Conda Documentation</a>
+as it contains many helpful hints on <code>conda usage</code>.</p>
                 
               
               
