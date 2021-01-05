@@ -1,5 +1,5 @@
 Python is an extremely flexable language. There are many ways one can install and
-configure it. However, with Data Analytics, it's hard to beat [Ananconda Python][]
+configure it. However, with Data Analytics, it's hard to beat [Anaconda Python][]
 as the platform was designed specificly for this type of work. You are more than
 welcome to use whatever methods suits your work environment best.
 
@@ -41,7 +41,7 @@ curl https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
 bash ~/Downloads/Anaconda3-2020.11-Linux-x86_64.sh
 
 # Install Notes:
-#   - Accept the the Defaults = yes
+#   - Accept the Defaults = yes
 #   - Add Anaconda to your path = yes
 #   - Close then re-open a terminal
 ```
