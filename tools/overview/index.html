@@ -390,6 +390,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#milti-distribution-commaons" class="md-nav__link">
+    Milti-Distribution Commaons
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -849,6 +856,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#milti-distribution-commaons" class="md-nav__link">
+    Milti-Distribution Commaons
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -874,13 +888,25 @@ instructions will cover installtion on Windows as well as <code>Vagrant</code>. 
 take place in a standard Ubuntu 20.04 LTS desktop environment.</p>
 <p>Where paractical, examples will include additional mainstream Linux distributions such as: Alpine, CentOS,
 Fedora, Debian, Mint, etc. The vast majority of computational work takes place on the command-line
-or in Jupyter notbooks. There is no need for a heavyweight desktop unless you want / need it for other
+or in Jupyter notebooks. There is no need for a heavyweight desktop unless you want / need it for other
 applications. The choice is entirely up to you, however, the more resources you take up with a heavy
 desktop environment, the less you have available for computing power.</p>
 <h2 id="hardware-considerations">Hardware Considerations<a class="headerlink" href="#hardware-considerations" title="Permanent link">&para;</a></h2>
 <p>There is no question about it, the more CPU cores and RAM you have, then faster results can be resturned.
-SSD's, where ever possible, should be fully utilized. </p>
-<p>Multi-Distro commands will be show in distribution tabs.</p>
+Use SSD's, where ever possible, and pack the system with as much memory as you can.</p>
+<p>While you can run spark jobs on minimal hardware, it's recommendecd to have at least 4 CPU cores and
+2GB of RAM per node. I would consider the the bar minimum for small job.</p>
+<p>For those that are ambitious, you can create a three or four node cluster out of Raspbery PI's; one
+control node and 3 compute nodes. If you go that reoute, consider the Pi 4 B (4GB / 8GB RAM) options.
+Four of those would make a nice little Spark Cluster at a modest cost compared to a High-End
+laptop boasting 6 cores (12 threads) and 16 GB RAM.</p>
+<blockquote>
+<p>NOTE: Remember, Spark Clusters do most of the computing in RAM. It's very fast compared to an HDFS
+approach. If you are going to spend cash, invenst in moderate CPU speeds and large quantities
+of fast ECC RAM. </p>
+</blockquote>
+<h2 id="milti-distribution-commaons">Milti-Distribution Commaons<a class="headerlink" href="#milti-distribution-commaons" title="Permanent link">&para;</a></h2>
+<p>WHere applicable, Multi-Distribution commands will be show in distribution tabs for eas of reading.</p>
 <blockquote>
 <p>NOTE: these are just examples, and not intended for execution.</p>
 </blockquote>
