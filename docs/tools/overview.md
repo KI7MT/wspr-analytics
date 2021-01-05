@@ -10,7 +10,7 @@ take place in a standard Ubuntu 20.04 LTS desktop environment.
 
 Where paractical, examples will include additional mainstream Linux distributions such as: Alpine, CentOS,
 Fedora, Debian, Mint, etc. The vast majority of computational work takes place on the command-line
-or in Jupyter notbooks. There is no need for a heavyweight desktop unless you want / need it for other
+or in Jupyter notebooks. There is no need for a heavyweight desktop unless you want / need it for other
 applications. The choice is entirely up to you, however, the more resources you take up with a heavy
 desktop environment, the less you have available for computing power.
 
@@ -19,7 +19,9 @@ desktop environment, the less you have available for computing power.
 There is no question about it, the more CPU cores and RAM you have, then faster results can be resturned.
 SSD's, where ever possible, should be fully utilized. 
 
-Multi-Distro commands will be show in distribution tabs.
+## Milti-Distribution Commaons
+
+WHere applicable, Multi-Distribution commands will be show in distribution tabs for eas of reading.
 
 >NOTE: these are just examples, and not intended for execution.
 
