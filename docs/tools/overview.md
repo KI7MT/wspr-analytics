@@ -34,7 +34,6 @@ Multi-Distro commands will be show in distribution tabs.
     apk add openssh opentp vim
     ```
 
-
 === "Ubuntu"
     Upgrade the host System Packages.
 
