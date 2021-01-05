@@ -32,7 +32,6 @@ sudo apt update && sudo apt install curl -y
 # download the file
 curl https://repo.anaconda.com/archive/Anaconda3-2020.11-Linux-x86_64.sh
 
-
 # once downloaded, run the installer
 bash ~/Downloads/Anaconda3-2020.11-Linux-x86_64.sh
 
@@ -73,8 +72,8 @@ complexity and test requirments.
 You can name the virtual environments anything you like. I tend
 to name it after the project, in this case `wsprana`.
 
-Additionally, I normally stay one back from the latest relase of
-the [Mainstream Python](https://www.python.org/downloads/)
+Additionally, I normally stay one minor version back from the latest 
+[Mainstream Python](https://www.python.org/downloads/) release
 to help with package compatability. At the time of this writing it
 was `3.9.1`. Therefore, we'll create a `v3.8` virtual environment.
 
