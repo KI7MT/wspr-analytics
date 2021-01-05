@@ -22,7 +22,7 @@ All of the example scripts will be incorporated into a main application at some 
 however, some will just be for testing.
 
 Additional tests will be done using [Scala][] and / or [Java][] for performance
-cvomparison. Initial tests will be run using Python, or more sustinct, [PySpark][],
+comparison. Initial tests will be run using Python, or more sustinct, [PySpark][],
 as it lends itself to rapid-deployment scenarios.
 
 >NOTE: This exercise is not a full-blown scientific experiment. Rather, its more
@@ -102,7 +102,7 @@ csvfile=$PWD/wsprspots-2020-02.csv
 git clone https://github.com/KI7MT/wspr-analytics.git
 
 # change directories and install dependencies
-cd ~/Downloads/wspr-analytics/experiments
+cd ~/Downloads/wspr-analytics/pyspark
 
 # NOTE: Be sure you are in a virtual environment "before"
 # installing Python packages
