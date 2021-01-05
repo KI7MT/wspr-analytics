@@ -19,7 +19,9 @@ desktop environment, the less you have available for computing power.
 There is no question about it, the more CPU cores and RAM you have, then faster results can be resturned.
 SSD's, where ever possible, should be fully utilized. 
 
-Multi-Distro commands will be show in distribution tabls.
+Multi-Distro commands will be show in distribution tabs.
+
+>NOTE: these are just examples, and not intended for execution.
 
 === "Alpine"
     - Update the package list
