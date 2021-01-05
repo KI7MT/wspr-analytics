@@ -16,11 +16,11 @@ desktop environment, the less you have available for computing power.
 
 ## Hardware Considerations
 
-There is no question about it, the more CPU cores and RAM you have, then faster results can be resturned.
-Use SSD's, where ever possible, and pack the system with as much memory as you can.
+There is no question about it, the more CPU cores and RAM you have, then faster results can be returned.
+Use SSD's whereever possible, and pack the system with as much memory as you can.
 
 While you can run spark jobs on minimal hardware, it's recommendecd to have at least 4 CPU cores and
-2GB of RAM per node. I would consider the the bar minimum for small job.
+2GB of RAM per node. I would consider the the bare-minimum for small jobs.
 
 For those that are ambitious, you can create a three or four node cluster out of Raspbery PI's; one
 control node and 3 compute nodes. If you go that reoute, consider the Pi 4 B (4GB / 8GB RAM) options.
@@ -30,6 +30,11 @@ laptop boasting 6 cores (12 threads) and 16 GB RAM.
 >NOTE: Remember, Spark Clusters do most of the computing in RAM. It's very fast compared to an HDFS
 >approach. If you are going to spend cash, invenst in moderate CPU speeds and large quantities
 >of fast ECC RAM. 
+
+If you have a high-end workstation with 16/24/32 cores and 64 to 128 GB of RAM, you can create 
+a cluster of virtual machines to do your processing. Obviously, this is not a high availability
+cluster as it resides on a single machine, but it would resemble a real cluster to a degree and
+perform quite well.
 
 ## Multi-Distribution Commands
 
