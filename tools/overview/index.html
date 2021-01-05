@@ -867,19 +867,59 @@
                 <p>Choosing an operating system is rather like picking out a car these days. One can go from mild to wild and 
 everyting in between. My personal preference is Linux, with MacOS a very close second. If I were traveling
 for work, I'd be on a Mac, no question about it.</p>
-<p>For the application-toolset being used with <code>Spark</code>, I do not recommend Windows, and will not be showing
-installaiton examples for it. If you must use a Windows Laptop or Workstation, I would highly recommend installing
-<code>Virtualbox</code> and create a virtual machine for all things <code>Spark</code> related. The <code>Virtualbox</code> instructions
-will cover installtion on Windows as well as <code>Vagrant</code>. Aside from that, all actions will take
-place in a standard Ubuntu 20.04 LTS desktop environment.</p>
-<p>WHere paractical, examples will include additional mainstream Linux distributions such as: Alpine, CentOS,
-Fedora, Debian, Mint, etc. The vvast majority of computational work takes place in on the command-line
-or in Jupyter notbooks. There's no need for a heavyweight desktop unless you want / need it for other
+<p>For an application-toolset being used with <code>Spark</code>, I do not recommend Windows, and will not be showing
+installaiton examples for it. If you must use a Windows Laptop or Workstation, I would highly recommend
+installing <code>Virtualbox</code> and create a virtual machine for all things <code>Spark</code> related. The <code>Virtualbox</code>
+instructions will cover installtion on Windows as well as <code>Vagrant</code>. Aside from that, all actions will
+take place in a standard Ubuntu 20.04 LTS desktop environment.</p>
+<p>Where paractical, examples will include additional mainstream Linux distributions such as: Alpine, CentOS,
+Fedora, Debian, Mint, etc. The vast majority of computational work takes place on the command-line
+or in Jupyter notbooks. There is no need for a heavyweight desktop unless you want / need it for other
 applications. The choice is entirely up to you, however, the more resources you take up with a heavy
 desktop environment, the less you have available for computing power.</p>
 <h2 id="hardware-considerations">Hardware Considerations<a class="headerlink" href="#hardware-considerations" title="Permanent link">&para;</a></h2>
 <p>There is no question about it, the more CPU cores and RAM you have, then faster results can be resturned.
 SSD's, where ever possible, should be fully utilized. </p>
+<p>Multi-Distro commands will be show in distribution tabs.</p>
+<blockquote>
+<p>NOTE: these are just examples, and not intended for execution.</p>
+</blockquote>
+<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Alpine</label><div class="tabbed-content">
+<ul>
+<li>Update the package list
+<div class="highlight"><pre><span></span><code>apk update
+</code></pre></div></li>
+<li>Add a package
+<div class="highlight"><pre><span></span><code>apk add openssh
+apk add openssh opentp vim
+</code></pre></div></li>
+</ul>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
+<p>Upgrade the host System Packages.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command</span>
+sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade
+</code></pre></div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Mint</label><div class="tabbed-content">
+<p>Install a pre-requesite package for VirtualBox.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command</span>
+sudo apt-get update
+sudo apt-get install dkms
+</code></pre></div>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Fedora</label><div class="tabbed-content">
+<p>a. Update your fedora release</p>
+<div class="highlight"><pre><span></span><code>sudo dnf upgrade --refresh
+</code></pre></div>
+<p>b. Install a plugin</p>
+<div class="highlight"><pre><span></span><code>sudo dnf install dnf-plugin-system-upgrade
+</code></pre></div>
+<p>c. Download upgraded packages
+<div class="highlight"><pre><span></span><code>sudo dnf system-upgrade download --refresh --releasever<span class="o">=</span><span class="m">33</span>
+</code></pre></div></p>
+</div>
+</div>
                 
               
               
