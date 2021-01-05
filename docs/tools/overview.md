@@ -31,9 +31,9 @@ laptop boasting 6 cores (12 threads) and 16 GB RAM.
 >approach. If you are going to spend cash, invenst in moderate CPU speeds and large quantities
 >of fast ECC RAM. 
 
-## Milti-Distribution Commaons
+## Multi-Distribution Commands
 
-WHere applicable, Multi-Distribution commands will be show in distribution tabs for eas of reading.
+Where applicable, Multi-Distribution commands will be shown in distribution tabs for ease of reading.
 
 >NOTE: these are just examples, and not intended for execution.
 
