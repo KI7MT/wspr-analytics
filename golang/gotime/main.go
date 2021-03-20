@@ -14,9 +14,10 @@ import (
 
 // version flags for main funciton
 var (
-	appname string
-	version string
-	date    string
+	appname     string
+	version     string
+	date        string
+	description string = "Golang App to display time zone informaiton."
 )
 
 // CheckError is a function to print out errors
@@ -47,6 +48,7 @@ func main() {
 		fmt.Println("\nApp Name .....: ", Cyan(appname))
 		fmt.Println("Version ......: ", Cyan(version))
 		fmt.Println("Build Date ...: ", Cyan(date))
+		fmt.Println("Description ..: ", Cyan(description))
 		fmt.Println()
 		os.Exit(0)
 	}
