@@ -133,9 +133,9 @@ func main() {
 	// only print the version informaiton if the user asks for it.
 	if *ver {
 		fmt.Println()
-		fmt.Println("App Name.......: ", appname)
-		fmt.Println("Version.......: ", version)
-		fmt.Println("Build Date....: ", date)
+		fmt.Println("App Name .....: ", appname)
+		fmt.Println("Version ......: ", version)
+		fmt.Println("Build Date ...: ", date)
 		fmt.Println()
 		os.Exit(0)
 	}
