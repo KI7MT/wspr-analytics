@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
+	"runtime"
 	"strings"
 
 	"github.com/dustin/go-humanize"
@@ -19,6 +21,7 @@ var (
 	date        string
 	description string
 	ver         bool
+	homedir     string
 )
 
 // WriteCounter counts the number of bytes written to it
@@ -42,7 +45,7 @@ func (wc WriteCounter) PrintProgress() {
 
 	// Return again and print current status of download
 	// We use the humanize package to print the bytes in a meaningful way (e.g. 10 MB)
-	fmt.Printf("\rDownload Progress ..: %s ", humanize.Bytes(wc.Total))
+	fmt.Printf("\rProgress ...: %s ", humanize.Bytes(wc.Total))
 }
 
 // DownloadFile will downlaods a url to a local file.
@@ -99,42 +102,76 @@ func clearScreen() {
 	c.Run()
 }
 
-// main is the main entry point to the application
+// UserHomeDire attempts to get the users home directory on Win and Linux
+func UserHomeDir() string {
+	if runtime.GOOS == "windows" {
+		home := os.Getenv("HOMEDRIVE") + os.Getenv("HOMEPATH")
+		if home == "" {
+			home = os.Getenv("USERPROFILE")
+		}
+		return home
+	}
+	return os.Getenv("HOME")
+}
+
+// main is the entry point to the application
 func main() {
 
 	// clear the screen
 	clearScreen()
 
+	// default download directory
+	dldir := filepath.Join(UserHomeDir(), "Downloads")
+
 	// if the users does not supply args, 2008 and 03 will be used
 	var yearvar = flag.StringP("year", "y", "2008", "specify year like 2008")
 	var monthvar = flag.StringP("month", "m", "03", "specify month like 03")
 	var ver = flag.BoolP("version", "v", false, "prints app version information")
+	var ddir = flag.StringP("dest", "d", dldir, "destination for file default is ~/Downlaods")
 	flag.Parse()
 
 	// only print the version informaiton if the user asks for it.
 	if *ver {
 		fmt.Println()
-		fmt.Println("App Name....: ", appname)
-		fmt.Println("Version.....: ", version)
-		fmt.Println("Build Date..: ", date)
+		fmt.Println("App Name.......: ", appname)
+		fmt.Println("Version.......: ", version)
+		fmt.Println("Build Date....: ", date)
 		fmt.Println()
 		os.Exit(0)
 	}
 
-	//  build the string to download the csv file
-	fileName := "wsprspots-" + *yearvar + "-" + *monthvar + ".csv.gz"
+	// make the default download directory exists
+	if _, err := os.Stat(*ddir); os.IsNotExist(err) {
+		os.Mkdir(*ddir, os.ModePerm)
+	}
+
+	// build the string to download the csv file
+	ext := ""
+	if runtime.GOOS == "windows" {
+		ext = ".csv.zip"
+	} else {
+		ext = ".csv.gz"
+	}
+	fileName := "wsprspots-" + *yearvar + "-" + *monthvar + ext
 	fileUrl := "http://wsprnet.org/archive/" + fileName
 
-	// make the destination directory if passes
-	//os.MkdirAll(folderPath, os.ModePerm)
+	// move into download directory
+	os.Chdir(*ddir)
+
+	// get the current working directory
+	baseDir, _ := os.Getwd()
 
 	// start dwonloading
-	fmt.Println("\nDownloading File ...: " + fileName)
+	fmt.Println("Location ...: " + *ddir)
+	fmt.Println("File .......: " + fileName)
 
 	err := DownloadFile(fileName, fileUrl)
 	if err != nil {
 		panic(err)
 	}
+
+	// move back to the working directory
+	os.Chdir(baseDir)
 
 	fmt.Println("Finished")
 	fmt.Println()
