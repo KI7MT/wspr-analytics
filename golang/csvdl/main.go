@@ -18,6 +18,7 @@ var (
 	version     string
 	date        string
 	description string
+	ver         bool
 )
 
 // WriteCounter counts the number of bytes written to it
@@ -98,20 +99,27 @@ func clearScreen() {
 	c.Run()
 }
 
-// main ins the main entry point to the application
+// main is the main entry point to the application
 func main() {
 
 	// clear the screen
 	clearScreen()
 
-	fmt.Println("App Name....: ", appname)
-	fmt.Println("Version.....: ", version)
-	fmt.Println("Build Date..: ", date)
-
 	// if the users does not supply args, 2008 and 03 will be used
 	var yearvar = flag.StringP("year", "y", "2008", "specify year like 2008")
 	var monthvar = flag.StringP("month", "m", "03", "specify month like 03")
+	var ver = flag.BoolP("version", "v", false, "prints app version information")
 	flag.Parse()
+
+	// only print the version informaiton if the user asks for it.
+	if *ver {
+		fmt.Println()
+		fmt.Println("App Name....: ", appname)
+		fmt.Println("Version.....: ", version)
+		fmt.Println("Build Date..: ", date)
+		fmt.Println()
+		os.Exit(0)
+	}
 
 	//  build the string to download the csv file
 	fileName := "wsprspots-" + *yearvar + "-" + *monthvar + ".csv.gz"
