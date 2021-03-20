@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/dustin/go-humanize"
+	. "github.com/logrusorgru/aurora"
 	flag "github.com/spf13/pflag"
 )
 
@@ -19,7 +20,7 @@ var (
 	appname     string
 	version     string
 	date        string
-	description string
+	description string = "Golang app to download WSPRnet CSV Files."
 	ver         bool
 	homedir     string
 )
@@ -127,15 +128,16 @@ func main() {
 	var yearvar = flag.StringP("year", "y", "2008", "specify year like 2008")
 	var monthvar = flag.StringP("month", "m", "03", "specify month like 03")
 	var ver = flag.BoolP("version", "v", false, "prints app version information")
-	var ddir = flag.StringP("dest", "d", dldir, "destination for file default is ~/Downlaods")
+	var ddir = flag.StringP("dest", "d", dldir, "destination for CSV file")
 	flag.Parse()
 
 	// only print the version informaiton if the user asks for it.
 	if *ver {
 		fmt.Println()
-		fmt.Println("App Name .....: ", appname)
-		fmt.Println("Version ......: ", version)
-		fmt.Println("Build Date ...: ", date)
+		fmt.Println("App Name .....: ", Cyan(appname))
+		fmt.Println("Version ......: ", Cyan(version))
+		fmt.Println("Build Date ...: ", Cyan(date))
+		fmt.Println("Description ..: ", Cyan(description))
 		fmt.Println()
 		os.Exit(0)
 	}
