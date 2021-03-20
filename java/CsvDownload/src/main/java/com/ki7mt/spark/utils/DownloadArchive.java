@@ -13,9 +13,18 @@ import java.util.zip.ZipInputStream;
 public class DownloadArchive {
     public static void main(String[] args) {
 
+        // Check args and exit if not equal to to
+        int count = args.length;
+        if (count != 2 ) {
+            System.err.println("CsvDownload requires (2) arguments, year and month");
+            System.err.println("Example: java -jar CsvDownload_2.12.0-1.jar 2008 03");
+            System.exit(1);
+        }
+
         // Change the year and two digit month to download
-        String year = "2008";
-        String month = "03";
+        String year = args[0];
+        String month = args[1];
+
 
         /* -- NO FURTHER EDITS NEEDED BELOW THIS LINE -- */
 
@@ -28,7 +37,7 @@ public class DownloadArchive {
 
         // Download the file
         System.out.println("* Downloading WSPR Archive File : " + fileName);
-        //DownloadFile(inFileUrl, outFile);
+        DownloadFile(inFileUrl, outFile);
 
         // Unzip the file
         UnzipFile(outFile, outFileDir);
