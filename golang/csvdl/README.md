@@ -3,6 +3,14 @@
 `CSVDL` is a simple [Golang][] app that downloads CSV archive files from
 the [WSPRnet][] download repository. Yes, you could use `curl`, `wget`, or any number of GNU tools, to perform the same task, and with many more options. However, this was just to show the simplicity of using [Golang][] to perform a similar task.
 
+## Features
+
+- Works on Linux, MacOS, and Windows
+- Compiles and runs as expected on MSYS2 via `mingw-w64-x86_64-go` package
+- Auto-Selects file extension: Windows = `.csv.zip`, Linux/MacOS = `.csv.gz`
+- Default destination is $HOME/Downlads or %USERPROFILE%/Downloads if `--dest` flag is not set
+- Uses posix flags for --year, --month, --version, --help and download --destination
+
 ## Compiling
 
 [Golang][] apps do not need to be compiled to run. However, you do need the [Golang][] framework installed for your operating system if not using a pre-compiled binary. Likewise, to compile the binaries, you also need the framwork installed.
