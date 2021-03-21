@@ -75,7 +75,7 @@ Example:
 
 ## Example Usage
 
-Using the example invocation above will download the **smallest* [WSPRnet][] archive file once you run it.
+Using the example invocation above will download the **smallest** [WSPRnet][] archive file once you run it.
 
 You can substitute the following year / month combinations
 
