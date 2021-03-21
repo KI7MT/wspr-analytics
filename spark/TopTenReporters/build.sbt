@@ -1,4 +1,4 @@
-organization := "com.ki7mt.wsprana.scala"
+organization := "com.ki7mt"
 
 version := "1.0"
 

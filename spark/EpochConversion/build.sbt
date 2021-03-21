@@ -1,4 +1,8 @@
-name := "SparkExamples"
+organization := "io.ki7mt"
+
+version := "1.0"
+
+name := "EpochConversion"
 
 version := "0.1"
 
