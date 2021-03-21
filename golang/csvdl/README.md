@@ -150,7 +150,7 @@ A small shell script would resemble the following:
 # Description: Small shell wrapper for downloading WSPRnet CSV Files
 
 # Save this script as: ..: test-csvdl.sh
-# Update Permissions ....: chmod +c ./test-csvdl.sh
+# Update Permissions ....: chmod +x ./test-csvdl.sh
 # Run the script with  ..: ./test-csvdl.sh
 
 set -e
