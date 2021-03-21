@@ -34,21 +34,21 @@ var (
 // IN this case, it's reporesting a parquet-go structure
 // For details see: https://github.com/xitongsys/parquet-go
 type Spot struct {
-	SpotID    int64 `parquet:"name=spotid, type=INT64"`
-	Timestamp int64
-	Reporter  string
-	RxGrid    string
-	SNR       int32
-	Frequency float64
-	Callsign  string
-	Grid      string
-	Power     int32
-	Drift     int32
-	Distance  int32
-	Azimuth   int32
-	Band      string
-	Version   string
-	Code      int32
+	SpotID    string `parquet:"name=spotid, type=BYTE_ARRAY"`
+	Timestamp string `parquet:"name=timestamp, type=BYTE_ARRAY"`
+	Reporter  string `parquet:"name=reporter, type=BYTE_ARRAY"`
+	RxGrid    string `parquet:"name=rxgrid, type=BYTE_ARRAY"`
+	SNR       string `parquet:"name=snr, type=BYTE_ARRAY"`
+	Frequency string `parquet:"name=frequency, type=BYTE_ARRAY"`
+	Callsign  string `parquet:"name=callsign, type=BYTE_ARRAY"`
+	Grid      string `parquet:"name=grid, type=BYTE_ARRAY"`
+	Power     string `parquet:"name=power, type=BYTE_ARRAY"`
+	Drift     string `parquet:"name=drift, type=BYTE_ARRAY"`
+	Distance  string `parquet:"name=sdistance, type=BYTE_ARRAY"`
+	Azimuth   string `parquet:"name=azimuth, type=BYTE_ARRAY"`
+	Band      string `parquet:"name=band, type=BYTE_ARRAY"`
+	Version   string `parquet:"name=version, type=BYTE_ARRAY"`
+	Code      string `parquet:"name=code, type=BYTE_ARRAY"`
 }
 
 // CheckError is a function to print out errors
@@ -97,6 +97,7 @@ func main() {
 	filePath := filepath.Join(*srcdir, *file)
 
 	// if the path + file don't exist, we can't convert it so exit.
+	fmt.Println("* Checking CSV File")
 	_, err := os.Stat(filePath)
 	if err != nil {
 		if os.IsNotExist(err) {
@@ -107,6 +108,7 @@ func main() {
 	}
 
 	// check if we can create the parquet file in this location
+	fmt.Println("* Checking Write Permissions")
 	outfile := filepath.Join(*destdir, "spot.parquet")
 	fw, err := local.NewLocalFileWriter(outfile)
 	if err != nil {
@@ -127,7 +129,8 @@ func main() {
 	// this is the sourceCSV file
 	csvFile, _ := os.Open(filePath)
 	reader := csv.NewReader(bufio.NewReader(csvFile))
-
+	counter := 0
+	fmt.Println("* Processing CSV file\n")
 	for {
 		line, error := reader.Read()
 		if error == io.EOF {
@@ -136,33 +139,35 @@ func main() {
 			log.Fatal(error)
 		}
 		spot := Spot{
-			SpotID:    0,
-			Timestamp: 0,
+			SpotID:    line[0],
+			Timestamp: line[1],
 			Reporter:  line[2],
 			RxGrid:    line[3],
-			SNR:       0,
-			Frequency: 0,
+			SNR:       line[4],
+			Frequency: line[5],
 			Callsign:  line[6],
 			Grid:      line[7],
-			Power:     0,
-			Drift:     0,
-			Distance:  0,
-			Azimuth:   0,
+			Power:     line[8],
+			Drift:     line[9],
+			Distance:  line[10],
+			Azimuth:   line[11],
 			Band:      line[12],
-			Version:   version,
-			Code:      0,
+			Version:   line[13],
+			Code:      line[14],
 		}
 		if err = pw.Write(spot); err != nil {
 			log.Println("Write error", err)
 		}
+		counter++
+		fmt.Print("\r Line Count: ", counter)
 	}
 
 	if err = pw.WriteStop(); err != nil {
-		log.Println("WriteStop error", err)
+		log.Println("\nWriteStop error", err)
 		return
 	}
 
-	log.Println("Write Finished")
+	log.Println("Write Finished\n")
 	fw.Close()
 }
 
@@ -183,21 +188,42 @@ func main() {
 /*
 	Spot struct from scala
 
-	 val spotSchema = new StructType()
-      .add("SpotID", LongType, nullable = false)
-      .add("Timestamp", IntegerType, nullable = false)
-      .add("Reporter", StringType, nullable = false)
-      .add("RxGrid", StringType, nullable = false)
-      .add("SNR", ByteType, nullable = false)
-      .add("Frequency", DoubleType, nullable = false)
-      .add("CallSign", StringType, nullable = false)
-      .add("Grid", StringType, nullable = false)
-      .add("Power", ByteType, nullable = false)
-      .add("Drift", ByteType, nullable = false)
-      .add("Distance", ShortType, nullable = false)
-      .add("Azimuth", ByteType, nullable = false)
-      .add("Band", ByteType, nullable = false)
-      .add("Version", StringType, nullable = true)
-      .add("Code", ByteType, nullable = true)
+val spotSchema = new StructType()
+	.add("SpotID", LongType, nullable = false)
+	.add("Timestamp", IntegerType, nullable = false)
+	.add("Reporter", StringType, nullable = false)
+	.add("RxGrid", StringType, nullable = false)
+	.add("SNR", ByteType, nullable = false)
+	.add("Frequency", DoubleType, nullable = false)
+	.add("CallSign", StringType, nullable = false)
+	.add("Grid", StringType, nullable = false)
+	.add("Power", ByteType, nullable = false)
+	.add("Drift", ByteType, nullable = false)
+	.add("Distance", ShortType, nullable = false)
+	.add("Azimuth", ByteType, nullable = false)
+	.add("Band", ByteType, nullable = false)
+	.add("Version", StringType, nullable = true)
+	.add("Code", ByteType, nullable = true)
+
+Golang parquet-go struct convertion
+
+type Spot struct {
+	SpotID    string `parquet:"name=spotid, type=BYTE_ARRAY, convertedtype=INT_64"`
+	Timestamp string `parquet:"name=timestamp, type=BYTE_ARRAY, convertedtype=INT_64"`
+	Reporter  string `parquet:"name=reporter, type=BYTE_ARRAY"`
+	RxGrid    string `parquet:"name=rxgrid, type=BYTE_ARRAY"`
+	SNR       string `parquet:"name=snr, type=BYTE_ARRAY, convertedtype=INT_16"`
+	Frequency string `parquet:"name=frequency, type=BYTE_ARRAY, convertedtype=DOUBLE"`
+	Callsign  string `parquet:"name=callsign, type=BYTE_ARRAY"`
+	Grid      string `parquet:"name=grid, type=BYTE_ARRAY"`
+	Power     string `parquet:"name=power, type=BYTE_ARRAY, convertedtype=INT_16"`
+	Drift     string `parquet:"name=drift, type=BYTE_ARRAY, convertedtype=INT_16"`
+	Distance  string `parquet:"name=sdistance, type=BYTE_ARRAY, convertedtype=INT_32"`
+	Azimuth   string `parquet:"name=azimuth, type=BYTE_ARRAY, convertedtype=INT_16"`
+	Band      string `parquet:"name=band, type=BYTE_ARRAY, convertedtype=INT_16"`
+	Version   string `parquet:"name=version, type=BYTE_ARRAY"`
+	Code      string `parquet:"name=code, type=BYTE_ARRAY, convertedtype=INT_16"`
+}
+
 
 */
