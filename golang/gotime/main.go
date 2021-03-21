@@ -37,9 +37,9 @@ func clearScreen() {
 // main is the primary entry point for the app
 func main() {
 
-	clearScreen()
+	//clearScreen()
 
-	// if the users does not supply args, 2008 and 03 will be used
+	// set the option flagsd
 	var ver = flag.BoolP("version", "v", false, "prints app version information")
 	flag.Parse()
 

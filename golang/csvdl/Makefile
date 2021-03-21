@@ -14,6 +14,7 @@ DATE=$(shell date)
 BINDIR=/usr/local/bin
 CP=cp -u
 CLEAR=clear
+LOGUSER=$(shell $LOGNAME)
 
 # Build rules
 .PHONY: build
@@ -27,14 +28,14 @@ build: clean
 	@echo ''
 	@echo 'Finished Build'
 	@echo ''
-	@echo "To run $(APP), use the following"
-	@echo ""
-	@echo "OPTIONS"
-	@echo '  -y, --year string    specify year like 2009 (default "2008")'
-	@echo '  -m, --month string   specify month like 01 (default "03")'
+	@echo "Usage: ./csvdl [args]"
+	@echo "   -d, --dest string    destination for CSV file (default /home/${LOGNAME}/Downloads)"
+	@echo '   -m, --month string   specify month like 03 (default "03")'
+	@echo '   -v, --version        prints app version information'
+	@echo '   -y, --year string    specify year like 2008 (default "2008")'
 	@echo ''
 	@echo 'Example:'
-	@echo "  ${APP} --year=2008 -month=03"
+	@echo "  ./csvdl --year=2008 --month=03 --dest=/home/${LOGNAME}/Downloads"
 	@echo ''
 
 .PHONY: install

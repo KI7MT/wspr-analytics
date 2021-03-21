@@ -119,7 +119,7 @@ func UserHomeDir() string {
 func main() {
 
 	// clear the screen
-	clearScreen()
+	//clearScreen()
 
 	// default download directory
 	dldir := filepath.Join(UserHomeDir(), "Downloads")
