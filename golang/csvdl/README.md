@@ -123,7 +123,7 @@ You can specify the output destination for downloaded archive file using the (`-
 For Example:
 
 ```bash
-# To use use custom output destination, type:
+# To use custom destination, type:
 
 ./csvdl --year=2008 --month=03 --dest=$HOME/Downloads/wsprnet
 
