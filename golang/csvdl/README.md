@@ -10,6 +10,7 @@ the [WSPRnet][] download repository. Yes, you could use `curl`, `wget`, or any n
 - Auto-Selects file extension: Windows = `.csv.zip`, Linux/MacOS = `.csv.gz`
 - Default destination is $HOME/Downloads or %USERPROFILE%\Downloads if `--dest` flag is not set
 - Uses posix flags for --year, --month, --version, --help and download --destination
+- Auto-Creates `--dest` location if the user has write permissions
 
 ## Compiling
 
@@ -92,7 +93,7 @@ You can substitute the following year / month combinations
 - Available Years: `2008 thu 2021`
 - Available months: `01 02 03 04 05 06 07 08 09 10 11 12`
 
-These values are not error-checked per say, so be carful when entering them manyally.
+These values are not error-checked per say, so be carful when entering them manually.
 
 ```bash
 # run the default example
@@ -131,7 +132,7 @@ You can specify the output destination for downloaded archive file using the (`-
 For Example:
 
 ```bash
-# To use custom destination, type:
+# To use a custom destination, type:
 
 ./csvdl --year=2008 --month=03 --dest=$HOME/Downloads/wsprnet
 
