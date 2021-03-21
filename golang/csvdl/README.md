@@ -8,7 +8,7 @@ the [WSPRnet][] download repository. Yes, you could use `curl`, `wget`, or any n
 - Works on Linux, MacOS, and Windows
 - Compiles and runs as expected on MSYS2 via `mingw-w64-x86_64-go` package
 - Auto-Selects file extension: Windows = `.csv.zip`, Linux/MacOS = `.csv.gz`
-- Default destination is $HOME/Downlads or %USERPROFILE%\Downloads if `--dest` flag is not set
+- Default destination is $HOME/Downloads or %USERPROFILE%\Downloads if `--dest` flag is not set
 - Uses posix flags for --year, --month, --version, --help and download --destination
 
 ## Compiling
