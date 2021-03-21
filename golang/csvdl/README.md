@@ -191,7 +191,7 @@ echo ''
 exit 0
 
 # NOTE:
-#   You could also add getopts to allow for command line put for the year month
+#   You could also add getopts to allow for command-line input for the year / month
 #   combnations if desired.
 ```
 
