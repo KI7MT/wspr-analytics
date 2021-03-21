@@ -4,7 +4,7 @@
 # Copyright .....: Copyright (C) 2021, Greg Beam (KI7MT)
 # License .......: Apache 2.0
 # Description ...: WSPRnet CSV Download App
-# Execution .....: As normal user type: csvdl --year=2008 --month=03
+# Execution .....: As a normal user type: csvdl --year=2008 --month=03 --dest=$HOME/Downloads"
 
 # Process variables
 APP=csvdl
