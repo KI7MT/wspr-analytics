@@ -1,7 +1,7 @@
 # WSPR CSV Archive Dowload Applicaiton
 
 `CSVDL` is a simple [Golang][] app that downloads CSV archive files from
-the [WSPRnet][] download repository.
+the [WSPRnet][] download repository. Yes, you could use `curl`, `wget`, or any number of GNU tools, to perform the same task, and with many more options. However, this was just to show the simplicity of using [Golang][] to perform a similar task.
 
 ## Compiling
 
@@ -18,14 +18,17 @@ See the following link for informaiton about setting up [Golang][] on your opera
 If you have [Git][] installed, you can simply clone the repository. If not, see [download from zip file](#downloading-from-zip-file) below.
 
 ```bash
-# clone the wspr-analytics repository
+# Clone the wspr-analytics repository
 # Open a terminal, then type:
 
-# For Linx / MacOS (adjust location to your preference)
+# Adjust location to your preference
+
 cd ~/Downloads
 
-# clone the repository
+# Clone the repository
+
 git clone https://github.com/KI7MT/wspr-analytics.git
+
 ```
 
 ## Downloading From Zip File
@@ -44,13 +47,14 @@ To compile and run the application, change directories to the the cloned or down
 # In this example, I am using $HOME/Downloads
 # Type the folloing commands to build and run
 
-# Linux / MacOS (adjust accordingly for windows path location)
+# Change direcories
 cd $HOME/Downloads/wspr-analytics/golang/csvdl
 
-# Build Command for Linux / MacOS
+# To compile the app, type:
+
 make build
 
-# make build output / results
+# command output
 go build -ldflags \
         "-X main.appname=csvdl \
         -X main.version=v1.0.0 \
@@ -71,7 +75,7 @@ Example:
 
 ## Example Usage
 
-Using example invocation above will download the **smallest* [WSPRnet][] archive file once you run it.
+Using the example invocation above will download the **smallest* [WSPRnet][] archive file once you run it.
 
 You can substitute the following year / month combinations
 
@@ -83,10 +87,11 @@ You can substitute the following year / month combinations
 These values are not error-checked per say, so be carful when entering them manyally.
 
 ```bash
-# run the defauly example
+# run the default example
+
 ./csvdl --year=2008 --month=03 --dest=/home/ki7mt/Downloads
 
-# output from command
+# command output
 Location ...: /home/ki7mt/Downloads
 File .......: wsprspots-2008-03.csv.gz
 Progress ...: 993 kB                              
@@ -100,10 +105,11 @@ To print the application version information, use the following:
 > NOTE: the build date should be the time you compiled the application.
 
 ```bash
-# to print the version info, type:
+# To print the version info, type:
+
 ./csvdl --version
 
-# output from command
+# command ouput
 App Name .....:  csvdl
 Version ......:  v1.0.0
 Build Date ...:  Sat 20 Mar 2021 06:27:26 PM MDT
@@ -117,10 +123,11 @@ You can specify the output destination for downloaded archive file using the (`-
 For Example:
 
 ```bash
-# to use use custom output destination, type:
+# To use use custom output destination, type:
+
 ./csvdl --year=2008 --month=03 --dest=$HOME/Downloads/wsprnet
 
-# output from command
+# command output
 Location ...: /home/ki7mt/Downloads/wsprnet
 File .......: wsprspots-2008-03.csv.gz
 Progress ...: 993 kB                              
