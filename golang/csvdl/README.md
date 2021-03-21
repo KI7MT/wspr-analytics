@@ -12,15 +12,13 @@ the [WSPRnet][] download repository. Yes, you could use `curl`, `wget`, or any n
 - Uses posix flags for --year, --month, --version, --help and download --destination
 - Auto-Creates `--dest` location if the user has write permissions
 
-## Compiling
+## Requirements
 
 [Golang][] apps do not need to be compiled to run. However, you do need the [Golang][] framework installed for your operating system if not using a pre-compiled binary. Likewise, to compile the binaries, you also need the framwork installed.
 
 See the following link for informaiton about setting up [Golang][] on your operating system (Windows, Linux, MacOS):
 
 - [Golang Installation](https://golang.org/doc/install)
-- Installing Golang in MSYS2
-
 
 ## Cloning The Repository
 
