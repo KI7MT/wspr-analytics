@@ -1,4 +1,4 @@
-# WSPR CSV Archive Dowload Applicaiton
+# WSPR CSV Archive Download Applicaiton
 
 `CSVDL` is a simple [Golang][] app that downloads CSV archive files from
 the [WSPRnet][] download repository. Yes, you could use `curl`, `wget`, or any number of GNU tools, to perform the same task, and with many more options. However, this was just to show the simplicity of using [Golang][] to perform a similar task.
