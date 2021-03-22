@@ -52,10 +52,10 @@ object ConvertCsvToParquet {
     if (args.length <= 1) {
       println("\nInput Processing Error\n")
       println("The conversion script rerquires two parameters\n")
-      println("Input File       : /path/to/some/wsprspots-2020-12.csv")
-      println("Output Directory : /tmp/wspr/raw/parquet/2020/11")
+      println("Input File       : /data/raw/csv/wsprspots-2021-01.csv")
+      println("Output Directory : /data/raw/parquet/2021/01")
       println("\nExample\n")
-      println("spark-sumbit --master local[8] ConvertCsvParquet-assembly-1.0.jar $inFile $outDir\n")
+      println("spark-sumbit --master local[8] ConvertCsvParquet-assembly-1.0.jar $infile $outdir\n")
       System.exit(1)
     }
 
@@ -69,7 +69,7 @@ object ConvertCsvToParquet {
       println(s"\nObject        : $appname")
       println(s"Process File  : $inFile" )
       println(s"File Out Path : $outDir")
-      println(s"Tiimestame    : $timestamp")
+      println(s"Tiimestamp    : $timestamp")
       println(s"Description   : $description\n" )
 
       println("Process Steps to Create Parquet File(s)")

@@ -9,11 +9,11 @@
 set -e
 
 # Destination path
-DOWNLOAD_DIR="$HOME/Downloads/wsprnet"
+DOWNLOAD_DIR="/data/raw/csv"
 
 # this will download the months 03,04, and 05 for 2008
-declare -a year=(2008)
-declare -a month=(03 04 05)
+declare -a year=(2021)
+declare -a month=(01 02)
 
 # clear the screen
 clear ||:
@@ -30,7 +30,7 @@ do
 done
 
 # list items in the custom output location
-ls -al "$DOWNLOAD_DIR"
+ls -alh "$DOWNLOAD_DIR"
 echo ''
 
 # exit the script
