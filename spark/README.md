@@ -13,12 +13,13 @@ This apps in the directory are used for exploring the use of
 In each folder under you'll find instructions for compiling and running each
 project or script as appropriate.
 
-You must have Java, Scala, Spark and SBT available from the command line.
+You must have Java, Scala, Spark and SBT, and Python available from the command line.
 
 - Java openjdk version 1.8.0_275 or later
 - Scala Version 2.12.12
 - Spark 3.0.1
 - SBT Tools 1.4.9
+- Python, PySpark, and PyArrow
 
 An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
