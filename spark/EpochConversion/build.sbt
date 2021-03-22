@@ -1,13 +1,16 @@
 name          := "EpochConversion"
 version       := "1.0"
 scalaVersion  := "2.12.12"
-organization  := "io.ki7mt"
+organization  := "com.ki7mt"
 
+val sparkVersion = "3.0.1"
 
 libraryDependencies ++= Seq(
-  "org.apache.spark" %% "spark-core" % "3.0.1",
-  "org.apache.spark" %% "spark-sql" % "3.0.1",
-  "org.apache.spark" %% "spark-mllib" % "3.0.1",
-  "org.apache.spark" %% "spark-streaming" % "3.0.1",
-  "commons-io" % "commons-io" % "2.8.0"
+    "org.apache.spark" %% "spark-core" % "3.0.1" % "provided",
+    "org.apache.spark" %% "spark-sql" % "3.0.1" % "provided"
 )
+
+// example : convertcsvparquet-2.12-3.0.1-1.0.jar
+artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
+  Artifact.artifactName(sv, module, artifact).replaceAll(s"-${module.revision}", s"-${sparkVersion}-${module.revision}")
+}

@@ -1,24 +1,45 @@
-package com.ki7mt
+package com.ki7mt.spark
 
-import org.apache.log4j.PropertyConfigurator
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 
 import java.time.ZoneId
 
-
 object EpocConversion {
 
+  case class RawSpot(
+                      SpotId: Long,
+                      TimeStamp: Integer,
+                      Reporter: String,
+                      RxGrid: String,
+                      SNR: Byte,
+                      Frequency: Double,
+                      CallSign: String,
+                      Grid: String,
+                      Power: Byte,
+                      Drift: Byte,
+                      Distance: Short,
+                      Azimuth: Byte,
+                      Band: Byte,
+                      Version: String,
+                      Code: Byte
+                    )
+
+  // timer function
+  def time[R](block: => R): R = {
+    val t0 = System.currentTimeMillis()
+    val result = block // call the block
+    val t1 = System.currentTimeMillis()
+    val elapsedTimeMsec: Float = t1 - t0
+    val elapsedTime: Float = elapsedTimeMsec / 1000
+    println(f"Elapsed Time : $elapsedTime sec")
+    result
+  }
+
   def main(args: Array[String]): Unit = {
-    PropertyConfigurator.configure("log4j/log4j.properties")
 
     val debug: Boolean = false
-
-    // IMPORTANT: When converting EPOCH times, you must do so with the
-    // to_utc_timestamp method. This requires telling the system what Zone
-    // your computer is in (the one doing the conversion) in order to get
-    // the correct unix time.
     val z = ZoneId.systemDefault()
     val zoneId = z.getId
 
@@ -60,7 +81,7 @@ object EpocConversion {
     println("- Select the column we want to process")
     val res = ds.select("*")
       .withColumn("x_TimeStamp", date_format(col("TimeStamp")
-        .cast(DataTypes.TimestampType), "yyyy-MM-dd HH:mm:ss"))
+      .cast(DataTypes.TimestampType), "yyyy-MM-dd HH:mm:ss"))
 
     // only print the schema in Debug Mode
     if (debug) {
@@ -96,17 +117,6 @@ object EpocConversion {
 
   } // END - Main CLass
 
-  // timer function
-  def time[R](block: => R): R = {
-    val t0 = System.currentTimeMillis()
-    val result = block // call the block
-    val t1 = System.currentTimeMillis()
-    val elapsedTimeMsec: Float = t1 - t0
-    val elapsedTime: Float = elapsedTimeMsec / 1000
-    println(f"Elapsed Time : $elapsedTime sec")
-    result
-  }
-
   // TODO: Move `case class RawSpot` to a beans package
   // TODO: Add column for calculating km to statue miles
   // TODO: Add column for standardized Band field
@@ -132,22 +142,5 @@ object EpocConversion {
    * @param Code      Integer Archives generated after 22 Dec 2010 have an additional integer Code field.
    *                  Non-zero values will indicate that the spot is likely to be erroneous.
    */
-  case class RawSpot(
-                      SpotId: Long,
-                      TimeStamp: Integer,
-                      Reporter: String,
-                      RxGrid: String,
-                      SNR: Byte,
-                      Frequency: Double,
-                      CallSign: String,
-                      Grid: String,
-                      Power: Byte,
-                      Drift: Byte,
-                      Distance: Short,
-                      Azimuth: Byte,
-                      Band: Byte,
-                      Version: String,
-                      Code: Byte
-                    )
 
 } // END - EpocConversion
