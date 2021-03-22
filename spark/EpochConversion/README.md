@@ -28,7 +28,7 @@ cd jars/
 # run the application supplying a properly formatted csv file
 # change the input-path as needed
 
-spark-submit --master local[*] EpochConversion-assembly-1.0.jar /data/wsprspots-2008-03.csv
+spark-submit --master local[*] EpochConversion-assembly-1.0.jar /data/wsprspots-2021-02.csv
 ```
 
 ## Sample Output
