@@ -37,34 +37,10 @@ The following is a list of sample applications that can be performed on the vari
 * [Epoch Conversion][]
 * [Delta Create Table][]
 
-[WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
-[WSPR]: https://www.physics.princeton.edu/pulsar/k1jt/wspr.html
-[Big Data]: https://www.oracle.com/big-data/what-is-big-data.html
-[Amazon AWS EBR]: https://aws.amazon.com/emr/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc
-[Microsoft Cloud Analytics]: https://azure.microsoft.com/en-us/solutions/big-data/#products
-[Google Smart Analytics]: https://cloud.google.com/solutions/smart-analytics/
-[Apache Spark]: https://spark.apache.org
-[PySpark]: https://databricks.com/glossary/pyspark
-[Anaconda Python]: https://www.anaconda.com/
-[Scala]: https://docs.scala-lang.org
-[Open Source Tools]: https://apache.org/index.html#projects-list
-[AWS]: https://aws.amazon.com/
-[Azure]: https://azure.microsoft.com/en-us/
-[GCP]: https://cloud.google.com/
-[Apache Hadoop]: http://hadoop.apache.org/
-[Jupyter Notebooks]: https://jupyter.org/
-[IntelliJ IDEA]: https://www.jetbrains.com/idea/
-[Dockerize PostgreSQL]: https://docs.docker.com/engine/examples/postgresql_service/
-[PostgreSQL]: https://www.postgresql.org/
-[PostgreSQL with Vagrant]: https://wiki.postgresql.org/wiki/PostgreSQL_For_Development_With_Vagrant
-[Parquet]: https://parquet.apache.org/
-[Flask-Pandas-App]: https://github.com/the-akira/Flask-Pandas-App
-[Full Stack Flask]: https://www.fullstackpython.com
-[WSPRNet Archives]: http://www.wsprnet.org/drupal/downloads
-[Anaconda Python]: https://www.anaconda.com/
-[sdkman]: https://sdkman.io/
-[PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
 
+[Apache Spark]: https://spark.apache.org
+[Scala]: https://docs.scala-lang.org
+[sdkman]: https://sdkman.io/
 
 [Query Columns using Parquet Folders]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/QueryColumnParquet
 [Query Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
