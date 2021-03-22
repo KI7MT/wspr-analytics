@@ -6,7 +6,7 @@ This apps in the directory are used for exploring the use of
 1. Converting CSV files to Parquet
 1. Query both raw CSV files and Parquet partitions
 1. Query Parquet Folders and GroupBy and Count Columns.
-1. Example opf how to convert Epoch time to humand readable values
+1. Example of how to convert Epoch times to humand readable values
 
 ## Basic Tool and Build Instructions
 
@@ -41,6 +41,7 @@ The following is a list of sample applications that can be performed on the vari
 [Apache Spark]: https://spark.apache.org
 [Scala]: https://docs.scala-lang.org
 [sdkman]: https://sdkman.io/
+[WSPR Spots]: https://wsprnet.org/drupal/downloads
 
 [Query Columns using Parquet Folders]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/QueryColumnParquet
 [Query Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
