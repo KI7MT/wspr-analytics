@@ -1,4 +1,4 @@
-package com.ki7mt.spark
+package com.ki7mt
 
 import org.apache.log4j.PropertyConfigurator
 import org.apache.spark.sql.SparkSession

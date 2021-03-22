@@ -1,12 +1,8 @@
-organization := "io.ki7mt"
+name          := "EpochConversion"
+version       := "1.0"
+scalaVersion  := "2.12.12"
+organization  := "io.ki7mt"
 
-version := "1.0"
-
-name := "EpochConversion"
-
-version := "0.1"
-
-scalaVersion := "2.12.12"
 
 libraryDependencies ++= Seq(
   "org.apache.spark" %% "spark-core" % "3.0.1",
