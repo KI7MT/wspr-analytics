@@ -27,7 +27,7 @@ def build_jar_files(dir):
 
 if __name__ == '__main__':
 
-    folders = ['ConvertCsvToParquet', 'QueryColumnParquet', 'TopTenReporters']
+    folders = ['ConvertCsvToParquet', 'QueryColumnParquet', 'TopTenReporters', 'EpochConversion']
     with Pool(cpu) as p:
         p.map(build_jar_files, folders)
     p.close()
