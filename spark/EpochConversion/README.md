@@ -1,8 +1,8 @@
 # Epoch Conversion
 
 This is a sample program that takes the Epoch Time listed in a WSPRnet Spot and
-converts it to seven additional columns in human readable format. It's very fact and effecient,
-particularly when processing files with millins of rows:
+converts it to seven additional columns in human readable format. It's very fast and effecient,
+particularly when processing files with millions of rows:
 
 - x_timestamp is the date and time
 - x_date is just the date
