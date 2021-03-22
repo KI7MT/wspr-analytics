@@ -6,6 +6,7 @@ This apps in the directory are used for exploring the use of
 1. Converting CSV files to Parquet
 1. Query both raw CSV files and Parquet partitions
 1. Query Parquet Folders and GroupBy and Count Columns.
+1. Example opf how to convert Epoch time to humand readable values
 
 ## Basic Tool and Build Instructions
 
@@ -17,7 +18,7 @@ You must have Java, Scala, Spark and SBT available from the command line.
 - Java openjdk version 1.8.0_275 or later
 - Scala Version 2.12.12
 - Spark 3.0.1
-- SBT Tools 1.4.5
+- SBT Tools 1.4.9
 
 An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
@@ -31,8 +32,10 @@ The following is a list of sample applications that can be performed on the vari
 [WSPR Spots][] CSV Files. As new script are written, they will appear in the list below.
 
 * [Query Columns using Parquet Folders][]
-* [Top Ten Reporters][]
+* [Query Top Ten Reporters][]
 * [Convert CSV to Parquet][]
+* [Epoch Conversion][]
+* [Delta Create Table][]
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPR]: https://www.physics.princeton.edu/pulsar/k1jt/wspr.html
@@ -66,3 +69,5 @@ The following is a list of sample applications that can be performed on the vari
 [Query Columns using Parquet Folders]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/QueryColumnParquet
 [Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
 [Convert CSV to Parquet]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/ConvertCsvParquet
+[Delta Create Table]: https://github.com/KI7MT/wspr-analytics/tree/main/spark/DeltaCreateTable
+[Epoch Conversion]: https://github.com/KI7MT/wspr-analytics/tree/main/spark/EpochConversion
