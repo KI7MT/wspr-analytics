@@ -20,6 +20,11 @@ You must have Java, Scala, Spark and SBT, and Python available from the command 
 - Spark 3.0.1
 - SBT Tools 1.4.9
 
+>IMPORTANT: The Spark / Scala combinations are very version specific. Check the [Spark][]
+download page for recommended version combinaiton if you deviate from what is listed here.
+As of this writing, Spark 3.0.1 and above was built with Scala 2.12.12. For the least
+amount of frustration, stick with what's known to work.
+
 An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
 one to install virtually any combination of tools you need without
