@@ -33,12 +33,12 @@ spark-submit --master local[*] EpochConversion-assembly-1.0.jar /data/wsprspots-
 
 ## Sample Output
 
-Using Spark Submit, the following is for `wsprspots-2008-03`.
+Using Spark Submit, the following is for `wsprspots-2021-02`.
 
 ```bash
-Object        : EpochCoversion
-Process File  : /data/wsprspots-2008-03.csv
-Tiimestamp    : 2021-03-22T08:56:22.446
+bject        : EpochCoversion
+Process File  : /data/wsprspots-2021-02.csv
+Tiimestamp    : 2021-03-22T10:06:57.243
 Description   : Convert Epoch Time to Human Readable Values
 
 Steps For Processing The CSV File
@@ -49,20 +49,20 @@ Steps For Processing The CSV File
 - Setup Epoh Conversion
 - Execute the Query
 
-+------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+-------+----+-------------------+----------+------+-------+-----+------+--------+
-|SpotID| Timestamp|Reporter|RxGrid|SNR|Frequency|CallSign|  Grid|Power|Drift|Distance|Azimuth|Band|Version|Code|        x_timestamp|    x_date|x_year|x_month|x_day|x_hour|x_minute|
-+------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+-------+----+-------------------+----------+------+-------+-----+------+--------+
-| 17230|1205272920|  WD4KPD|FM15mm|-21|10.140106|    K1JT|FN20qi|   37|    0|     575|   null|  10|   null|   0|2008-03-11 22:02:00|2008-03-11|  2008|      3|   11|    22|       2|
-| 11937|1205272920|  WD4KPD|FM15mm|-26|10.140188|    K7EK|CN87tb|   37|    0|    3943|     92|  10|   null|   0|2008-03-11 22:02:00|2008-03-11|  2008|      3|   11|    22|       2|
-| 11936|1205273040|  WD4KPD|FM15mm|-21|10.140106|    K1JT|FN20qi|   37|    0|     575|   null|  10|   null|   0|2008-03-11 22:04:00|2008-03-11|  2008|      3|   11|    22|       4|
-| 11935|1205273160|  WD4KPD|FM15mm|-26|10.140106|    K1JT|FN20qi|   37|    0|     575|   null|  10|   null|   0|2008-03-11 22:06:00|2008-03-11|  2008|      3|   11|    22|       6|
-| 17226|1205273160|  WD4KPD|FM15mm|-26|10.140188|    K7EK|CN87tb|   37|    0|    3943|     92|  10|   null|   0|2008-03-11 22:06:00|2008-03-11|  2008|      3|   11|    22|       6|
-+------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+-------+----+-------------------+----------+------+-------+-----+------+--------+
++----------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+--------+----+-------------------+----------+------+-------+-----+------+--------+
+|    SpotID| Timestamp|Reporter|RxGrid|SNR|Frequency|CallSign|  Grid|Power|Drift|Distance|Azimuth|Band| Version|Code|        x_timestamp|    x_date|x_year|x_month|x_day|x_hour|x_minute|
++----------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+--------+----+-------------------+----------+------+-------+-----+------+--------+
+|2789667222|1612137600|  2E0PYB|JO01is|  6|14.097079|  2E0DYH|JO01ht|   10|    0|       7|   null|  14|   2.1.2|   1|2021-02-01 00:00:00|2021-02-01|  2021|      2|    1|     0|       0|
+|2789666501|1612137600|  EA8BFK|IL38bo|-17| 7.040078|  2E0ETU|  IO81|   27|    0|    2699|   null|   7|    null|   1|2021-02-01 00:00:00|2021-02-01|  2021|      2|    1|     0|       0|
+|2789669160|1612137600|  HB9TMC|JN46lj|-20| 7.040076|  2E0ETU|  IO81|   27|    0|    1041|    118|   7|    null|   1|2021-02-01 00:00:00|2021-02-01|  2021|      2|    1|     0|       0|
+|2789667577|1612137600|  HG5ACZ|JN87pq|-16| 7.040077|  2E0ETU|  IO81|   27|    0|    1520|     98|   7|1.3 Kiwi|   1|2021-02-01 00:00:00|2021-02-01|  2021|      2|    1|     0|       0|
+|2789667439|1612137600|   I3JPA|JN65dk|-13| 7.040078|  2E0ETU|  IO81|   27|    0|    1311|    115|   7|1.3 Kiwi|   1|2021-02-01 00:00:00|2021-02-01|  2021|      2|    1|     0|       0|
++----------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+--------+----+-------------------+----------+------+-------+-----+------+--------+
 only showing top 5 rows
 
-Elapsed Time : 1.283 sec
+Elapsed Time : 1.315 sec
 
 Getting final row count, please wait...
-Epoch Conversion Processed : (93,890) Spots 
-Elapsed Time : 0.237 sec
+Epoch Conversion Processed : (63,369,286) Spots 
+Elapsed Time : 1.916 sec
 ```
