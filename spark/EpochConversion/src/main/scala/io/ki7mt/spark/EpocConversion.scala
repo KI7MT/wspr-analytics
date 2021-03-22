@@ -98,12 +98,16 @@ object EpocConversion {
 
     println("- Read the CSV file into a DataSet")
     import spark.implicits._
-    val ds = spark.read
+    val x = spark.read
       .option("delimiter", ",")
       .option("header", "false")
       .schema(spotSchema)
       .csv(path = inFile)
       .as[RawSpot]
+
+    // fill null values in Version with nr = not reported
+    println("- Cleaning up Version null values")
+    val ds = x.na.fill("nr",Seq("Version"))
 
     println("- Select the column we want to process")
     val res = ds.select("*")
@@ -133,7 +137,7 @@ object EpocConversion {
 
     println("- Execute the Query\n")
     time {
-      res1.show(5)
+      res1.show(10)
     }
 
     println("\nGetting final row count, please wait...")
