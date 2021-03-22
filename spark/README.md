@@ -67,7 +67,7 @@ The following is a list of sample applications that can be performed on the vari
 
 
 [Query Columns using Parquet Folders]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/QueryColumnParquet
-[Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
+[Query Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
 [Convert CSV to Parquet]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/ConvertCsvParquet
 [Delta Create Table]: https://github.com/KI7MT/wspr-analytics/tree/main/spark/DeltaCreateTable
 [Epoch Conversion]: https://github.com/KI7MT/wspr-analytics/tree/main/spark/EpochConversion
