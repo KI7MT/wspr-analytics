@@ -19,11 +19,7 @@ To build the apps, perform the following in a terminal
 ```bash
 # change directories to spark/ and type the following:
 
-python build_jars.py
-
-# if the build passed
-
-cd jars/
+python build_jars.py && cd jars/
 
 # run the application supplying a properly formatted csv file
 # change the input-path as needed
@@ -36,9 +32,9 @@ spark-submit --master local[*] EpochConversion-assembly-1.0.jar /data/wsprspots-
 Using Spark Submit, the following is for `wsprspots-2021-02`.
 
 ```bash
-bject        : EpochCoversion
+Object        : EpochCoversion
 Process File  : /data/wsprspots-2021-02.csv
-Tiimestamp    : 2021-03-22T10:06:57.243
+Tiimestamp    : 2021-03-22T10:19:43.207
 Description   : Convert Epoch Time to Human Readable Values
 
 Steps For Processing The CSV File
@@ -60,9 +56,8 @@ Steps For Processing The CSV File
 +----------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+--------+----+-------------------+----------+------+-------+-----+------+--------+
 only showing top 5 rows
 
-Elapsed Time : 1.315 sec
+Elapsed Time : 1.314 sec
 
 Getting final row count, please wait...
-Epoch Conversion Processed : (63,369,286) Spots 
-Elapsed Time : 1.916 sec
+Epoch Conversion Processed : (63,369,286) Spots
 ```

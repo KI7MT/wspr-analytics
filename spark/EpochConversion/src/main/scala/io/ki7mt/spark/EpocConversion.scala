@@ -137,10 +137,8 @@ object EpocConversion {
     }
 
     println("\nGetting final row count, please wait...")
-    time {
-      val rowcount = res1.count()
-      println(f"Epoch Conversion Processed : ($rowcount%,d) Spots ")
-    }
+    val rowcount = res1.count()
+    println(f"Epoch Conversion Processed : ($rowcount%,d) Spots ")
     println("\n")
   
   } // END - Main CLass
