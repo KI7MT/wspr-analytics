@@ -1,10 +1,7 @@
-organization := "com.ki7mt"
-
-version := "1.0"
-
-name := "ConvertCsvToParquet"
-
-scalaVersion := "2.12.12"
+name          := "ConvertCsvToParquet"
+version       := "1.0"
+scalaVersion  := "2.12.12"
+organization  := "com.ki7mt"
 
 val sparkVersion = "3.0.1"
 

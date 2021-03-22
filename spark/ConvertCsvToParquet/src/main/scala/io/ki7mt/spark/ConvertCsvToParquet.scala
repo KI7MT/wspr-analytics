@@ -71,9 +71,9 @@ object ConvertCsvToParquet {
       println(s"File Out Path : $outDir")
       println(s"Tiimestamp    : $timestamp")
       println(s"Description   : $description\n" )
-
       println("Process Steps to Create Parquet File(s)")
       println("- Create a Spark Session")
+
       val spark = SparkSession
         .builder
         .appName("Convert CSV To Parquet")
@@ -96,7 +96,6 @@ object ConvertCsvToParquet {
         .add("Band", IntegerType, nullable = false)
         .add("Version", StringType, nullable = true)
         .add("Code", IntegerType, nullable = true)
-
 
         println("- Read the CSV file into a DataSet")
         import spark.implicits._

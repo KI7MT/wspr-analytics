@@ -21,7 +21,7 @@ set -e
 declare -a year=(2008)
 
 # month of the wsprspots file
-declare -a month=(03)
+declare -a month=(03 04 05)
 
 #################################################
 ## --   no edits needed below this line   --  ##
