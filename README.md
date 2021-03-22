@@ -40,9 +40,14 @@ You must have Python, Java, PySpark/Spark available from the command line.
 - Python 3.7+
 - PySpark from PyPi
 - Apache Arrow 2.0+
-- Scala 2.12+
+- Scala 2.12.12
 - Spark 3.0.1
 - PostgreSQL Database (local, remote, Docker, etc)
+
+>IMPORTANT: The Spark / Scala combinations are very version specific. Check the [Spark][]
+download page for recommended version combinaitons if you deviate from what is listed here.
+As of this writing, Spark 3.0.1 and above was built with Scala 2.12.12. For the least
+amount of frustration, stick with what's known to work.
 
 An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
 through an management tool called [sdkman][]. This tool allows
@@ -79,6 +84,7 @@ by many of the apps and scripts.
 [Microsoft Cloud Analytics]: https://azure.microsoft.com/en-us/solutions/big-data/#products
 [Google Smart Analytics]: https://cloud.google.com/solutions/smart-analytics/
 [Apache Spark]: https://spark.apache.org/PySpark
+[Spark]: https://spark.apache.org/downloads.html
 [PySpark]: https://databricks.com/glossary/pyspark
 [Anaconda Python]: https://www.anaconda.com/
 [Scala]: https://docs.scala-lang.org

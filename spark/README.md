@@ -21,7 +21,7 @@ You must have Java, Scala, Spark and SBT, and Python available from the command 
 - SBT Tools 1.4.9
 
 >IMPORTANT: The Spark / Scala combinations are very version specific. Check the [Spark][]
-download page for recommended version combinaiton if you deviate from what is listed here.
+download page for recommended version combinaitons if you deviate from what is listed here.
 As of this writing, Spark 3.0.1 and above was built with Scala 2.12.12. For the least
 amount of frustration, stick with what's known to work.
 
@@ -47,6 +47,7 @@ The following is a list of sample applications that can be performed on the vari
 [Scala]: https://docs.scala-lang.org
 [sdkman]: https://sdkman.io/
 [WSPR Spots]: https://wsprnet.org/drupal/downloads
+[Spark]: https://spark.apache.org/downloads.html
 
 [Query Columns using Parquet Folders]: https://github.com/KI7MT/wspr-analytics/tree/main/scala/QueryColumnParquet
 [Query Top Ten Reporters]: https://github.com/KI7MT/wsprana-spark-scala/tree/main/scala/TopTenReporters
