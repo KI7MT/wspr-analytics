@@ -30,7 +30,7 @@ if you are not accustom to their installation methods.
 
 Each folder will contain a series of `README` files that explain the content, and where warranted ,
 usage. Additionally, project documentation website can be used for more extensive and exhaustive 
-explination of the project and its contents.
+explanation of the project and its contents.
 
 * [WSPR Analytics Docs][] - bookmark this location for future reference
 
