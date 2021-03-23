@@ -1,9 +1,9 @@
-organization := "io.ki7mt"
-version := "1.0"
-name := "TopTenReporter"
-scalaVersion := "2.12.13"
+organization  := "io.ki7mt"
+name          := "TopTenReporter"
+version       := "1.0"
+scalaVersion  := "2.12.13"
 
-val sparkVersion = "3.1.1"
+val sparkVersion = "3.0.1"
 
 // compiler options for cleaner code
 scalacOptions ++= Seq(

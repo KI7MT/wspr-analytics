@@ -3,7 +3,7 @@ name          := "EpochConversion"
 version       := "1.0"
 scalaVersion  := "2.12.13"
 
-val sparkVersion = "3.1.1"
+val sparkVersion = "3.0.1"
 
 // compiler options for cleaner code
 scalacOptions ++= Seq(
