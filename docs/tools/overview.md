@@ -42,6 +42,14 @@ Where applicable, Multi-Distribution commands will be shown in distribution tabs
 
 >NOTE: these are just examples, and not intended for execution.
 
+=== "Ubuntu"
+    Upgrade the host System Packages.
+
+    ```shell
+    # Run the following command
+    sudo apt-get update && sudo apt-get upgrade
+    ```
+
 === "Alpine"
     - Update the package list
     ```bash
@@ -53,37 +61,13 @@ Where applicable, Multi-Distribution commands will be shown in distribution tabs
     apk add openssh opentp vim
     ```
 
-=== "Ubuntu"
-    Upgrade the host System Packages.
+=== "Arch"
+    Example to install a prerequisite package for Kernel compiling.
 
     ```shell
-    # Run the following command
-    sudo apt-get update && sudo apt-get upgrade
-    ```
+    # Update the repositories
+    pacman -Syu 
 
-=== "Mint"
-    Install a pre-requesite package for VirtualBox.
-
-    ```shell
-    # Run the following command
-    sudo apt-get update
-    sudo apt-get install dkms
-    ```
-
-=== "Fedora"
-    a. Update your fedora release
-
-    ```bash
-    sudo dnf upgrade --refresh
-    ```
-
-    b. Install a plugin
-
-    ```bash
-    sudo dnf install dnf-plugin-system-upgrade
-    ```
-
-    c. Download upgraded packages
-    ```bash
-    sudo dnf system-upgrade download --refresh --releasever=33
+    # Install a package
+    pacman -S dkms
     ```

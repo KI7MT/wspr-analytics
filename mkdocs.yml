@@ -30,16 +30,18 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Tools:
+  - Setup:
     - Overview: 'tools/overview.md'
     - Install Python: 'tools/install-python.md'
-    - Install Java: 'tools/install-java.md'
+    - Install Golang: 'tools/install-golang.md'
     - Install Sdkman: 'tools/install-sdkman.md'
+    - Install Java: 'tools/install-java.md'
     - Install Spark: 'tools/install-spark.md'
     - Install Scala: 'tools/install-scala.md'
-    - Install R: 'tools/install-r.md'
-    - Install Graphana: 'tools/install-grafana.md'
     - Install PostgreSQL: 'tools/install-postgresql.md'
+    - Install ClickHouse: 'tools/install-clickhouse.md'
+    - Install Grafana: 'tools/install-grafana.md'
+
     - Install VirtualBox: 'tools/install-virtualbox.md'
     - Install Vagrant: 'tools/install-vagrant.md'
   - Spark:
@@ -51,8 +53,6 @@ nav:
   - PySpark:
     - Overview: 'pyspark/overview.md'
     - Basic Examples: 'pyspark/basic-examples.md'
-  - R-Scripts:
-    - Overview: 'rscripts/overview.md'
   - Jupyter:
     - Overview: 'notebooks/overview.md'
   - WSPR-Daemon:

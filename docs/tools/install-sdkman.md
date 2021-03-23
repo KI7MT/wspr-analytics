@@ -1,3 +1,5 @@
 >Under Development
 
-This section will discuss the various ways to install sdkman.
+This section will discuss the installation anc configuration of [Sdkman][].
+
+[Sdkman]: https://sdkman.io/

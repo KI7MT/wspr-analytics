@@ -4,9 +4,17 @@ In the early days (March 2008), [WSPR Spots][] measured in the hundreds of thous
 that number has increased to over 75+ Million per month and shows no sign of abatement.
 By any reasonable definition, it is safe to say that [WSPR][] has entered the realm of [Big Data][].
 
-## Project Goal
+## Features
 
-The goal of this project is to provide a set of tools to download, manage, transform and query
+- Full Tool Chain Installation and Environment Setup Guide(s)
+- Tutorials, experiments, and tests on large data sets
+- Exposure to leading-edge technologies in the realm of Big Data Processing
+- Hints, tips and tricks for keeping your Linux distro running smooth
+- And eventually, produce useful datasets for the greater Amateur Radio Community to consume
+
+## Primary Focus
+
+The focus of this project is to provide a set of tools to download, manage, transform and query
 WSPR DataSets using modern [Big Data][] frameworks.
 
 ## Folder Descriptions
@@ -15,6 +23,7 @@ Several frameworks are used in this repository. The following matrix provides a 
 of each, and their intended purpose.
 
 * `docs` - Python, MkDocs for repository documentation
+* `golang` - General purpose command line apps and utilities
 * `java` - Java, Maven, and SBT apps for RDD and Avro examples
 * `notebooks` - Jupyter Notebooks  for basic test and visualization
 * `pyspark` - Python, PyArrow scripts that interact with CSV and Parquet files
@@ -26,47 +35,49 @@ of each, and their intended purpose.
 Pay close attention to the `README` files as they lay out how to setup the
 tools needed to run their respective scripts or application.
 
-## Basic Tool Requirements
+## Base Tool Requirements
 
->NOTE: During development, the wsprana package **is not** intended for pip installaiton
->yet, but will be.It should be checked out and run from source at present.
+You must have Python, Java, PySpark / Spark (Scala) and SBT available from the command line.
 
-You must have Python, Java, PySpark/Spark available from the command line.
-
-- Java openjdk version 1.8.0_275 or later
-- Python 3.7+
+- Java OpenJDK version 1.8.0_275 or later
+- Python 3.7 or 3.8, PyArrow has issues with 3.9 at present
 - PySpark from PyPi
 - Apache Arrow 2.0+
-- Scala 2.12+
+- Scala 2.12.12 - patch version 10,11,12,13 also work with Spark 3.0.1 / 3.1.1
 - Spark 3.0.1
-- PostgreSQL Database (local, remote, Docker, etc)
+- PostgreSQL Database (local, remote, Docker, Vagrant, etc)
+- Optional ClickHouse High Performance Database
 
-An easy way (on Linux / MacOS) to manage Java, Spark, Scala and SBT is
-through an management tool called [sdkman][]. This tool allows
-one to install virtually any combination of tools you need without
-affecting your root file system. With the exception of Python,
-All the above requirements can be installed and managed via [sdkman][].
-
-For Python, the recomendation is to use [Anaconda Python][], the full version,
-as it provides all the analytics tooling you'll need for this project and more.
+>IMPORTANT: The Spark / Scala combinations are version sensitive. Check the [Spark][]
+download page for recommended version combinations if you deviate from what is listed here.
+As of this writing, Spark 3.0.1 and above was built with Scala 2.12.10. For the least
+amount of frustration, stick with what's known to work (any of the 2.12.xx series)
 
 ## Data Sources and Processing
 
-The primary data source will be the monthly [WSPRNet Archives][]. At present, there is no plan to pull
-nightly updates. That could change if a reasonble API is identified.
+The main data source will be the monthly [WSPRNet Archives][]. At present, there is no plan to pull
+nightly updates. That could change if a reasonable API is identified. [WSPR Daemon][]
 
-The WSPR CSV tools will be used to convert the raw CSV files into a format better suited for parallel processing,
-namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramativaly with this storage format.
+The tools (apps/scripts) will be used to convert the raw CSV files into a format better suited for parallel processing,
+namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramatically with this storage format.
 However, there is a drawback, one cannot simply view a binary file as they can with raw text files. The
-original CSV will remain in place, but all bulk processing will be pulled from [Parquet][].
-During these transformations is where [PyArrow][] + [PySpark][] will earn it's keep.
+original CSV will remain in place, but all bulk processing will be pulled from [Parquet][] or a high performance database
+such as [ClickHouse][]. During these transformations is where [PyArrow][], [PySpark][] or [Spark][] will earn it's keep.
 
-## Persistant Storage
+## Persistent Storage
 
 A [PostgreSQL][] database server will be needed. There are many ways to perform this installation (local, remote,
-[Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc). Whichever method you chose, it will be used extensively
-by many of the apps and scripts.
+[Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc).
 
+## High Performance Database
+
+While [PostgreSQL][] is a highly-capabale RDMS, another database that is better suited to big data and extremely
+fast queries called [ClickHouse][] will be used.
+
+>It is column-oriented and allows to generate analytical reports using SQL queries in real-time. Blazingly fast,
+> Linearly scalable, Feature rich, Hardware efficient, Fault-tolerant, Highly reliable
+>
+><cite>[ClickHouse Organization][]</cite>
 
 ## Distribution Tabs
 
@@ -86,6 +97,16 @@ desired tab will render the command or content relevant to that distribution.
     apk add openssh opentp vim
     ```
 
+=== "Arch"
+    Example to install a prerequisite package for Kernel compiling.
+
+    ```shell
+    # Update the repositories
+    pacman -Syu 
+
+    # Install a package
+    pacman -S dkms
+    ```
 
 === "Ubuntu"
     Upgrade the host System Packages.
@@ -95,41 +116,14 @@ desired tab will render the command or content relevant to that distribution.
     sudo apt-get update && sudo apt-get upgrade
     ```
 
-=== "Mint"
-    Install a pre-requesite package for VirtualBox.
-
-    ```shell
-    # Run the following command
-    sudo apt-get update
-    sudo apt-get install dkms
-    ```
-
-=== "Fedora"
-    a. Update your fedora release
-
-    ```bash
-    sudo dnf upgrade --refresh
-    ```
-
-    b. Install a plugin
-
-    ```bash
-    sudo dnf install dnf-plugin-system-upgrade
-    ```
-
-    c. Download upgraded packages
-    ```bash
-    sudo dnf system-upgrade download --refresh --releasever=33
-    ```
-
 === "Windows"
     Lets not and say we did!
 
     ```batch
     REM Run the following command
     echo Spark runs better on Linux.
-    echo   Please consider running Spark apps in
-    echo   VirtualBox if your host os is Windows!!
+    echo Please consider running Spark apps in
+    echo VirtualBox if your host os is Windows!!
     ```
 
 ## Super Fencing
@@ -138,36 +132,232 @@ In many examples you may see multiple tabs relating to a particular code-block. 
 tab shows the syntax for the stated language. This is the same behaviour as with
 [Distribution Tabs](#distribution-tabs)
 
-=== "C"
+=== "Golang"
 
-    ``` c
-    #include <stdio.h>
+    ``` go
+    package main
 
-    int main(void) {
-      printf("Hello world!\n");
-      return 0;
+    import (
+        "fmt"
+        "os"
+        "os/exec"
+        "strings"
+        "time"
+
+        flag "github.com/spf13/pflag"
+
+        . "github.com/logrusorgru/aurora"
+    )
+
+    // version flags for main funciton
+    var (
+        appname     string
+        version     string
+        date        string
+        description string = "Golang App to display time zone informaiton."
+    )
+
+    // CheckError is a function to print out errors
+    func CheckError(e error) {
+        if e != nil {
+            fmt.Println(e)
+        }
+    }
+
+    // clearScreen simple clears the terminal screen of any existing text
+    func clearScreen() {
+        c := exec.Command("clear")
+        c.Stdout = os.Stdout
+        c.Run()
+    }
+
+    // main is the primary entry point for the app
+    func main() {
+
+        //clearScreen()
+
+        // set the option flagsd
+        var ver = flag.BoolP("version", "v", false, "prints app version information")
+        flag.Parse()
+
+        // only print the version informaiton if the user asks for it.
+        if *ver {
+            fmt.Println("\nApp Name .....: ", Cyan(appname))
+            fmt.Println("Version ......: ", Cyan(version))
+            fmt.Println("Build Date ...: ", Cyan(date))
+            fmt.Println("Description ..: ", Cyan(description))
+            fmt.Println()
+            os.Exit(0)
+        }
+
+        tNow := time.Now()
+
+        fmt.Println(Cyan("\nCurrent Time Data In Local Time Zone"))
+        fmt.Println(strings.Repeat("-", 55))
+
+        // Local Time Now in Unix Timestamp format
+        tUnix := tNow.Unix()
+        fmt.Printf("Unix.Time:\t%d\n", tUnix)
+
+        // Local Time Now serived from unix timestamp
+        tLocal := time.Unix(tUnix, 0)
+        fmt.Printf("Time.Local:\t%s\n", tLocal)
+
+        // UTC Time serived from unix timestamp
+        tUtc := time.Unix(tUnix, 0).UTC()
+        fmt.Printf("Time.UTC:\t%s\n", tUtc)
+
+        // Location Source: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+        fmt.Println(Cyan("\nLocal Time For A Specific Zone"))
+        fmt.Println(strings.Repeat("-", 58))
+
+        eastern, e := time.LoadLocation("US/Eastern")
+        CheckError(e)
+
+        central, e := time.LoadLocation("US/Central")
+        CheckError(e)
+
+        mountain, e := time.LoadLocation("US/Mountain")
+        CheckError(e)
+
+        pacific, e := time.LoadLocation("US/Pacific")
+        CheckError(e)
+
+        alaska, e := time.LoadLocation("US/Alaska")
+        CheckError(e)
+
+        hawaii, e := time.LoadLocation("US/Hawaii")
+        CheckError(e)
+
+        fmt.Println("US/Eastern:\t", tNow.In(eastern))
+        fmt.Println("US/Central:\t", tNow.In(central))
+        fmt.Println("US/Mountain:\t", tNow.In(mountain))
+        fmt.Println("US/Pacific:\t", tNow.In(pacific))
+        fmt.Println("US/Alaska:\t", tNow.In(alaska))
+        fmt.Println("US/Hawaii:\t", tNow.In(hawaii))
+        /*
+        Goloang Time Format Examples
+        */
+        fmt.Println(Cyan("\nGloang Time Package Format Examples"))
+        fmt.Println(strings.Repeat("-", 55))
+        fmt.Println("ANSIC:  \t", tNow.Format(time.ANSIC))
+        fmt.Println("UnixDate:\t", tNow.Format(time.UnixDate))
+        fmt.Println("RubyDate:\t", tNow.Format(time.RubyDate))
+        fmt.Println("RFC822:  \t", tNow.Format(time.RFC822))
+        fmt.Println("RFC822Z:  \t", tNow.Format(time.RFC822Z))
+        fmt.Println("RFC850:  \t", tNow.Format(time.RFC850))
+        fmt.Println("RFC1123:  \t", tNow.Format(time.RFC1123))
+        fmt.Println("RFC1123Z:  \t", tNow.Format(time.RFC1123Z))
+        fmt.Println("RFC3339:  \t", tNow.Format(time.RFC3339))
+        fmt.Println("Kitchen:    \t", tNow.Format(time.Kitchen))
+        fmt.Println("StampMicro:\t", tNow.Format(time.StampMicro))
+        fmt.Println("StampMilli:\t", tNow.Format(time.StampMilli))
+        fmt.Println("StampNano:\t", tNow.Format(time.StampNano))
+        fmt.Println()
     }
     ```
 
-=== "C++"
+=== "Java"
 
-    ``` c++
-    #include <iostream>
+    ``` java
+    /**
+    *
+    * Static Method: Unzip a file to a path location
+    *
+    */
+    private static void UnzipFile(String zipFilePath, String destDir) {
 
-    int main(void) {
-      std::cout << "Hello world!" << std::endl;
-      return 0;
-    }
+        File dir = new File(destDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        FileInputStream fis;
+
+        byte[] buffer = new byte[1024];
+        try {
+            
+            fis = new FileInputStream(zipFilePath);
+            ZipInputStream zis = new ZipInputStream(fis);
+            ZipEntry ze = zis.getNextEntry();
+
+            // outer-loop
+            while (ze != null) {
+                String fileName = ze.getName();
+                File newFile = new File(destDir + File.separator + fileName);
+                System.out.println("* Unzipping to " + newFile.getAbsolutePath());
+
+                new File(newFile.getParent()).mkdirs();
+                FileOutputStream fos = new FileOutputStream(newFile);
+                int len;
+
+                // inner-loop
+                while ((len = zis.read(buffer)) > 0) {
+                    fos.write(buffer, 0, len);
+                }
+                fos.close();
+
+                //close this ZipEntry
+                zis.closeEntry();
+                ze = zis.getNextEntry();
+            }
+
+            // close the ZipEntry
+            zis.closeEntry();
+            zis.close();
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(2);
+        }
+    } // END - UnzipFile method
+    ```
+
+=== "Python"
+
+    ``` python
+    def pandas_convert_csv(csvfile):
+        """Convert CSV file using parquet_type compression"""
+
+        file_name = os.path.basename(csvfile)
+
+        clear()
+        print("\nPandas CSV Conversion Method")
+        print(f"Parquet Compression Types : {parquet_types}")
+        print("Sit back and relax, this takes a while!!\n")
+        print(f'* Reading file  : {file_name}')
+    
+        start = time.time()
+        df = pd.read_csv(csvfile, dtype=spot_dtype, names=column_names, header=None)
+        rc = df.shape[0]
+        print(f"* Spot Count    : {rc:,}")
+        end = time.time()
+        
+        print(f"* File Size     : {round(get_file_size(csvfile, 'csv'), 2)} MB")
+        print(f"* Elapsed Time  : {round((end - start), 3)} sec")
+
+        for f in parquet_types:
+            compression_type = str(f.upper())
+            file_name = csvfile.replace('csv', f.lower())
+            if compression_type == "PARQUET":
+                comp_type = "NONE"
+            else:
+                comp_type = compression_type.upper()
+            print(f'\n* Converting CSV to -> {f.lower()}')
+            start = time.time()
+            df.to_parquet(file_name, compression=str(comp_type.upper()))
+            end = time.time()
+            time.sleep(sleep_time) # prevent seg-fault on reads that are too quick
+
+            print(f"* File Size     : {round(get_file_size(csvfile, comp_type), 2)} MB")
+            print(f"* Elapsed Time  : {round((end - start), 3)} sec")
     ```
 
 === "Scala"
 
     ``` scala
-    /**
-    *
-    * Convert Epoch in from WSPRnet CSV files
-    *
-    */
+    // Convert Epoch Times in from WSPRnet CSV files
+
     def main(args: Array[String]): Unit = {
         
         val debug: Boolean = false
@@ -264,103 +454,14 @@ tab shows the syntax for the stated language. This is the same behaviour as with
     } // END - Main CLass
     ```
 
-=== "Python"
+<div>
+    <p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
+</div>
 
-    ``` python
-    def pandas_convert_csv(csvfile):
-        """Convert CSV file using parquet_type compression"""
-
-        file_name = os.path.basename(csvfile)
-
-        clear()
-        print("\nPandas CSV Conversion Method")
-        print(f"Parquet Compression Types : {parquet_types}")
-        print("Sit back and relax, this takes a while!!\n")
-        print(f'* Reading file  : {file_name}')
-    
-        start = time.time()
-        df = pd.read_csv(csvfile, dtype=spot_dtype, names=column_names, header=None)
-        rc = df.shape[0]
-        print(f"* Spot Count    : {rc:,}")
-        end = time.time()
-        
-        print(f"* File Size     : {round(get_file_size(csvfile, 'csv'), 2)} MB")
-        print(f"* Elapsed Time  : {round((end - start), 3)} sec")
-
-        for f in parquet_types:
-            compression_type = str(f.upper())
-            file_name = csvfile.replace('csv', f.lower())
-            if compression_type == "PARQUET":
-                comp_type = "NONE"
-            else:
-                comp_type = compression_type.upper()
-            print(f'\n* Converting CSV to -> {f.lower()}')
-            start = time.time()
-            df.to_parquet(file_name, compression=str(comp_type.upper()))
-            end = time.time()
-            time.sleep(sleep_time) # prevent seg-fault on reads that are too quick
-
-            print(f"* File Size     : {round(get_file_size(csvfile, comp_type), 2)} MB")
-            print(f"* Elapsed Time  : {round((end - start), 3)} sec")
-    ```
-
-=== "Java"
-
-    ``` java
-    /**
-    *
-    * Static Method: Unzip a file to a path location
-    *
-    */
-    private static void UnzipFile(String zipFilePath, String destDir) {
-
-        File dir = new File(destDir);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-
-        FileInputStream fis;
-
-        byte[] buffer = new byte[1024];
-        try {
-            
-            fis = new FileInputStream(zipFilePath);
-            ZipInputStream zis = new ZipInputStream(fis);
-            ZipEntry ze = zis.getNextEntry();
-
-            // outer-loop
-            while (ze != null) {
-                String fileName = ze.getName();
-                File newFile = new File(destDir + File.separator + fileName);
-                System.out.println("* Unzipping to " + newFile.getAbsolutePath());
-
-                new File(newFile.getParent()).mkdirs();
-                FileOutputStream fos = new FileOutputStream(newFile);
-                int len;
-
-                // inner-loop
-                while ((len = zis.read(buffer)) > 0) {
-                    fos.write(buffer, 0, len);
-                }
-                fos.close();
-
-                //close this ZipEntry
-                zis.closeEntry();
-                ze = zis.getNextEntry();
-            }
-
-            // close the ZipEntry
-            zis.closeEntry();
-            zis.close();
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(2);
-        }
-    } // END - UnzipFile method
-    ```
-
-<p align="center"><i>WSPR Analytics is <a href="https://github.com/KI7MT/wspr-analytics/blob/master/LICENSE.md">Apache 2.0 licensed</a> code.</i></p>
+[Arch Linux]: https://archlinux.org/
+[Alpine]: https://www.alpinelinux.org/
+[ClickHouse]: https://clickhouse.tech/
+[ClickHouse Organization]: https://clickhouse.tech/
 
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPRnet]: http://www.wsprnet.org
@@ -392,3 +493,5 @@ tab shows the syntax for the stated language. This is the same behaviour as with
 [PyArrow]: https://towardsdatascience.com/distributed-processing-with-pyarrow-powered-new-pandas-udfs-in-pyspark-3-0-8f1fe4c15208
 [Apache Foundation Project List]: https://apache.org/index.html#projects-list
 [WSPR Analytics Docs]: https://ki7mt.github.io/wspr-analytics/
+[Ubuntu-20.04]: http://www.releases.ubuntu.com/20.04/
+[WSPR Daemon]: http://wsprdaemon.org/

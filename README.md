@@ -103,7 +103,7 @@ fast queries called [ClickHouse][] will be used.
 [Arch Linux]: https://archlinux.org/
 [Alpine]: https://www.alpinelinux.org/
 [ClickHouse]: https://clickhouse.tech/
-[ClickHouse Orginization]: https://clickhouse.tech/
+[ClickHouse Organization]: https://clickhouse.tech/
 [WSPR Spots]: http://www.wsprnet.org/drupal/wsprnet/activity
 [WSPRnet]: http://www.wsprnet.org
 [WSPR]: https://www.physics.princeton.edu/pulsar/k1jt/wspr.html
