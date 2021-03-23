@@ -24,13 +24,13 @@ they need to setup their system for big data processing. The guide has been well
 different Linux distributions, namely: [Ubuntu-20.04][], [Arch Linux][], and [Alpine][].
 
 For newer Linux users, I'd highly recommend [Ubuntu-20.04][], as Arch and Alpine can be difficult
-if you are not accustom to their installation methiods.
+if you are not accustom to their installation methods.
 
 ## Documentation
 
-Each folder will contain a series of `README` files that explain the content, and where warrented,
-usage. Additionally, project documentation website can be used for more extensive and exhaustinve 
-explination of the project and its contence.
+Each folder will contain a series of `README` files that explain the content, and where warranted ,
+usage. Additionally, project documentation website can be used for more extensive and exhaustive 
+explination of the project and its contents.
 
 * [WSPR Analytics Docs][] - bookmark this location for future reference
 
@@ -54,29 +54,29 @@ Folder       | Frameworks          | Description
 
 You must have Python, Java, PySpark / Spark (Scala) and SBT available from the command line.
 
-- Java openjdk version 1.8.0_275 or later
+- Java OpenJDK version 1.8.0_275 or later
 - Python 3.7 or 3.8, PyArrow has issues with 3.9 at present
 - PySpark from PyPi
 - Apache Arrow 2.0+
 - Scala 2.12.12 - patch version 10,11,12,13 also work with Spark 3.0.1 / 3.1.1
 - Spark 3.0.1
 - PostgreSQL Database (local, remote, Docker, Vagrant, etc)
-- Optional ClickHouse High Perormance Database
+- Optional ClickHouse High Performance Database
 
 >IMPORTANT: The Spark / Scala combinations are version sensitive. Check the [Spark][]
-download page for recommended version combinaitons if you deviate from what is listed here.
+download page for recommended version combinations if you deviate from what is listed here.
 As of this writing, Spark 3.0.1 and above was built with Scala 2.12.10. For the least
 amount of frustration, stick with what's known to work (any of the 2.12.xx series)
 
 ## Data Sources and Processing
 
 The main data source will be the monthly [WSPRNet Archives][]. At present, there is no plan to pull
-nightly updates. That could change if a reasonble API is identified. [WSPR Daemon][]
+nightly updates. That could change if a reasonable API is identified. [WSPR Daemon][]
 
 The tools (apps/scripts) will be used to convert the raw CSV files into a format better suited for parallel processing,
-namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramativaly with this storage format.
+namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramatically with this storage format.
 However, there is a drawback, one cannot simply view a binary file as they can with raw text files. The
-original CSV will remain in place, but all bulk processing will be pulled from [Parquet][] or a high performance dataabase
+original CSV will remain in place, but all bulk processing will be pulled from [Parquet][] or a high performance database
 such as [ClickHouse][]. During these transformations is where [PyArrow][], [PySpark][] or [Spark][] will earn it's keep.
 
 ## Persistant Storage
@@ -97,7 +97,7 @@ fast queries called [ClickHouse][] will be used.
 > - Fault-tolerant
 > - Highly reliable
 >
-> <cite>[ClickHouse Orginization][]</cite>
+> <cite>[ClickHouse Organization][]</cite>
 >
 
 [Arch Linux]: https://archlinux.org/
