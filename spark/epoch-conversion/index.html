@@ -16,7 +16,7 @@
     
     
       
-        <title>Spark Examples - WSPR Analytics</title>
+        <title>Epoch Conversion - WSPR Analytics</title>
       
     
     
@@ -60,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#spark-examples" class="md-skip">
+        <a href="#epoch-conversion" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Spark Examples
+              Epoch Conversion
             
           </span>
         </div>
@@ -586,9 +586,45 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Epoch Conversion
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
     <a href="./" class="md-nav__link md-nav__link--active">
-      Spark Examples
+      Epoch Conversion
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-output" class="md-nav__link">
+    Sample Output
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -768,6 +804,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sample-output" class="md-nav__link">
+    Sample Output
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -779,12 +837,62 @@
               
                 
                 
-                <h1 id="spark-examples">Spark Examples<a class="headerlink" href="#spark-examples" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p>Under Development</p>
-</blockquote>
-<p>This projest folder will be using IntelliJ IDEA to test various
-script, apps and snippets using <a href="https://scala-lang.org/">Scala</a></p>
+                <h1 id="epoch-conversion">Epoch Conversion<a class="headerlink" href="#epoch-conversion" title="Permanent link">&para;</a></h1>
+<p>This is a sample program that takes the Epoch Time listed in a WSPRnet Spot and
+converts it to seven additional columns in human readable format. It's very fast and efficient,
+particularly when processing files with millions of rows. It also corrects <code>null</code> values in
+the version column. Additional investigation into the <code>null</code> values for Azimuth is needed
+as show below.</p>
+<ul>
+<li>x_timestamp is the date and time</li>
+<li>x_date is just the date</li>
+<li>x_year year only</li>
+<li>x_month month only</li>
+<li>x_day day only</li>
+<li>x_hours hour only</li>
+<li>x_minute minute only</li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p>To build the apps, perform the following in a terminal</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># change directories to spark/ and type the following:</span>
+
+python build_jars.py <span class="o">&amp;&amp;</span> <span class="nb">cd</span> jars/
+
+<span class="c1"># run the application supplying a properly formatted csv file</span>
+<span class="c1"># change the input-path as needed</span>
+
+spark-submit --master local<span class="o">[</span>*<span class="o">]</span> EpochConversion-assembly-1.0.jar /data/wsprspots-2021-02.csv
+</code></pre></div>
+<h2 id="sample-output">Sample Output<a class="headerlink" href="#sample-output" title="Permanent link">&para;</a></h2>
+<p>Using Spark Submit, the following is for <code>wsprspots-2021-02</code>.</p>
+<div class="highlight"><pre><span></span><code>Object        : EpochCoversion
+Process File  : /data/wsprspots-2021-02.csv
+Tiimestamp    : <span class="m">2021</span>-03-23T03:32:13.210
+Description   : Convert Epoch Time to Human Readable Values
+
+Application Actions to Process CSV File
+- Create a Spark Session
+- Create the Spot Schema
+- Read the CSV file into a DataSet
+- Cleaning up Version null values
+- Select the column we want to process
+- Setup Epoch Conversion
+- Execute the Query
+
++----------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+--------+----+-------------------+----------+------+-------+-----+------+--------+
+<span class="p">|</span>    SpotID<span class="p">|</span> Timestamp<span class="p">|</span>Reporter<span class="p">|</span>RxGrid<span class="p">|</span>SNR<span class="p">|</span>Frequency<span class="p">|</span>CallSign<span class="p">|</span>  Grid<span class="p">|</span>Power<span class="p">|</span>Drift<span class="p">|</span>Distance<span class="p">|</span>Azimuth<span class="p">|</span>Band<span class="p">|</span> Version<span class="p">|</span>Code<span class="p">|</span>        x_timestamp<span class="p">|</span>    x_date<span class="p">|</span>x_year<span class="p">|</span>x_month<span class="p">|</span>x_day<span class="p">|</span>x_hour<span class="p">|</span>x_minute<span class="p">|</span>
++----------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+--------+----+-------------------+----------+------+-------+-----+------+--------+
+<span class="p">|</span><span class="m">2789667222</span><span class="p">|</span><span class="m">1612137600</span><span class="p">|</span>  2E0PYB<span class="p">|</span>JO01is<span class="p">|</span>  <span class="m">6</span><span class="p">|</span><span class="m">14</span>.097079<span class="p">|</span>  2E0DYH<span class="p">|</span>JO01ht<span class="p">|</span>   <span class="m">10</span><span class="p">|</span>    <span class="m">0</span><span class="p">|</span>       <span class="m">7</span><span class="p">|</span>   null<span class="p">|</span>  <span class="m">14</span><span class="p">|</span>   <span class="m">2</span>.1.2<span class="p">|</span>   <span class="m">1</span><span class="p">|</span><span class="m">2021</span>-02-01 <span class="m">00</span>:00:00<span class="p">|</span><span class="m">2021</span>-02-01<span class="p">|</span>  <span class="m">2021</span><span class="p">|</span>      <span class="m">2</span><span class="p">|</span>    <span class="m">1</span><span class="p">|</span>     <span class="m">0</span><span class="p">|</span>       <span class="m">0</span><span class="p">|</span>
+<span class="p">|</span><span class="m">2789666501</span><span class="p">|</span><span class="m">1612137600</span><span class="p">|</span>  EA8BFK<span class="p">|</span>IL38bo<span class="p">|</span>-17<span class="p">|</span> <span class="m">7</span>.040078<span class="p">|</span>  2E0ETU<span class="p">|</span>  IO81<span class="p">|</span>   <span class="m">27</span><span class="p">|</span>    <span class="m">0</span><span class="p">|</span>    <span class="m">2699</span><span class="p">|</span>   null<span class="p">|</span>   <span class="m">7</span><span class="p">|</span>      nr<span class="p">|</span>   <span class="m">1</span><span class="p">|</span><span class="m">2021</span>-02-01 <span class="m">00</span>:00:00<span class="p">|</span><span class="m">2021</span>-02-01<span class="p">|</span>  <span class="m">2021</span><span class="p">|</span>      <span class="m">2</span><span class="p">|</span>    <span class="m">1</span><span class="p">|</span>     <span class="m">0</span><span class="p">|</span>       <span class="m">0</span><span class="p">|</span>
+<span class="p">|</span><span class="m">2789669160</span><span class="p">|</span><span class="m">1612137600</span><span class="p">|</span>  HB9TMC<span class="p">|</span>JN46lj<span class="p">|</span>-20<span class="p">|</span> <span class="m">7</span>.040076<span class="p">|</span>  2E0ETU<span class="p">|</span>  IO81<span class="p">|</span>   <span class="m">27</span><span class="p">|</span>    <span class="m">0</span><span class="p">|</span>    <span class="m">1041</span><span class="p">|</span>    <span class="m">118</span><span class="p">|</span>   <span class="m">7</span><span class="p">|</span>      nr<span class="p">|</span>   <span class="m">1</span><span class="p">|</span><span class="m">2021</span>-02-01 <span class="m">00</span>:00:00<span class="p">|</span><span class="m">2021</span>-02-01<span class="p">|</span>  <span class="m">2021</span><span class="p">|</span>      <span class="m">2</span><span class="p">|</span>    <span class="m">1</span><span class="p">|</span>     <span class="m">0</span><span class="p">|</span>       <span class="m">0</span><span class="p">|</span>
+<span class="p">|</span><span class="m">2789667577</span><span class="p">|</span><span class="m">1612137600</span><span class="p">|</span>  HG5ACZ<span class="p">|</span>JN87pq<span class="p">|</span>-16<span class="p">|</span> <span class="m">7</span>.040077<span class="p">|</span>  2E0ETU<span class="p">|</span>  IO81<span class="p">|</span>   <span class="m">27</span><span class="p">|</span>    <span class="m">0</span><span class="p">|</span>    <span class="m">1520</span><span class="p">|</span>     <span class="m">98</span><span class="p">|</span>   <span class="m">7</span><span class="p">|</span><span class="m">1</span>.3 Kiwi<span class="p">|</span>   <span class="m">1</span><span class="p">|</span><span class="m">2021</span>-02-01 <span class="m">00</span>:00:00<span class="p">|</span><span class="m">2021</span>-02-01<span class="p">|</span>  <span class="m">2021</span><span class="p">|</span>      <span class="m">2</span><span class="p">|</span>    <span class="m">1</span><span class="p">|</span>     <span class="m">0</span><span class="p">|</span>       <span class="m">0</span><span class="p">|</span>
+<span class="p">|</span><span class="m">2789667439</span><span class="p">|</span><span class="m">1612137600</span><span class="p">|</span>   I3JPA<span class="p">|</span>JN65dk<span class="p">|</span>-13<span class="p">|</span> <span class="m">7</span>.040078<span class="p">|</span>  2E0ETU<span class="p">|</span>  IO81<span class="p">|</span>   <span class="m">27</span><span class="p">|</span>    <span class="m">0</span><span class="p">|</span>    <span class="m">1311</span><span class="p">|</span>    <span class="m">115</span><span class="p">|</span>   <span class="m">7</span><span class="p">|</span><span class="m">1</span>.3 Kiwi<span class="p">|</span>   <span class="m">1</span><span class="p">|</span><span class="m">2021</span>-02-01 <span class="m">00</span>:00:00<span class="p">|</span><span class="m">2021</span>-02-01<span class="p">|</span>  <span class="m">2021</span><span class="p">|</span>      <span class="m">2</span><span class="p">|</span>    <span class="m">1</span><span class="p">|</span>     <span class="m">0</span><span class="p">|</span>       <span class="m">0</span><span class="p">|</span>
++----------+----------+--------+------+---+---------+--------+------+-----+-----+--------+-------+----+--------+----+-------------------+----------+------+-------+-----+------+--------+
+only showing top <span class="m">5</span> rows
+
+Elapsed Time : <span class="m">1</span>.371 sec
+Epoch Conversion Processed : <span class="o">(</span><span class="m">63</span>,369,286<span class="o">)</span> Spots
+</code></pre></div>
                 
               
               
