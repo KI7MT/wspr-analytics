@@ -179,7 +179,7 @@
   
     <li class="md-tabs__item">
       <a href="./" class="md-tabs__link md-tabs__link--active">
-        Tools
+        Setup
       </a>
     </li>
   
@@ -212,22 +212,6 @@
     <li class="md-tabs__item">
       <a href="../../pyspark/overview/" class="md-tabs__link">
         PySpark
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../rscripts/overview/" class="md-tabs__link">
-        R-Scripts
       </a>
     </li>
   
@@ -339,13 +323,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
-      Tools
+      Setup
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Tools" data-md-level="1">
+    <nav class="md-nav" aria-label="Setup" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
         <span class="md-nav__icon md-icon"></span>
-        Tools
+        Setup
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -424,8 +408,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-java/" class="md-nav__link">
-      Install Java
+    <a href="../install-golang/" class="md-nav__link">
+      Install Golang
     </a>
   </li>
 
@@ -439,6 +423,19 @@
   <li class="md-nav__item">
     <a href="../install-sdkman/" class="md-nav__link">
       Install Sdkman
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../install-java/" class="md-nav__link">
+      Install Java
     </a>
   </li>
 
@@ -476,8 +473,21 @@
 
 
   <li class="md-nav__item">
-    <a href="../install-r/" class="md-nav__link">
-      Install R
+    <a href="../install-postgresql/" class="md-nav__link">
+      Install PostgreSQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../install-clickhouse/" class="md-nav__link">
+      Install ClickHouse
     </a>
   </li>
 
@@ -490,20 +500,7 @@
 
   <li class="md-nav__item">
     <a href="../install-grafana/" class="md-nav__link">
-      Install Graphana
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../install-postgresql/" class="md-nav__link">
-      Install PostgreSQL
+      Install Grafana
     </a>
   </li>
 
@@ -701,53 +698,11 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
     
     <label class="md-nav__link" for="nav-5">
-      R-Scripts
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="R-Scripts" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon"></span>
-        R-Scripts
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../../rscripts/overview/" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
-    
-    <label class="md-nav__link" for="nav-6">
       Jupyter
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Jupyter" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
         Jupyter
       </label>
@@ -782,14 +737,14 @@
   <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       WSPR-Daemon
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="WSPR-Daemon" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
         WSPR-Daemon
       </label>
@@ -914,7 +869,13 @@ perform quite well.</p>
 <blockquote>
 <p>NOTE: these are just examples, and not intended for execution.</p>
 </blockquote>
-<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Alpine</label><div class="tabbed-content">
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Ubuntu</label><div class="tabbed-content">
+<p>Upgrade the host System Packages.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command</span>
+sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade
+</code></pre></div>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Alpine</label><div class="tabbed-content">
 <ul>
 <li>Update the package list
 <div class="highlight"><pre><span></span><code>apk update
@@ -925,29 +886,14 @@ apk add openssh opentp vim
 </code></pre></div></li>
 </ul>
 </div>
-<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Ubuntu</label><div class="tabbed-content">
-<p>Upgrade the host System Packages.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command</span>
-sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Arch</label><div class="tabbed-content">
+<p>Example to install a prerequisite package for Kernel compiling.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Update the repositories</span>
+pacman -Syu 
+
+<span class="c1"># Install a package</span>
+pacman -S dkms
 </code></pre></div>
-</div>
-<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Mint</label><div class="tabbed-content">
-<p>Install a pre-requesite package for VirtualBox.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Run the following command</span>
-sudo apt-get update
-sudo apt-get install dkms
-</code></pre></div>
-</div>
-<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Fedora</label><div class="tabbed-content">
-<p>a. Update your fedora release</p>
-<div class="highlight"><pre><span></span><code>sudo dnf upgrade --refresh
-</code></pre></div>
-<p>b. Install a plugin</p>
-<div class="highlight"><pre><span></span><code>sudo dnf install dnf-plugin-system-upgrade
-</code></pre></div>
-<p>c. Download upgraded packages
-<div class="highlight"><pre><span></span><code>sudo dnf system-upgrade download --refresh --releasever<span class="o">=</span><span class="m">33</span>
-</code></pre></div></p>
 </div>
 </div>
                 

@@ -16,7 +16,7 @@
     
     
       
-        <title>Overview - WSPR Analytics</title>
+        <title>Install ClickHouse - WSPR Analytics</title>
       
     
     
@@ -87,7 +87,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Overview
+              Install ClickHouse
             
           </span>
         </div>
@@ -165,14 +165,16 @@
         
   
   
+    
+  
 
 
   
   
   
     <li class="md-tabs__item">
-      <a href="../../tools/overview/" class="md-tabs__link">
-        Tools
+      <a href="../overview/" class="md-tabs__link md-tabs__link--active">
+        Setup
       </a>
     </li>
   
@@ -205,24 +207,6 @@
     <li class="md-tabs__item">
       <a href="../../pyspark/overview/" class="md-tabs__link">
         PySpark
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-    
-  
-
-
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="./" class="md-tabs__link md-tabs__link--active">
-        R-Scripts
       </a>
     </li>
   
@@ -324,21 +308,23 @@
       
 
 
+  
+
 
   
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
-      Tools
+      Setup
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Tools" data-md-level="1">
+    <nav class="md-nav" aria-label="Setup" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
         <span class="md-nav__icon md-icon"></span>
-        Tools
+        Setup
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -350,7 +336,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/overview/" class="md-nav__link">
+    <a href="../overview/" class="md-nav__link">
       Overview
     </a>
   </li>
@@ -363,7 +349,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/install-python/" class="md-nav__link">
+    <a href="../install-python/" class="md-nav__link">
       Install Python
     </a>
   </li>
@@ -376,8 +362,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/install-java/" class="md-nav__link">
-      Install Java
+    <a href="../install-golang/" class="md-nav__link">
+      Install Golang
     </a>
   </li>
 
@@ -389,7 +375,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/install-sdkman/" class="md-nav__link">
+    <a href="../install-sdkman/" class="md-nav__link">
       Install Sdkman
     </a>
   </li>
@@ -402,7 +388,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/install-spark/" class="md-nav__link">
+    <a href="../install-java/" class="md-nav__link">
+      Install Java
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../install-spark/" class="md-nav__link">
       Install Spark
     </a>
   </li>
@@ -415,7 +414,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/install-scala/" class="md-nav__link">
+    <a href="../install-scala/" class="md-nav__link">
       Install Scala
     </a>
   </li>
@@ -428,33 +427,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/install-r/" class="md-nav__link">
-      Install R
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../../tools/install-grafana/" class="md-nav__link">
-      Install Graphana
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="../../tools/install-postgresql/" class="md-nav__link">
+    <a href="../install-postgresql/" class="md-nav__link">
       Install PostgreSQL
     </a>
   </li>
@@ -465,9 +438,42 @@
           
 
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Install ClickHouse
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
+
 
   <li class="md-nav__item">
-    <a href="../../tools/install-virtualbox/" class="md-nav__link">
+    <a href="../install-grafana/" class="md-nav__link">
+      Install Grafana
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../install-virtualbox/" class="md-nav__link">
       Install VirtualBox
     </a>
   </li>
@@ -480,7 +486,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../tools/install-vagrant/" class="md-nav__link">
+    <a href="../install-vagrant/" class="md-nav__link">
       Install Vagrant
     </a>
   </li>
@@ -645,70 +651,19 @@
       
 
 
-  
-
-
-  
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
-    
-    <label class="md-nav__link" for="nav-5">
-      R-Scripts
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="R-Scripts" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon"></span>
-        R-Scripts
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      Overview
-    </a>
-    
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
 
   
   <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-5">
       Jupyter
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Jupyter" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-5">
         <span class="md-nav__icon md-icon"></span>
         Jupyter
       </label>
@@ -743,14 +698,14 @@
   <li class="md-nav__item md-nav__item--nested">
     
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" >
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" >
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-6">
       WSPR-Daemon
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="WSPR-Daemon" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-6">
         <span class="md-nav__icon md-icon"></span>
         WSPR-Daemon
       </label>
@@ -801,12 +756,11 @@
               
                 
                 
-                  <h1>Overview</h1>
+                  <h1>Install ClickHouse</h1>
                 
-                <blockquote>
-<p>Under Development</p>
-</blockquote>
-<p>This section will be the overview page to R-Scripts.</p>
+                <div class="highlight"><pre><span></span><code>&gt;Under Development
+</code></pre></div>
+<p>This section will discuss the installation of <a href="https://clickhouse.tech/">ClickHouse</a>.</p>
                 
               
               
@@ -825,7 +779,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../../pyspark/basic-examples/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../install-postgresql/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -834,19 +788,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Basic Examples
+                Install PostgreSQL
               </div>
             </div>
           </a>
         
         
-          <a href="../../notebooks/overview/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../install-grafana/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Overview
+                Install Grafana
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
