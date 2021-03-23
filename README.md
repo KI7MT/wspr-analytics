@@ -79,7 +79,7 @@ However, there is a drawback, one cannot simply view a binary file as they can w
 original CSV will remain in place, but all bulk processing will be pulled from [Parquet][] or a high performance database
 such as [ClickHouse][]. During these transformations is where [PyArrow][], [PySpark][] or [Spark][] will earn it's keep.
 
-## Persistant Storage
+## Persistent Storage
 
 A [PostgreSQL][] database server will be needed. There are many ways to perform this installation (local, remote,
 [Dockerize PostgreSQL][], [PostgreSQL with Vagrant][], etc).
