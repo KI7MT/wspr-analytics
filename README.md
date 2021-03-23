@@ -17,7 +17,7 @@ By any reasonable definition, it is safe to say that [WSPR][] has entered the re
 The focus of this project is to provide a set of tools to download, manage, transform and query
 WSPR DataSets using modern [Big Data][] frameworks.
 
-# Setup and Installation
+## Setup and Installation
 
 The setup section in the [documentation below](#documentation) below will walk users through everything
 they need to setup their system for big data processing. The guide has been well tested on three
