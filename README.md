@@ -52,15 +52,16 @@ Folder       | Frameworks          | Description
 
 ## Base Tool Requirements
 
-You must have Python, Java, PySpark/Spark available from the command line.
+You must have Python, Java, PySpark / Spark (Scala) and SBT available from the command line.
 
 - Java openjdk version 1.8.0_275 or later
-- Python 3.7 oir 3.8, PyArrow hsa some issues with 3.9
+- Python 3.7 or 3.8, PyArrow has issues with 3.9 at present
 - PySpark from PyPi
 - Apache Arrow 2.0+
-- Scala 2.12.12
+- Scala 2.12.12 - patch version 10,11,12,13 also work with Spark 3.0.1 / 3.1.1
 - Spark 3.0.1
-- PostgreSQL Database (local, remote, Docker, etc)
+- PostgreSQL Database (local, remote, Docker, Vagrant, etc)
+- Optional ClickHouse High Perormance Database
 
 >IMPORTANT: The Spark / Scala combinations are version sensitive. Check the [Spark][]
 download page for recommended version combinaitons if you deviate from what is listed here.
@@ -70,7 +71,7 @@ amount of frustration, stick with what's known to work (any of the 2.12.xx serie
 ## Data Sources and Processing
 
 The main data source will be the monthly [WSPRNet Archives][]. At present, there is no plan to pull
-nightly updates. That could change if a reasonble API is identified.
+nightly updates. That could change if a reasonble API is identified. [WSPR Daemon][]
 
 The tools (apps/scripts) will be used to convert the raw CSV files into a format better suited for parallel processing,
 namely, [Parquet][]. Read speeds, storage footprints, and ingestion improve dramativaly with this storage format.
@@ -135,3 +136,4 @@ fast queries called [ClickHouse][] will be used.
 [Apache Foundation Project List]: https://apache.org/index.html#projects-list
 [WSPR Analytics Docs]: https://ki7mt.github.io/wspr-analytics/
 [Ubuntu-20.04]: http://www.releases.ubuntu.com/20.04/
+[WSPR Daemon]: http://wsprdaemon.org/
