@@ -52,6 +52,8 @@ nav:
   - PySpark:
     - Overview: 'pyspark/overview.md'
     - Basic Examples: 'pyspark/basic-examples.md'
+  - Golang:
+    - Overview: 'golang/overview.md'
   - Jupyter:
     - Overview: 'notebooks/overview.md'
   - WSPR-Daemon:
