@@ -1,7 +1,7 @@
 name          := "DeltaCreateTable"
 version       := "1.0"
 organization  := "io.ki7mt"
-scalaVersion  := "2.12.12"
+scalaVersion  := "2.12.13"
 
 val sparkVersion = "3.0.1"
 
@@ -11,7 +11,6 @@ libraryDependencies ++= Seq(
     "io.delta" %% "delta-core" % "0.8.0",
 )
 
-// example : convertcsvparquet-2.12-3.0.1-1.0.jar
 artifactName := { (sv: ScalaVersion, module: ModuleID, artifact: Artifact) =>
   Artifact.artifactName(sv, module, artifact).replaceAll(s"-${module.revision}", s"-${sparkVersion}-${module.revision}")
 }
