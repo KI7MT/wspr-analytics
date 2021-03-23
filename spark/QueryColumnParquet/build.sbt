@@ -1,4 +1,4 @@
-organization := "com.ki7mt"
+organization := "io.ki7mt"
 version := "1.0"
 name := "QueryColumnParquet"
 scalaVersion := "2.12.13"

@@ -1,7 +1,7 @@
+organization  := "io.ki7mt"
 name          := "EpochConversion"
 version       := "1.0"
 scalaVersion  := "2.12.13"
-organization  := "com.ki7mt"
 
 val sparkVersion = "3.1.1"
 

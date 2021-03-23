@@ -1,6 +1,6 @@
+organization  := "io.ki7mt"
 name          := "DeltaCreateTable"
 version       := "1.0"
-organization  := "io.ki7mt"
 scalaVersion  := "2.12.13"
 
 val sparkVersion = "3.0.1"

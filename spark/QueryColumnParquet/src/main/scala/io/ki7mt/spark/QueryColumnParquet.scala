@@ -1,4 +1,4 @@
-package com.ki7mt.spark
+package io.ki7mt.spark
 
 import java.time.LocalDateTime
 
