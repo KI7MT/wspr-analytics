@@ -55,12 +55,14 @@ object EpocConversion {
       System.exit(1)
     }
 
+    // set to true for debug print outs
+    val debug: Boolean = false
+
+    // process variables
     val appname: String = "EpochCoversion"
     val timestamp: String = LocalDateTime.now().toString()
     val description: String = "Convert Epoch Time to Human Readable Values"
-
     val inFile: String = args(0)
-    val debug: Boolean = false
     val z = ZoneId.systemDefault()
     val zoneId = z.getId
 
@@ -69,7 +71,7 @@ object EpocConversion {
     println(s"Process File  : $inFile" )
     println(s"Tiimestamp    : $timestamp")
     println(s"Description   : $description\n" )
-    println("Steps For Processing The CSV File")
+    println("Application Actions to Process CSV File")
     println("- Create a Spark Session")
 
     val spark: SparkSession = SparkSession.builder()
@@ -140,10 +142,10 @@ object EpocConversion {
       res1.show(10)
     }
 
-    println("\nGetting final row count, please wait...")
+    //println("\nGetting final row count, please wait...")
     val rowcount = res1.count()
-    println(f"Epoch Conversion Processed : ($rowcount%,d) Spots ")
-    println("\n")
+    println(f"Epoch Conversion Processed : ($rowcount%,d) Spots\n")
+    //println("\n")
   
   } // END - Main CLass
 
