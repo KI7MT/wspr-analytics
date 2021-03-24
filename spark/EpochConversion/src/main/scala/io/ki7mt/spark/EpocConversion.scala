@@ -45,21 +45,21 @@ object EpocConversion {
     // Set the Java Log Level
     Logger.getLogger("org").setLevel(Level.ERROR)
 
+    // set to true for debug print outs
+    var debug : Boolean = false
+
     // TODO: convert to scopt
     if (args.length < 1) {
       println("\nInput Processing Error\n")
       println("The Epoch Conversion App requires one parameters\n")
       println("Input File       : /data/raw/csv/wsprspots-2021-01.csv")
       println("\nExample:\n")
-      println("spark-submit --master local[8] EpochConversion-assembly-1.0.jar /data/wsprspots-2008-03.csv\n")
+      println("spark-submit --master local[8] EpochConversion-assembly-1.0.jar /data/2021-01.csv\n")
       System.exit(1)
     }
 
-    // set to true for debug print outs
-    val debug: Boolean = false
-
     // process variables
-    val appname: String = "EpochCoversion"
+    val appname: String = "EpochConversion"
     val timestamp: String = LocalDateTime.now().toString()
     val description: String = "Convert Epoch Time to Human Readable Values"
     val inFile: String = args(0)
@@ -69,7 +69,7 @@ object EpocConversion {
     // Print basic header information
     println(s"\nObject        : $appname")
     println(s"Process File  : $inFile" )
-    println(s"Tiimestamp    : $timestamp")
+    println(s"Timestamp     : $timestamp")
     println(s"Description   : $description\n" )
     
     
@@ -112,7 +112,7 @@ object EpocConversion {
     if (debug) { println("- Cleaning up Version null values") }
     val ds = x.na.fill("nr",Seq("Version"))
 
-    if (debug) { println("- Select the column we want to process") }
+    if (debug) { println("- Select the column we want to process\n") }
     val res = ds.select("*")
       .withColumn("x_TimeStamp", date_format(col("TimeStamp")
       .cast(DataTypes.TimestampType), "yyyy-MM-dd HH:mm:ss"))
@@ -132,7 +132,7 @@ object EpocConversion {
       .withColumn("x_minute", minute(col("x_TimeStamp")).cast(ByteType))
 
     if (debug) {
-      println("- Print Res1 Schema")
+      println("- Print Res1 Schema\n")
       res1.printSchema()
     }
 
