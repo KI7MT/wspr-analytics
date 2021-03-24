@@ -71,16 +71,17 @@ object EpocConversion {
     println(s"Process File  : $inFile" )
     println(s"Tiimestamp    : $timestamp")
     println(s"Description   : $description\n" )
-    println("Application Actions to Process CSV File")
-    println("- Create a Spark Session")
-
+    
+    
+    if (debug) { println("Application Actions to Process CSV File") }
+    if (debug) { println("- Create a Spark Session") }
     val spark: SparkSession = SparkSession.builder()
       .appName("Read CSV and Show New Schema Values")
       .master("local[*]")
       .getOrCreate()
 
     // This is the original schema based on WSPRnet CSV criteria
-    println("- Create the Spot Schema")
+    if (debug) { println("- Create the Spot Schema") }
     val spotSchema = new StructType()
       .add("SpotID", LongType, nullable = false)
       .add("Timestamp", IntegerType, nullable = false)
@@ -98,7 +99,7 @@ object EpocConversion {
       .add("Version", StringType, nullable = true)
       .add("Code", ByteType, nullable = true)
 
-    println("- Read the CSV file into a DataSet")
+    if (debug) { println("- Read the CSV file into a DataSet") }
     import spark.implicits._
     val x = spark.read
       .option("delimiter", ",")
@@ -108,21 +109,19 @@ object EpocConversion {
       .as[RawSpot]
 
     // fill null values in Version with nr = not reported
-    println("- Cleaning up Version null values")
+    if (debug) { println("- Cleaning up Version null values") }
     val ds = x.na.fill("nr",Seq("Version"))
 
-    println("- Select the column we want to process")
+    if (debug) { println("- Select the column we want to process") }
     val res = ds.select("*")
       .withColumn("x_TimeStamp", date_format(col("TimeStamp")
       .cast(DataTypes.TimestampType), "yyyy-MM-dd HH:mm:ss"))
 
     // only print the schema in Debug Mode
-    if (debug) {
-      res.printSchema()
-    }
+    if (debug) { res.printSchema() }
 
     // See not above about ZoneId, it's important.
-    println("- Setup Epoh Conversion")
+    if (debug) { println("- Setup Epoh Conversion") }
     val res1 = res.select("*")
       .withColumn("x_timestamp", to_utc_timestamp(col("x_TimeStamp"), zoneId))
       .withColumn("x_date", to_date(col("x_TimeStamp")))
@@ -137,16 +136,16 @@ object EpocConversion {
       res1.printSchema()
     }
 
-    println("- Execute the Query\n")
+    if (debug) { println("- Execute the Query\n") }
     time {
       res1.show(10)
     }
 
-    //println("\nGetting final row count, please wait...")
+    if (debug) { println("\nGetting final row count, please wait...")}
     val rowcount = res1.count()
-    println(f"Epoch Conversion Processed : ($rowcount%,d) Spots\n")
-    //println("\n")
-  
+    println(f"Row Count    : ($rowcount%,d)\n")
+    println("")
+
   } // END - Main CLass
 
   // TODO: Move `case class RawSpot` to a beans package
