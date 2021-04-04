@@ -15,35 +15,45 @@ BINDIR=/usr/local/bin
 CP=cp -u
 CLEAR=clear
 
-# Build rules
-.PHONY: build
 build: clean
 	@$(CLEAR) ||:
+	mkdir ./dist
 	go build -ldflags \
 		"-X main.appname=${APP} \
 		-X main.version=v$(VERSION) \
 		-X 'main.date=$(DATE)'" \
-		-o ${APP} main.go
+		-o ./dist/${APP} ./main.go
 	@echo ''
-	@echo 'Finished Build'
-	@echo ''
-	@echo "To run $(APP), use the following"
+	@echo "To run $(APP), type:"
 	@echo ""
-	@echo 'Example:'
-	@echo "  ./${APP}"
+	@echo "  ./dist/${APP}"
+	@echo ''
+	@echo "To install $(APP), type:"
+	@echo ''
+	@echo '  sudo make install'
+	@echo ''
+	@echo "To uninstall $(APP), type"
+	@echo ''
+	@echo '  sudo make uninstall'
 	@echo ''
 
-
-.PHONY: run
 run:
 	@clear ||:
 	@go run -race main.go
 
+install:
+	@${CP} ./dist/${APP} ${BINDIR}/
+	@echo ''
+	@echo "To run $(APP), type:"
+	@echo ""
+	@echo "  ${APP}"
+	@echo ''
 
-.PHONY: install
-install: clean build
-	${CP} ${APP} ${BINDIR}/
+uninstall:
+	@rm -f ${BINDIR}/${APP}
 
-.PHONY: clean
 clean:
 	@go clean
+	@rm -rf ./dist
+
+.PHONY: build clean run install uninstall

@@ -12,12 +12,12 @@ import (
 	. "github.com/logrusorgru/aurora"
 )
 
-// version flags for main funciton
+// version flags for main function
 var (
 	appname     string
 	version     string
 	date        string
-	description string = "Golang App to display time zone informaiton."
+	description string = "Golang App to display time zone information."
 )
 
 // CheckError is a function to print out errors
@@ -43,7 +43,7 @@ func main() {
 	var ver = flag.BoolP("version", "v", false, "prints app version information")
 	flag.Parse()
 
-	// only print the version informaiton if the user asks for it.
+	// only print the version informationif the user asks for it.
 	if *ver {
 		fmt.Println("\nApp Name .....: ", Cyan(appname))
 		fmt.Println("Version ......: ", Cyan(version))
@@ -55,20 +55,20 @@ func main() {
 
 	tNow := time.Now()
 
-	fmt.Println(Cyan("\nCurrent Time Data In Local Time Zone"))
+	fmt.Println(Cyan("\nCurrent Local Time Zone"))
 	fmt.Println(strings.Repeat("-", 55))
 
 	// Local Time Now in Unix Timestamp format
 	tUnix := tNow.Unix()
-	fmt.Printf("Unix.Time:\t%d\n", tUnix)
+	fmt.Println("Unix.Time:\t", tUnix)
 
-	// Local Time Now serived from unix timestamp
+	// Local Time Now from unix timestamp
 	tLocal := time.Unix(tUnix, 0)
-	fmt.Printf("Time.Local:\t%s\n", tLocal)
+	fmt.Println("Time.Local:\t", tLocal)
 
-	// UTC Time serived from unix timestamp
+	// UTC Time from unix timestamp
 	tUtc := time.Unix(tUnix, 0).UTC()
-	fmt.Printf("Time.UTC:\t%s\n", tUtc)
+	fmt.Println("Time.UTC:\t", tUtc)
 
 	// Location Source: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 	fmt.Println(Cyan("\nLocal Time For A Specific Zone"))

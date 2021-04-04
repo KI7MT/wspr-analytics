@@ -83,7 +83,7 @@ func main() {
 	// clear the screen
 	ClearScreen()
 
-	// defaul source and destination folder locations
+	// default source and destination folder locations
 	defaultSrcDir := filepath.Join(UserHomeDir(), "Downloads", "wsprnet", "csv")
 	defaultDestDir := filepath.Join(UserHomeDir(), "Downloads", "wsprnet", "parquet")
 
